@@ -9,6 +9,18 @@ app_license = "MIT"
 # التطبيقات المطلوبة (صيغة Frappe Cloud / v15+)
 required_apps = ["frappe/erpnext"]
 
+# الظهور في شاشة التطبيقات وسطح المكتب (v15/v16)
+app_logo_url = "/assets/zimam/images/zimam-logo.svg"
+app_home = "/app/zimam"
+add_to_apps_screen = [
+	{
+		"name": "zimam",
+		"logo": "/assets/zimam/images/zimam-logo.svg",
+		"title": "زِمام",
+		"route": "/app/zimam",
+	}
+]
+
 # ---------------------------------------------------------------------------
 # التثبيت والترحيل — دوال آمنة للتكرار
 # ---------------------------------------------------------------------------

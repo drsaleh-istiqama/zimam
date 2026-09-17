@@ -5,6 +5,8 @@
 - النطاقات (Domains) للحزم القطاعية: Heritage الآن، وEducation/Training/Charity محجوزة.
 - حقول مخصصة على مستندات ERPNext القياسية (لا تعديل على النواة).
 """
+import os
+
 import frappe
 from frappe.custom.doctype.custom_field.custom_field import create_custom_fields
 
@@ -72,10 +74,38 @@ def create_fields():
 	create_custom_fields(CUSTOM_FIELDS, ignore_validate=frappe.flags.in_patch, update=True)
 
 
+def sync_dashboards():
+	"""Frappe لا يزامن مستندات Dashboard من مجلد التطبيق تلقائيًا (بخلاف Number Card وDashboard Chart) — نستوردها هنا."""
+	import glob
+	from frappe.modules.import_file import import_file_by_path
+
+	base = os.path.dirname(os.path.dirname(__file__))
+	for path in sorted(glob.glob(os.path.join(base, "*", "dashboard", "*", "*.json"))):
+		try:
+			import_file_by_path(path, force=True, ignore_version=True)
+		except Exception:
+			frappe.log_error(title="zimam: dashboard sync failed", message=path)
+
+
+def sync_desktop_icons():
+	"""v16: أيقونات سطح المكتب تُشتق من المساحات العامة وتطبيقات add_to_apps_screen — نعيد توليدها بعد التثبيت/الترحيل."""
+	try:
+		create = frappe.get_attr("frappe.desk.doctype.desktop_icon.desktop_icon.create_desktop_icons")
+	except Exception:
+		return
+	try:
+		create()
+	except Exception:
+		frappe.log_error(title="zimam: desktop icons sync failed")
+
+
 def after_install():
 	create_roles()
 	create_domains()
 	create_fields()
+	sync_dashboards()
+	sync_desktop_icons()
+	frappe.clear_cache()
 	frappe.db.commit()
 	frappe.msgprint("تم تثبيت زِمام. الخطوة التالية: bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{\"profile\": \"<profile>\"}'")
 
@@ -84,4 +114,7 @@ def after_migrate():
 	create_roles()
 	create_domains()
 	create_fields()
+	sync_dashboards()
+	sync_desktop_icons()
+	frappe.clear_cache()
 	frappe.db.commit()

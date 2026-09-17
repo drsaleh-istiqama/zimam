@@ -54,3 +54,128 @@ Service Requests by Type,طلبات الخدمة بحسب النوع
 Print Jobs by Status,أوامر الطباعة بحسب الحالة
 Cabinets Received by Month,الخزائن المستلمة شهريًا
 Cabinet Items by Type,المقتنيات بحسب النوع
+Human Resource,الموارد البشرية
+Total Employees,إجمالي الموظفين
+New Hires (This Year),تعيينات جديدة (هذا العام)
+Employee Exits (This Year),مغادرات الموظفين (هذا العام)
+Employees Joining (This Quarter),الملتحقون (هذا الربع)
+Employees Relieving (This Quarter),المغادرون (هذا الربع)
+Hiring vs Attrition Count,التعيين مقابل التسرّب
+Hiring Count,عدد التعيينات
+Attrition Count,عدد المغادرين
+Employees by Age,الموظفون بحسب العمر
+Employees by Gender,الموظفون بحسب الجنس
+Employees by Department,الموظفون بحسب القسم
+Employees by Designation,الموظفون بحسب المسمى
+Employees by Grade,الموظفون بحسب الدرجة
+Employees by Branch,الموظفون بحسب الفرع
+Employees by Employment Type,الموظفون بحسب نوع التوظيف
+Employee Lifecycle,دورة حياة الموظف
+Recruitment,التوظيف
+Payroll,الرواتب
+Attendance,الحضور
+Expense Claims,مطالبات المصروفات
+Leaves,الإجازات
+Shift & Attendance,الورديات والحضور
+Tax & Benefits,الضرائب والمزايا
+Tenure,مدة الخدمة
+Performance,الأداء
+HR Setup,إعداد الموارد البشرية
+Expenses,المصروفات
+Invoicing,الفوترة
+Payments,المدفوعات
+Accounting,المحاسبة
+Accounts,الحسابات
+Financial Reports,التقارير المالية
+Accounts Setup,إعداد الحسابات
+Taxes,الضرائب
+Banking,الأعمال المصرفية
+Budget,الموازنة
+Assets,الأصول
+Asset,الأصل
+Buying,المشتريات
+Selling,المبيعات
+Stock,المخزون
+Manufacturing,التصنيع
+Projects,المشاريع
+Project,المشروع
+Quality,الجودة
+Support,الدعم
+CRM,إدارة علاقات العملاء
+Subcontracting,التعاقد من الباطن
+Organization,المؤسسة
+Framework,الإطار
+Frappe Framework,إطار Frappe
+Frappe HR,فرابي للموارد البشرية
+ERPNext Settings,إعدادات ERPNext
+Home,الصفحة الرئيسية
+Users,المستخدمون
+Website,الموقع الإلكتروني
+Integrations,التكاملات
+Build,البناء
+Automation,الأتمتة
+Data,البيانات
+Email,البريد الإلكتروني
+Printing,الطباعة
+System,النظام
+Dashboard,لوحة القيادة
+Dashboards,اللوحات
+Reports,التقارير
+Masters,البيانات الرئيسية
+Your Shortcuts,اختصاراتك
+Reports & Masters,التقارير والبيانات الرئيسية
+Getting Started,البدء
+Search,البحث
+Notification,إعلام
+Notifications,الإعلامات
+New,جديد
+Refresh,تحديث
+Refresh All,تحديث الكل
+Save,حفظ
+Submit,ترحيل
+Cancel,إلغاء
+Amend,تعديل
+Delete,حذف
+Edit,تعديل
+Print,طباعة
+Not Saved,غير محفوظ
+Last synced just now,آخر مزامنة الآن فقط
+Last synced {0} ago,آخر مزامنة منذ {0}
+This Year,هذا العام
+This Quarter,هذا الربع
+This Month,هذا الشهر
+Last Year,العام الماضي
+Monthly,شهري
+Weekly,أسبوعي
+Daily,يومي
+Yearly,سنوي
+Quarterly,ربع سنوي
+Custom Documents,مستندات مخصصة
+Custom Reports,تقارير مخصصة
+Gross Profit,الربح الإجمالي
+Accounts Receivable,الحسابات المدينة
+Accounts Payable,الحسابات الدائنة
+Sales Register,سجل المبيعات
+Purchase Register,سجل المشتريات
+Bank Reconciliation Statement,بيان تسوية الحساب البنكي
+Bank Clearance Summary,ملخص التخليص البنكي
+Trial Balance,ميزان المراجعة
+Profit and Loss Statement,قائمة الدخل
+Balance Sheet,الميزانية العمومية
+Cash Flow,التدفقات النقدية
+General Ledger,دفتر الأستاذ العام
+Budget Variance Report,تقرير انحراف الموازنة
+Accounts Receivable Summary,ملخص الحسابات المدينة
+Accounts Payable Summary,ملخص الحسابات الدائنة
+Consolidated Financial Statement,القوائم المالية الموحدة
+Employee,الموظف
+Department,القسم
+Designation,المسمى الوظيفي
+Leave Application,طلب إجازة
+Attendance Request,طلب حضور
+Salary Slip,قسيمة الراتب
+Payroll Entry,قيد الرواتب
+Expense Claim,مطالبة مصروفات
+Job Opening,وظيفة شاغرة
+Job Applicant,متقدم لوظيفة
+Appraisal,تقييم الأداء
