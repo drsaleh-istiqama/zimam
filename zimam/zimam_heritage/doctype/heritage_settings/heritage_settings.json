@@ -18,7 +18,17 @@
   "section_3",
   "restoration_service_item",
   "cb_s2",
-  "digital_copy_item"
+  "digital_copy_item",
+  "section_4",
+  "restoration_price_list",
+  "restoration_taxes_template",
+  "default_tax_rate",
+  "cb_p1",
+  "default_validity_days",
+  "default_advance_percent",
+  "default_warranty_months",
+  "restoration_payment_terms",
+  "restoration_terms"
  ],
  "fields": [
   {
@@ -87,6 +97,65 @@
    "fieldtype": "Link",
    "label": "صنف النسخة الرقمية",
    "options": "Item"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "التسعير وعروض أسعار الترميم"
+  },
+  {
+   "fieldname": "restoration_price_list",
+   "fieldtype": "Link",
+   "label": "قائمة أسعار الترميم",
+   "options": "Price List",
+   "description": "قائمة الأسعار التي تُجلب منها أسعار خدمات الترميم في «تقييم وعرض تكلفة ترميم»"
+  },
+  {
+   "fieldname": "restoration_taxes_template",
+   "fieldtype": "Link",
+   "label": "قالب ضرائب عروض الترميم",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "default_tax_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة الافتراضية (%)",
+   "default": 5
+  },
+  {
+   "fieldname": "cb_p1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "default_validity_days",
+   "fieldtype": "Int",
+   "label": "صلاحية عرض السعر (أيام)",
+   "default": 30
+  },
+  {
+   "fieldname": "default_advance_percent",
+   "fieldtype": "Percent",
+   "label": "الدفعة المقدمة الافتراضية (%)",
+   "default": 50
+  },
+  {
+   "fieldname": "default_warranty_months",
+   "fieldtype": "Int",
+   "label": "مدة الضمان الافتراضية (أشهر)",
+   "default": 12
+  },
+  {
+   "fieldname": "restoration_payment_terms",
+   "fieldtype": "Link",
+   "label": "قالب شروط الدفع",
+   "options": "Payment Terms Template"
+  },
+  {
+   "fieldname": "restoration_terms",
+   "fieldtype": "Link",
+   "label": "الشروط والأحكام",
+   "options": "Terms and Conditions"
   }
  ],
  "idx": 0,

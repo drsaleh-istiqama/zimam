@@ -44,6 +44,15 @@ CUSTOM_FIELDS = {
 	"Quotation": [
 		dict(fieldname="zimam_print_job", label="أمر الطباعة", fieldtype="Link", options="Print Job",
 			insert_after="order_type", read_only=1, no_copy=1),
+		dict(fieldname="zimam_ref_section", label="مرجع زِمام", fieldtype="Section Break", insert_after="terms", collapsible=1),
+		dict(fieldname="zimam_ref_doctype", label="نوع المستند المصدر", fieldtype="Link", options="DocType",
+			insert_after="zimam_ref_section", read_only=1, no_copy=1),
+		dict(fieldname="zimam_ref_name", label="المستند المصدر", fieldtype="Dynamic Link", options="zimam_ref_doctype",
+			insert_after="zimam_ref_doctype", read_only=1, no_copy=1),
+	],
+	"Quotation Item": [
+		dict(fieldname="zimam_object_code", label="رمز الوعاء", fieldtype="Data", insert_after="description", in_list_view=0),
+		dict(fieldname="zimam_pages", label="الصفحات/الوثائق", fieldtype="Int", insert_after="zimam_object_code"),
 	],
 	"Sales Order": [
 		dict(fieldname="zimam_print_job", label="أمر الطباعة", fieldtype="Link", options="Print Job",

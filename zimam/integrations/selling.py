@@ -30,6 +30,28 @@ def quotation_on_submit(doc, method=None):
 	pj = doc.get("zimam_print_job")
 	if pj and frappe.db.exists("Print Job", pj):
 		frappe.db.set_value("Print Job", pj, {"quotation": doc.name, "status": "مُسعَّر"}, update_modified=False)
+	_assessment_sync(doc, "مُرسل")
+
+
+def quotation_on_update_after_submit(doc, method=None):
+	status = {"Ordered": "مقبول", "Lost": "مرفوض", "Expired": "منتهي الصلاحية"}.get(doc.status)
+	if status:
+		_assessment_sync(doc, status)
+
+
+def quotation_on_cancel(doc, method=None):
+	_assessment_sync(doc, "مسودة", clear=True)
+
+
+def _assessment_sync(doc, status, clear=False):
+	if doc.get("zimam_ref_doctype") != "Restoration Assessment" or not doc.get("zimam_ref_name"):
+		return
+	if not frappe.db.exists("Restoration Assessment", doc.zimam_ref_name):
+		return
+	values = {"status": status}
+	if clear:
+		values["quotation"] = None
+	frappe.db.set_value("Restoration Assessment", doc.zimam_ref_name, values, update_modified=False)
 
 
 def sales_order_on_submit(doc, method=None):

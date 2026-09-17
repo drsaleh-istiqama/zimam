@@ -1,0 +1,405 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "assessment_type",
+  "customer",
+  "customer_name",
+  "cb1",
+  "subject",
+  "cabinet",
+  "reference_no",
+  "section_1",
+  "assessment_date",
+  "date_hijri",
+  "validity_days",
+  "valid_until",
+  "cb2",
+  "advance_percent",
+  "warranty_months",
+  "price_list",
+  "section_2",
+  "items",
+  "section_3",
+  "total_objects",
+  "total_pages",
+  "net_total",
+  "cb3",
+  "tax_rate",
+  "round_tax",
+  "tax_amount",
+  "grand_total",
+  "section_4",
+  "billing_type",
+  "status",
+  "cb4",
+  "quotation",
+  "jobs_created",
+  "section_5",
+  "terms",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة (ذراع الترميم)",
+   "options": "Company",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "assessment_type",
+   "fieldtype": "Select",
+   "label": "نوع التقييم",
+   "options": "عرض سعر لعميل\nتقييم داخلي لخزانة",
+   "default": "عرض سعر لعميل",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "Customer",
+   "depends_on": "eval:doc.assessment_type=='عرض سعر لعميل'",
+   "mandatory_depends_on": "eval:doc.assessment_type=='عرض سعر لعميل'",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "اسم العميل",
+   "fetch_from": "customer.customer_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "الموضوع",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "مثال: صيانة خمسة كتب مخطوطة من خزانة وقف …"
+  },
+  {
+   "fieldname": "cabinet",
+   "fieldtype": "Link",
+   "label": "الخزانة (إن وُجدت)",
+   "options": "Cabinet",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "رقم مرجعي داخلي"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "التواريخ والشروط"
+  },
+  {
+   "fieldname": "assessment_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التقييم",
+   "default": "Today",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "date_hijri",
+   "fieldtype": "Data",
+   "label": "التاريخ الهجري",
+   "read_only": 1
+  },
+  {
+   "fieldname": "validity_days",
+   "fieldtype": "Int",
+   "label": "صلاحية العرض (أيام)"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "صالح حتى",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "advance_percent",
+   "fieldtype": "Percent",
+   "label": "الدفعة المقدمة (%)"
+  },
+  {
+   "fieldname": "warranty_months",
+   "fieldtype": "Int",
+   "label": "الضمان (أشهر)"
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "قائمة الأسعار",
+   "options": "Price List"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "البنود"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "بنود التقييم",
+   "options": "Restoration Assessment Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "الإجماليات"
+  },
+  {
+   "fieldname": "total_objects",
+   "fieldtype": "Int",
+   "label": "عدد الأوعية",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_pages",
+   "fieldtype": "Int",
+   "label": "مجموع الصفحات/الوثائق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "الإجمالي قبل الضريبة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "tax_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة (%)"
+  },
+  {
+   "fieldname": "round_tax",
+   "fieldtype": "Check",
+   "label": "تقريب الضريبة إلى أقرب ريال",
+   "description": "افتراضيًا تُحسب الضريبة بدقة البيسة كما يفعل ERPNext"
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "الضريبة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "الإجمالي النهائي",
+   "read_only": 1,
+   "bold": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "الفوترة والمتابعة"
+  },
+  {
+   "fieldname": "billing_type",
+   "fieldtype": "Select",
+   "label": "نوع الفوترة",
+   "options": "فاتورة عميل\nفوترة بينية للمؤسسة\nبلا فوترة",
+   "default": "فاتورة عميل",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مسودة\nمُرسل\nمقبول\nمرفوض\nمنتهي الصلاحية\nملغى",
+   "default": "مسودة",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "عرض السعر",
+   "options": "Quotation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "jobs_created",
+   "fieldtype": "Check",
+   "label": "أُنشئت طلبات الترميم",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "الشروط والملاحظات"
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Text",
+   "label": "الشروط"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات داخلية"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Restoration Assessment",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Restoration Job",
+   "link_fieldname": "assessment"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Restoration Assessment",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:RA-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "subject",
+ "show_title_field_in_link": 1,
+ "search_fields": "subject,customer_name,reference_no",
+ "restrict_to_domain": "Heritage"
+}

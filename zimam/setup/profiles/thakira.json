@@ -7,33 +7,93 @@
   "currency": "OMR"
  },
  "arms": [
-  {"name": "مطبعة الذاكرة", "abbr": "THP", "role": "press"},
-  {"name": "بيت الترميم", "abbr": "BTR", "role": "restoration"}
+  {
+   "name": "مطبعة الذاكرة",
+   "abbr": "THP",
+   "role": "press"
+  },
+  {
+   "name": "بيت الترميم",
+   "abbr": "BTR",
+   "role": "restoration"
+  }
  ],
  "optional_arms": [
-  {"name": "استثمارات وقف الذاكرة", "abbr": "WQI", "role": "waqf"}
+  {
+   "name": "استثمارات وقف الذاكرة",
+   "abbr": "WQI",
+   "role": "waqf"
+  }
  ],
- "domains": ["Heritage"],
- "cost_centers": ["الإدارة العامة", "المكتبة والخزائن", "الترميم والرقمنة", "خدمات الباحثين", "الفعاليات والإعلام", "الوقف"],
+ "domains": [
+  "Heritage"
+ ],
+ "cost_centers": [
+  "الإدارة العامة",
+  "المكتبة والخزائن",
+  "الترميم والرقمنة",
+  "خدمات الباحثين",
+  "الفعاليات والإعلام",
+  "الوقف"
+ ],
  "income_accounts": {
-  "parent": ["إيرادات الوقف", "إيرادات خدمات الباحثين"],
-  "press": ["إيرادات الطباعة"],
-  "restoration": ["إيرادات الترميم"]
+  "parent": [
+   "إيرادات الوقف",
+   "إيرادات خدمات الباحثين"
+  ],
+  "press": [
+   "إيرادات الطباعة"
+  ],
+  "restoration": [
+   "إيرادات الترميم"
+  ]
  },
  "waqf_income_account": "إيرادات الوقف",
  "waqf_cost_center": "الوقف",
  "service_types": [
-  {"name": "اطلاع على مقتنى", "free": true, "public": true},
-  {"name": "نسخة رقمية", "fees": 5, "public": true},
-  {"name": "استشارة تراثية", "fees": 20, "public": true},
-  {"name": "طلب طباعة نسخة", "fees": 0, "public": true},
-  {"name": "زيارة أو موعد", "free": true, "public": true}
+  {
+   "name": "اطلاع على مقتنى",
+   "free": true,
+   "public": true
+  },
+  {
+   "name": "نسخة رقمية",
+   "fees": 5,
+   "public": true
+  },
+  {
+   "name": "استشارة تراثية",
+   "fees": 20,
+   "public": true
+  },
+  {
+   "name": "طلب طباعة نسخة",
+   "fees": 0,
+   "public": true
+  },
+  {
+   "name": "زيارة أو موعد",
+   "free": true,
+   "public": true
+  }
  ],
  "waqf_shares": [
-  {"name": "سهم صغير", "amount": 10},
-  {"name": "سهم متوسط", "amount": 50},
-  {"name": "سهم كبير", "amount": 100},
-  {"name": "سهم ذهبي", "amount": 500}
+  {
+   "name": "سهم صغير",
+   "amount": 10
+  },
+  {
+   "name": "سهم متوسط",
+   "amount": 50
+  },
+  {
+   "name": "سهم كبير",
+   "amount": 100
+  },
+  {
+   "name": "سهم ذهبي",
+   "amount": 500
+  }
  ],
  "certificate": {
   "signatory": "",
@@ -41,7 +101,359 @@
   "footer": "وقفكم يحفظ ذاكرة عُمان للأجيال"
  },
  "heritage": {
-  "warehouses": {"cabinets": "خزائن واردة", "materials": "مواد الترميم"},
-  "labor_rate": 3
+  "warehouses": {
+   "cabinets": "خزائن واردة",
+   "materials": "مواد الترميم"
+  },
+  "labor_rate": 3,
+  "restoration_pricing": {
+   "_comment": "نظام التقييم الموحد في بيت الترميم (سبتمبر 2026) — الأسعار بالريال العماني لكل وحدة؛ خصومات التجليد (بدون ختم/لسان/حبكة) تُطبَّق يدويًا في البند",
+   "price_list": "أسعار بيت الترميم",
+   "tax_rate": 5,
+   "tax_account": "ضريبة القيمة المضافة",
+   "advance_percent": 50,
+   "validity_days": 30,
+   "warranty_months": 12,
+   "terms_title": "شروط خدمات الترميم",
+   "terms": "الضمان على الصيانة لمدة عام من تاريخ التسليم.\nفي حالة الرغبة في إعادة ترتيب بعض الأوراق أو إضافة أوراق أخرى بعد الصيانة تُحتسب قيمة الترميم والتحبيك.\nتُحفظ المواد الورقية في مكان بارد وجاف؛ ويُحفظ الجلد الصناعي في مكان بارد وجاف وإلا تعرّض للتلف.",
+   "catalog": [
+    {
+     "code": "RST-CLEAN-BOOK-L1",
+     "name": "تعقيم وتنظيف كتاب — إصابة بسيطة",
+     "unit": "صفحة",
+     "rate": 0.04,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L2",
+     "name": "تعقيم وتنظيف كتاب — إصابة متوسطة",
+     "unit": "صفحة",
+     "rate": 0.05,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L3",
+     "name": "تعقيم وتنظيف كتاب — إصابة عالية",
+     "unit": "صفحة",
+     "rate": 0.06,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L4",
+     "name": "تعقيم وتنظيف كتاب — إصابة عالية جدًا",
+     "unit": "صفحة",
+     "rate": 0.07,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-DOC",
+     "name": "تعقيم وتنظيف وثيقة",
+     "unit": "وثيقة",
+     "rate": 0.25,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-PHOTO",
+     "name": "تصوير (5 ميغابكسل فأعلى)",
+     "unit": "صورة",
+     "rate": 0.02,
+     "category": "تصوير"
+    },
+    {
+     "code": "RST-MS-L1",
+     "name": "ترميم مخطوط ≤25 سم — إصابة بسيطة",
+     "unit": "صفحة",
+     "rate": 0.4,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L2",
+     "name": "ترميم مخطوط ≤25 سم — إصابة متوسطة",
+     "unit": "صفحة",
+     "rate": 0.5,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L3",
+     "name": "ترميم مخطوط ≤25 سم — إصابة عالية",
+     "unit": "صفحة",
+     "rate": 0.6,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L4",
+     "name": "ترميم مخطوط ≤25 سم — إصابة عالية جدًا",
+     "unit": "صفحة",
+     "rate": 0.7,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-BIG",
+     "name": "إضافة حجم: مخطوط أكبر من 25 سم",
+     "unit": "صفحة",
+     "rate": 0.1,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-PRINT-S",
+     "name": "ترميم مطبوع ≤30 سم",
+     "unit": "صفحة",
+     "rate": 0.1,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-PRINT-L",
+     "name": "ترميم مطبوع أكبر من 30 سم",
+     "unit": "صفحة",
+     "rate": 0.2,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-DOC-L1",
+     "name": "ترميم وثيقة — إصابة بسيطة",
+     "unit": "وثيقة",
+     "rate": 1.5,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-DOC-L2",
+     "name": "ترميم وثيقة — إصابة متوسطة",
+     "unit": "وثيقة",
+     "rate": 2.5,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-DOC-L3",
+     "name": "ترميم وثيقة — إصابة عالية",
+     "unit": "وثيقة",
+     "rate": 3.5,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-DOC-FRAG",
+     "name": "ترميم وثيقة متكسرة (فُتات)",
+     "unit": "وثيقة",
+     "rate": 5.0,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-DOC-LAM",
+     "name": "ترميم وثيقة مغلفة حراريًا",
+     "unit": "وثيقة",
+     "rate": 3.0,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-PHOTO-RST",
+     "name": "ترميم صورة",
+     "unit": "صورة",
+     "rate": 4.0,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-NEWS-S",
+     "name": "ترميم جريدة (أقل من 100 صفحة)",
+     "unit": "صفحة",
+     "rate": 1.0,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-NEWS-L",
+     "name": "ترميم جريدة (100 صفحة فأكثر)",
+     "unit": "صفحة",
+     "rate": 0.6,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-LEATHER-NAT-L1",
+     "name": "صيانة جلد طبيعي — إصابة بسيطة",
+     "unit": "كتاب",
+     "rate": 8,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-LEATHER-NAT-L2",
+     "name": "صيانة جلد طبيعي — إصابة متوسطة",
+     "unit": "كتاب",
+     "rate": 13,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-LEATHER-NAT-L3",
+     "name": "صيانة جلد طبيعي — إصابة عالية",
+     "unit": "كتاب",
+     "rate": 18,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-LEATHER-SYN-L1",
+     "name": "صيانة جلد صناعي / كتان / قماش — إصابة بسيطة",
+     "unit": "كتاب",
+     "rate": 6,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-LEATHER-SYN-L2",
+     "name": "صيانة جلد صناعي / كتان / قماش — إصابة متوسطة",
+     "unit": "كتاب",
+     "rate": 9,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-LEATHER-SYN-L3",
+     "name": "صيانة جلد صناعي / كتان / قماش — إصابة عالية",
+     "unit": "كتاب",
+     "rate": 12,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-COVER-PAPER-L1",
+     "name": "صيانة غلاف ورقي — إصابة بسيطة",
+     "unit": "كتاب",
+     "rate": 3,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-COVER-PAPER-L2",
+     "name": "صيانة غلاف ورقي — إصابة متوسطة",
+     "unit": "كتاب",
+     "rate": 4,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-COVER-PAPER-L3",
+     "name": "صيانة غلاف ورقي — إصابة عالية",
+     "unit": "كتاب",
+     "rate": 5,
+     "category": "الجلود"
+    },
+    {
+     "code": "RST-BIND-GOAT-S",
+     "name": "تجليد بجلد ماعز طبيعي — صغير (أقل من 20 سم)",
+     "unit": "كتاب",
+     "rate": 23,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-GOAT-M",
+     "name": "تجليد بجلد ماعز طبيعي — متوسط (20–25 سم)",
+     "unit": "كتاب",
+     "rate": 33,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-GOAT-L",
+     "name": "تجليد بجلد ماعز طبيعي — كبير (أكبر من 25 سم)",
+     "unit": "كتاب",
+     "rate": 43,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-SYN-THICK",
+     "name": "تجليد بجلد صناعي سميك",
+     "unit": "كتاب",
+     "rate": 10,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-SYN-LIGHT",
+     "name": "تجليد بجلد صناعي خفيف (للمطبوعات)",
+     "unit": "كتاب",
+     "rate": 8,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-DECOR",
+     "name": "تلوين زخارف الجلد",
+     "unit": "كتاب",
+     "rate": 30,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-DISASSEMBLE",
+     "name": "فك الكتاب",
+     "unit": "كتاب",
+     "rate": 2,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-ORDER",
+     "name": "ترتيب الكتاب",
+     "unit": "كتاب",
+     "rate": 2,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BIND-SEW",
+     "name": "تحبيك الكتاب",
+     "unit": "كتاب",
+     "rate": 2,
+     "category": "التجليد"
+    },
+    {
+     "code": "RST-BOX-1",
+     "name": "صندوق حفظ لكتاب واحد",
+     "unit": "صندوق",
+     "rate": 6,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-BOX-MULTI",
+     "name": "صندوق حفظ لعدة كتب",
+     "unit": "صندوق",
+     "rate": 8,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-BOX-XL",
+     "name": "صندوق حفظ كبير جدًا",
+     "unit": "صندوق",
+     "rate": 10,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-BOX-SYN-ADD",
+     "name": "إضافة تغليف الصندوق بالجلد الصناعي",
+     "unit": "صندوق",
+     "rate": 2,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-TITLE-PRINT",
+     "name": "طباعة عنوان على الكتاب",
+     "unit": "كتاب",
+     "rate": 4,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-BOX-LINEN-40",
+     "name": "صندوق كتان للوثائق (40 وثيقة فأقل)",
+     "unit": "صندوق",
+     "rate": 6,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-BOX-LINEN-40P",
+     "name": "صندوق كتان للوثائق (أكثر من 40 وثيقة)",
+     "unit": "صندوق",
+     "rate": 8,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-FOLDER-A4",
+     "name": "ملف ورقي نقي للوثائق (A4)",
+     "unit": "قطعة",
+     "rate": 0.5,
+     "category": "صناديق الحفظ"
+    },
+    {
+     "code": "RST-SLEEVE-A4",
+     "name": "مدخل شفاف نقي للوثائق (A4)",
+     "unit": "قطعة",
+     "rate": 0.5,
+     "category": "صناديق الحفظ"
+    }
+   ]
+  }
  }
 }

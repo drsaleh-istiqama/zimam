@@ -9,32 +9,184 @@
  },
  "arms": [],
  "optional_arms": [
-  {"name": "مطبعة زِمام (عرض)", "abbr": "ZPR", "role": "press"},
-  {"name": "بيت الترميم (عرض)", "abbr": "ZRS", "role": "restoration"}
+  {
+   "name": "مطبعة زِمام (عرض)",
+   "abbr": "ZPR",
+   "role": "press"
+  },
+  {
+   "name": "بيت الترميم (عرض)",
+   "abbr": "ZRS",
+   "role": "restoration"
+  }
  ],
- "domains": ["Heritage"],
- "cost_centers": ["الإدارة العامة", "الخدمات", "الفعاليات والإعلام", "الوقف", "الخزائن والترميم"],
+ "domains": [
+  "Heritage"
+ ],
+ "cost_centers": [
+  "الإدارة العامة",
+  "الخدمات",
+  "الفعاليات والإعلام",
+  "الوقف",
+  "الخزائن والترميم"
+ ],
  "income_accounts": {
-  "parent": ["إيرادات الوقف", "إيرادات الخدمات"],
-  "press": ["إيرادات الطباعة"],
-  "restoration": ["إيرادات الترميم"]
+  "parent": [
+   "إيرادات الوقف",
+   "إيرادات الخدمات"
+  ],
+  "press": [
+   "إيرادات الطباعة"
+  ],
+  "restoration": [
+   "إيرادات الترميم"
+  ]
  },
  "waqf_income_account": "إيرادات الوقف",
  "waqf_cost_center": "الوقف",
  "service_types": [
-  {"name": "استفسار", "free": true, "public": true},
-  {"name": "شهادة أو إفادة", "fees": 2, "public": true},
-  {"name": "نسخة رقمية", "fees": 5, "public": true},
-  {"name": "استشارة", "fees": 20, "public": true}
+  {
+   "name": "استفسار",
+   "free": true,
+   "public": true
+  },
+  {
+   "name": "شهادة أو إفادة",
+   "fees": 2,
+   "public": true
+  },
+  {
+   "name": "نسخة رقمية",
+   "fees": 5,
+   "public": true
+  },
+  {
+   "name": "استشارة",
+   "fees": 20,
+   "public": true
+  }
  ],
  "waqf_shares": [
-  {"name": "سهم صغير", "amount": 10},
-  {"name": "سهم متوسط", "amount": 50},
-  {"name": "سهم كبير", "amount": 100}
+  {
+   "name": "سهم صغير",
+   "amount": 10
+  },
+  {
+   "name": "سهم متوسط",
+   "amount": 50
+  },
+  {
+   "name": "سهم كبير",
+   "amount": 100
+  }
  ],
- "certificate": {"signatory": "", "title": "المدير التنفيذي", "footer": "وقفكم أثرٌ باقٍ"},
+ "certificate": {
+  "signatory": "",
+  "title": "المدير التنفيذي",
+  "footer": "وقفكم أثرٌ باقٍ"
+ },
  "heritage": {
-  "warehouses": {"cabinets": "خزائن واردة", "materials": "مواد الترميم"},
-  "labor_rate": 3
+  "warehouses": {
+   "cabinets": "خزائن واردة",
+   "materials": "مواد الترميم"
+  },
+  "labor_rate": 3,
+  "restoration_pricing": {
+   "_comment": "نظام التقييم الموحد في بيت الترميم (سبتمبر 2026) — الأسعار بالريال العماني لكل وحدة؛ خصومات التجليد (بدون ختم/لسان/حبكة) تُطبَّق يدويًا في البند",
+   "price_list": "أسعار الترميم (عرض)",
+   "tax_rate": 5,
+   "tax_account": "ضريبة القيمة المضافة",
+   "advance_percent": 50,
+   "validity_days": 30,
+   "warranty_months": 12,
+   "terms_title": "شروط خدمات الترميم",
+   "terms": "الضمان على الصيانة لمدة عام من تاريخ التسليم.\nفي حالة الرغبة في إعادة ترتيب بعض الأوراق أو إضافة أوراق أخرى بعد الصيانة تُحتسب قيمة الترميم والتحبيك.\nتُحفظ المواد الورقية في مكان بارد وجاف؛ ويُحفظ الجلد الصناعي في مكان بارد وجاف وإلا تعرّض للتلف.",
+   "catalog": [
+    {
+     "code": "RST-CLEAN-BOOK-L1",
+     "name": "تعقيم وتنظيف كتاب — إصابة بسيطة",
+     "unit": "صفحة",
+     "rate": 0.04,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L2",
+     "name": "تعقيم وتنظيف كتاب — إصابة متوسطة",
+     "unit": "صفحة",
+     "rate": 0.05,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L3",
+     "name": "تعقيم وتنظيف كتاب — إصابة عالية",
+     "unit": "صفحة",
+     "rate": 0.06,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-BOOK-L4",
+     "name": "تعقيم وتنظيف كتاب — إصابة عالية جدًا",
+     "unit": "صفحة",
+     "rate": 0.07,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-CLEAN-DOC",
+     "name": "تعقيم وتنظيف وثيقة",
+     "unit": "وثيقة",
+     "rate": 0.25,
+     "category": "تعقيم وتنظيف"
+    },
+    {
+     "code": "RST-PHOTO",
+     "name": "تصوير (5 ميغابكسل فأعلى)",
+     "unit": "صورة",
+     "rate": 0.02,
+     "category": "تصوير"
+    },
+    {
+     "code": "RST-MS-L1",
+     "name": "ترميم مخطوط ≤25 سم — إصابة بسيطة",
+     "unit": "صفحة",
+     "rate": 0.4,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L2",
+     "name": "ترميم مخطوط ≤25 سم — إصابة متوسطة",
+     "unit": "صفحة",
+     "rate": 0.5,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L3",
+     "name": "ترميم مخطوط ≤25 سم — إصابة عالية",
+     "unit": "صفحة",
+     "rate": 0.6,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-L4",
+     "name": "ترميم مخطوط ≤25 سم — إصابة عالية جدًا",
+     "unit": "صفحة",
+     "rate": 0.7,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-MS-BIG",
+     "name": "إضافة حجم: مخطوط أكبر من 25 سم",
+     "unit": "صفحة",
+     "rate": 0.1,
+     "category": "ترميم"
+    },
+    {
+     "code": "RST-PRINT-S",
+     "name": "ترميم مطبوع ≤30 سم",
+     "unit": "صفحة",
+     "rate": 0.1,
+     "category": "ترميم"
+    }
+   ]
+  }
  }
 }

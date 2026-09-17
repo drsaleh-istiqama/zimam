@@ -6,7 +6,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import flt
+from frappe.utils import add_months, flt, nowdate
 
 from zimam.utils import (cancel_linked, compute_amounts, compute_labor, get_heritage_settings, get_settings,
 	make_material_issue, make_service_invoice)
@@ -30,10 +30,21 @@ class RestorationJob(Document):
 			self.price = self.total_cost
 		if not self.materials_warehouse and self.materials:
 			self.materials_warehouse = hs.restoration_materials_warehouse
+		self.set_warranty()
 		self.sync_item_status()
 
 	def on_update_after_submit(self):
+		self.set_warranty()
 		self.sync_item_status()
+
+	def set_warranty(self):
+		"""الضمان يبدأ من تاريخ التسليم؛ يُعبَّأ تاريخ التسليم تلقائيًا عند الحالة «مُسلَّم»."""
+		if self.status == "مُسلَّم" and not self.delivered_on:
+			self.delivered_on = nowdate()
+		if self.delivered_on and self.warranty_months:
+			self.warranty_until = add_months(self.delivered_on, int(self.warranty_months))
+		elif not self.delivered_on:
+			self.warranty_until = None
 
 	def on_submit(self):
 		se = make_material_issue(self.company, self.materials_warehouse, self.materials, None, _("مواد ترميم {0}").format(self.name))

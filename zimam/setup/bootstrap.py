@@ -206,6 +206,102 @@ def activate_domains(domains):
 		log(f"الحزم المفعّلة: {', '.join(domains)}")
 
 
+RESTORATION_ITEM_GROUP = "خدمات الترميم"
+
+
+def ensure_restoration_catalog(company, h):
+	"""كتالوج «نظام التقييم الموحد» لذراع الترميم: مجموعة أصناف + أصناف خدمة + قائمة أسعار بيع + أسعار،
+	وقالب ضريبة مبيعات وشروط دفع (مقدم) وشروط وأحكام؛ ثم تُربط كلها في إعدادات الحزمة التراثية."""
+	pricing = h.get("restoration_pricing") or {}
+	catalog = pricing.get("catalog") or []
+	if not catalog:
+		return {}
+	if not frappe.db.exists("Item Group", RESTORATION_ITEM_GROUP):
+		frappe.get_doc({"doctype": "Item Group", "item_group_name": RESTORATION_ITEM_GROUP, "parent_item_group": "All Item Groups", "is_group": 0}).insert(ignore_permissions=True)
+	price_list = pricing.get("price_list") or "أسعار الترميم"
+	if not frappe.db.exists("Price List", price_list):
+		currency = frappe.db.get_value("Company", company, "default_currency")
+		frappe.get_doc({"doctype": "Price List", "price_list_name": price_list, "selling": 1, "buying": 0, "enabled": 1, "currency": currency}).insert(ignore_permissions=True)
+		log(f"قائمة أسعار: {price_list}")
+	n_items = n_prices = 0
+	for row in catalog:
+		code = row["code"]
+		if not frappe.db.exists("Item", code):
+			frappe.get_doc({
+				"doctype": "Item", "item_code": code, "item_name": row["name"], "description": f"{row['name']} — لكل {row.get('unit', 'وحدة')}",
+				"item_group": RESTORATION_ITEM_GROUP, "stock_uom": "Nos", "is_stock_item": 0, "is_sales_item": 1, "is_purchase_item": 0,
+				"standard_rate": row["rate"],
+			}).insert(ignore_permissions=True)
+			n_items += 1
+		if not frappe.db.exists("Item Price", {"item_code": code, "price_list": price_list}):
+			frappe.get_doc({"doctype": "Item Price", "item_code": code, "price_list": price_list, "price_list_rate": row["rate"], "selling": 1}).insert(ignore_permissions=True)
+			n_prices += 1
+	log(f"كتالوج الترميم: {n_items} صنفًا جديدًا، {n_prices} سعرًا في «{price_list}»")
+
+	out = {"price_list": price_list}
+	tax_rate = pricing.get("tax_rate", 5)
+	if tax_rate:
+		out["taxes_template"] = ensure_sales_tax_template(company, pricing.get("tax_account") or "ضريبة القيمة المضافة", tax_rate)
+	advance = pricing.get("advance_percent", 50)
+	if advance:
+		out["payment_terms"] = ensure_payment_terms(advance)
+	terms = pricing.get("terms")
+	if terms:
+		out["terms"] = ensure_terms(pricing.get("terms_title") or "شروط خدمات الترميم", terms)
+	out.update(tax_rate=tax_rate, advance=advance, validity=pricing.get("validity_days", 30), warranty=pricing.get("warranty_months", 12))
+	return out
+
+
+def ensure_tax_account(company, name):
+	existing = frappe.db.get_value("Account", {"account_name": name, "company": company}, "name")
+	if existing:
+		return existing
+	parent = frappe.db.get_value("Account", {"company": company, "account_name": "Duties and Taxes", "is_group": 1}, "name") \
+		or frappe.db.get_value("Account", {"company": company, "root_type": "Liability", "is_group": 1}, "name")
+	doc = frappe.get_doc({"doctype": "Account", "account_name": name, "parent_account": parent, "company": company, "is_group": 0, "account_type": "Tax"}).insert(ignore_permissions=True)
+	log(f"حساب ضريبة: {doc.name}")
+	return doc.name
+
+
+def ensure_sales_tax_template(company, account_name, rate):
+	title = f"ضريبة القيمة المضافة {rate}%"
+	existing = frappe.db.get_value("Sales Taxes and Charges Template", {"title": title, "company": company}, "name")
+	if existing:
+		return existing
+	account = ensure_tax_account(company, account_name)
+	doc = frappe.get_doc({
+		"doctype": "Sales Taxes and Charges Template", "title": title, "company": company, "is_default": 0,
+		"taxes": [{"charge_type": "On Net Total", "account_head": account, "description": title, "rate": rate}],
+	}).insert(ignore_permissions=True)
+	log(f"قالب ضريبة: {doc.name}")
+	return doc.name
+
+
+def ensure_payment_terms(advance_percent):
+	name = f"مقدم {int(advance_percent)}% والباقي عند التسليم"
+	if frappe.db.exists("Payment Terms Template", name):
+		return name
+	def term(tname, portion, due_days):
+		if not frappe.db.exists("Payment Term", tname):
+			frappe.get_doc({"doctype": "Payment Term", "payment_term_name": tname, "invoice_portion": portion, "due_date_based_on": "Day(s) after invoice date", "credit_days": due_days}).insert(ignore_permissions=True)
+		return tname
+	t1 = term(f"دفعة مقدمة {int(advance_percent)}%", advance_percent, 0)
+	t2 = term(f"الباقي {int(100 - advance_percent)}% عند التسليم", 100 - advance_percent, 30)
+	frappe.get_doc({"doctype": "Payment Terms Template", "template_name": name,
+		"terms": [{"payment_term": t1, "invoice_portion": advance_percent, "due_date_based_on": "Day(s) after invoice date", "credit_days": 0},
+			{"payment_term": t2, "invoice_portion": 100 - advance_percent, "due_date_based_on": "Day(s) after invoice date", "credit_days": 30}]}).insert(ignore_permissions=True)
+	log(f"قالب شروط دفع: {name}")
+	return name
+
+
+def ensure_terms(title, text):
+	if frappe.db.exists("Terms and Conditions", title):
+		return title
+	frappe.get_doc({"doctype": "Terms and Conditions", "title": title, "selling": 1, "buying": 0, "terms": text}).insert(ignore_permissions=True)
+	log(f"شروط وأحكام: {title}")
+	return title
+
+
 # ---------------------------------------------------------------------------
 def run(profile="template", with_optional_arms=False):
 	if not frappe.db.get_single_value("System Settings", "setup_complete"):
@@ -279,6 +375,14 @@ def run(profile="template", with_optional_arms=False):
 			"restoration_service_item": ensure_item("SRV-RESTORATION", "خدمة ترميم"),
 			"digital_copy_item": ensure_item("DIGITAL-COPY", "نسخة رقمية من مقتنى"),
 		})
+		cat = ensure_restoration_catalog(lab, h)
+		if cat:
+			hs.update({
+				"restoration_price_list": cat.get("price_list"), "restoration_taxes_template": cat.get("taxes_template"),
+				"default_tax_rate": cat.get("tax_rate"), "default_validity_days": cat.get("validity"),
+				"default_advance_percent": cat.get("advance"), "default_warranty_months": cat.get("warranty"),
+				"restoration_payment_terms": cat.get("payment_terms"), "restoration_terms": cat.get("terms"),
+			})
 		hs.save(ignore_permissions=True)
 		log("إعدادات الحزمة التراثية جاهزة")
 

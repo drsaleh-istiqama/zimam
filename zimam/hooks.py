@@ -37,6 +37,8 @@ doc_events = {
 	},
 	"Quotation": {
 		"on_submit": "zimam.integrations.selling.quotation_on_submit",
+		"on_update_after_submit": "zimam.integrations.selling.quotation_on_update_after_submit",
+		"on_cancel": "zimam.integrations.selling.quotation_on_cancel",
 	},
 	"Sales Order": {
 		"on_submit": "zimam.integrations.selling.sales_order_on_submit",

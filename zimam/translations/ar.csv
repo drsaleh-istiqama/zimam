@@ -1042,3 +1042,15 @@ Create User Automatically,إنشاء مستخدم تلقائيًا
 "Creates a User account for this employee using the Preferred, Company, or Personal email.",ينشئ حساب مستخدم لهذا الموظف باستخدام البريد المفضل أو بريد الشركة أو البريد الشخصي.
 Issue a debit note against an existing Sales Invoice to adjust the rate. The quantity will be retained from the original invoice.,إصدار إشعار مدين على فاتورة مبيعات قائمة لتعديل السعر، مع الاحتفاظ بالكمية من الفاتورة الأصلية.
 Steps Completed,خطوات مكتملة
+Restoration Assessment,تقييم وعرض تكلفة ترميم
+Restoration Assessment Item,بند تقييم ترميم
+Restoration Quotation,عرض أسعار ترميم
+Restoration Assessments Awaiting Reply,عروض تكلفة ترميم بانتظار الرد
+Price List,قائمة الأسعار
+Item Price,سعر الصنف
+Payment Terms Template,قالب شروط الدفع
+Sales Taxes and Charges Template,قالب ضرائب ورسوم المبيعات
+Terms and Conditions,الشروط والأحكام
+Valid Till,صالح حتى
+Quotation To,عرض السعر إلى
+Party Name,اسم الطرف

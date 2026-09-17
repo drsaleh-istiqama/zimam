@@ -42,6 +42,12 @@
   "price",
   "sales_invoice",
   "stock_entry",
+  "section_7",
+  "assessment",
+  "delivered_on",
+  "cb5",
+  "warranty_months",
+  "warranty_until",
   "sb_notes",
   "notes",
   "amended_from"
@@ -266,6 +272,44 @@
    "options": "Stock Entry",
    "read_only": 1,
    "no_copy": 1
+  },
+  {
+   "fieldname": "section_7",
+   "fieldtype": "Section Break",
+   "label": "التسليم والضمان"
+  },
+  {
+   "fieldname": "assessment",
+   "fieldtype": "Link",
+   "label": "تقييم/عرض التكلفة المصدر",
+   "options": "Restoration Assessment",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "delivered_on",
+   "fieldtype": "Date",
+   "label": "تاريخ التسليم",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "warranty_months",
+   "fieldtype": "Int",
+   "label": "مدة الضمان (أشهر)",
+   "default": 12,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "warranty_until",
+   "fieldtype": "Date",
+   "label": "الضمان ساري حتى",
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "sb_notes",
