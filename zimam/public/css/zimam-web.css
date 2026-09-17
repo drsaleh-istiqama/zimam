@@ -49,7 +49,11 @@ body.zimam-login,
 }
 
 .page-card .btn-primary,
-.for-login .btn-primary {
+.for-login .btn-primary,
+.for-login .btn-login,
+.for-signup .btn-primary,
+.for-forgot .btn-primary {
+	color: #fff !important;
 	background: var(--zimam-green) !important;
 	border-color: var(--zimam-green) !important;
 	border-radius: 10px;
@@ -57,7 +61,8 @@ body.zimam-login,
 	padding: 10px 14px;
 }
 
-.page-card .btn-primary:hover {
+.page-card .btn-primary:hover,
+.for-login .btn-login:hover {
 	background: var(--zimam-navy) !important;
 	border-color: var(--zimam-navy) !important;
 }

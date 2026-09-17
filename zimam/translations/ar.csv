@@ -1017,3 +1017,28 @@ Work Anniversaries ,ذكرى الالتحاق بالعمل
 Additional Information ,معلومات إضافية
 Allow multi-currency invoices against single party account ,السماح بفواتير متعددة العملات على حساب طرف واحد
  Unlink Payment on Cancellation of Employee Advance,فكّ ارتباط الدفع عند إلغاء سلفة الموظف
+Sign In,تسجيل الدخول
+Welcome! Please sign in to continue.,مرحبًا! يرجى تسجيل الدخول للمتابعة.
+Forgot password?,نسيت كلمة المرور؟
+Masters & Reports,البيانات الرئيسية والتقارير
+Transactions & Reports,المعاملات والتقارير
+Employees on leave today,الموظفون في إجازة اليوم
+Employees on leave this month,الموظفون في إجازة هذا الشهر
+Application,الطلبات
+Payroll Reports,تقارير الرواتب
+Accounting Reports,التقارير المحاسبية
+Deduction Reports,تقارير الخصومات
+Consolidated Report,التقرير الموحد
+Customer Ledger,دفتر أستاذ العميل
+Supplier Ledger,دفتر أستاذ المورد
+Registers,السجلات
+Address And Contacts,العناوين وجهات الاتصال
+Accounting Onboarding,تهيئة المحاسبة
+Configure Chart of Accounts,ضبط شجرة الحسابات
+Setup Sales Taxes,إعداد ضرائب المبيعات
+View Balance Sheet,عرض الميزانية العمومية
+Review Accounts Settings,مراجعة إعدادات الحسابات
+Create User Automatically,إنشاء مستخدم تلقائيًا
+"Creates a User account for this employee using the Preferred, Company, or Personal email.",ينشئ حساب مستخدم لهذا الموظف باستخدام البريد المفضل أو بريد الشركة أو البريد الشخصي.
+Issue a debit note against an existing Sales Invoice to adjust the rate. The quantity will be retained from the original invoice.,إصدار إشعار مدين على فاتورة مبيعات قائمة لتعديل السعر، مع الاحتفاظ بالكمية من الفاتورة الأصلية.
+Steps Completed,خطوات مكتملة

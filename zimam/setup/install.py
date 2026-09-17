@@ -99,12 +99,36 @@ def sync_desktop_icons():
 		frappe.log_error(title="zimam: desktop icons sync failed")
 
 
+
+def ensure_website_defaults():
+	"""الواجهة الرسمية: تُملأ إعدادات الموقع الفارغة/الافتراضية فقط (لا تُستبدل تخصيصات المؤسسة)."""
+	ws = frappe.get_single("Website Settings")
+	institution = None
+	if frappe.db.exists("DocType", "Zimam Settings"):
+		company = frappe.db.get_single_value("Zimam Settings", "parent_company")
+		if company:
+			institution = frappe.db.get_value("Company", company, "company_name")
+	changed = False
+	if not ws.home_page:
+		ws.home_page, changed = "zimam-home", True
+	if institution and (not ws.app_name or ws.app_name in ("Frappe", "ERPNext")):
+		ws.app_name, changed = institution, True
+	if not ws.app_logo:
+		ws.app_logo, changed = "/assets/zimam/images/zimam-logo.svg", True
+	if not ws.splash_image:
+		ws.splash_image, changed = "/assets/zimam/images/zimam-logo.svg", True
+	if not ws.footer_powered:
+		ws.footer_powered, changed = "يعمل هذا الموقع من خلال منصة زِمام", True
+	if changed:
+		ws.save(ignore_permissions=True)
+
 def after_install():
 	create_roles()
 	create_domains()
 	create_fields()
 	sync_dashboards()
 	sync_desktop_icons()
+	ensure_website_defaults()
 	frappe.clear_cache()
 	frappe.db.commit()
 	frappe.msgprint("تم تثبيت زِمام. الخطوة التالية: bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{\"profile\": \"<profile>\"}'")
@@ -116,5 +140,6 @@ def after_migrate():
 	create_fields()
 	sync_dashboards()
 	sync_desktop_icons()
+	ensure_website_defaults()
 	frappe.clear_cache()
 	frappe.db.commit()

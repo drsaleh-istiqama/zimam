@@ -14,6 +14,9 @@ def get_context(context):
 	context.powered_by = (settings and settings.powered_by_text) or "يعمل هذا النظام من خلال منصة زِمام"
 	context.powered_by_url = (settings and settings.powered_by_url) or "https://jadwa.om"
 	context.version = frappe.get_attr("zimam.__version__")
+	context.title = f"{context.institution} — يعمل من خلال منصة زِمام"
+	context.no_breadcrumbs = 1
+	context.no_sidebar = 1
 	context.headline = _("نظام الإدارة المالية والإدارية لـ{0}").format(context.institution)
 	context.lead = _("محاسبة مزدوجة القيد، أذرع استثمارية مستقلة بقوائم موحدة، عطاء وقفي بشهادات فورية، موارد بشرية، وحزم قطاعية تناسب طبيعة نشاط المؤسسة.")
 	context.stats = [
