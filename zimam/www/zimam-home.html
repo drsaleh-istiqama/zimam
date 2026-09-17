@@ -1,0 +1,103 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ institution }} — {{ _("يعمل من خلال منصة زِمام") }}{% endblock %}
+
+{% block head_include %}
+<meta name="description" content="{{ institution }} — نظام الإدارة المالية والإدارية من خلال منصة زِمام">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<style>
+:root{--z-ink:#14202b;--z-muted:#5d6b78;--z-green:#1F6D5C;--z-navy:#24356E;--z-gold:#B8912B;--z-bg:#f6f7f4;--z-card:#ffffff;--z-line:#e3e7e2}
+html,body{direction:rtl}
+.zimam-landing{direction:rtl;font-family:"IBM Plex Sans Arabic","Noto Kufi Arabic",Tahoma,sans-serif;color:var(--z-ink);background:var(--z-bg);margin:-2rem -15px 0;padding:0}
+.zimam-landing h1,.zimam-landing h2,.zimam-landing h3,.zimam-landing .kufi{font-family:"Noto Kufi Arabic","IBM Plex Sans Arabic",Tahoma,sans-serif}
+.z-hero{position:relative;overflow:hidden;background:radial-gradient(1200px 600px at 85% -10%,rgba(31,109,92,.22),transparent 60%),radial-gradient(900px 500px at 10% 110%,rgba(36,53,110,.18),transparent 60%),linear-gradient(180deg,#0f2a2a 0%,#153a46 55%,#1c2f5e 100%);color:#fff;padding:72px 24px 88px}
+.z-hero::after{content:"";position:absolute;inset:auto 0 -1px 0;height:90px;background:linear-gradient(180deg,transparent,var(--z-bg))}
+.z-wrap{max-width:1120px;margin:0 auto}
+.z-brand{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.z-brand img{width:56px;height:56px;border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+.z-brand .t{font-size:1.05rem;opacity:.9}
+.z-brand .t b{display:block;font-size:1.35rem}
+.z-hero h1{font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.35;margin:0 0 14px;max-width:820px}
+.z-hero p.lead{font-size:1.15rem;line-height:1.9;max-width:720px;opacity:.92;margin:0 0 30px}
+.z-cta{display:flex;flex-wrap:wrap;gap:12px}
+.z-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:12px;font-weight:700;text-decoration:none;font-size:1.02rem;transition:transform .15s,box-shadow .15s}
+.z-btn:hover{transform:translateY(-2px);text-decoration:none}
+.z-btn.primary{background:var(--z-gold);color:#1b1b1b;box-shadow:0 10px 30px rgba(184,145,43,.35)}
+.z-btn.ghost{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.35)}
+.z-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:44px}
+.z-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+.z-stat b{display:block;font-size:1.5rem;font-family:"Noto Kufi Arabic",sans-serif}
+.z-stat span{font-size:.85rem;opacity:.85}
+.z-section{padding:56px 24px}
+.z-section h2{font-size:1.6rem;font-weight:800;margin:0 0 8px;color:var(--z-navy)}
+.z-section p.sub{color:var(--z-muted);margin:0 0 28px;font-size:1.02rem}
+.z-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.z-card{background:var(--z-card);border:1px solid var(--z-line);border-radius:16px;padding:22px;box-shadow:0 1px 2px rgba(20,32,43,.04),0 12px 30px -18px rgba(20,32,43,.25);transition:transform .15s}
+.z-card:hover{transform:translateY(-3px)}
+.z-card .ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:1.4rem;margin-bottom:12px;background:linear-gradient(135deg,rgba(31,109,92,.15),rgba(36,53,110,.15));color:var(--z-green)}
+.z-card h3{font-size:1.08rem;margin:0 0 6px;color:var(--z-ink)}
+.z-card p{margin:0;color:var(--z-muted);line-height:1.8;font-size:.95rem}
+.z-band{background:linear-gradient(90deg,var(--z-green),var(--z-navy));color:#fff;border-radius:20px;padding:30px 28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.z-band h3{margin:0 0 6px;font-size:1.3rem}
+.z-band p{margin:0;opacity:.9}
+.z-footer{padding:28px 24px 40px;color:var(--z-muted);font-size:.9rem;text-align:center;border-top:1px solid var(--z-line)}
+.z-footer a{color:var(--z-green);text-decoration:none;font-weight:600}
+.ltr{direction:ltr;unicode-bidi:isolate}
+@media (max-width:640px){.z-hero{padding:48px 16px 70px}.z-section{padding:40px 16px}}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="zimam-landing" dir="rtl" lang="ar">
+  <section class="z-hero">
+    <div class="z-wrap">
+      <div class="z-brand">
+        <img src="/assets/zimam/images/zimam-logo.svg" alt="زِمام">
+        <div class="t"><b>{{ institution }}</b>{{ _("نظام الإدارة المالية والإدارية") }}</div>
+      </div>
+      <h1>{{ headline }}</h1>
+      <p class="lead">{{ lead }}</p>
+      <div class="z-cta">
+        <a class="z-btn primary" href="/login#login">{{ _("دخول النظام") }} ←</a>
+        <a class="z-btn ghost" href="#features">{{ _("ماذا يقدّم زِمام؟") }}</a>
+      </div>
+      <div class="z-stats">
+        {% for s in stats %}
+        <div class="z-stat"><b>{{ s.value }}</b><span>{{ s.label }}</span></div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="z-section" id="features">
+    <div class="z-wrap">
+      <h2>{{ _("منظومة واحدة تمسك بزمام المؤسسة") }}</h2>
+      <p class="sub">{{ _("زِمام يجمع المال والإدارة والأذرع الاستثمارية والعطاء الوقفي في نظام واحد مبني على ERPNext، بواجهة عربية أصيلة.") }}</p>
+      <div class="z-grid">
+        {% for f in features %}
+        <div class="z-card"><div class="ic">{{ f.icon }}</div><h3>{{ f.title }}</h3><p>{{ f.text }}</p></div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="z-section" style="padding-top:8px">
+    <div class="z-wrap">
+      <div class="z-band">
+        <div>
+          <h3>{{ _("زِمام الأمر بيدك") }}</h3>
+          <p>{{ _("ديوان الزمام كان مركز مراجعة حسابات الدواوين كلها؛ واليوم يجمع زِمام حسابات مؤسستك وأذرعها في لوحة واحدة.") }}</p>
+        </div>
+        <a class="z-btn primary" href="/login#login">{{ _("ابدأ الآن") }}</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="z-footer">
+    <div class="z-wrap">
+      {{ powered_by }} · {{ _("منتج") }} <a href="{{ powered_by_url }}" target="_blank" rel="noopener">{{ _("جدوى للدراسات والتطوير") }}</a> · {{ _("مبني على") }} <span class="ltr">ERPNext</span> · <span class="ltr">v{{ version }}</span>
+    </div>
+  </footer>
+</div>
+{% endblock %}

@@ -1,0 +1,54 @@
+/* زِمام — سمة سطح المكتب: خط عربي أنيق وألوان العلامة (تعديلات خفيفة لا تكسر واجهة Frappe) */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap");
+
+:root {
+	--zimam-green: #1F6D5C;
+	--zimam-navy: #24356E;
+	--zimam-gold: #B8912B;
+}
+
+html[lang="ar"] body,
+html[dir="rtl"] body {
+	font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+html[lang="ar"] .page-title .title-text,
+html[lang="ar"] .widget-head .widget-title,
+html[lang="ar"] .number-widget-box .widget-label,
+html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4,
+html[lang="ar"] .sidebar-item-label,
+html[lang="ar"] .desktop-icon-label {
+	font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* الأزرار الأساسية بلون العلامة */
+.btn-primary,
+.btn.btn-primary,
+.page-form .btn-primary {
+	background-color: var(--zimam-green) !important;
+	border-color: var(--zimam-green) !important;
+}
+
+.btn-primary:hover,
+.btn.btn-primary:hover {
+	background-color: var(--zimam-navy) !important;
+	border-color: var(--zimam-navy) !important;
+}
+
+/* بطاقات المؤشرات ولوحات القيادة */
+.number-widget-box,
+.widget.dashboard-widget-box,
+.widget.shortcut-widget-box,
+.widget.links-widget-box {
+	border-radius: 14px;
+}
+
+.number-widget-box .widget-content .number {
+	font-family: "Noto Kufi Arabic", sans-serif;
+}
+
+/* شريط الانتماء أسفل الشاشة */
+#zimam-powered-by {
+	font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
+	letter-spacing: 0.01em;
+}

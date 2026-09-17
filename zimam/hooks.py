@@ -57,8 +57,13 @@ scheduler_events = {
 # العلامة: «يعمل هذا النظام من خلال منصة زِمام» — كل مؤسسة تبقي اسمها وشعارها
 # ---------------------------------------------------------------------------
 app_include_js = ["/assets/zimam/js/zimam_branding.js"]
+app_include_css = ["/assets/zimam/css/zimam-desk.css"]
+web_include_css = ["/assets/zimam/css/zimam-web.css"]
+
+# الصفحة الرسمية (صفحة الهبوط) وشاشة الدخول
+home_page = "zimam-home"
 boot_session = "zimam.setup.boot.boot_session"
-website_context = {"footer_powered": "يعمل هذا الموقع من خلال منصة زِمام"}
+website_context = {"footer_powered": "يعمل هذا الموقع من خلال منصة زِمام", "splash_image": "/assets/zimam/images/zimam-logo.svg"}
 update_website_context = ["zimam.setup.boot.website_context"]
 
 # لا نعدّل نواة ERPNext إطلاقًا؛ الحقول الإضافية Custom Field في setup/install.py

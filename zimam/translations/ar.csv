@@ -179,3 +179,841 @@ Expense Claim,مطالبة مصروفات
 Job Opening,وظيفة شاغرة
 Job Applicant,متقدم لوظيفة
 Appraisal,تقييم الأداء
+Unlink Payment on Cancellation of Employee Advance,فكّ ارتباط الدفع عند إلغاء سلفة الموظف
+(Purchase Order + Material Request + Actual Expense),(أمر الشراء + طلب المواد + المصروف الفعلي)
+A customer must have primary contact email.,يجب أن يكون للعميل بريد إلكتروني لجهة الاتصال الرئيسية.
+API Details,تفاصيل واجهة البرمجة
+Abbr,الاختصار
+Accepted Job Applicants,المتقدمون المقبولون
+Accepted Qty in Stock UOM,الكمية المقبولة بوحدة المخزون
+Account Closing Balance,رصيد إقفال الحساب
+Account Currency (From),عملة الحساب (من)
+Account Currency (To),عملة الحساب (إلى)
+Account Head,الحساب الرئيسي
+Account Opening Balance,الرصيد الافتتاحي للحساب
+Accounting & Payment,المحاسبة والدفع
+Accounting Details,التفاصيل المحاسبية
+Accounting Dimension Filter,مرشّح البعد المحاسبي
+Accounts Closing,إقفال الحسابات
+Accounts Payable Ageing,أعمار الذمم الدائنة
+Accounts Receivable / Payable Report,تقرير الذمم المدينة / الدائنة
+Accounts Receivable / Payable remarks length,طول ملاحظات الذمم المدينة / الدائنة
+Accounts Receivable Ageing,أعمار الذمم المدينة
+Accrual,استحقاق
+Accrual Arrears,متأخرات الاستحقاق
+Accrual Component,مكوّن الاستحقاق
+Accrue and payout at end of payroll period,يُستحق ويُصرف في نهاية فترة الرواتب
+"Accrue per cycle, pay only on claim",يُستحق كل دورة ويُصرف عند المطالبة فقط
+Accrued Benefits,المزايا المستحقة
+Accrued Earnings Report,تقرير الاستحقاقات المتراكمة
+Action if same rate is not maintained throughout internal transaction,الإجراء عند عدم ثبات السعر في المعاملة الداخلية
+Active Customers,العملاء النشطون
+Active Employees,الموظفون النشطون
+Active RQ Worker,عامل الطابور النشط
+Active Suppliers,الموردون النشطون
+Activities,الأنشطة
+Actual Encashable Days,الأيام الفعلية القابلة للصرف نقدًا
+Actual Overtime Duration,مدة العمل الإضافي الفعلية
+Add Day-wise Dates,إضافة التواريخ يومًا بيوم
+Add Manually,إضافة يدويًا
+Add Or Deduct,إضافة أو خصم
+Add Serial / Batch No,إضافة رقم تسلسلي / دفعة
+Add unused leaves from previous leave period's allocation to this allocation,إضافة الإجازات غير المستخدمة من تخصيص الفترة السابقة إلى هذا التخصيص
+Added On,أُضيف في
+Additional Information,معلومات إضافية
+Adjustment Type,نوع التسوية
+Advance Account,حساب السلف
+Advance Paid,السلفة المدفوعة
+Advance Paid (Company Currency),السلفة المدفوعة (بعملة الشركة)
+Advance Payment Ledger Entry,قيد دفتر الدفعات المقدمة
+Advance Taxes and Charges,الضرائب والرسوم المقدمة
+Advance Voucher No,رقم سند السلفة
+Advance Voucher Type,نوع سند السلفة
+Advanced Filters,مرشّحات متقدمة
+Advances,السلف
+Allocate Based On Leave Policy,التخصيص بحسب سياسة الإجازات
+Allocate Full Amount to Stock Items,تخصيص المبلغ كاملًا لأصناف المخزون
+Allocate on Day,التخصيص في يوم
+Allocated Amount (Company Currency),المبلغ المخصص (بعملة الشركة)
+Allocated Via,خُصّص عبر
+Allocation Date,تاريخ التخصيص
+Allocation Details,تفاصيل التخصيص
+Allocation to Adjust,التخصيص المراد تسويته
+Allow Employee Checkin from Mobile App,السماح بتسجيل حضور الموظف من تطبيق الجوال
+Allow Geolocation Tracking,السماح بتتبع الموقع الجغرافي
+Allow Leave Application After (Calendar Days),السماح بطلب الإجازة بعد (أيام تقويمية)
+Allow Multiple Shift Assignments for Same Date,السماح بتعيين أكثر من وردية في اليوم نفسه
+Allow Over Allocation,السماح بتجاوز التخصيص
+Allow Partial Payment,السماح بالدفع الجزئي
+Allow User to Edit Rate,السماح للمستخدم بتعديل السعر
+Allow claim for full benefit amount,السماح بالمطالبة بكامل مبلغ الميزة
+Allow multi-currency invoices against single party account,السماح بفواتير متعددة العملات على حساب طرف واحد
+Allowed DocTypes,أنواع المستندات المسموح بها
+Allows allocating more leaves than the number of days in the allocation period.,يسمح بتخصيص إجازات أكثر من عدد أيام فترة التخصيص.
+Always Ask,اسأل دائمًا
+Amount Eligible for Commission,المبلغ المستحق للعمولة
+Amount claimed via Expense Claim,المبلغ المطالب به عبر مطالبة المصروفات
+"Amount column has ""CR""/""DR"" values","عمود المبلغ يحوي قيم ""CR""/""DR"""
+Amount column has positive/negative values,عمود المبلغ يحوي قيمًا موجبة/سالبة
+Amount in Account Currency,المبلغ بعملة الحساب
+Amount of expense,مبلغ المصروف
+Amount paid against this encashment,المبلغ المدفوع مقابل هذا الصرف
+Amount scheduled for deduction via salary,المبلغ المجدول للخصم من الراتب
+Amount that has been paid against this advance,المبلغ المدفوع مقابل هذه السلفة
+Analytical Accounting,المحاسبة التحليلية
+Annual Gross Earning,إجمالي الدخل السنوي
+Annual Purchase,المشتريات السنوية
+Annual Sales,المبيعات السنوية
+Annual Taxable Amount,المبلغ الخاضع للضريبة سنويًا
+Any,أي
+"Any other remarks, noteworthy effort that should go in the records",أي ملاحظات أخرى أو جهد جدير بالتسجيل
+Applicable Earnings Component,مكوّن الاستحقاقات المطبَّق
+Applicable Salary Components,مكوّنات الراتب المطبَّقة
+Applicable on POS Invoice,يُطبَّق على فاتورة نقطة البيع
+Applicant Name,اسم المتقدم
+Applicant Rating,تقييم المتقدم
+Applicant-to-Hire Percentage,نسبة المتقدمين إلى التعيين
+Application Web Form Route,مسار نموذج التقديم على الويب
+Apply discounts and margins on products,تطبيق الخصومات والهوامش على المنتجات
+Apply for Public Holiday,التقديم في عطلة رسمية
+Apply for Weekend,التقديم في عطلة نهاية الأسبوع
+Appraisal Cycle,دورة تقييم الأداء
+Appraisal KRA,مجال النتائج الرئيسية للتقييم
+Appraisal Linking,ربط التقييم
+Appraisal Overview,نظرة عامة على التقييم
+Appraisal Template,قالب تقييم الأداء
+Appraisee,المقيَّم
+Approval,الاعتماد
+Approved,معتمد
+Approved Claims (This Month),المطالبات المعتمدة (هذا الشهر)
+Arrear,متأخرات
+Arrear Component,مكوّن المتأخرات
+Arrear Start Date,تاريخ بدء المتأخرات
+Arrears,المتأخرات
+Asset Settings,إعدادات الأصول
+Assets Allocated,الأصول المخصصة
+Assign Shift,تعيين وردية
+Assign Shift Schedule,تعيين جدول الورديات
+Assignment Starts From,يبدأ التعيين من
+Assignment based on,التعيين بناءً على
+Associated Document,المستند المرتبط
+Associated Document Type,نوع المستند المرتبط
+Attach Proof,إرفاق إثبات
+Attempted,تمت المحاولة
+Attendance Settings,إعدادات الحضور
+Auto Reconciliation job trigger,مشغّل مهمة التسوية الآلية
+Auto reconcile Payments,تسوية المدفوعات آليًا
+Automated Based on Goal Progress,آلي بناءً على تقدم الأهداف
+Automatically add Taxes and Charges from Item Tax Template,إضافة الضرائب والرسوم آليًا من قالب ضريبة الصنف
+Automatically add taxes from Taxes and Charges Template,إضافة الضرائب آليًا من قالب الضرائب والرسوم
+Automatically fetch Payment Terms from Order/Quotation,جلب شروط الدفع آليًا من الطلب/عرض السعر
+"Automatically fetches all assets allocated to the employee, if any",يجلب آليًا كل الأصول المخصصة للموظف إن وُجدت
+Automatically process deferred Accounting entry,معالجة القيود المحاسبية المؤجلة آليًا
+Automatically run rules on unreconciled transactions,تشغيل القواعد آليًا على المعاملات غير المسوّاة
+Automatically update Last Sync of Checkin,تحديث آخر مزامنة لتسجيل الحضور آليًا
+Available Leave(s),الإجازات المتاحة
+Average Feedback Score,متوسط درجة التغذية الراجعة
+Average Rating,متوسط التقييم
+Average Sales Order Value,متوسط قيمة أمر البيع
+"Average of Goal Score, Feedback Score, and Self Appraisal Score",متوسط درجة الأهداف ودرجة التغذية الراجعة ودرجة التقييم الذاتي
+Background Job Activity,نشاط المهام الخلفية
+Balance,الرصيد
+Bank Account Balance,رصيد الحساب البنكي
+Bank Account No,رقم الحساب البنكي
+Bank Entry Type,نوع القيد البنكي
+Bank Name,اسم البنك
+Bank Statement Import Log,سجل استيراد كشف الحساب البنكي
+Bank Statement Import Log Column Map,خريطة أعمدة سجل استيراد كشف الحساب
+Bank Transaction Rule,قاعدة المعاملة البنكية
+Bank Transaction Rule Accounts,حسابات قاعدة المعاملة البنكية
+Bank Transaction Rule Description Conditions,شروط وصف قاعدة المعاملة البنكية
+"Base, Variable & Leave Encashment",الأساسي والمتغير وصرف الإجازات
+Begin On (Days),يبدأ بعد (أيام)
+Benefit Amount,مبلغ الميزة
+Benefit Details,تفاصيل الميزة
+Benefits,المزايا
+Birthdays,أعياد الميلاد
+Boarding Status,حالة الالتحاق
+Body,المتن
+Bonus,مكافأة
+Book Asset Depreciation entry automatically,تسجيل قيد إهلاك الأصول آليًا
+Book Deferred entries based on,تسجيل القيود المؤجلة بناءً على
+Book Stock Expense GL Entries,تسجيل قيود مصروف المخزون في دفتر الأستاذ
+Book deferred entries via Journal Entry,تسجيل القيود المؤجلة عبر قيد يومية
+Book tax loss on early payment discount,تسجيل خسارة الضريبة عند خصم الدفع المبكر
+Budget Variance,انحراف الموازنة
+Bulk Salary Structure Assignment,تعيين هيكل الرواتب دفعةً واحدة
+CTC,إجمالي كلفة الموظف
+Calculate Final Score based on Formula,احتساب الدرجة النهائية بمعادلة
+Calculate Gratuity Amount Based On,احتساب مكافأة نهاية الخدمة بناءً على
+Category-wise Asset Value,قيمة الأصول بحسب الفئة
+Cause of Grievance,سبب التظلّم
+Check Supplier invoice number uniqueness,التحقق من عدم تكرار رقم فاتورة المورد
+Check if this tax is not applicable to items (distinct from 0% rate),حدّد إن كانت هذه الضريبة لا تنطبق على الأصناف (بخلاف نسبة 0%)
+Checkin Radius,نطاق تسجيل الحضور
+Choose the date on which you want to create these components as arrears.,اختر التاريخ الذي تريد إنشاء هذه المكوّنات فيه كمتأخرات.
+Claims by Type,المطالبات بحسب النوع
+Classify As,تصنيف كـ
+Cleared,مُسوّى
+Closed On,أُغلق في
+Closes On,يُغلق في
+Column Mapping,ربط الأعمدة
+Commission Rate (%),نسبة العمولة (%)
+Company Details,بيانات الشركة
+Condition & Formula,الشرط والمعادلة
+Consider Marked Attendance on Holidays,احتساب الحضور المسجَّل في العطل
+Contact No.,رقم التواصل
+Contains,يحتوي
+Cost,التكلفة
+Costing,التكاليف
+Create Overtime Slip For Eligible Employee(s),إنشاء قسيمة عمل إضافي للموظفين المستحقين
+Create Shifts After,إنشاء الورديات بعد
+Create payment requests in Draft status,إنشاء طلبات الدفع بحالة مسودة
+Criteria,المعايير
+Currency,العملة
+Current CTC,إجمالي الكلفة الحالية
+Current Employer,صاحب العمل الحالي
+Current Invoice End Date,تاريخ انتهاء الفاتورة الحالية
+Current Invoice Start Date,تاريخ بدء الفاتورة الحالية
+Current Job Title,المسمى الوظيفي الحالي
+Current Liability,الخصوم المتداولة
+Current Month Income Tax,ضريبة الدخل للشهر الحالي
+Current Payroll Period,فترة الرواتب الحالية
+Current Slab,الشريحة الحالية
+Current Work Experience,الخبرة العملية الحالية
+Custom Range,نطاق مخصص
+Custom Remark,ملاحظة مخصصة
+Customer,العميل
+Cycle Name,اسم الدورة
+Cycles,الدورات
+DFS,بحث بالعمق أولًا
+Data fetch method,طريقة جلب البيانات
+Date of Birth,تاريخ الميلاد
+Date of Joining,تاريخ الالتحاق
+Dates & Reason,التواريخ والسبب
+Dates Based On,التواريخ بناءً على
+Days before the current subscription period,الأيام قبل فترة الاشتراك الحالية
+Days to Reverse,أيام العكس
+Debit Amount in Transaction Currency,المبلغ المدين بعملة المعاملة
+Debit/Credit,مدين/دائن
+Deduction Arrears,متأخرات الخصومات
+Deductions before tax calculation,الخصومات قبل احتساب الضريبة
+Default Account,الحساب الافتراضي
+Default Base Pay,الراتب الأساسي الافتراضي
+Deferred Expense Account,حساب المصروفات المؤجلة
+Delete Accounting and Stock Ledger entries on deletion of transaction,حذف قيود الأستاذ والمخزون عند حذف المعاملة
+Delivered by Supplier,مسلَّم من المورد
+Delivery Trends,اتجاهات التسليم
+Department Wise Employee Count,عدد الموظفين بحسب القسم
+Department Wise Openings,الوظائف الشاغرة بحسب القسم
+Department Wise Salary(Last Month),الرواتب بحسب القسم (الشهر الماضي)
+Department wise Expense Claims,مطالبات المصروفات بحسب القسم
+Department wise Timesheet Hours,ساعات الدوام بحسب القسم
+Description Rules,قواعد الوصف
+Designation Wise Employee Count,عدد الموظفين بحسب المسمى
+Designation Wise Openings,الوظائف الشاغرة بحسب المسمى
+Designation Wise Salary(Last Month),الرواتب بحسب المسمى (الشهر الماضي)
+Detected Amount Format,صيغة المبلغ المكتشفة
+Detected Date Format,صيغة التاريخ المكتشفة
+Detected Header Index,موضع الترويسة المكتشف
+Detected Transaction Ending Index,موضع نهاية المعاملات المكتشف
+Detected Transaction Starting Index,موضع بداية المعاملات المكتشف
+Determine Address Tax Category from,تحديد فئة ضريبة العنوان من
+Disable,تعطيل
+"Disable ""Consider Accounting Dimension"" Filter",تعطيل مرشّح «مراعاة البعد المحاسبي»
+Disable Rounded Total,تعطيل الإجمالي المقرَّب
+Do Not Include in Accounting Entries,لا يُدرج في القيود المحاسبية
+Do not import,لا تستورد
+Document Naming,تسمية المستندات
+Duration (Days),المدة (أيام)
+Early Exit (This Month),خروج مبكر (هذا الشهر)
+Earned Leave Schedule,جدول الإجازات المكتسبة
+Earning Arrears,متأخرات الاستحقاقات
+Earnings & Deductions,الاستحقاقات والخصومات
+Effective From,ساري من
+Effective To,ساري إلى
+Email Activity,نشاط البريد
+Employee Advance,سلفة موظف
+Employee Advance Status,حالة سلف الموظفين
+Employee Analytics,تحليلات الموظفين
+Employee Benefit Detail,تفاصيل مزايا الموظف
+Employee Benefit Ledger,دفتر مزايا الموظف
+Employee Birthday,أعياد ميلاد الموظفين
+Employee CTC Break-up,تفصيل إجمالي كلفة الموظف
+Employee Company,شركة الموظف
+Employee Cost Center,مركز تكلفة الموظف
+Employee Exit Settings,إعدادات مغادرة الموظف
+Employee Exits,مغادرات الموظفين
+Employee Feedback Criteria,معايير تغذية الموظف الراجعة
+Employee Feedback Rating,تقييم تغذية الموظف الراجعة
+Employee Grievance,تظلّم موظف
+Employee Hours Utilization Based On Timesheet,استغلال ساعات الموظف بناءً على سجل الدوام
+Employee Info,بيانات الموظف
+Employee Information,معلومات الموظف
+Employee Leave Balance,رصيد إجازات الموظف
+Employee Leave Balance Summary,ملخص رصيد إجازات الموظف
+Employee Naming By,تسمية الموظف بـ
+Employee Number,رقم الموظف
+Employee Performance Feedback,تغذية راجعة عن أداء الموظف
+Employee Responsible,الموظف المسؤول
+Employee Retained,بقاء الموظف
+Employee name,اسم الموظف
+Employee records are created using the selected option,تُنشأ سجلات الموظفين بحسب الخيار المحدد
+Employees,الموظفون
+Employees by Type,الموظفون بحسب النوع
+Employees on Half Day HTML,الموظفون في نصف يوم
+Employer Contribution,مساهمة صاحب العمل
+Employer Contributions,مساهمات صاحب العمل
+Employment Type,نوع التوظيف
+Enable Accounting Dimensions,تفعيل الأبعاد المحاسبية
+Enable Discounts and Margin,تفعيل الخصومات والهامش
+Enable Early Exit Marking,تفعيل تسجيل الخروج المبكر
+Enable Late Entry Marking,تفعيل تسجيل الدخول المتأخر
+Enable Loyalty Point Program,تفعيل برنامج نقاط الولاء
+Enable Subscription,تفعيل الاشتراك
+Enable Subscription tracking in invoice,تفعيل تتبع الاشتراك في الفاتورة
+"Enable cost center, projects and other custom accounting dimensions",تفعيل مراكز التكلفة والمشاريع والأبعاد المحاسبية المخصصة
+Enabled only for Employee Benefit components from Salary Structure Assignment,يُفعَّل فقط لمكوّنات مزايا الموظف من تعيين هيكل الراتب
+Encashment Date,تاريخ الصرف النقدي
+Encashment Days,أيام الصرف النقدي
+End Time,وقت الانتهاء
+End of the current subscription period,نهاية فترة الاشتراك الحالية
+Ends With,ينتهي بـ
+Enter yearly benefit amounts,أدخل مبالغ المزايا السنوية
+Every 2 Weeks,كل أسبوعين
+Every 3 Weeks,كل ثلاثة أسابيع
+Every 4 Weeks,كل أربعة أسابيع
+Every Week,كل أسبوع
+Exchange Rate,سعر الصرف
+Exchange rate of Payment Entry against Employee Advance,سعر صرف قيد الدفع مقابل سلفة الموظف
+Exemption Proofs,إثباتات الإعفاء
+Exit Confirmed,تأكيد المغادرة
+Exit Details,تفاصيل المغادرة
+Exit Interview,مقابلة المغادرة
+Exit Questionnaire,استبيان المغادرة
+Exit Questionnaire Notification Template,قالب إشعار استبيان المغادرة
+Exit Questionnaire Web Form,نموذج ويب لاستبيان المغادرة
+Expected Average Rating,متوسط التقييم المتوقع
+Expected By,متوقع بحلول
+Expected Compensation,التعويض المتوقع
+Expected Skill Set,المهارات المتوقعة
+Expected Skillset,مجموعة المهارات المتوقعة
+Expense Approver,معتمد المصروفات
+Expense Claims (This Month),مطالبات المصروفات (هذا الشهر)
+Expenses & Advances,المصروفات والسلف
+Expenses Settings,إعدادات المصروفات
+Expired Leave(s),الإجازات المنتهية
+Failure Details,تفاصيل الفشل
+Failure Reason,سبب الفشل
+Feedback HTML,التغذية الراجعة
+Feedback Ratings,تقييمات التغذية الراجعة
+Feedback Reminder Notification Template,قالب إشعار تذكير التغذية الراجعة
+Fetch Geolocation,جلب الموقع الجغرافي
+Fetch Payment Schedule in Payment Request,جلب جدول الدفع في طلب الدفع
+Fetch valuation rate for internal Transaction,جلب سعر التقييم للمعاملة الداخلية
+Filled,مشغولة
+Filter Employees,تصفية الموظفين
+Filter by Shift,تصفية بحسب الوردية
+Final Decision,القرار النهائي
+Final Score,الدرجة النهائية
+Final Score Formula,معادلة الدرجة النهائية
+First Day,اليوم الأول
+Fixed Hourly Rate,أجر ساعة ثابت
+Flexible Benefit,ميزة مرنة
+For Designation,للمسمى الوظيفي
+Fraction of Applicable Earnings,نسبة من الاستحقاقات المطبَّقة
+Fraction of Daily Salary per Leave,نسبة من الأجر اليومي لكل إجازة
+From Employee,من الموظف
+From(Year),من (السنة)
+Fuchsia,فوشيا
+Full and Final Asset,أصل التسوية النهائية
+Full and Final Outstanding Statement,كشف المستحقات في التسوية النهائية
+Future Income Tax,ضريبة الدخل المستقبلية
+Gain Loss Account,حساب الأرباح والخسائر
+Gender Diversity Ratio,نسبة التنوع بين الجنسين
+General Ledger Report,تقرير دفتر الأستاذ العام
+General Ledger remarks length,طول ملاحظات دفتر الأستاذ العام
+Generate New Invoices Past Due Date,توليد فواتير جديدة بعد تاريخ الاستحقاق
+Get Job Requisitions,جلب طلبات التوظيف
+Goal Completion (%),إنجاز الهدف (%)
+Goal Score (%),درجة الهدف (%)
+Goal Score (weighted),درجة الهدف (موزونة)
+Grade,الدرجة
+Gratuity,مكافأة نهاية الخدمة
+Gratuity Applicable Component,مكوّن مكافأة نهاية الخدمة
+Gratuity Rule,قاعدة مكافأة نهاية الخدمة
+Gratuity Rule Slab,شريحة قاعدة مكافأة نهاية الخدمة
+Grievance Against,التظلّم ضد
+Grievance Against Party,الطرف المتظلَّم ضده
+Grievance Details,تفاصيل التظلّم
+Grievance Type,نوع التظلّم
+Gross Pay (Company Currency),إجمالي الراتب (بعملة الشركة)
+Gross Year To Date,الإجمالي منذ بداية السنة
+Gross Year To Date(Company Currency),الإجمالي منذ بداية السنة (بعملة الشركة)
+HR Telemetry Milestone,معلم قياس الموارد البشرية
+Half Day Marked Employee Header,ترويسة الموظفين المسجَّلين نصف يوم
+Header Text,نص الترويسة
+Holiday List Assignment,تعيين قائمة العطل
+Holiday List End,نهاية قائمة العطل
+Holiday List Start,بداية قائمة العطل
+Holidays,العطل
+Holidays in this month,العطل في هذا الشهر
+Horizontal Break,فاصل أفقي
+Hour Rate,أجر الساعة
+Hour Rate (Company Currency),أجر الساعة (بعملة الشركة)
+Hourly Rate,الأجر بالساعة
+"If checked, Payroll Payable will be booked against each employee",إذا حُدد، تُسجَّل الرواتب المستحقة لكل موظف على حدة
+"If checked, flexible benefits are considered only if benefit application exists",إذا حُدد، لا تُحتسب المزايا المرنة إلا بوجود طلب ميزة
+"If checked, overtime slip creation can be handled as part of payroll processing",إذا حُدد، يمكن إنشاء قسائم العمل الإضافي ضمن معالجة الرواتب
+"If enabled, rule matching algorithm will run every hour",إذا فُعّل، تعمل خوارزمية مطابقة القواعد كل ساعة
+"If enabled, this component will be included in arrear calculations",إذا فُعّل، يُدرج هذا المكوّن في احتساب المتأخرات
+"If set, the job opening will be closed automatically after this date",إذا حُدد، تُغلق الوظيفة الشاغرة آليًا بعد هذا التاريخ
+Ignore Account closing balance,تجاهل رصيد إقفال الحساب
+Import MT940 Fromat,استيراد بصيغة MT940
+In Process,قيد المعالجة
+Incentive,حافز
+Include Holidays,تضمين العطل
+Income Source,مصدر الدخل
+Income Tax Breakup,تفصيل ضريبة الدخل
+Income Tax Computation,احتساب ضريبة الدخل
+Income Tax Deducted Till Date,ضريبة الدخل المخصومة حتى تاريخه
+Income and Expense,الإيرادات والمصروفات
+Income from Other Sources,الدخل من مصادر أخرى
+Incoming Bills (Purchase Invoice),الفواتير الواردة (فواتير الشراء)
+Incoming Leads,العملاء المحتملون الواردون
+Interest,الفائدة
+Interest Income Account,حساب إيرادات الفوائد
+Interview,مقابلة
+Interview Detail,تفصيل المقابلة
+Interview Details,تفاصيل المقابلة
+Interview Feedback,تغذية راجعة عن المقابلة
+Interview Reminder Notification Template,قالب إشعار تذكير المقابلة
+Interview Status,حالة المقابلة
+Interview Summary,ملخص المقابلة
+Interview Type,نوع المقابلة
+Interview Type Name,اسم نوع المقابلة
+Interviewer,المُقابِل
+Interviewers,المُقابِلون
+Investigated,تم التحقيق
+Investigation Details,تفاصيل التحقيق
+Invoice Portion (%),نسبة الفاتورة (%)
+Is Allocated,مخصص
+Is Applicable for Referral Bonus,مؤهل لمكافأة الترشيح
+Is Credit Card,بطاقة ائتمان
+Is Mandatory,إلزامي
+Is Paid,مدفوع
+Is Partially Paid Leave,إجازة مدفوعة جزئيًا
+Is Recurring Additional Salary,راتب إضافي متكرر
+Is Rule Evaluated,تم تقييم القاعدة
+Is Salary Released,الراتب مُفرج عنه
+Is Salary Withheld,الراتب محجوز
+Item,الصنف
+Item Shortage Summary,ملخص نقص الأصناف
+Item-wise Annual Sales,المبيعات السنوية بحسب الصنف
+Job Applicant Pipeline,مسار المتقدمين للوظائف
+Job Applicants by Country,المتقدمون بحسب الدولة
+Job Application Frequency,تكرار طلبات التوظيف
+Job Application Status,حالة طلب التوظيف
+Job Offer Acceptance Rate,نسبة قبول عروض العمل
+Job Offer Status,حالة عرض العمل
+Job Offer Term Template,قالب شروط عرض العمل
+Job Offers (This Month),عروض العمل (هذا الشهر)
+Job Opening Template,قالب الوظيفة الشاغرة
+Job Openings,الوظائف الشاغرة
+Job Requisition,طلب توظيف
+Job Title,المسمى الوظيفي
+KRA,مجال النتائج الرئيسية
+KRA Evaluation Method,طريقة تقييم مجالات النتائج الرئيسية
+KRA vs Goals,مجالات النتائج مقابل الأهداف
+KRAs,مجالات النتائج الرئيسية
+Key Result Area,مجال النتائج الرئيسية
+Last Day,اليوم الأخير
+Last Odometer Value,آخر قراءة للعداد
+Late Entry & Early Exit Settings for Auto Attendance,إعدادات الدخول المتأخر والخروج المبكر للحضور الآلي
+Late Entry (This Month),دخول متأخر (هذا الشهر)
+Leave Adjustment,تسوية الإجازات
+Leave Approver,معتمد الإجازات
+Leave Block List,قائمة حظر الإجازات
+Leave Details,تفاصيل الإجازة
+Leave Ledger,دفتر الإجازات
+Leave Policy Assignment,تعيين سياسة الإجازات
+Leave Settings,إعدادات الإجازات
+Leave(s) Pending Approval,إجازات بانتظار الاعتماد
+Leaves After Adjustment,الإجازات بعد التسوية
+Leaves to Adjust,الإجازات المراد تسويتها
+License Plate,لوحة المركبة
+Lime,ليموني
+Loan,قرض
+Loan Account,حساب القرض
+Loan Product,منتج القرض
+Location-wise Asset Value,قيمة الأصول بحسب الموقع
+Lower Range,الحد الأدنى
+Maintain same rate throughout internal Transaction,الحفاظ على السعر نفسه في المعاملة الداخلية
+Mandatory Benefit Application,طلب الميزة إلزامي
+Manual Rating,تقييم يدوي
+Manually,يدويًا
+Maps To,يُربط بـ
+Margin,الهامش
+Mark Auto Attendance on Holidays,تسجيل الحضور الآلي في العطل
+Match transfers within 'N' days,مطابقة التحويلات خلال «ن» يومًا
+Matched,مطابَق
+Matched Transaction Rule,قاعدة المعاملة المطابَقة
+Material Request Analysis,تحليل طلبات المواد
+Max Amount Eligible For Claim,الحد الأقصى المستحق للمطالبة
+Maximum Benefit Amount,الحد الأقصى لمبلغ الميزة
+Maximum Consecutive Leaves Allowed,الحد الأقصى للإجازات المتتالية
+Maximum Encashable Leaves,الحد الأقصى للإجازات القابلة للصرف نقدًا
+Maximum Leave Allocation Allowed per Leave Period,الحد الأقصى لتخصيص الإجازات في الفترة
+Maximum Overtime Hours Allowed,الحد الأقصى لساعات العمل الإضافي
+Maximum Overtime Hours Allowed Per Day,الحد الأقصى لساعات العمل الإضافي يوميًا
+Merge similar Account Heads,دمج الحسابات المتشابهة
+Minimum Year for Gratuity,الحد الأدنى من السنوات لمكافأة نهاية الخدمة
+Minimum calendar days required since Date of Joining to apply for this leave,الحد الأدنى من الأيام التقويمية منذ الالتحاق للتقدم لهذه الإجازة
+Miscellaneous,متنوعة
+Model,الطراز
+Month To Date,منذ بداية الشهر
+Month To Date(Company Currency),منذ بداية الشهر (بعملة الشركة)
+Multiple Accounts,حسابات متعددة
+Net Pay (Company Currency),صافي الراتب (بعملة الشركة)
+Net Pay Info,بيانات صافي الراتب
+New Assets (This Year),أصول جديدة (هذا العام)
+New Lead (Last 1 Month),عملاء محتملون جدد (الشهر الماضي)
+New Opportunity (Last 1 Month),فرص جديدة (الشهر الماضي)
+New shift assignments will be created after this date.,ستُنشأ تعيينات الورديات الجديدة بعد هذا التاريخ.
+No of. Positions,عدد الوظائف
+Non Taxable Earnings,استحقاقات غير خاضعة للضريبة
+Non-Encashable Leaves,إجازات غير قابلة للصرف نقدًا
+Normal Balances,الأرصدة الطبيعية
+Note: Shift will not be overwritten in existing attendance records,ملاحظة: لن تُستبدل الوردية في سجلات الحضور القائمة
+Notifications By Type,الإشعارات بحسب النوع
+Number of Employees on Leave (This Month),عدد الموظفين في إجازة (هذا الشهر)
+Number of Employees on Leave (Today),عدد الموظفين في إجازة (اليوم)
+Number of Leaves,عدد الإجازات
+Number of Transactions,عدد المعاملات
+Number of Withholding Cycles,عدد دورات الحجز
+Number of days to consider for matching transfers across bank accounts,عدد الأيام لمطابقة التحويلات بين الحسابات البنكية
+Number of leaves eligible for encashment based on leave type settings,عدد الإجازات المستحقة للصرف نقدًا بحسب إعدادات نوع الإجازة
+Obtained Average Rating,متوسط التقييم المحقق
+Off-shift,خارج الوردية
+Offer Date,تاريخ العرض
+Offer Terms,شروط العرض
+Old Parent,الأصل السابق
+Oldest Items,أقدم الأصناف
+Onboarding Activities,أنشطة الالتحاق
+Onboarding Begins On,يبدأ الالتحاق في
+Onboardings (This Month),الملتحقون الجدد (هذا الشهر)
+Open & Approved,مفتوح ومعتمد
+Open Opportunity,فرصة مفتوحة
+Open Resume in New Tab,فتح السيرة الذاتية في تبويب جديد
+Opening Balances,الأرصدة الافتتاحية
+Opportunities via Campaigns,الفرص عبر الحملات
+Opportunity Trends,اتجاهات الفرص
+Other Details,تفاصيل أخرى
+Other Settings,إعدادات أخرى
+Outgoing Bills (Sales Invoice),الفواتير الصادرة (فواتير المبيعات)
+Outgoing Salary,الرواتب المصروفة
+Overtime,العمل الإضافي
+Overtime Amount Calculation,احتساب مبلغ العمل الإضافي
+Overtime Details,تفاصيل العمل الإضافي
+Overtime Duration,مدة العمل الإضافي
+Overtime Salary Component,مكوّن راتب العمل الإضافي
+Overtime Slip,قسيمة عمل إضافي
+Overtime Slip Step,خطوة قسيمة العمل الإضافي
+Overtime Type,نوع العمل الإضافي
+Overtime earnings will be booked under this salary component for payout.,تُسجَّل استحقاقات العمل الإضافي تحت مكوّن الراتب هذا للصرف.
+Owned,مملوك
+PCV Job Timeout (seconds),مهلة مهمة سند إقفال الفترة (ثوانٍ)
+PDF Tables,جداول PDF
+POS Configurations,إعدادات نقطة البيع
+POS Item Details,تفاصيل صنف نقطة البيع
+POS Item Selector,محدد أصناف نقطة البيع
+PWA Notification,إشعار تطبيق الويب
+Paid via Salary Slip,مدفوع عبر قسيمة الراتب
+Parent Goal,الهدف الأصل
+Partially Reposted,أُعيد ترحيله جزئيًا
+Partly Claimed and Returned,مُطالَب به جزئيًا ومُعاد
+Party Account No.,رقم حساب الطرف
+Party IBAN,الآيبان للطرف
+Party ID,معرّف الطرف
+Party Name/Account Holder,اسم الطرف / صاحب الحساب
+Passport Number,رقم جواز السفر
+Pay Details,تفاصيل الأجر
+Pay Rate Multipliers,مضاعفات معدل الأجر
+Pay Via Payment Entry,الدفع عبر قيد دفع
+Pay via Salary Slip,الدفع عبر قسيمة الراتب
+Payment Account,حساب الدفع
+Payment Days Calculation Help,مساعدة احتساب أيام الدفع
+Payment Options,خيارات الدفع
+Payment and Accounting,الدفع والمحاسبة
+Payout,الصرف
+Payout Method,طريقة الصرف
+Payout Unclaimed Amount in Final Payroll Cycle,صرف المبلغ غير المطالب به في آخر دورة رواتب
+Payroll Correction,تصحيح الرواتب
+Payroll Correction Child,بند تصحيح الرواتب
+Payroll Cost Centers,مراكز تكلفة الرواتب
+Payroll Info,بيانات الرواتب
+Payroll Payable Account,حساب الرواتب المستحقة
+Pending (unpaid) amount from previous advances,المبلغ المتبقي غير المسدد من سلف سابقة
+Percentage (%),النسبة (%)
+Posted On,رُحّل في
+Posting Date inheritance for exchange gain / loss,وراثة تاريخ الترحيل لأرباح/خسائر الصرف
+Posting date,تاريخ الترحيل
+Prevent Duplicate Applications,منع الطلبات المكررة
+Prevent Sales Invoice when Customer is Overdue,منع فاتورة المبيعات عند تأخر العميل في السداد
+Prevent self approval for expense claims even if user has permissions,منع الاعتماد الذاتي لمطالبات المصروفات حتى مع وجود الصلاحية
+Prevent self approval for leaves even if user has permissions,منع الاعتماد الذاتي للإجازات حتى مع وجود الصلاحية
+Price List & Currency,قائمة الأسعار والعملة
+Principal Amount,أصل المبلغ
+Printing Details,تفاصيل الطباعة
+Process Payroll Accounting Entry based on Employee,معالجة قيد الرواتب المحاسبي لكل موظف
+Process Shift Requests,معالجة طلبات الورديات
+Process leave encashment via a separate Payment Entry instead of Salary Slip,معالجة صرف الإجازات عبر قيد دفع مستقل بدل قسيمة الراتب
+Project Profitability,ربحية المشاريع
+Promotions (This Month),الترقيات (هذا الشهر)
+Public Holiday Multiplier,مضاعف العطلة الرسمية
+Publish Applications Received,نشر عدد الطلبات المستلمة
+Publish Salary Range,نشر نطاق الراتب
+Purpose & Amount,الغرض والمبلغ
+Questionnaire Email Sent,أُرسل بريد الاستبيان
+Quick Filters,مرشّحات سريعة
+Radius within which check-in is allowed (in meters),النطاق المسموح فيه بتسجيل الحضور (بالأمتار)
+Raised By,مقدَّم من
+Rate Goals Manually,تقييم الأهداف يدويًا
+Rating Criteria,معايير التقييم
+Ratings,التقييمات
+Reason for Adjustment,سبب التسوية
+Reason for Requesting,سبب الطلب
+Reason for Withholding Salary,سبب حجز الراتب
+Recommended for a single biometric device / checkins via mobile app,يُنصح به لجهاز بصمة واحد / تسجيل الحضور عبر تطبيق الجوال
+Reconciliation Type,نوع التسوية
+Reconciliation queue size,حجم طابور التسوية
+Recover Cost,استرداد التكلفة
+Reduce,تخفيض
+Reference No,رقم المرجع
+Referral Bonus Payment Status,حالة دفع مكافأة الترشيح
+Referral Details,تفاصيل الترشيح
+Referrer Details,تفاصيل المرشِّح
+Referrer Name,اسم المرشِّح
+Reflections,تأملات
+Regex,تعبير نمطي
+Rejected Claims (This Month),المطالبات المرفوضة (هذا الشهر)
+Rejected Job Applicants,المتقدمون المرفوضون
+Released,مُفرج عنه
+Relieving Date,تاريخ انتهاء الخدمة
+Remove if Zero Valued,إزالة إن كانت القيمة صفرًا
+Repay Unclaimed Amount from Salary,سداد المبلغ غير المطالب به من الراتب
+Repeat On Days,التكرار في الأيام
+Reports To,يتبع لـ
+Repost,إعادة الترحيل
+Reposted,أُعيد ترحيله
+Reposting Status,حالة إعادة الترحيل
+Requested By,مقدَّم من
+Requested By (Name),اسم مقدم الطلب
+Resignation Letter Date,تاريخ خطاب الاستقالة
+Resolution Date,تاريخ الحل
+Resolution Details,تفاصيل الحل
+Resolved By,حُلّ بواسطة
+Restrict Backdated Leave Application,تقييد طلبات الإجازة بأثر رجعي
+Resume Link,رابط السيرة الذاتية
+Resume link,رابط السيرة الذاتية
+Retirement Age (In Years),سن التقاعد (بالسنوات)
+Retry Failed Allocations,إعادة محاولة التخصيصات الفاشلة
+Returned,مُعاد
+Reviewer,المراجع
+Reviewer Name,اسم المراجع
+Revised CTC,إجمالي الكلفة المعدَّل
+Role Allowed to Bypass Over Billing Restriction,الدور المسموح له بتجاوز قيد الفوترة الزائدة
+Role Allowed to over bill,الدور المسموح له بالفوترة الزائدة
+Role allowed to bypass credit limit,الدور المسموح له بتجاوز حد الائتمان
+Role allowed to override stop action,الدور المسموح له بتجاوز إجراء الإيقاف
+Roster Color,لون الجدول
+Round off Work Experience,تقريب سنوات الخبرة
+Round tax amount row-wise,تقريب مبلغ الضريبة لكل صف
+Rounded Total (Company Currency),الإجمالي المقرَّب (بعملة الشركة)
+Rounding Adjustment (Company Currency),تسوية التقريب (بعملة الشركة)
+Route to the custom Job Application Webform,مسار نموذج التقديم المخصص على الويب
+Running,قيد التشغيل
+Salary Component Based,بناءً على مكوّن الراتب
+Salary Expectation,الراتب المتوقع
+Salary Paid Per,يُدفع الراتب لكل
+Salary Slip Leave,إجازة قسيمة الراتب
+Salary Slip Reference,مرجع قسيمة الراتب
+Salary Withholding,حجز الراتب
+Salary Withholding Cycle,دورة حجز الراتب
+Salary components should be part of the Salary Structure.,يجب أن تكون مكوّنات الراتب جزءًا من هيكل الراتب.
+Sales Orders Count,عدد أوامر البيع
+Sales Partner,شريك المبيعات
+Sanctioned Amount,المبلغ المعتمد
+Sanctioned Amount (Company Currency),المبلغ المعتمد (بعملة الشركة)
+Scheduled Jobs,المهام المجدولة
+Scheduled On,مجدول في
+Select Month for LWP Reversal,اختر شهر عكس الإجازة بلا أجر
+Select if any of the days selected for request are holidays,حدّد إن كان أي من الأيام المطلوبة عطلة
+Self Appraisal,التقييم الذاتي
+Send Interview Feedback Reminder,إرسال تذكير بتغذية المقابلة الراجعة
+Send Interview Reminder,إرسال تذكير بالمقابلة
+Send Leave Notification,إرسال إشعار الإجازة
+Sender Copy,نسخة للمرسل
+Separate columns for withdrawal and deposit,عمودان منفصلان للسحب والإيداع
+Separation Activities,أنشطة إنهاء الخدمة
+Separation Begins On,يبدأ إنهاء الخدمة في
+Separations (This Month),حالات إنهاء الخدمة (هذا الشهر)
+"Set ""From(Year)"" and ""To(Year)"" to 0 for no upper and lower limit.",اضبط «من (السنة)» و«إلى (السنة)» على 0 لإلغاء الحدين.
+Set Assignment Details,ضبط تفاصيل التعيين
+Set Leave Details,ضبط تفاصيل الإجازة
+Set filters to fetch employees,اضبط المرشّحات لجلب الموظفين
+Set opening balances for earnings and taxes from the previous employer,ضبط الأرصدة الافتتاحية للاستحقاقات والضرائب من صاحب العمل السابق
+Set optional filters to fetch employees in the appraisee list,اضبط مرشّحات اختيارية لجلب الموظفين في قائمة المقيَّمين
+Set the frequency for holiday reminders,ضبط تكرار تذكيرات العطل
+Shift Assignment Breakup,تفصيل تعيينات الورديات
+Shift Assignment Details,تفاصيل تعيين الوردية
+Shift Assignment Tool,أداة تعيين الورديات
+Shift Attendance,حضور الورديات
+Shift Details,تفاصيل الوردية
+Shift Location,موقع الوردية
+Shift Request Filters,مرشّحات طلبات الورديات
+Shift Requests ending before this date will be excluded.,تُستبعد طلبات الورديات المنتهية قبل هذا التاريخ.
+Shift Requests starting after this date will be excluded.,تُستبعد طلبات الورديات التي تبدأ بعد هذا التاريخ.
+Shift Schedule,جدول الورديات
+Shift Schedule Assignment,تعيين جدول الورديات
+Shift Settings,إعدادات الورديات
+Shift Status,حالة الوردية
+Shift Timings,أوقات الوردية
+Shift and Attendance,الورديات والحضور
+Shortlisted,ضمن القائمة المختصرة
+Show Leave Balances in Salary Slip,إظهار أرصدة الإجازات في قسيمة الراتب
+Show Payment Schedule in print,إظهار جدول الدفع في الطباعة
+Show balances in Chart of Accounts,إظهار الأرصدة في شجرة الحسابات
+Show inclusive tax in print,إظهار الضريبة المضمَّنة في الطباعة
+Show taxes as table in print,إظهار الضرائب جدولًا في الطباعة
+Single Account,حساب واحد
+Skill Assessment,تقييم المهارات
+Skills,المهارات
+Staffing Details,تفاصيل التوظيف
+Standard Multiplier,المضاعف القياسي
+Standard Working Hours,ساعات العمل القياسية
+Starts With,يبدأ بـ
+Statement Format,صيغة الكشف
+Statement PDF Password,كلمة مرور ملف الكشف
+Status for Other Half,حالة النصف الآخر
+Stock Expense Accounting,محاسبة مصروفات المخزون
+Submit Journal entries,ترحيل قيود اليومية
+Submitted via Payroll Entry,مُرحَّل عبر قيد الرواتب
+Sum of all previous slabs,مجموع الشرائح السابقة
+Take Exact Completed Years,احتساب السنوات المكتملة بدقة
+Task Weight,وزن المهمة
+Tax Deducted Till Date,الضريبة المخصومة حتى تاريخه
+Tax Exemption Declaration,إقرار الإعفاء الضريبي
+Tax Withholding,الاستقطاع الضريبي
+Taxable Earnings Till Date,الاستحقاقات الخاضعة للضريبة حتى تاريخه
+Taxable Income Relief Threshold Limit,حد إعفاء الدخل الخاضع للضريبة
+Taxes & Charges,الضرائب والرسوم
+Template Name,اسم القالب
+Terms,الشروط
+Territory Wise Opportunity Count,عدد الفرص بحسب المنطقة
+Territory Wise Sales,المبيعات بحسب المنطقة
+The day of the month when leaves should be allocated,يوم الشهر الذي تُخصص فيه الإجازات
+Time Sheet,سجل الدوام
+Time taken to fill the open positions,الوقت المستغرق لشغل الوظائف الشاغرة
+Time to Fill,مدة شغل الوظيفة
+Timelines,الجداول الزمنية
+Timesheet Activity Breakup,تفصيل أنشطة سجل الدوام
+Timesheet Details,تفاصيل سجل الدوام
+Timesheet Working Hours,ساعات العمل في سجل الدوام
+To(Year),إلى (السنة)
+Top Customers,أهم العملاء
+Top Suppliers,أهم الموردين
+Total Absent (This Month),إجمالي الغياب (هذا الشهر)
+Total Advance Amount (Company Currency),إجمالي مبلغ السلف (بعملة الشركة)
+Total Allocated Leave(s),إجمالي الإجازات المخصصة
+Total Applicants (This Month),إجمالي المتقدمين (هذا الشهر)
+Total Asset Recovery Cost,إجمالي تكلفة استرداد الأصول
+Total Assets,إجمالي الأصول
+Total Claimed Amount (Company Currency),إجمالي المبلغ المطالب به (بعملة الشركة)
+Total Cost To Company (CTC),إجمالي الكلفة على الشركة
+Total Credit Transactions,إجمالي المعاملات الدائنة
+Total Credits,إجمالي الدائن
+Total Days Without Pay,إجمالي الأيام بلا أجر
+Total Debit Transactions,إجمالي المعاملات المدينة
+Total Debits,إجمالي المدين
+Total Declaration Submitted,إجمالي الإقرارات المقدمة
+Total Deduction (Company Currency),إجمالي الخصومات (بعملة الشركة)
+Total Earnings,إجمالي الاستحقاقات
+Total Exchange Gain/Loss,إجمالي أرباح/خسائر الصرف
+Total Goal Score,إجمالي درجة الأهداف
+Total Incentive Given(Last month),إجمالي الحوافز المصروفة (الشهر الماضي)
+Total Income Tax,إجمالي ضريبة الدخل
+Total Incoming Bills,إجمالي الفواتير الواردة
+Total Incoming Payment,إجمالي المدفوعات الواردة
+Total Outgoing Bills,إجمالي الفواتير الصادرة
+Total Outgoing Payment,إجمالي المدفوعات الصادرة
+Total Outgoing Salary(Last month),إجمالي الرواتب المصروفة (الشهر الماضي)
+Total Overtime Duration,إجمالي مدة العمل الإضافي
+Total Payable Amount,إجمالي المبلغ المستحق الدفع
+Total Payment,إجمالي الدفع
+Total Present (This Month),إجمالي الحضور (هذا الشهر)
+Total Receivable Amount,إجمالي المبلغ المستحق التحصيل
+Total Salary Structure,إجمالي هياكل الرواتب
+Total Sanctioned Amount (Company Currency),إجمالي المبلغ المعتمد (بعملة الشركة)
+Total Self Score,إجمالي درجة التقييم الذاتي
+Total System Users,إجمالي مستخدمي النظام
+Total Taxes and Charges,إجمالي الضرائب والرسوم
+Total Website Users,إجمالي مستخدمي الموقع
+Total Working Hours,إجمالي ساعات العمل
+Total in words (Company Currency),الإجمالي كتابةً (بعملة الشركة)
+Total working Days Per Year,إجمالي أيام العمل في السنة
+Totals (Company Currency),الإجماليات (بعملة الشركة)
+Training Type,نوع التدريب
+Trainings (This Month),التدريبات (هذا الشهر)
+"Transaction type column has ""C""/""D"" values","عمود نوع المعاملة يحوي قيم ""C""/""D"""
+"Transaction type column has ""CR""/""DR"" values","عمود نوع المعاملة يحوي قيم ""CR""/""DR"""
+"Transaction type column has ""Deposit""/""Withdrawal"" values","عمود نوع المعاملة يحوي قيم ""إيداع""/""سحب"""
+Transfers (This Month),النقل الوظيفي (هذا الشهر)
+UTM Analytics,تحليلات UTM
+Unclaimed Amount,المبلغ غير المطالب به
+Unclaimed Amount (Company Currency),المبلغ غير المطالب به (بعملة الشركة)
+Under Review,قيد المراجعة
+Unlink Advance Payment on cancellation of order,فكّ ارتباط الدفعة المقدمة عند إلغاء الطلب
+Unlink Payment on cancellation of invoice,فكّ ارتباط الدفع عند إلغاء الفاتورة
+Unmarked Employee Header,ترويسة الموظفين غير المسجَّلين
+Unmarked Employees HTML,الموظفون غير المسجَّلين
+Unsettled,غير مسوّى
+Upper Range,الحد الأعلى
+Use legacy Budget Controller,استخدام متحكم الموازنة القديم
+Use legacy controller for Period Closing Voucher,استخدام المتحكم القديم لسند إقفال الفترة
+Used Leave(s),الإجازات المستخدمة
+Vehicle Expenses,مصروفات المركبات
+Vehicle Service Item,بند صيانة المركبة
+Violet,بنفسجي
+Voucher Created,أُنشئ السند
+Warehouse wise Stock Value,قيمة المخزون بحسب المستودع
+Webpage Views,مشاهدات الصفحات
+Weekend Multiplier,مضاعف عطلة نهاية الأسبوع
+Weightage (%),الوزن النسبي (%)
+Why is this Candidate Qualified for this Position?,لماذا هذا المرشح مؤهل لهذه الوظيفة؟
+Withheld,محجوز
+Won Opportunities,الفرص المكسوبة
+Won Opportunity (Last 1 Month),الفرص المكسوبة (الشهر الماضي)
+Work Anniversaries,ذكرى الالتحاق بالعمل
+Work Experience Calculation Method,طريقة احتساب الخبرة العملية
+Work References,مراجع العمل
+Working Days and Hours,أيام وساعات العمل
+Y-O-Y Promotions,الترقيات سنويًا
+Y-O-Y Transfers,النقل الوظيفي سنويًا
+Year To Date,منذ بداية السنة
+Year To Date(Company Currency),منذ بداية السنة (بعملة الشركة)
+Yearly Amount,المبلغ السنوي
+Yearly Benefit,الميزة السنوية
+Currency ,العملة
+Customer ,العميل
+Employee Responsible ,الموظف المسؤول
+Current Employer ,صاحب العمل الحالي
+For Designation ,للمسمى الوظيفي
+Fraction of Applicable Earnings ,نسبة من الاستحقاقات المطبَّقة
+Last Odometer Value ,آخر قراءة للعداد
+Role Allowed to over bill ,الدور المسموح له بالفوترة الزائدة
+Sales Partner ,شريك المبيعات
+Work Anniversaries ,ذكرى الالتحاق بالعمل
+Additional Information ,معلومات إضافية
+Allow multi-currency invoices against single party account ,السماح بفواتير متعددة العملات على حساب طرف واحد
+ Unlink Payment on Cancellation of Employee Advance,فكّ ارتباط الدفع عند إلغاء سلفة الموظف

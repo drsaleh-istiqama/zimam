@@ -1,0 +1,78 @@
+/* زِمام — تجميل صفحات الموقع العام وشاشة الدخول */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap");
+
+:root {
+	--zimam-green: #1F6D5C;
+	--zimam-navy: #24356E;
+	--zimam-gold: #B8912B;
+}
+
+html[lang="ar"] body,
+body[dir="rtl"] {
+	font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", Tahoma, sans-serif;
+}
+
+/* شاشة الدخول */
+.page-card-container,
+.for-login,
+.for-signup,
+.for-forgot {
+	direction: rtl;
+}
+
+body.zimam-login,
+.page-card-container {
+	background: radial-gradient(900px 500px at 90% -10%, rgba(31, 109, 92, 0.18), transparent 60%),
+		radial-gradient(700px 400px at 5% 110%, rgba(36, 53, 110, 0.16), transparent 60%), #f6f7f4;
+	min-height: 100vh;
+}
+
+.page-card {
+	border: 1px solid #e3e7e2;
+	border-radius: 18px;
+	box-shadow: 0 20px 50px -24px rgba(20, 32, 43, 0.35);
+	padding: 32px 28px;
+	background: #fff;
+}
+
+.page-card .page-card-head h4,
+.page-card-head .indicator {
+	font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", sans-serif;
+	font-weight: 700;
+}
+
+.page-card .app-logo,
+.page-card-head img {
+	width: 64px !important;
+	height: 64px !important;
+	border-radius: 14px;
+}
+
+.page-card .btn-primary,
+.for-login .btn-primary {
+	background: var(--zimam-green) !important;
+	border-color: var(--zimam-green) !important;
+	border-radius: 10px;
+	font-weight: 700;
+	padding: 10px 14px;
+}
+
+.page-card .btn-primary:hover {
+	background: var(--zimam-navy) !important;
+	border-color: var(--zimam-navy) !important;
+}
+
+.page-card .form-control {
+	border-radius: 10px;
+	padding: 10px 12px;
+	text-align: start;
+}
+
+.page-card a {
+	color: var(--zimam-green);
+}
+
+/* تذييل الموقع العام */
+.web-footer .footer-powered {
+	font-family: "IBM Plex Sans Arabic", sans-serif;
+}
