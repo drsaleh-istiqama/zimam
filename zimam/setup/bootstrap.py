@@ -54,10 +54,13 @@ def load_profile(profile):
 
 
 # ---------------------------------------------------------------------------
-def ensure_company(name, abbr, country, currency, parent=None, arm_type=None, arm_role=None):
+def ensure_company(name, abbr, country, currency, parent=None, arm_type=None, arm_role=None, is_group=False):
+	"""ERPNext يشترط أن تكون الشركة الأم «شركة مجموعة» (is_group) قبل ربط شركات تابعة بها."""
 	if frappe.db.exists("Company", name):
 		doc = frappe.get_doc("Company", name)
 		changed = False
+		if is_group and not doc.is_group:
+			doc.is_group, changed = 1, True
 		if parent and not doc.parent_company:
 			doc.parent_company, changed = parent, True
 		if arm_type and not doc.get("zimam_arm_type"):
@@ -71,6 +74,7 @@ def ensure_company(name, abbr, country, currency, parent=None, arm_type=None, ar
 	doc = frappe.get_doc({
 		"doctype": "Company", "company_name": name, "abbr": abbr, "default_currency": currency, "country": country,
 		"chart_of_accounts": "Standard", "parent_company": parent, "zimam_arm_type": arm_type, "zimam_arm_role": arm_role,
+		"is_group": 1 if is_group else 0,
 	}).insert(ignore_permissions=True)
 	log(f"أُنشئت الشركة: {name} ({abbr})")
 	return doc
@@ -211,8 +215,8 @@ def run(profile="template", with_optional_arms=False):
 	parent = inst["name"]
 	country, currency = inst["country"], inst["currency"]
 
-	ensure_company(parent, inst["abbr"], country, currency, arm_type="المؤسسة (الشركة الأم)")
 	arms = list(p.get("arms", [])) + (list(p.get("optional_arms", [])) if with_optional_arms else [])
+	ensure_company(parent, inst["abbr"], country, currency, arm_type="المؤسسة (الشركة الأم)", is_group=bool(arms))
 	by_role = {}
 	for a in arms:
 		ensure_company(a["name"], a["abbr"], country, currency, parent=parent, arm_type="ذراع استثماري تابع", arm_role=ARM_ROLE_LABEL[a["role"]])
