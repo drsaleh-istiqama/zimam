@@ -1,0 +1,285 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabinet",
+  "cabinet_name",
+  "company",
+  "cb1",
+  "start_date",
+  "target_date",
+  "status",
+  "section_1",
+  "stages",
+  "section_2",
+  "materials",
+  "materials_warehouse",
+  "cost_center",
+  "section_3",
+  "labor_hours",
+  "labor_rate",
+  "total_labor_cost",
+  "cb2",
+  "total_material_cost",
+  "total_cost",
+  "section_4",
+  "stock_entry",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabinet",
+   "fieldtype": "Link",
+   "label": "الخزانة",
+   "options": "Cabinet",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cabinet_name",
+   "fieldtype": "Data",
+   "label": "اسم الخزانة",
+   "fetch_from": "cabinet.cabinet_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "تاريخ البدء",
+   "default": "Today"
+  },
+  {
+   "fieldname": "target_date",
+   "fieldtype": "Date",
+   "label": "التاريخ المستهدف"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مفتوح\nقيد التنفيذ\nمكتمل\nملغى",
+   "default": "مفتوح",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المراحل"
+  },
+  {
+   "fieldname": "stages",
+   "fieldtype": "Table",
+   "label": "مراحل المعالجة",
+   "options": "Processing Stage",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المواد المستهلكة"
+  },
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "label": "المواد",
+   "options": "Processing Material"
+  },
+  {
+   "fieldname": "materials_warehouse",
+   "fieldtype": "Link",
+   "label": "مستودع صرف المواد",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التكلفة"
+  },
+  {
+   "fieldname": "labor_hours",
+   "fieldtype": "Float",
+   "label": "إجمالي ساعات العمل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "labor_rate",
+   "fieldtype": "Currency",
+   "label": "أجر الساعة"
+  },
+  {
+   "fieldname": "total_labor_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة العمل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "total_material_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة المواد",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "التكلفة الإجمالية",
+   "read_only": 1,
+   "bold": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "الربط"
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "قيد صرف المواد",
+   "options": "Stock Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Processing Order",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Processing Order",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:MZ-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "cabinet_name",
+ "show_title_field_in_link": 1,
+ "restrict_to_domain": "Heritage"
+}

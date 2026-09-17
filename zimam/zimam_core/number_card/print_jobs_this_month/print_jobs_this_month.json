@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "Print Jobs This Month",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Core",
+ "label": "أوامر طباعة هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Print Job",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#AD1457",
+ "filters_json": "[[\"Print Job\", \"docstatus\", \"=\", 1, false], [\"Print Job\", \"creation\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]"
+}

@@ -1,0 +1,334 @@
+{
+ "doctype": "Workspace",
+ "name": "Zimam",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Core",
+ "title": "Zimam",
+ "label": "Zimam",
+ "public": 1,
+ "is_hidden": 0,
+ "icon": "book",
+ "indicator_color": "green",
+ "parent_page": "",
+ "for_user": "",
+ "sequence_id": 98.0,
+ "restrict_to_domain": "",
+ "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — إدارة المؤسسة</b></span>\", \"col\": 12}}, {\"id\": \"sc_service_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب خدمة\", \"col\": 4}}, {\"id\": \"sc_waqf_contribution\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مساهمة وقفية\", \"col\": 4}}, {\"id\": \"sc_print_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر طباعة\", \"col\": 4}}, {\"id\": \"sc_institution_event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فعالية\", \"col\": 4}}, {\"id\": \"sc_legal_matter\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"شأن قانوني\", \"col\": 4}}, {\"id\": \"sc_zimam_manager\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة مدير المؤسسة\", \"col\": 4}}, {\"id\": \"nc_service_requests_receive\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Received This Month\", \"col\": 4}}, {\"id\": \"nc_service_requests_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Completed This Month\", \"col\": 4}}, {\"id\": \"nc_media_activities_this_mo\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Media Activities This Month\", \"col\": 4}}, {\"id\": \"nc_events_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Events This Month\", \"col\": 4}}, {\"id\": \"nc_waqf_income_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Waqf Income This Month\", \"col\": 4}}, {\"id\": \"nc_sales_invoices_this_mont\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Sales Invoices This Month\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_81350877\", \"type\": \"card\", \"data\": {\"card_name\": \"الخدمات\", \"col\": 4}}, {\"id\": \"card_13001717\", \"type\": \"card\", \"data\": {\"card_name\": \"الأذرع والمطبعة\", \"col\": 4}}, {\"id\": \"card_5734508\", \"type\": \"card\", \"data\": {\"card_name\": \"العطاء الوقفي\", \"col\": 4}}, {\"id\": \"card_88436243\", \"type\": \"card\", \"data\": {\"card_name\": \"الفعاليات والإعلام\", \"col\": 4}}, {\"id\": \"card_67706283\", \"type\": \"card\", \"data\": {\"card_name\": \"الشؤون القانونية\", \"col\": 4}}, {\"id\": \"card_56478062\", \"type\": \"card\", \"data\": {\"card_name\": \"الإعدادات\", \"col\": 4}}]",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "الخدمات",
+   "link_count": 2,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب خدمة",
+   "link_type": "DocType",
+   "link_to": "Service Request",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نوع خدمة",
+   "link_type": "DocType",
+   "link_to": "Service Type",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الأذرع والمطبعة",
+   "link_count": 4,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر طباعة",
+   "link_type": "DocType",
+   "link_to": "Print Job",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "عرض سعر",
+   "link_type": "DocType",
+   "link_to": "Quotation",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر بيع",
+   "link_type": "DocType",
+   "link_to": "Sales Order",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "فاتورة مبيعات",
+   "link_type": "DocType",
+   "link_to": "Sales Invoice",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "العطاء الوقفي",
+   "link_count": 4,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "حملة وقفية",
+   "link_type": "DocType",
+   "link_to": "Waqf Campaign",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نوع سهم وقفي",
+   "link_type": "DocType",
+   "link_to": "Waqf Share Type",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مساهمة وقفية",
+   "link_type": "DocType",
+   "link_to": "Waqf Contribution",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "عقار وقفي استثماري",
+   "link_type": "DocType",
+   "link_to": "Waqf Property",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الفعاليات والإعلام",
+   "link_count": 2,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "فعالية",
+   "link_type": "DocType",
+   "link_to": "Institution Event",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نشاط إعلامي",
+   "link_type": "DocType",
+   "link_to": "Media Activity",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الشؤون القانونية",
+   "link_count": 2,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "شأن قانوني",
+   "link_type": "DocType",
+   "link_to": "Legal Matter",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "عقد",
+   "link_type": "DocType",
+   "link_to": "Contract",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الإعدادات",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "إعدادات زِمام",
+   "link_type": "DocType",
+   "link_to": "Zimam Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الشركات",
+   "link_type": "DocType",
+   "link_to": "Company",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مراكز التكلفة",
+   "link_type": "DocType",
+   "link_to": "Cost Center",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "المستودعات",
+   "link_type": "DocType",
+   "link_to": "Warehouse",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طرق الدفع",
+   "link_type": "DocType",
+   "link_to": "Mode of Payment",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الحزم المفعّلة (النطاقات)",
+   "link_type": "DocType",
+   "link_to": "Domain Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  }
+ ],
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "label": "طلب خدمة",
+   "link_to": "Service Request",
+   "color": "Purple"
+  },
+  {
+   "type": "DocType",
+   "label": "مساهمة وقفية",
+   "link_to": "Waqf Contribution",
+   "color": "Green"
+  },
+  {
+   "type": "DocType",
+   "label": "أمر طباعة",
+   "link_to": "Print Job",
+   "color": "Pink"
+  },
+  {
+   "type": "DocType",
+   "label": "فعالية",
+   "link_to": "Institution Event",
+   "color": "Cyan"
+  },
+  {
+   "type": "DocType",
+   "label": "شأن قانوني",
+   "link_to": "Legal Matter",
+   "color": "Red"
+  },
+  {
+   "type": "Dashboard",
+   "label": "لوحة مدير المؤسسة",
+   "link_to": "Zimam Manager",
+   "color": "Grey"
+  }
+ ],
+ "number_cards": [
+  {
+   "label": "طلبات خدمة مستلمة هذا الشهر",
+   "number_card_name": "Service Requests Received This Month"
+  },
+  {
+   "label": "طلبات خدمة منجزة هذا الشهر",
+   "number_card_name": "Service Requests Completed This Month"
+  },
+  {
+   "label": "أنشطة إعلامية هذا الشهر",
+   "number_card_name": "Media Activities This Month"
+  },
+  {
+   "label": "فعاليات هذا الشهر",
+   "number_card_name": "Events This Month"
+  },
+  {
+   "label": "إيرادات الوقف هذا الشهر",
+   "number_card_name": "Waqf Income This Month"
+  },
+  {
+   "label": "مبيعات الفواتير هذا الشهر (كل الشركات)",
+   "number_card_name": "Sales Invoices This Month"
+  }
+ ],
+ "charts": [],
+ "quick_lists": [],
+ "custom_blocks": [],
+ "roles": []
+}

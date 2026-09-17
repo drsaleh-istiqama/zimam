@@ -1,0 +1,360 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "customer",
+  "customer_name",
+  "cb1",
+  "job_title",
+  "product_type",
+  "status",
+  "section_1",
+  "quantity",
+  "size",
+  "pages",
+  "paper",
+  "cb2",
+  "color",
+  "binding",
+  "finishing",
+  "artwork",
+  "section_2",
+  "cost_items",
+  "section_3",
+  "total_cost",
+  "margin_percent",
+  "cb3",
+  "quoted_price",
+  "unit_price",
+  "section_4",
+  "due_date",
+  "cb4",
+  "delivered_on",
+  "section_5",
+  "quotation",
+  "sales_order",
+  "cb5",
+  "sales_invoice",
+  "sb_notes",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "Customer",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "اسم العميل",
+   "fetch_from": "customer.customer_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "عنوان العمل",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "product_type",
+   "fieldtype": "Select",
+   "label": "نوع المنتج",
+   "options": "كتاب\nكتيب\nمجلة\nبطاقات\nملصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "طلب\nمُسعَّر\nمعتمد\nقيد الطباعة\nجاهز\nمُسلَّم\nملغى",
+   "default": "طلب",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المواصفات"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "label": "الكمية",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "size",
+   "fieldtype": "Data",
+   "label": "المقاس"
+  },
+  {
+   "fieldname": "pages",
+   "fieldtype": "Int",
+   "label": "عدد الصفحات"
+  },
+  {
+   "fieldname": "paper",
+   "fieldtype": "Data",
+   "label": "نوع الورق وغراماته"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Select",
+   "label": "الألوان",
+   "options": "ملون\nأبيض وأسود\nمختلط",
+   "default": "ملون"
+  },
+  {
+   "fieldname": "binding",
+   "fieldtype": "Select",
+   "label": "التجليد",
+   "options": "بلا\nتدبيس\nغراء\nخياطة\nسلك\nغلاف صلب",
+   "default": "بلا"
+  },
+  {
+   "fieldname": "finishing",
+   "fieldtype": "Small Text",
+   "label": "التشطيب"
+  },
+  {
+   "fieldname": "artwork",
+   "fieldtype": "Attach",
+   "label": "ملف التصميم"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "بنود التكلفة"
+  },
+  {
+   "fieldname": "cost_items",
+   "fieldtype": "Table",
+   "label": "بنود التكلفة",
+   "options": "Print Cost Item"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التسعير"
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "إجمالي التكلفة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "هامش الربح %",
+   "default": 25
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "quoted_price",
+   "fieldtype": "Currency",
+   "label": "السعر المعروض",
+   "in_list_view": 1,
+   "bold": 1,
+   "description": "يُحسب تلقائيًا من التكلفة والهامش إن تُرك فارغًا"
+  },
+  {
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "label": "سعر الوحدة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "المواعيد"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "موعد التسليم"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "delivered_on",
+   "fieldtype": "Date",
+   "label": "سُلِّم في"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "مستندات البيع"
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "عرض السعر",
+   "options": "Quotation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "أمر البيع",
+   "options": "Sales Order",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "فاتورة المبيعات",
+   "options": "Sales Invoice",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Print Job",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Job",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:PJ-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "job_title",
+ "show_title_field_in_link": 1,
+ "search_fields": "job_title,customer_name"
+}

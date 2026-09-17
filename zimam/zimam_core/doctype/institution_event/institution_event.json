@@ -1,0 +1,274 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "event_title",
+  "event_type",
+  "company",
+  "cb1",
+  "start_datetime",
+  "end_datetime",
+  "status",
+  "section_1",
+  "venue",
+  "organizer",
+  "project",
+  "cb2",
+  "budget",
+  "actual_cost",
+  "cost_center",
+  "section_2",
+  "description",
+  "poster",
+  "program_file",
+  "publish_on_website",
+  "section_3",
+  "registrations",
+  "registrations_count",
+  "attendees_count"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_title",
+   "fieldtype": "Data",
+   "label": "عنوان الفعالية",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "event_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "مؤتمر\nندوة\nمعرض\nورشة\nمحاضرة\nملتقى\nدورة تدريبية\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "start_datetime",
+   "fieldtype": "Datetime",
+   "label": "البداية",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "end_datetime",
+   "fieldtype": "Datetime",
+   "label": "النهاية"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مخطط\nمعلن\nمنعقد\nمنتهٍ\nملغى",
+   "default": "مخطط",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "التفاصيل"
+  },
+  {
+   "fieldname": "venue",
+   "fieldtype": "Data",
+   "label": "المكان"
+  },
+  {
+   "fieldname": "organizer",
+   "fieldtype": "Link",
+   "label": "المنظِّم",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع",
+   "options": "Project"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "budget",
+   "fieldtype": "Currency",
+   "label": "الميزانية"
+  },
+  {
+   "fieldname": "actual_cost",
+   "fieldtype": "Currency",
+   "label": "التكلفة الفعلية"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "poster",
+   "fieldtype": "Attach Image",
+   "label": "الملصق"
+  },
+  {
+   "fieldname": "program_file",
+   "fieldtype": "Attach",
+   "label": "البرنامج/الكتيب"
+  },
+  {
+   "fieldname": "publish_on_website",
+   "fieldtype": "Check",
+   "label": "نشر في الموقع"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التسجيل"
+  },
+  {
+   "fieldname": "registrations",
+   "fieldtype": "Table",
+   "label": "المسجَّلون",
+   "options": "Event Registration"
+  },
+  {
+   "fieldname": "registrations_count",
+   "fieldtype": "Int",
+   "label": "عدد المسجَّلين",
+   "read_only": 1
+  },
+  {
+   "fieldname": "attendees_count",
+   "fieldtype": "Int",
+   "label": "عدد الحضور",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Media Activity",
+   "link_fieldname": "related_event"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Institution Event",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:EV-{YYYY}-{###}",
+ "naming_rule": "Expression",
+ "title_field": "event_title",
+ "show_title_field_in_link": 1,
+ "image_field": "poster"
+}

@@ -1,0 +1,343 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabinet",
+  "item_type",
+  "title",
+  "cb1",
+  "author",
+  "copyist",
+  "language",
+  "section_1",
+  "date_hijri",
+  "date_gregorian",
+  "folios",
+  "cb2",
+  "dimensions",
+  "condition",
+  "needs_restoration",
+  "section_2",
+  "restoration_status",
+  "digitization_status",
+  "cb3",
+  "catalog_status",
+  "catalog_number",
+  "section_3",
+  "summary",
+  "keywords",
+  "cb4",
+  "cover_image",
+  "digital_copy",
+  "section_4",
+  "is_sellable_digital",
+  "digital_item",
+  "cb5",
+  "digital_price",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabinet",
+   "fieldtype": "Link",
+   "label": "الخزانة",
+   "options": "Cabinet",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "item_type",
+   "fieldtype": "Select",
+   "label": "نوع المقتنى",
+   "options": "مخطوط\nوثيقة\nكتاب\nخريطة\nصورة\nتحفة\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "author",
+   "fieldtype": "Data",
+   "label": "المؤلف"
+  },
+  {
+   "fieldname": "copyist",
+   "fieldtype": "Data",
+   "label": "الناسخ"
+  },
+  {
+   "fieldname": "language",
+   "fieldtype": "Data",
+   "label": "اللغة",
+   "default": "العربية"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الوصف المادي"
+  },
+  {
+   "fieldname": "date_hijri",
+   "fieldtype": "Data",
+   "label": "تاريخ النسخ (هجري)"
+  },
+  {
+   "fieldname": "date_gregorian",
+   "fieldtype": "Data",
+   "label": "التاريخ الميلادي"
+  },
+  {
+   "fieldname": "folios",
+   "fieldtype": "Int",
+   "label": "عدد الأوراق/الصفحات"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "dimensions",
+   "fieldtype": "Data",
+   "label": "الأبعاد (سم)"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "جيدة\nمتوسطة\nسيئة\nحرجة",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "needs_restoration",
+   "fieldtype": "Check",
+   "label": "يحتاج ترميمًا"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "حالة المعالجة"
+  },
+  {
+   "fieldname": "restoration_status",
+   "fieldtype": "Select",
+   "label": "الترميم",
+   "options": "لا يحتاج\nبانتظار الترميم\nقيد الترميم\nمُرمَّم",
+   "default": "لا يحتاج",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "digitization_status",
+   "fieldtype": "Select",
+   "label": "الرقمنة",
+   "options": "غير مرقمن\nقيد الرقمنة\nمرقمن",
+   "default": "غير مرقمن",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "catalog_status",
+   "fieldtype": "Select",
+   "label": "الفهرسة",
+   "options": "غير مفهرس\nقيد الفهرسة\nمفهرس",
+   "default": "غير مفهرس",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "catalog_number",
+   "fieldtype": "Data",
+   "label": "رقم الفهرسة النهائي"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "المحتوى"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Text",
+   "label": "ملخص المحتوى"
+  },
+  {
+   "fieldname": "keywords",
+   "fieldtype": "Small Text",
+   "label": "كلمات مفتاحية"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cover_image",
+   "fieldtype": "Attach Image",
+   "label": "صورة الغلاف"
+  },
+  {
+   "fieldname": "digital_copy",
+   "fieldtype": "Attach",
+   "label": "النسخة الرقمية (ملف)"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "المتجر"
+  },
+  {
+   "fieldname": "is_sellable_digital",
+   "fieldtype": "Check",
+   "label": "نسخة رقمية قابلة للبيع"
+  },
+  {
+   "fieldname": "digital_item",
+   "fieldtype": "Link",
+   "label": "صنف المتجر المقابل",
+   "options": "Item",
+   "depends_on": "is_sellable_digital"
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "digital_price",
+   "fieldtype": "Currency",
+   "label": "سعر النسخة الرقمية",
+   "depends_on": "is_sellable_digital"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Restoration Job",
+   "link_fieldname": "cabinet_item"
+  },
+  {
+   "link_doctype": "Digitization Job",
+   "link_fieldname": "cabinet_item"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Cabinet Item",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مستفيد خارجي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:MQ-{YYYY}-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "title",
+ "show_title_field_in_link": 1,
+ "search_fields": "title,author,copyist,catalog_number",
+ "image_field": "cover_image",
+ "restrict_to_domain": "Heritage"
+}

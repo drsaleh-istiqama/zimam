@@ -1,0 +1,380 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "source_type",
+  "cabinet_item",
+  "cb1",
+  "customer",
+  "customer_name",
+  "section_1",
+  "object_description",
+  "object_type",
+  "cb2",
+  "received_date",
+  "promised_date",
+  "section_2",
+  "condition_before",
+  "before_photo",
+  "section_3",
+  "treatments",
+  "section_4",
+  "materials",
+  "materials_warehouse",
+  "section_5",
+  "quality_check",
+  "condition_after",
+  "cb3",
+  "after_photo",
+  "status",
+  "section_6",
+  "total_labor",
+  "total_materials",
+  "total_cost",
+  "cb4",
+  "billing_type",
+  "price",
+  "sales_invoice",
+  "stock_entry",
+  "sb_notes",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source_type",
+   "fieldtype": "Select",
+   "label": "مصدر الطلب",
+   "options": "داخلي - خزانة\nعميل خارجي",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cabinet_item",
+   "fieldtype": "Link",
+   "label": "المقتنى",
+   "options": "Cabinet Item",
+   "depends_on": "eval:doc.source_type=='داخلي - خزانة'",
+   "mandatory_depends_on": "eval:doc.source_type=='داخلي - خزانة'",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "Customer",
+   "depends_on": "eval:doc.source_type=='عميل خارجي'",
+   "mandatory_depends_on": "eval:doc.source_type=='عميل خارجي'",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "اسم العميل",
+   "fetch_from": "customer.customer_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الوعاء"
+  },
+  {
+   "fieldname": "object_description",
+   "fieldtype": "Small Text",
+   "label": "وصف الوعاء",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "object_type",
+   "fieldtype": "Select",
+   "label": "نوع الوعاء",
+   "options": "مخطوط\nوثيقة\nكتاب\nخريطة\nصورة\nتحفة\nأخرى",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "received_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الاستلام",
+   "default": "Today"
+  },
+  {
+   "fieldname": "promised_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التسليم المتفق"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الحالة قبل الترميم"
+  },
+  {
+   "fieldname": "condition_before",
+   "fieldtype": "Text",
+   "label": "وصف الحالة قبل"
+  },
+  {
+   "fieldname": "before_photo",
+   "fieldtype": "Attach Image",
+   "label": "صورة قبل"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "المعالجات"
+  },
+  {
+   "fieldname": "treatments",
+   "fieldtype": "Table",
+   "label": "المعالجات",
+   "options": "Restoration Treatment"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "المواد"
+  },
+  {
+   "fieldname": "materials",
+   "fieldtype": "Table",
+   "label": "المواد المستهلكة",
+   "options": "Processing Material"
+  },
+  {
+   "fieldname": "materials_warehouse",
+   "fieldtype": "Link",
+   "label": "مستودع المواد",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "الجودة والحالة بعد"
+  },
+  {
+   "fieldname": "quality_check",
+   "fieldtype": "Select",
+   "label": "فحص الجودة",
+   "options": "لم يُفحص\nمقبول\nيحتاج إعادة",
+   "default": "لم يُفحص"
+  },
+  {
+   "fieldname": "condition_after",
+   "fieldtype": "Text",
+   "label": "وصف الحالة بعد"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "after_photo",
+   "fieldtype": "Attach Image",
+   "label": "صورة بعد"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مستلم\nقيد التقييم\nقيد الترميم\nفحص الجودة\nمكتمل\nمُسلَّم\nملغى",
+   "default": "مستلم",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_6",
+   "fieldtype": "Section Break",
+   "label": "التكلفة والتسعير"
+  },
+  {
+   "fieldname": "total_labor",
+   "fieldtype": "Currency",
+   "label": "تكلفة العمل",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_materials",
+   "fieldtype": "Currency",
+   "label": "تكلفة المواد",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "التكلفة الإجمالية",
+   "read_only": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "billing_type",
+   "fieldtype": "Select",
+   "label": "نوع الفوترة",
+   "options": "فاتورة عميل\nفوترة بينية للمؤسسة\nبلا فوترة",
+   "default": "فاتورة عميل",
+   "reqd": 1
+  },
+  {
+   "fieldname": "price",
+   "fieldtype": "Currency",
+   "label": "السعر المتفق",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "فاتورة المبيعات",
+   "options": "Sales Invoice",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "قيد صرف المواد",
+   "options": "Stock Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Restoration Job",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Restoration Job",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:RJ-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "object_description",
+ "show_title_field_in_link": 1,
+ "restrict_to_domain": "Heritage"
+}

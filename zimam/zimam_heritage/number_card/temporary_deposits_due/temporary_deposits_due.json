@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "Temporary Deposits Due",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Heritage",
+ "label": "أمانات مؤقتة يحلّ موعد إعادتها",
+ "type": "Document Type",
+ "document_type": "Cabinet Intake",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Weekly",
+ "color": "#C62828",
+ "filters_json": "[[\"Cabinet Intake\", \"docstatus\", \"=\", 1, false], [\"Cabinet Intake\", \"ownership_type\", \"=\", \"أمانة مؤقتة\", false], [\"Cabinet Intake\", \"status\", \"not in\", [\"مُعادة\", \"ملغاة\"], false], [\"Cabinet Intake\", \"return_due_date\", \"Timespan\", \"next 30 days\", false]]",
+ "dynamic_filters_json": "[]"
+}

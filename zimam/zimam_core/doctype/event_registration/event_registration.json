@@ -1,0 +1,70 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "participant_name",
+  "email",
+  "phone",
+  "organization",
+  "attended"
+ ],
+ "fields": [
+  {
+   "fieldname": "participant_name",
+   "fieldtype": "Data",
+   "label": "اسم المشارك",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "options": "Email",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "organization",
+   "fieldtype": "Data",
+   "label": "الجهة",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "attended",
+   "fieldtype": "Check",
+   "label": "حضر",
+   "in_list_view": 1,
+   "columns": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Event Registration",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

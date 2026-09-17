@@ -1,0 +1,26 @@
+{
+ "_comment": "قالب ملف تعريف مؤسسة على زِمام — انسخه باسم المؤسسة وعدّله. domains: Heritage الآن؛ Education/Training/Charity محجوزة لحزم لاحقة.",
+ "institution": {
+  "name": "اسم المؤسسة",
+  "abbr": "INST",
+  "type": "تعليمية",
+  "country": "Oman",
+  "currency": "OMR"
+ },
+ "arms": [],
+ "optional_arms": [],
+ "domains": [],
+ "cost_centers": ["الإدارة العامة", "البرامج والخدمات", "الفعاليات والإعلام", "الوقف"],
+ "income_accounts": {"parent": ["إيرادات الوقف", "إيرادات الخدمات"]},
+ "waqf_income_account": "إيرادات الوقف",
+ "waqf_cost_center": "الوقف",
+ "service_types": [
+  {"name": "استفسار", "free": true, "public": true},
+  {"name": "شهادة أو إفادة", "fees": 2, "public": true}
+ ],
+ "waqf_shares": [
+  {"name": "سهم صغير", "amount": 10},
+  {"name": "سهم كبير", "amount": 100}
+ ],
+ "certificate": {"signatory": "", "title": "المدير التنفيذي", "footer": ""}
+}

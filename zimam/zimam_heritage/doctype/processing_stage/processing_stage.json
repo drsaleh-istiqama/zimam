@@ -1,0 +1,88 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "stage",
+  "assigned_to",
+  "status",
+  "started_on",
+  "completed_on",
+  "hours",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "stage",
+   "fieldtype": "Select",
+   "label": "المرحلة",
+   "options": "فرز\nترميم\nفهرسة\nرقمنة\nمراجعة",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "label": "المكلَّف",
+   "options": "Employee",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "لم تبدأ\nجارية\nمكتملة",
+   "default": "لم تبدأ",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "started_on",
+   "fieldtype": "Date",
+   "label": "بدأت في",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Date",
+   "label": "اكتملت في",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "label": "ساعات العمل",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات",
+   "columns": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Processing Stage",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1,
+ "restrict_to_domain": "Heritage"
+}

@@ -1,0 +1,222 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "campaign_name",
+  "company",
+  "status",
+  "cb1",
+  "target_amount",
+  "raised_amount",
+  "progress",
+  "section_1",
+  "start_date",
+  "cb2",
+  "end_date",
+  "section_2",
+  "income_account",
+  "cb3",
+  "cost_center",
+  "section_3",
+  "image",
+  "description",
+  "publish_on_website"
+ ],
+ "fields": [
+  {
+   "fieldname": "campaign_name",
+   "fieldtype": "Data",
+   "label": "اسم الحملة",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "نشطة\nمتوقفة\nمكتملة",
+   "default": "نشطة",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "target_amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ المستهدف",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "raised_amount",
+   "fieldtype": "Currency",
+   "label": "المحصَّل",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "progress",
+   "fieldtype": "Percent",
+   "label": "نسبة الإنجاز",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المدة"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "البداية"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "النهاية"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المحاسبة"
+  },
+  {
+   "fieldname": "income_account",
+   "fieldtype": "Link",
+   "label": "حساب الإيراد",
+   "options": "Account"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التعريف"
+  },
+  {
+   "fieldname": "image",
+   "fieldtype": "Attach Image",
+   "label": "صورة الحملة"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text Editor",
+   "label": "وصف الحملة"
+  },
+  {
+   "fieldname": "publish_on_website",
+   "fieldtype": "Check",
+   "label": "نشر في الموقع"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Waqf Contribution",
+   "link_fieldname": "campaign"
+  },
+  {
+   "link_doctype": "Waqf Property",
+   "link_fieldname": "campaign"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Giving",
+ "name": "Waqf Campaign",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:WQC-{###}",
+ "naming_rule": "Expression",
+ "title_field": "campaign_name",
+ "show_title_field_in_link": 1,
+ "image_field": "image"
+}

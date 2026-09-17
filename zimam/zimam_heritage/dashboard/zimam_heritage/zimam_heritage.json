@@ -1,0 +1,44 @@
+{
+ "doctype": "Dashboard",
+ "name": "Zimam Heritage",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Heritage",
+ "dashboard_name": "Zimam Heritage",
+ "is_standard": 1,
+ "is_default": 0,
+ "cards": [
+  {
+   "card": "New Cabinet Items This Month"
+  },
+  {
+   "card": "Cabinets Received This Month"
+  },
+  {
+   "card": "Restoration Jobs In Progress"
+  },
+  {
+   "card": "Restoration Jobs Completed This Month"
+  },
+  {
+   "card": "Digitization Jobs Completed This Month"
+  },
+  {
+   "card": "Temporary Deposits Due"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Cabinets Received by Month",
+   "width": "Half"
+  },
+  {
+   "chart": "Cabinet Items by Type",
+   "width": "Half"
+  }
+ ]
+}

@@ -1,0 +1,256 @@
+# -*- coding: utf-8 -*-
+"""تهيئة مؤسسة على زِمام من ملف تعريف — تُشغَّل مرة بعد إكمال معالج الإعداد:
+
+    bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{"profile": "<اسم الملف في profiles/>"}'
+    bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{"profile": "/path/to/custom.json", "with_optional_arms": true}'
+
+ملفات التعريف في zimam/setup/profiles/*.json (انظر template.json). آمنة للتكرار: كل عنصر يُنشأ إن لم يوجد.
+
+ما يُنشأ من الملف: الشركة الأم والأذرع التابعة (بشركة لكل ذراع) · مراكز التكلفة · الحزم المفعّلة (Domain Settings)
+· مجموعة الأصناف وأصناف الخدمات · حسابات الإيراد · أنواع الخدمات · الأسهم الوقفية · العميل الداخلي والموردون الداخليون
+للفوترة البينية · إعدادات زِمام · وإعدادات الحزمة التراثية إن كانت مفعّلة.
+"""
+import json
+import os
+
+import frappe
+from frappe import _
+
+ITEM_GROUP = "خدمات زِمام"
+ARM_ROLE_LABEL = {"press": "مطبعة", "restoration": "ترميم", "waqf": "استثمار وقفي", "other": "أخرى"}
+
+
+def log(msg):
+	print("[zimam bootstrap] " + msg)
+
+
+def load_profile(profile):
+	path = profile if profile.endswith(".json") else os.path.join(os.path.dirname(__file__), "profiles", profile + ".json")
+	if not os.path.exists(path):
+		frappe.throw(_("ملف التعريف غير موجود: {0}").format(path))
+	with open(path, encoding="utf-8") as fh:
+		return json.load(fh), os.path.basename(path)[:-5]
+
+
+# ---------------------------------------------------------------------------
+def ensure_company(name, abbr, country, currency, parent=None, arm_type=None, arm_role=None):
+	if frappe.db.exists("Company", name):
+		doc = frappe.get_doc("Company", name)
+		changed = False
+		if parent and not doc.parent_company:
+			doc.parent_company, changed = parent, True
+		if arm_type and not doc.get("zimam_arm_type"):
+			doc.zimam_arm_type, changed = arm_type, True
+		if arm_role and not doc.get("zimam_arm_role"):
+			doc.zimam_arm_role, changed = arm_role, True
+		if changed:
+			doc.save(ignore_permissions=True)
+		log(f"الشركة موجودة: {name}")
+		return doc
+	doc = frappe.get_doc({
+		"doctype": "Company", "company_name": name, "abbr": abbr, "default_currency": currency, "country": country,
+		"chart_of_accounts": "Standard", "parent_company": parent, "zimam_arm_type": arm_type, "zimam_arm_role": arm_role,
+	}).insert(ignore_permissions=True)
+	log(f"أُنشئت الشركة: {name} ({abbr})")
+	return doc
+
+
+def root_cost_center(company):
+	return frappe.db.get_value("Cost Center", {"company": company, "is_group": 1, "parent_cost_center": ["in", ["", None]]}, "name")
+
+
+def ensure_cost_centers(company, names):
+	parent = root_cost_center(company)
+	if not parent:
+		frappe.throw(_("لا مركز تكلفة جذري للشركة {0}").format(company))
+	for cc in names:
+		if not frappe.db.exists("Cost Center", {"cost_center_name": cc, "company": company}):
+			frappe.get_doc({"doctype": "Cost Center", "cost_center_name": cc, "parent_cost_center": parent, "company": company, "is_group": 0}).insert(ignore_permissions=True)
+			log(f"مركز تكلفة: {cc}")
+
+
+def ensure_warehouse(name, company):
+	existing = frappe.db.get_value("Warehouse", {"warehouse_name": name, "company": company}, "name")
+	if existing:
+		return existing
+	doc = frappe.get_doc({"doctype": "Warehouse", "warehouse_name": name, "company": company}).insert(ignore_permissions=True)
+	log(f"مستودع: {doc.name}")
+	return doc.name
+
+
+def ensure_item_group():
+	if not frappe.db.exists("Item Group", ITEM_GROUP):
+		frappe.get_doc({"doctype": "Item Group", "item_group_name": ITEM_GROUP, "parent_item_group": "All Item Groups", "is_group": 0}).insert(ignore_permissions=True)
+
+
+def ensure_item(code, name, is_stock=0, has_serial=0, uom="Nos", sales=1):
+	if frappe.db.exists("Item", code):
+		return code
+	frappe.get_doc({
+		"doctype": "Item", "item_code": code, "item_name": name, "description": name, "item_group": ITEM_GROUP,
+		"stock_uom": uom, "is_stock_item": is_stock, "has_serial_no": has_serial,
+		"serial_no_series": "ZS-.#####" if has_serial else None, "is_sales_item": sales, "is_purchase_item": 0,
+	}).insert(ignore_permissions=True)
+	log(f"صنف: {code} — {name}")
+	return code
+
+
+def income_parent(company):
+	for candidate in ("Direct Income", "Income"):
+		acc = frappe.db.get_value("Account", {"company": company, "account_name": candidate, "is_group": 1}, "name")
+		if acc:
+			return acc
+	return frappe.db.get_value("Account", {"company": company, "root_type": "Income", "is_group": 1}, "name")
+
+
+def ensure_income_account(name, company):
+	existing = frappe.db.get_value("Account", {"account_name": name, "company": company}, "name")
+	if existing:
+		return existing
+	parent = income_parent(company)
+	if not parent:
+		frappe.throw(_("لا حساب إيراد أب في {0}").format(company))
+	doc = frappe.get_doc({"doctype": "Account", "account_name": name, "parent_account": parent, "company": company, "is_group": 0, "account_type": "Income Account"}).insert(ignore_permissions=True)
+	log(f"حساب: {doc.name}")
+	return doc.name
+
+
+def default_customer_group():
+	return frappe.db.get_single_value("Selling Settings", "customer_group") or frappe.db.get_value("Customer Group", {"is_group": 0}, "name") or "All Customer Groups"
+
+
+def default_territory():
+	return frappe.db.get_single_value("Selling Settings", "territory") or "All Territories"
+
+
+def ensure_internal_customer(represents, allowed):
+	existing = frappe.db.get_value("Customer", {"is_internal_customer": 1, "represents_company": represents}, "name")
+	if existing:
+		return existing
+	doc = frappe.get_doc({
+		"doctype": "Customer", "customer_name": represents, "customer_type": "Company", "customer_group": default_customer_group(),
+		"territory": default_territory(), "is_internal_customer": 1, "represents_company": represents,
+		"companies": [{"company": c} for c in allowed],
+	}).insert(ignore_permissions=True)
+	log(f"عميل داخلي يمثّل {represents}")
+	return doc.name
+
+
+def ensure_internal_supplier(represents, allowed):
+	existing = frappe.db.get_value("Supplier", {"is_internal_supplier": 1, "represents_company": represents}, "name")
+	if existing:
+		return existing
+	group = frappe.db.get_single_value("Buying Settings", "supplier_group") or frappe.db.get_value("Supplier Group", {"is_group": 0}, "name") or "All Supplier Groups"
+	doc = frappe.get_doc({
+		"doctype": "Supplier", "supplier_name": represents, "supplier_type": "Company", "supplier_group": group,
+		"is_internal_supplier": 1, "represents_company": represents, "companies": [{"company": c} for c in allowed],
+	}).insert(ignore_permissions=True)
+	log(f"مورد داخلي يمثّل {represents}")
+	return doc.name
+
+
+def ensure_service_types(rows, company, default_item):
+	for r in rows:
+		if frappe.db.exists("Service Type", r["name"]):
+			continue
+		frappe.get_doc({
+			"doctype": "Service Type", "service_name": r["name"], "company": company, "is_free": 1 if r.get("free") else 0,
+			"default_fees": r.get("fees", 0), "service_item": None if r.get("free") else default_item,
+			"description": r.get("description"), "is_active": 1, "publish_on_website": 1 if r.get("public") else 0,
+		}).insert(ignore_permissions=True)
+		log(f"نوع خدمة: {r['name']}")
+
+
+def ensure_waqf_shares(rows):
+	for name, amount in rows:
+		if not frappe.db.exists("Waqf Share Type", name):
+			frappe.get_doc({"doctype": "Waqf Share Type", "share_name": name, "amount": amount, "is_active": 1}).insert(ignore_permissions=True)
+			log(f"سهم وقفي: {name} = {amount}")
+
+
+def activate_domains(domains):
+	ds = frappe.get_single("Domain Settings")
+	existing = {d.domain for d in ds.active_domains}
+	changed = False
+	for dom in domains:
+		if dom not in existing:
+			ds.append("active_domains", {"domain": dom})
+			changed = True
+	if changed:
+		ds.save(ignore_permissions=True)
+		log(f"الحزم المفعّلة: {', '.join(domains)}")
+
+
+# ---------------------------------------------------------------------------
+def run(profile="template", with_optional_arms=False):
+	if not frappe.db.get_single_value("System Settings", "setup_complete"):
+		frappe.throw(_("أكمل معالج الإعداد (Setup Wizard) أولًا."))
+	p, profile_name = load_profile(profile)
+	inst = p["institution"]
+	parent = inst["name"]
+	country, currency = inst["country"], inst["currency"]
+
+	ensure_company(parent, inst["abbr"], country, currency, arm_type="المؤسسة (الشركة الأم)")
+	arms = list(p.get("arms", [])) + (list(p.get("optional_arms", [])) if with_optional_arms else [])
+	by_role = {}
+	for a in arms:
+		ensure_company(a["name"], a["abbr"], country, currency, parent=parent, arm_type="ذراع استثماري تابع", arm_role=ARM_ROLE_LABEL[a["role"]])
+		by_role.setdefault(a["role"], a["name"])
+
+	ensure_cost_centers(parent, p.get("cost_centers", []))
+	activate_domains(p.get("domains", []))
+	ensure_item_group()
+	service_item = ensure_item("SRV-GENERAL", "خدمة مؤسسية")
+	print_item = ensure_item("SRV-PRINT", "خدمة طباعة") if "press" in by_role else None
+
+	accounts = p.get("income_accounts", {})
+	for name in accounts.get("parent", []):
+		ensure_income_account(name, parent)
+	for role, names in accounts.items():
+		if role != "parent" and role in by_role:
+			for name in names:
+				ensure_income_account(name, by_role[role])
+	waqf_income = ensure_income_account(p.get("waqf_income_account", "إيرادات الوقف"), parent)
+
+	ensure_service_types(p.get("service_types", []), parent, service_item)
+	ensure_waqf_shares([(r["name"], r["amount"]) for r in p.get("waqf_shares", [])])
+
+	internal_customer = None
+	if arms:
+		internal_customer = ensure_internal_customer(parent, [a["name"] for a in arms])
+		for a in arms:
+			ensure_internal_supplier(a["name"], [parent])
+
+	waqf_cc_name = p.get("waqf_cost_center")
+	waqf_cc = frappe.db.get_value("Cost Center", {"cost_center_name": waqf_cc_name, "company": parent}, "name") if waqf_cc_name else None
+	cert = p.get("certificate", {})
+
+	settings = frappe.get_single("Zimam Settings")
+	settings.update({
+		"parent_company": parent, "institution_type": inst["type"], "institution_profile": profile_name,
+		"internal_customer": internal_customer, "press_company": by_role.get("press"), "print_service_item": print_item,
+		"default_service_item": service_item, "service_company": parent, "waqf_income_account": waqf_income,
+		"waqf_cost_center": waqf_cc, "certificate_signatory": cert.get("signatory") or settings.certificate_signatory,
+		"certificate_title": cert.get("title") or settings.certificate_title, "certificate_footer": cert.get("footer") or settings.certificate_footer,
+	})
+	settings.save(ignore_permissions=True)
+
+	if "Heritage" in p.get("domains", []):
+		h = p.get("heritage", {})
+		wh = h.get("warehouses", {})
+		lab = by_role.get("restoration", parent)
+		hs = frappe.get_single("Heritage Settings")
+		hs.update({
+			"restoration_company": lab,
+			"default_labor_rate": h.get("labor_rate", 3),
+			"incoming_cabinet_item": ensure_item("CABINET-IN", "خزانة واردة", is_stock=1, has_serial=1, sales=0),
+			"incoming_cabinets_warehouse": ensure_warehouse(wh.get("cabinets", "خزائن واردة"), parent),
+			"restoration_materials_warehouse": ensure_warehouse(wh.get("materials", "مواد الترميم"), lab),
+			"restoration_service_item": ensure_item("SRV-RESTORATION", "خدمة ترميم"),
+			"digital_copy_item": ensure_item("DIGITAL-COPY", "نسخة رقمية من مقتنى"),
+		})
+		hs.save(ignore_permissions=True)
+		log("إعدادات الحزمة التراثية جاهزة")
+
+	frappe.db.commit()
+	log(f"اكتملت تهيئة «{parent}» من ملف التعريف {profile_name}. راجع إعدادات زِمام ثم أنشئ المستخدمين وأدوارهم.")

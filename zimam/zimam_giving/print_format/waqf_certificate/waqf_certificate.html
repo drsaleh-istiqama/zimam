@@ -1,0 +1,39 @@
+{%- set s = frappe.get_doc("Zimam Settings") -%}
+{%- set institution = frappe.db.get_value("Company", doc.company, "company_name") -%}
+{%- set campaign_name = frappe.db.get_value("Waqf Campaign", doc.campaign, "campaign_name") -%}
+<div dir="rtl" lang="ar" style="direction:rtl; text-align:center; font-family:'Sakkal Majalla','Noto Naskh Arabic','Amiri',serif; padding:28px 36px; border:6px double #8a6d2b; margin:6px;">
+	<div style="font-size:15pt; color:#6b5418; letter-spacing:1px;">{{ institution }}</div>
+	<div style="font-size:26pt; font-weight:bold; margin:14px 0 4px; color:#24356E;">شهادة مساهمة وقفية</div>
+	<div style="font-size:12pt; color:#555; margin-bottom:22px;">{{ campaign_name }}</div>
+
+	<div style="font-size:15pt; line-height:2.1; margin:0 20px;">
+		تشهد {{ institution }} بأن
+		<div style="font-size:21pt; font-weight:bold; margin:6px 0; color:#24356E;">{{ doc.contributor_name }}</div>
+		{% if doc.in_memory_of %}<div>وقفًا عن / باسم: <b>{{ doc.in_memory_of }}</b></div>{% endif %}
+		قد أسهم في هذا الوقف
+		{% if doc.share_type %}بعدد <b>{{ doc.shares }}</b> من «{{ doc.share_type }}»{% endif %}
+		بمبلغ قدره <b>{{ frappe.utils.fmt_money(doc.amount, currency=frappe.db.get_value("Company", doc.company, "default_currency")) }}</b>
+		{% if doc.dedication %}<div style="font-size:13pt; color:#444; margin-top:6px;">{{ doc.dedication }}</div>{% endif %}
+	</div>
+
+	<div style="font-size:12.5pt; margin-top:22px; color:#333;">
+		حُرِّرت في <b>{{ doc.certificate_date_hijri }}</b>
+		الموافق <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.certificate_date, {"fieldtype": "Date"}) }}</span>م
+	</div>
+
+	<table style="width:100%; margin-top:34px; font-size:12pt;">
+		<tr>
+			<td style="text-align:right; width:50%; vertical-align:top;">
+				<div>رقم الشهادة: <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span></div>
+				<div style="color:#666; font-size:10pt;">يُتحقق من الشهادة بمراجعة المؤسسة برقمها</div>
+			</td>
+			<td style="text-align:left; width:50%; vertical-align:top;">
+				<div style="height:44px;"></div>
+				<div style="border-top:1px solid #999; display:inline-block; padding-top:4px; min-width:200px; text-align:center;">
+					{{ s.certificate_signatory or "" }}<br><span style="color:#555; font-size:10.5pt;">{{ s.certificate_title or "" }}</span>
+				</div>
+			</td>
+		</tr>
+	</table>
+	{% if s.certificate_footer %}<div style="margin-top:18px; font-size:10pt; color:#777;">{{ s.certificate_footer }}</div>{% endif %}
+</div>

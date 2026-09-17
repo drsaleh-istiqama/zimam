@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "property_name",
+  "property_type",
+  "company",
+  "cb1",
+  "status",
+  "campaign",
+  "asset",
+  "section_1",
+  "location",
+  "area_sqm",
+  "cb2",
+  "acquisition_value",
+  "annual_expected_income",
+  "section_2",
+  "leases",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "property_name",
+   "fieldtype": "Data",
+   "label": "اسم العقار",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "property_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "عقار سكني\nعقار تجاري\nمخزن\nأرض\nمحل",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مؤجَّر\nشاغر\nقيد الصيانة\nقيد التطوير",
+   "default": "شاغر",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Link",
+   "label": "الحملة الوقفية المموِّلة",
+   "options": "Waqf Campaign"
+  },
+  {
+   "fieldname": "asset",
+   "fieldtype": "Link",
+   "label": "الأصل الثابت",
+   "options": "Asset"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الموقع والمساحة"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Data",
+   "label": "الموقع"
+  },
+  {
+   "fieldname": "area_sqm",
+   "fieldtype": "Float",
+   "label": "المساحة (م²)"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "acquisition_value",
+   "fieldtype": "Currency",
+   "label": "قيمة الاقتناء"
+  },
+  {
+   "fieldname": "annual_expected_income",
+   "fieldtype": "Currency",
+   "label": "العائد السنوي المتوقع",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "عقود الإيجار"
+  },
+  {
+   "fieldname": "leases",
+   "fieldtype": "Table",
+   "label": "الإيجارات",
+   "options": "Property Lease"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Giving",
+ "name": "Waqf Property",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:WP-{###}",
+ "naming_rule": "Expression",
+ "title_field": "property_name",
+ "show_title_field_in_link": 1
+}

@@ -1,0 +1,80 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "treatment",
+  "description",
+  "technician",
+  "hours",
+  "rate",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "treatment",
+   "fieldtype": "Select",
+   "label": "المعالجة",
+   "options": "تنظيف\nترميم أوراق\nتقوية\nإزالة أحماض\nتعقيم\nتجليد\nتصوير\nصناعة علبة حفظ\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "الوصف",
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "technician",
+   "fieldtype": "Link",
+   "label": "الفني",
+   "options": "Employee",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "label": "الساعات",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "أجر الساعة",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Restoration Treatment",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1,
+ "restrict_to_domain": "Heritage"
+}

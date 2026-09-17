@@ -1,0 +1,316 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "contributor_name",
+  "contributor_phone",
+  "contributor_email",
+  "customer",
+  "cb1",
+  "campaign",
+  "company",
+  "contribution_date",
+  "section_1",
+  "share_type",
+  "share_amount",
+  "shares",
+  "cb2",
+  "amount",
+  "in_memory_of",
+  "dedication",
+  "section_2",
+  "payment_status",
+  "mode_of_payment",
+  "payment_reference",
+  "cb3",
+  "paid_on",
+  "journal_entry",
+  "section_3",
+  "certificate_issued",
+  "certificate_date",
+  "certificate_date_hijri",
+  "cb4",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "contributor_name",
+   "fieldtype": "Data",
+   "label": "اسم المساهم",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "contributor_phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "contributor_email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "options": "Email"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "عميل مرتبط (اختياري)",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Link",
+   "label": "الحملة",
+   "options": "Waqf Campaign",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1,
+   "fetch_from": "campaign.company"
+  },
+  {
+   "fieldname": "contribution_date",
+   "fieldtype": "Date",
+   "label": "تاريخ المساهمة",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الأسهم والمبلغ"
+  },
+  {
+   "fieldname": "share_type",
+   "fieldtype": "Link",
+   "label": "نوع السهم",
+   "options": "Waqf Share Type"
+  },
+  {
+   "fieldname": "share_amount",
+   "fieldtype": "Currency",
+   "label": "قيمة السهم",
+   "fetch_from": "share_type.amount",
+   "read_only": 1
+  },
+  {
+   "fieldname": "shares",
+   "fieldtype": "Int",
+   "label": "عدد الأسهم",
+   "default": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ الإجمالي",
+   "reqd": 1,
+   "in_list_view": 1,
+   "bold": 1,
+   "description": "يُحسب من الأسهم إن اختير نوع سهم؛ ويُدخل يدويًا للمساهمة الحرة"
+  },
+  {
+   "fieldname": "in_memory_of",
+   "fieldtype": "Data",
+   "label": "وقفٌ عن / باسم"
+  },
+  {
+   "fieldname": "dedication",
+   "fieldtype": "Small Text",
+   "label": "الإهداء المكتوب على الشهادة"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "السداد"
+  },
+  {
+   "fieldname": "payment_status",
+   "fieldtype": "Select",
+   "label": "حالة السداد",
+   "options": "معلق\nمدفوع\nملغى",
+   "default": "معلق",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "طريقة الدفع",
+   "options": "Mode of Payment",
+   "mandatory_depends_on": "eval:doc.payment_status=='مدفوع'"
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "مرجع الدفع (تحويل/بوابة)"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "paid_on",
+   "fieldtype": "Date",
+   "label": "تاريخ السداد"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "قيد اليومية",
+   "options": "Journal Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "الشهادة"
+  },
+  {
+   "fieldname": "certificate_issued",
+   "fieldtype": "Check",
+   "label": "صدرت الشهادة",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "certificate_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الشهادة",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "certificate_date_hijri",
+   "fieldtype": "Data",
+   "label": "تاريخ الشهادة (هجري)",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Waqf Contribution",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Giving",
+ "name": "Waqf Contribution",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:WQ-{YYYY}-{######}",
+ "naming_rule": "Expression",
+ "title_field": "contributor_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "contributor_name,contributor_phone,payment_reference"
+}

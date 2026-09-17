@@ -1,0 +1,249 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_1",
+  "parent_company",
+  "institution_type",
+  "cb_i1",
+  "institution_profile",
+  "internal_customer",
+  "section_2",
+  "press_company",
+  "cb_a1",
+  "print_service_item",
+  "section_3",
+  "default_service_item",
+  "cb_s1",
+  "service_company",
+  "section_4",
+  "waqf_income_account",
+  "waqf_cost_center",
+  "cb_w1",
+  "certificate_signatory",
+  "certificate_title",
+  "certificate_footer",
+  "section_5",
+  "powered_by_text",
+  "cb_b1",
+  "powered_by_url",
+  "section_6",
+  "ai_enabled",
+  "ai_model",
+  "cb_ai",
+  "anthropic_api_key"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المؤسسة"
+  },
+  {
+   "fieldname": "parent_company",
+   "fieldtype": "Link",
+   "label": "المؤسسة (الشركة الأم)",
+   "options": "Company"
+  },
+  {
+   "fieldname": "institution_type",
+   "fieldtype": "Select",
+   "label": "نوع المؤسسة",
+   "options": "ثقافية\nتعليمية\nتدريبية\nخيرية\nأخرى"
+  },
+  {
+   "fieldname": "cb_i1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "institution_profile",
+   "fieldtype": "Data",
+   "label": "ملف التعريف المستخدم في التهيئة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "internal_customer",
+   "fieldtype": "Link",
+   "label": "عميل داخلي يمثّل المؤسسة",
+   "options": "Customer",
+   "description": "عميل داخلي (Internal Customer) يمثّل الشركة الأم عند فوترة الأذرع لها"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الأذرع الاستثمارية"
+  },
+  {
+   "fieldname": "press_company",
+   "fieldtype": "Link",
+   "label": "شركة المطبعة (إن وُجدت)",
+   "options": "Company"
+  },
+  {
+   "fieldname": "cb_a1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "print_service_item",
+   "fieldtype": "Link",
+   "label": "صنف خدمة الطباعة",
+   "options": "Item"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "الخدمات"
+  },
+  {
+   "fieldname": "default_service_item",
+   "fieldtype": "Link",
+   "label": "صنف الخدمات الافتراضي",
+   "options": "Item"
+  },
+  {
+   "fieldname": "cb_s1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "service_company",
+   "fieldtype": "Link",
+   "label": "شركة تقديم الخدمات",
+   "options": "Company",
+   "description": "افتراضيًا الشركة الأم"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "العطاء الوقفي"
+  },
+  {
+   "fieldname": "waqf_income_account",
+   "fieldtype": "Link",
+   "label": "حساب إيرادات الوقف/التبرعات",
+   "options": "Account"
+  },
+  {
+   "fieldname": "waqf_cost_center",
+   "fieldtype": "Link",
+   "label": "مركز تكلفة الوقف",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "cb_w1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "certificate_signatory",
+   "fieldtype": "Data",
+   "label": "اسم موقّع شهادة المساهمة"
+  },
+  {
+   "fieldname": "certificate_title",
+   "fieldtype": "Data",
+   "label": "صفة الموقّع",
+   "default": "المدير التنفيذي"
+  },
+  {
+   "fieldname": "certificate_footer",
+   "fieldtype": "Small Text",
+   "label": "عبارة ذيل الشهادة"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "العلامة"
+  },
+  {
+   "fieldname": "powered_by_text",
+   "fieldtype": "Data",
+   "label": "عبارة الانتماء للمنصة",
+   "default": "يعمل هذا النظام من خلال منصة زِمام",
+   "description": "تظهر أسفل سطح المكتب وفي ذيل الموقع العام؛ المؤسسة تبقي اسمها وشعارها في إعدادات الشركة والموقع"
+  },
+  {
+   "fieldname": "cb_b1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "powered_by_url",
+   "fieldtype": "Data",
+   "label": "رابط المنصة",
+   "options": "URL",
+   "default": "https://jadwa.om"
+  },
+  {
+   "fieldname": "section_6",
+   "fieldtype": "Section Break",
+   "label": "الذكاء الاصطناعي"
+  },
+  {
+   "fieldname": "ai_enabled",
+   "fieldtype": "Check",
+   "label": "تفعيل مساعد الذكاء الاصطناعي"
+  },
+  {
+   "fieldname": "ai_model",
+   "fieldtype": "Data",
+   "label": "نموذج Claude",
+   "default": "claude-sonnet-5",
+   "depends_on": "ai_enabled"
+  },
+  {
+   "fieldname": "cb_ai",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "anthropic_api_key",
+   "fieldtype": "Password",
+   "label": "مفتاح Anthropic API",
+   "depends_on": "ai_enabled"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Zimam Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "issingle": 1
+}

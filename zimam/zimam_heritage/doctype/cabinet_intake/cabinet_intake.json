@@ -1,0 +1,348 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "depositor",
+  "depositor_name",
+  "cabinet_name",
+  "cb1",
+  "intake_date",
+  "ownership_type",
+  "return_due_date",
+  "section_1",
+  "company",
+  "receiving_employee",
+  "cb2",
+  "origin_wilayat",
+  "origin_place",
+  "section_2",
+  "est_manuscripts",
+  "est_documents",
+  "est_books",
+  "cb3",
+  "est_maps",
+  "est_photos",
+  "est_artifacts",
+  "section_3",
+  "condition",
+  "intake_photo",
+  "cb4",
+  "terms",
+  "section_4",
+  "status",
+  "cabinet",
+  "cb5",
+  "stock_entry",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "depositor",
+   "fieldtype": "Link",
+   "label": "المودع",
+   "options": "Depositor",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "depositor_name",
+   "fieldtype": "Data",
+   "label": "اسم المودع",
+   "fetch_from": "depositor.depositor_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cabinet_name",
+   "fieldtype": "Data",
+   "label": "اسم الخزانة (العائلة/المكتبة)",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "intake_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الاستلام",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ownership_type",
+   "fieldtype": "Select",
+   "label": "نوع الملكية",
+   "options": "إهداء\nإيداع\nأمانة مؤقتة\nشراء",
+   "reqd": 1,
+   "in_standard_filter": 1,
+   "description": "إيداع: تبقى ملكًا للمودع · إهداء: تصير ملكًا للمؤسسة · أمانة مؤقتة: تُعاد بعد المعالجة"
+  },
+  {
+   "fieldname": "return_due_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الإعادة المتوقع",
+   "depends_on": "eval:doc.ownership_type=='أمانة مؤقتة'",
+   "mandatory_depends_on": "eval:doc.ownership_type=='أمانة مؤقتة'"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الجهة والموقع"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "receiving_employee",
+   "fieldtype": "Link",
+   "label": "الموظف المستلم",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "origin_wilayat",
+   "fieldtype": "Data",
+   "label": "ولاية المصدر",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "origin_place",
+   "fieldtype": "Data",
+   "label": "المكان (قرية/حارة)"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "تقديرات أولية للمحتوى"
+  },
+  {
+   "fieldname": "est_manuscripts",
+   "fieldtype": "Int",
+   "label": "مخطوطات (تقديري)"
+  },
+  {
+   "fieldname": "est_documents",
+   "fieldtype": "Int",
+   "label": "وثائق (تقديري)"
+  },
+  {
+   "fieldname": "est_books",
+   "fieldtype": "Int",
+   "label": "كتب (تقديري)"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "est_maps",
+   "fieldtype": "Int",
+   "label": "خرائط (تقديري)"
+  },
+  {
+   "fieldname": "est_photos",
+   "fieldtype": "Int",
+   "label": "صور (تقديري)"
+  },
+  {
+   "fieldname": "est_artifacts",
+   "fieldtype": "Int",
+   "label": "تحف (تقديري)"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "الحالة والشروط"
+  },
+  {
+   "fieldname": "condition",
+   "fieldtype": "Select",
+   "label": "الحالة العامة عند الاستلام",
+   "options": "جيدة\nمتوسطة\nسيئة\nحرجة"
+  },
+  {
+   "fieldname": "intake_photo",
+   "fieldtype": "Attach Image",
+   "label": "صورة عند الاستلام"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Text",
+   "label": "شروط المودع"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "المتابعة"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مسودة\nمستلمة\nقيد الفرز\nقيد المعالجة\nمكتملة\nمُعادة\nملغاة",
+   "default": "مسودة",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "cabinet",
+   "fieldtype": "Link",
+   "label": "الخزانة المُنشأة",
+   "options": "Cabinet",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "قيد المخزون",
+   "options": "Stock Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Cabinet Intake",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Cabinet Intake",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:KZI-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "cabinet_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "cabinet_name,depositor_name,origin_wilayat",
+ "restrict_to_domain": "Heritage"
+}

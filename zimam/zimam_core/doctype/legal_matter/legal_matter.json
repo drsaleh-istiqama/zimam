@@ -1,0 +1,220 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "title",
+  "matter_type",
+  "company",
+  "cb1",
+  "counterparty",
+  "contract",
+  "status",
+  "section_1",
+  "start_date",
+  "end_date",
+  "cb2",
+  "renewal_reminder_days",
+  "responsible",
+  "risk_level",
+  "section_2",
+  "summary",
+  "document",
+  "cb3",
+  "next_action",
+  "next_action_date",
+  "reminder_sent_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "matter_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "عقد\nمذكرة تفاهم\nقضية\nالتزام تنظيمي\nاستشارة\nترخيص\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "counterparty",
+   "fieldtype": "Data",
+   "label": "الطرف الآخر",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "contract",
+   "fieldtype": "Link",
+   "label": "العقد في النظام",
+   "options": "Contract"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مسودة\nساري\nمنتهٍ\nمتنازع عليه\nمغلق",
+   "default": "مسودة",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المدة والتنبيه"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "تاريخ البدء"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الانتهاء"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "renewal_reminder_days",
+   "fieldtype": "Int",
+   "label": "التنبيه قبل الانتهاء (أيام)",
+   "default": 30
+  },
+  {
+   "fieldname": "responsible",
+   "fieldtype": "Link",
+   "label": "المسؤول",
+   "options": "User"
+  },
+  {
+   "fieldname": "risk_level",
+   "fieldtype": "Select",
+   "label": "مستوى الخطر",
+   "options": "منخفض\nمتوسط\nعالٍ",
+   "default": "منخفض",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المحتوى"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Text",
+   "label": "الملخص"
+  },
+  {
+   "fieldname": "document",
+   "fieldtype": "Attach",
+   "label": "المستند"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "next_action",
+   "fieldtype": "Data",
+   "label": "الإجراء التالي"
+  },
+  {
+   "fieldname": "next_action_date",
+   "fieldtype": "Date",
+   "label": "موعد الإجراء التالي"
+  },
+  {
+   "fieldname": "reminder_sent_on",
+   "fieldtype": "Date",
+   "label": "أُرسل التنبيه في",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Legal Matter",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:LG-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "title",
+ "show_title_field_in_link": 1
+}

@@ -1,0 +1,248 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "cabinet_item",
+  "item_title",
+  "cabinet",
+  "cb1",
+  "company",
+  "operator",
+  "status",
+  "section_1",
+  "pages",
+  "resolution_dpi",
+  "color_mode",
+  "cb2",
+  "equipment",
+  "output_format",
+  "file_size_mb",
+  "section_2",
+  "started_on",
+  "completed_on",
+  "hours",
+  "cb3",
+  "storage_path",
+  "qc_status",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "cabinet_item",
+   "fieldtype": "Link",
+   "label": "المقتنى",
+   "options": "Cabinet Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "item_title",
+   "fieldtype": "Data",
+   "label": "العنوان",
+   "fetch_from": "cabinet_item.title",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cabinet",
+   "fieldtype": "Link",
+   "label": "الخزانة",
+   "options": "Cabinet",
+   "fetch_from": "cabinet_item.cabinet",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "operator",
+   "fieldtype": "Link",
+   "label": "المصوِّر",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مجدول\nقيد التصوير\nقيد المعالجة\nمكتمل\nملغى",
+   "default": "مجدول",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "مواصفات التصوير"
+  },
+  {
+   "fieldname": "pages",
+   "fieldtype": "Int",
+   "label": "عدد اللقطات/الصفحات"
+  },
+  {
+   "fieldname": "resolution_dpi",
+   "fieldtype": "Int",
+   "label": "الدقة (DPI)",
+   "default": 400
+  },
+  {
+   "fieldname": "color_mode",
+   "fieldtype": "Select",
+   "label": "اللون",
+   "options": "ملون\nرمادي\nأبيض وأسود",
+   "default": "ملون"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "equipment",
+   "fieldtype": "Data",
+   "label": "الجهاز"
+  },
+  {
+   "fieldname": "output_format",
+   "fieldtype": "Select",
+   "label": "صيغة الإخراج",
+   "options": "TIFF\nJPEG\nPDF\nTIFF + PDF",
+   "default": "TIFF + PDF"
+  },
+  {
+   "fieldname": "file_size_mb",
+   "fieldtype": "Float",
+   "label": "الحجم (ميغابايت)"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "التنفيذ"
+  },
+  {
+   "fieldname": "started_on",
+   "fieldtype": "Date",
+   "label": "بدأ في"
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Date",
+   "label": "اكتمل في"
+  },
+  {
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "label": "ساعات العمل"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "storage_path",
+   "fieldtype": "Data",
+   "label": "مسار الحفظ (خادم/قرص)"
+  },
+  {
+   "fieldname": "qc_status",
+   "fieldtype": "Select",
+   "label": "فحص الجودة",
+   "options": "لم يُفحص\nمقبول\nيحتاج إعادة",
+   "default": "لم يُفحص"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Digitization Job",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف فني",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:DJ-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "item_title",
+ "show_title_field_in_link": 1,
+ "restrict_to_domain": "Heritage"
+}

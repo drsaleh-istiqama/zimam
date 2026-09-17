@@ -1,0 +1,305 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "requester_name",
+  "email",
+  "phone",
+  "cb1",
+  "organization",
+  "qualification",
+  "customer",
+  "section_1",
+  "service_type",
+  "reference_doctype",
+  "reference_name",
+  "reference_note",
+  "cb2",
+  "requested_date",
+  "appointment",
+  "purpose",
+  "section_2",
+  "status",
+  "assigned_to",
+  "rejection_reason",
+  "cb3",
+  "is_free",
+  "fees",
+  "sales_invoice",
+  "delivered_file",
+  "completed_on",
+  "section_3",
+  "rating",
+  "feedback"
+ ],
+ "fields": [
+  {
+   "fieldname": "requester_name",
+   "fieldtype": "Data",
+   "label": "اسم مقدم الطلب",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "options": "Email"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "organization",
+   "fieldtype": "Data",
+   "label": "الجهة"
+  },
+  {
+   "fieldname": "qualification",
+   "fieldtype": "Data",
+   "label": "المؤهل/الصفة"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "عميل مرتبط",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الطلب"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Link",
+   "label": "نوع الخدمة",
+   "options": "Service Type",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "label": "نوع المستند المرجعي",
+   "options": "DocType"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "label": "المستند المرجعي",
+   "options": "reference_doctype"
+  },
+  {
+   "fieldname": "reference_note",
+   "fieldtype": "Data",
+   "label": "مرجع خارجي (رقم فهرس، ملف...)"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "requested_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الطلب",
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "appointment",
+   "fieldtype": "Datetime",
+   "label": "الموعد"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Text",
+   "label": "الغرض من الطلب"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المعالجة"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "جديد\nقيد المراجعة\nموافق عليه\nقيد التنفيذ\nمكتمل\nمرفوض",
+   "default": "جديد",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "label": "المكلَّف",
+   "options": "User"
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض",
+   "depends_on": "eval:doc.status=='مرفوض'"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "is_free",
+   "fieldtype": "Check",
+   "label": "خدمة مجانية",
+   "fetch_from": "service_type.is_free",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "fees",
+   "fieldtype": "Currency",
+   "label": "الرسوم",
+   "depends_on": "eval:!doc.is_free"
+  },
+  {
+   "fieldname": "sales_invoice",
+   "fieldtype": "Link",
+   "label": "الفاتورة",
+   "options": "Sales Invoice",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "delivered_file",
+   "fieldtype": "Attach",
+   "label": "الملف المسلَّم"
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Date",
+   "label": "اكتمل في"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "تقييم الخدمة"
+  },
+  {
+   "fieldname": "rating",
+   "fieldtype": "Rating",
+   "label": "التقييم"
+  },
+  {
+   "fieldname": "feedback",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات المستفيد"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Service Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مستفيد خارجي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "if_owner": 1,
+   "write": 1,
+   "create": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:SR-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "requester_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "requester_name,email,phone"
+}

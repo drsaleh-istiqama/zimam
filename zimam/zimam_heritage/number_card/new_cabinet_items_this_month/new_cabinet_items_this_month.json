@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "New Cabinet Items This Month",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Heritage",
+ "label": "مقتنيات جديدة هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Cabinet Item",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#2E7D32",
+ "filters_json": "[[\"Cabinet Item\", \"creation\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]"
+}

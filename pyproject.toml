@@ -1,0 +1,19 @@
+[project]
+name = "zimam"
+authors = [
+    { name = "جدوى للدراسات والتطوير", email = "info@jadwa.om"}
+]
+description = "زِمام — نظام إدارة المؤسسات المالي والإداري فوق ERPNext، بحزم قطاعية (تراثية، تعليمية، تدريبية، خيرية)"
+requires-python = ">=3.10"
+readme = "README.md"
+dynamic = ["version"]
+dependencies = [
+    # لا اعتمادات خارج frappe/erpnext عمدًا
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.dev-dependencies]
+# package_name = "~=1.1.0"

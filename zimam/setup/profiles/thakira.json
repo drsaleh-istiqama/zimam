@@ -1,0 +1,47 @@
+{
+ "institution": {
+  "name": "مركز ذاكرة عُمان",
+  "abbr": "OMC",
+  "type": "ثقافية",
+  "country": "Oman",
+  "currency": "OMR"
+ },
+ "arms": [
+  {"name": "مطبعة الذاكرة", "abbr": "THP", "role": "press"},
+  {"name": "بيت الترميم", "abbr": "BTR", "role": "restoration"}
+ ],
+ "optional_arms": [
+  {"name": "استثمارات وقف الذاكرة", "abbr": "WQI", "role": "waqf"}
+ ],
+ "domains": ["Heritage"],
+ "cost_centers": ["الإدارة العامة", "المكتبة والخزائن", "الترميم والرقمنة", "خدمات الباحثين", "الفعاليات والإعلام", "الوقف"],
+ "income_accounts": {
+  "parent": ["إيرادات الوقف", "إيرادات خدمات الباحثين"],
+  "press": ["إيرادات الطباعة"],
+  "restoration": ["إيرادات الترميم"]
+ },
+ "waqf_income_account": "إيرادات الوقف",
+ "waqf_cost_center": "الوقف",
+ "service_types": [
+  {"name": "اطلاع على مقتنى", "free": true, "public": true},
+  {"name": "نسخة رقمية", "fees": 5, "public": true},
+  {"name": "استشارة تراثية", "fees": 20, "public": true},
+  {"name": "طلب طباعة نسخة", "fees": 0, "public": true},
+  {"name": "زيارة أو موعد", "free": true, "public": true}
+ ],
+ "waqf_shares": [
+  {"name": "سهم صغير", "amount": 10},
+  {"name": "سهم متوسط", "amount": 50},
+  {"name": "سهم كبير", "amount": 100},
+  {"name": "سهم ذهبي", "amount": 500}
+ ],
+ "certificate": {
+  "signatory": "",
+  "title": "مدير مركز ذاكرة عُمان",
+  "footer": "وقفكم يحفظ ذاكرة عُمان للأجيال"
+ },
+ "heritage": {
+  "warehouses": {"cabinets": "خزائن واردة", "materials": "مواد الترميم"},
+  "labor_rate": 3
+ }
+}

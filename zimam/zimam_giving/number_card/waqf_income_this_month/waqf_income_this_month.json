@@ -1,0 +1,23 @@
+{
+ "doctype": "Number Card",
+ "name": "Waqf Income This Month",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Giving",
+ "label": "إيرادات الوقف هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Waqf Contribution",
+ "function": "Sum",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#2E7D32",
+ "filters_json": "[[\"Waqf Contribution\", \"docstatus\", \"=\", 1, false], [\"Waqf Contribution\", \"payment_status\", \"=\", \"مدفوع\", false], [\"Waqf Contribution\", \"paid_on\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]",
+ "aggregate_function_based_on": "amount"
+}

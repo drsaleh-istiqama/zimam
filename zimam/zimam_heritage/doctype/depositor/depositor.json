@@ -1,0 +1,214 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "depositor_name",
+  "depositor_type",
+  "cb1",
+  "phone",
+  "email",
+  "section_1",
+  "wilayat",
+  "governorate",
+  "cb2",
+  "address",
+  "id_number",
+  "section_2",
+  "customer",
+  "user",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "depositor_name",
+   "fieldtype": "Data",
+   "label": "اسم المودع / المُهدي",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "depositor_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "فرد\nأسرة\nمؤسسة\nمكتبة خاصة",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد الإلكتروني",
+   "options": "Email"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "العنوان"
+  },
+  {
+   "fieldname": "wilayat",
+   "fieldtype": "Data",
+   "label": "الولاية",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "governorate",
+   "fieldtype": "Data",
+   "label": "المحافظة"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "العنوان التفصيلي"
+  },
+  {
+   "fieldname": "id_number",
+   "fieldtype": "Data",
+   "label": "رقم البطاقة الشخصية"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الربط"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "عميل مرتبط (اختياري)",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "مستخدم البوابة (اختياري)",
+   "options": "User"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Cabinet Intake",
+   "link_fieldname": "depositor"
+  },
+  {
+   "link_doctype": "Cabinet",
+   "link_fieldname": "depositor"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Heritage",
+ "name": "Depositor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:DEP-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "depositor_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "depositor_name,phone,wilayat",
+ "restrict_to_domain": "Heritage"
+}

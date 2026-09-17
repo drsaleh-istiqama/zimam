@@ -1,0 +1,193 @@
+{
+ "doctype": "Workspace",
+ "name": "Zimam Heritage",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Heritage",
+ "title": "Zimam Heritage",
+ "label": "Zimam Heritage",
+ "public": 1,
+ "is_hidden": 0,
+ "icon": "book",
+ "indicator_color": "green",
+ "parent_page": "",
+ "for_user": "",
+ "sequence_id": 99.0,
+ "restrict_to_domain": "Heritage",
+ "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — الحزمة التراثية</b></span>\", \"col\": 12}}, {\"id\": \"sc_cabinet_intake\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"استلام خزانة\", \"col\": 4}}, {\"id\": \"sc_cabinet_item\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مقتنى\", \"col\": 4}}, {\"id\": \"sc_processing_order\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر معالجة\", \"col\": 4}}, {\"id\": \"sc_restoration_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب ترميم\", \"col\": 4}}, {\"id\": \"sc_digitization_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر رقمنة\", \"col\": 4}}, {\"id\": \"sc_zimam_heritage\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة الحزمة التراثية\", \"col\": 4}}, {\"id\": \"nc_new_cabinet_items_this_m\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"New Cabinet Items This Month\", \"col\": 4}}, {\"id\": \"nc_cabinets_received_this_m\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Cabinets Received This Month\", \"col\": 4}}, {\"id\": \"nc_restoration_jobs_in_prog\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Restoration Jobs In Progress\", \"col\": 4}}, {\"id\": \"nc_restoration_jobs_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Restoration Jobs Completed This Month\", \"col\": 4}}, {\"id\": \"nc_digitization_jobs_comple\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Digitization Jobs Completed This Month\", \"col\": 4}}, {\"id\": \"nc_temporary_deposits_due\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Temporary Deposits Due\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_65287488\", \"type\": \"card\", \"data\": {\"card_name\": \"الخزائن والمقتنيات\", \"col\": 4}}, {\"id\": \"card_92133283\", \"type\": \"card\", \"data\": {\"card_name\": \"بيت الترميم\", \"col\": 4}}, {\"id\": \"card_56478062\", \"type\": \"card\", \"data\": {\"card_name\": \"الإعدادات\", \"col\": 4}}]",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "الخزائن والمقتنيات",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "مودع",
+   "link_type": "DocType",
+   "link_to": "Depositor",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "استلام خزانة",
+   "link_type": "DocType",
+   "link_to": "Cabinet Intake",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "خزانة",
+   "link_type": "DocType",
+   "link_to": "Cabinet",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مقتنى",
+   "link_type": "DocType",
+   "link_to": "Cabinet Item",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر معالجة خزانة",
+   "link_type": "DocType",
+   "link_to": "Processing Order",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر رقمنة",
+   "link_type": "DocType",
+   "link_to": "Digitization Job",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "بيت الترميم",
+   "link_count": 1,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب ترميم",
+   "link_type": "DocType",
+   "link_to": "Restoration Job",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الإعدادات",
+   "link_count": 1,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "إعدادات الحزمة التراثية",
+   "link_type": "DocType",
+   "link_to": "Heritage Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  }
+ ],
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "label": "استلام خزانة",
+   "link_to": "Cabinet Intake",
+   "color": "Blue"
+  },
+  {
+   "type": "DocType",
+   "label": "مقتنى",
+   "link_to": "Cabinet Item",
+   "color": "Blue"
+  },
+  {
+   "type": "DocType",
+   "label": "أمر معالجة",
+   "link_to": "Processing Order",
+   "color": "Orange"
+  },
+  {
+   "type": "DocType",
+   "label": "طلب ترميم",
+   "link_to": "Restoration Job",
+   "color": "Orange"
+  },
+  {
+   "type": "DocType",
+   "label": "أمر رقمنة",
+   "link_to": "Digitization Job",
+   "color": "Cyan"
+  },
+  {
+   "type": "Dashboard",
+   "label": "لوحة الحزمة التراثية",
+   "link_to": "Zimam Heritage",
+   "color": "Grey"
+  }
+ ],
+ "number_cards": [
+  {
+   "label": "مقتنيات جديدة هذا الشهر",
+   "number_card_name": "New Cabinet Items This Month"
+  },
+  {
+   "label": "خزائن مستلمة هذا الشهر",
+   "number_card_name": "Cabinets Received This Month"
+  },
+  {
+   "label": "طلبات ترميم قيد التنفيذ",
+   "number_card_name": "Restoration Jobs In Progress"
+  },
+  {
+   "label": "ترميم مكتمل هذا الشهر",
+   "number_card_name": "Restoration Jobs Completed This Month"
+  },
+  {
+   "label": "رقمنة مكتملة هذا الشهر",
+   "number_card_name": "Digitization Jobs Completed This Month"
+  },
+  {
+   "label": "أمانات مؤقتة يحلّ موعد إعادتها",
+   "number_card_name": "Temporary Deposits Due"
+  }
+ ],
+ "charts": [],
+ "quick_lists": [],
+ "custom_blocks": [],
+ "roles": []
+}
