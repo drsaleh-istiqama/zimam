@@ -20,8 +20,29 @@ ITEM_GROUP = "خدمات زِمام"
 ARM_ROLE_LABEL = {"press": "مطبعة", "restoration": "ترميم", "waqf": "استثمار وقفي", "other": "أخرى"}
 
 
+_LOG = []
+
+
 def log(msg):
 	print("[zimam bootstrap] " + msg)
+	_LOG.append(msg)
+
+
+@frappe.whitelist()
+def list_profiles():
+	"""أسماء ملفات التعريف المتاحة في zimam/setup/profiles (لمدير النظام)."""
+	frappe.only_for("System Manager")
+	folder = os.path.join(os.path.dirname(__file__), "profiles")
+	return sorted(f[:-5] for f in os.listdir(folder) if f.endswith(".json") and f != "template.json") + ["template"]
+
+
+@frappe.whitelist()
+def run_profile(profile, with_optional_arms=0):
+	"""تشغيل التهيئة من واجهة «إعدادات زِمام» (زر) — لمدير النظام فقط؛ يُرجع سجل ما أُنشئ."""
+	frappe.only_for("System Manager")
+	_LOG.clear()
+	run(profile=profile, with_optional_arms=bool(int(with_optional_arms or 0)))
+	return list(_LOG)
 
 
 def load_profile(profile):
