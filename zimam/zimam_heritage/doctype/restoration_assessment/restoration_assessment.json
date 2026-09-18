@@ -123,7 +123,7 @@
    "fieldname": "date_hijri",
    "fieldtype": "Data",
    "label": "التاريخ الهجري",
-   "read_only": 1
+   "description": "يُحسب تلقائيًا (حساب جدولي قد يفرق يومًا أو يومين عن أم القرى) ويمكن تصحيحه يدويًا"
   },
   {
    "fieldname": "validity_days",

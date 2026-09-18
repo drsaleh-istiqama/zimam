@@ -30,7 +30,8 @@ class RestorationAssessment(Document):
 			self.warranty_months = hs.default_warranty_months or 12
 		if self.tax_rate is None:
 			self.tax_rate = flt(hs.default_tax_rate)
-		self.date_hijri = hijri_str(self.assessment_date)
+		if not self.date_hijri or (not self.is_new() and self.has_value_changed("assessment_date")):
+			self.date_hijri = hijri_str(self.assessment_date)
 		self.valid_until = add_days(getdate(self.assessment_date), int(self.validity_days))
 		self.compute_totals()
 		if not self.terms:
