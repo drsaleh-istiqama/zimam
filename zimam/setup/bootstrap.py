@@ -359,8 +359,10 @@ def run(profile="template", with_optional_arms=False):
 	if "Heritage" in p.get("domains", []):
 		h = p.get("heritage", {})
 		# ERPNext v15+: قيود الرقم التسلسلي على سطر المستند تتطلب تفعيل هذا الخيار في إعدادات المخزون
+		# Stock Settings مستند مفرد (Single) بلا جدول — لا يصلح معه has_column؛ نفحص الحقل عبر الـmeta
+		stock_meta = frappe.get_meta("Stock Settings")
 		for flag in ("enable_serial_and_batch_no_for_item", "use_serial_batch_fields"):
-			if frappe.db.has_column("Stock Settings", flag) and not frappe.db.get_single_value("Stock Settings", flag):
+			if stock_meta.has_field(flag) and not frappe.db.get_single_value("Stock Settings", flag):
 				frappe.db.set_single_value("Stock Settings", flag, 1)
 				log(f"إعدادات المخزون: تفعيل {flag}")
 		wh = h.get("warehouses", {})
