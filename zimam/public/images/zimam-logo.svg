@@ -1,5 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" width="96" height="96">
-  <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1F6D5C"/><stop offset="1" stop-color="#24356E"/></linearGradient></defs>
-  <rect x="4" y="4" width="88" height="88" rx="20" fill="url(#g)"/>
-  <text x="48" y="64" text-anchor="middle" font-family="Noto Kufi Arabic, Sakkal Majalla, Tahoma, sans-serif" font-size="40" font-weight="700" fill="#FFFFFF">زِمام</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="زِمام">
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#6E2231"/>
+  <path d="M16 46c11 0 17.5-4.6 22-15.5 1.6-3.9 3.6-6.5 8-6.5" fill="none" stroke="#F5F1EA" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="47" cy="17.5" r="3.6" fill="#A9822F"/>
+  <path d="M15 53h34" stroke="#A9822F" stroke-width="2.6" stroke-linecap="round"/>
 </svg>

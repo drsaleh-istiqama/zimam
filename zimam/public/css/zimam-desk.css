@@ -1,54 +1,82 @@
-/* زِمام — سمة سطح المكتب: خط عربي أنيق وألوان العلامة (تعديلات خفيفة لا تكسر واجهة Frappe) */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap");
+/* زِمام — سمة سطح المكتب (الهوية 0.6): قانٍ ونحاس وورق، خطا Tajawal وAmiri؛ تعديلات خفيفة لا تكسر واجهة Frappe */
+@import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap");
 
 :root {
-	--zimam-green: #1F6D5C;
-	--zimam-navy: #24356E;
-	--zimam-gold: #B8912B;
+	--zimam-brand: #6E2231;
+	--zimam-brand-deep: #4B1520;
+	--zimam-brass: #A9822F;
+	--zimam-slate: #34506A;
+	--zimam-paper: #F5F1EA;
 }
 
 html[lang="ar"] body,
 html[dir="rtl"] body {
-	font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", "Segoe UI", Tahoma, sans-serif;
+	font-family: "Tajawal", "Segoe UI", Tahoma, sans-serif;
+	font-size: 14px;
 }
 
 html[lang="ar"] .page-title .title-text,
 html[lang="ar"] .widget-head .widget-title,
 html[lang="ar"] .number-widget-box .widget-label,
 html[lang="ar"] h1, html[lang="ar"] h2, html[lang="ar"] h3, html[lang="ar"] h4,
-html[lang="ar"] .sidebar-item-label,
 html[lang="ar"] .desktop-icon-label {
-	font-family: "Noto Kufi Arabic", "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+	font-family: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+}
+
+html[lang="ar"] .page-title .title-text {
+	font-size: 1.35rem;
+	color: var(--zimam-brand-deep);
 }
 
 /* الأزرار الأساسية بلون العلامة */
 .btn-primary,
 .btn.btn-primary,
 .page-form .btn-primary {
-	background-color: var(--zimam-green) !important;
-	border-color: var(--zimam-green) !important;
+	background-color: var(--zimam-brand) !important;
+	border-color: var(--zimam-brand) !important;
+	border-radius: 6px;
 }
 
 .btn-primary:hover,
 .btn.btn-primary:hover {
-	background-color: var(--zimam-navy) !important;
-	border-color: var(--zimam-navy) !important;
+	background-color: var(--zimam-brand-deep) !important;
+	border-color: var(--zimam-brand-deep) !important;
 }
 
-/* بطاقات المؤشرات ولوحات القيادة */
+/* روابط الشريط الجانبي والحقول النشطة */
+.sidebar-item.selected .sidebar-item-label,
+.form-sidebar .sidebar-menu a:hover,
+a:not(.btn) {
+	color: var(--zimam-slate);
+}
+
+.form-control:focus,
+.frappe-control input:focus {
+	border-color: var(--zimam-brass) !important;
+	box-shadow: 0 0 0 2px rgba(169, 130, 47, 0.18) !important;
+}
+
+/* بطاقات المؤشرات ولوحات القيادة: حواف هادئة وخط نحاسي علوي */
 .number-widget-box,
 .widget.dashboard-widget-box,
 .widget.shortcut-widget-box,
 .widget.links-widget-box {
-	border-radius: 14px;
+	border-radius: 6px;
+	border-top: 3px solid var(--zimam-brass);
 }
 
 .number-widget-box .widget-content .number {
-	font-family: "Noto Kufi Arabic", sans-serif;
+	font-family: "Amiri", serif;
+	color: var(--zimam-brand-deep);
 }
+
+.indicator-pill.green, .indicator-pill.blue { filter: saturate(0.85); }
 
 /* شريط الانتماء أسفل الشاشة */
 #zimam-powered-by {
-	font-family: "IBM Plex Sans Arabic", "Noto Kufi Arabic", sans-serif;
+	font-family: "Tajawal", sans-serif;
 	letter-spacing: 0.01em;
+	color: var(--zimam-brand-deep);
+	background: var(--zimam-paper);
+	border-top: 1px solid #E4DCCF;
 }
