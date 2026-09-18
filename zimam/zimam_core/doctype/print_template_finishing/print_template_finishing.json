@@ -1,0 +1,63 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "finishing_service",
+  "applies_to",
+  "qty_per_copy",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "finishing_service",
+   "fieldtype": "Link",
+   "label": "خدمة التشطيب",
+   "options": "Finishing Service",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 5
+  },
+  {
+   "fieldname": "applies_to",
+   "fieldtype": "Select",
+   "label": "ينطبق على",
+   "options": "الكل\nالغلاف\nالداخلي",
+   "default": "الكل",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "qty_per_copy",
+   "fieldtype": "Float",
+   "label": "الكمية لكل نسخة",
+   "default": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Data",
+   "label": "ملاحظة",
+   "columns": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Template Finishing",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

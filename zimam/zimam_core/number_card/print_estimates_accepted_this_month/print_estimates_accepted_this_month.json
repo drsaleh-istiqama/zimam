@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "Print Estimates Accepted This Month",
+ "creation": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-16 22:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Core",
+ "label": "تقديرات طباعة مقبولة هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Print Estimate",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#7B3F61",
+ "filters_json": "[[\"Print Estimate\", \"docstatus\", \"=\", 1, false], [\"Print Estimate\", \"status\", \"=\", \"مقبول\", false], [\"Print Estimate\", \"modified\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]"
+}

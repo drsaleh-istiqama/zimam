@@ -1,0 +1,91 @@
+{%- set company = frappe.get_doc("Company", doc.company) -%}
+{%- set currency = company.default_currency -%}
+{%- set parent_name = frappe.db.get_value("Company", company.parent_company, "company_name") if company.parent_company else None -%}
+{%- set addressee = doc.customer_name or doc.prospect_name or "" -%}
+{%- set cur_words = {"OMR": ("ريال عماني", "بيسة"), "SAR": ("ريال سعودي", "هللة"), "AED": ("درهم إماراتي", "فلس"), "KWD": ("دينار كويتي", "فلس"), "QAR": ("ريال قطري", "درهم"), "BHD": ("دينار بحريني", "فلس"), "USD": ("دولار أمريكي", "سنت")} -%}
+{%- macro words(amount) -%}
+{%- set w = frappe.utils.money_in_words(amount, currency) -%}
+{%- if currency in cur_words -%}{{ w.replace(currency, cur_words[currency][0]).replace("Baisa", cur_words[currency][1]).replace("Halala", cur_words[currency][1]).replace("Fils", cur_words[currency][1]).replace("Dirham", cur_words[currency][1]).replace("Cent", cur_words[currency][1]).replace("فقط.", "فقط") }}{%- else -%}{{ w }}{%- endif -%}
+{%- endmacro -%}
+{%- macro money(v) -%}<span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.utils.fmt_money(v, currency=currency) }}</span>{%- endmacro -%}
+{%- macro num(v) -%}<span dir="ltr" style="unicode-bidi:isolate;">{{ ("%g" % v) if v is not none else "" }}</span>{%- endmacro -%}
+{%- set td = 'style="border:1px solid #999; padding:4px 6px;"' -%}
+<div dir="rtl" lang="ar" style="direction:rtl; text-align:right; font-family:'Sakkal Majalla','Noto Naskh Arabic','Amiri',serif; font-size:13.5pt; line-height:1.8; padding:10px 18px;">
+	<table style="width:100%; border-bottom:2px solid #7B3F61; margin-bottom:14px;">
+		<tr>
+			<td style="text-align:right; vertical-align:bottom; width:60%;">
+				<div style="font-size:18pt; font-weight:bold; color:#7B3F61;">{{ company.company_name }}</div>
+				{% if parent_name %}<div style="font-size:10.5pt; color:#666;">ذراع تابع لـ{{ parent_name }}</div>{% endif %}
+			</td>
+			<td style="text-align:left; vertical-align:bottom; font-size:11pt; color:#444;">
+				<div>عرض أسعار رقم: <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span></div>
+				<div>التاريخ: <b>{{ doc.date_hijri }}</b> الموافق <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.estimate_date, {"fieldtype": "Date"}) }}</span>م</div>
+			</td>
+		</tr>
+	</table>
+
+	<div>الأفاضل / <b>{{ addressee }}</b> المحترمون{% if doc.contact_phone %} — <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.contact_phone }}</span>{% endif %}</div>
+	<div>السلام عليكم ورحمة الله وبركاته، وبعد:</div>
+	<div style="margin:8px 0;"><b>الموضوع:</b> <u>عرض أسعار طباعة — {{ doc.title }}</u></div>
+	<div>يسرّ {{ company.company_name }} أن تقدّم لكم عرض الأسعار الآتي بناءً على طلبكم، وفق المواصفات المبينة أدناه:</div>
+
+	<table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:12pt;">
+		<tbody>
+			<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; width:22%; background:#f6f1f4; font-weight:bold;">المنتج</td><td {{ td }}>{{ doc.product_type }}{% if doc.description %} — {{ doc.description }}{% endif %}</td></tr>
+			<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">الكمية</td><td {{ td }}>{{ num(doc.quantity) }} نسخة</td></tr>
+			<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">المقاس النهائي</td><td {{ td }}>{{ num(doc.finished_width_mm) }} × {{ num(doc.finished_height_mm) }} مم{% if doc.size_preset and doc.size_preset != "مخصص" %} ({{ doc.size_preset }}){% endif %}</td></tr>
+			{% if doc.structure == "غلاف + داخلي" %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">الصفحات</td><td {{ td }}>{{ num(doc.pages) }} صفحة داخلية + الغلاف{% if doc.spine_mm %} — سماكة الكعب ≈ {{ num(doc.spine_mm) }} مم{% endif %}</td></tr>{% endif %}
+			{% for c in doc.components %}
+			<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">{{ c.component if c.component != "قطعة واحدة" else "الورق والطباعة" }}</td><td {{ td }}>{{ c.paper }} — طباعة {{ c.color }}، {{ c.sides }}</td></tr>
+			{% endfor %}
+			{% if doc.binding and doc.binding != "بلا" %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">التجليد</td><td {{ td }}>{{ doc.binding }}</td></tr>{% endif %}
+			{% if doc.finishing %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">التشطيب</td><td {{ td }}>{% for f in doc.finishing %}{{ f.finishing_service }}{% if f.applies_to and f.applies_to != "الكل" %} ({{ f.applies_to }}){% endif %}{% if not loop.last %}، {% endif %}{% endfor %}</td></tr>{% endif %}
+			{% if doc.extras %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">بنود إضافية</td><td {{ td }}>{% for e in doc.extras %}{{ e.description or e.component }}{% if not loop.last %}، {% endif %}{% endfor %}</td></tr>{% endif %}
+			{% if doc.design_hours %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">التصميم</td><td {{ td }}>{{ num(doc.design_hours) }} ساعة عمل</td></tr>{% endif %}
+			{% if doc.estimated_days %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">مدة التنفيذ</td><td {{ td }}>{{ num(doc.estimated_days) }} يوم عمل من اعتماد التصميم{% if doc.rush %} (مستعجل){% endif %}</td></tr>{% endif %}
+		</tbody>
+	</table>
+
+	<table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:12pt;">
+		<thead>
+			<tr style="background:#f6f1f4;">
+				<th {{ td }}>البيان</th>
+				<th {{ td }} style="border:1px solid #999; padding:4px 6px; width:28%;">المبلغ ({{ currency }})</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr><td {{ td }}>قيمة الطباعة لعدد {{ num(doc.quantity) }} نسخة (سعر الوحدة {{ money(doc.unit_price) }})</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.net_total) }}</td></tr>
+			{% if doc.discount_amount %}<tr><td {{ td }}>خصم خاص (مُطبَّق في السعر أعلاه)</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.discount_amount) }}</td></tr>{% endif %}
+			{% if doc.tax_amount %}<tr><td {{ td }}>ضريبة القيمة المضافة ({{ num(doc.tax_rate) }}%)</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.tax_amount) }}</td></tr>{% endif %}
+			<tr style="background:#fafaf6; font-weight:bold;"><td {{ td }}>الإجمالي{% if doc.tax_amount %} شامل الضريبة{% endif %}: {{ words(doc.grand_total) }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.grand_total) }}</td></tr>
+		</tbody>
+	</table>
+
+	{% set tiers = doc.tiers | selectattr("qty") | list %}
+	{% if tiers | length > 1 %}
+	<div style="font-weight:bold; color:#7B3F61; margin-top:6px;">أسعار الكميات الأخرى (قبل الضريبة):</div>
+	<table style="width:100%; border-collapse:collapse; margin:6px 0 12px; font-size:12pt; text-align:center;">
+		<thead><tr style="background:#f6f1f4;"><th {{ td }}>الكمية</th><th {{ td }}>سعر الوحدة</th><th {{ td }}>الإجمالي قبل الضريبة</th><th {{ td }}>الإجمالي شامل الضريبة</th></tr></thead>
+		<tbody>
+			{% for t in tiers %}
+			<tr{% if t.qty == doc.quantity %} style="background:#fafaf6; font-weight:bold;"{% endif %}><td {{ td }}>{{ num(t.qty) }}</td><td {{ td }}>{{ money(t.unit_price) }}</td><td {{ td }}>{{ money(t.price) }}</td><td {{ td }}>{{ money(t.grand_total) }}</td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
+
+	<div style="font-weight:bold; color:#B23A2E;">الشروط:</div>
+	<ul style="margin:0 18px 8px 0; padding:0;">
+		{% if doc.terms %}{% for line in doc.terms.split("\n") if line.strip() %}<li>{{ line }}</li>{% endfor %}{% endif %}
+		{% if doc.valid_until %}<li>عرض الأسعار ساري حتى <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.valid_until, {"fieldtype": "Date"}) }}</span>م.</li>{% endif %}
+		{% if doc.advance_percent and "المقدمة" not in (doc.terms or "") %}<li>الدفعة المقدمة: {{ doc.advance_percent|int }}% عند اعتماد العرض.</li>{% endif %}
+	</ul>
+
+	<div style="margin-top:14px;">شاكرين لكم ثقتكم، ومتطلعين إلى خدمتكم…<br>وتفضلوا بقبول فائق الاحترام والتقدير…</div>
+	<table style="width:100%; margin-top:26px; font-size:12pt;">
+		<tr>
+			<td style="text-align:right; width:50%;">{{ doc.date_hijri }}<br><span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.estimate_date, {"fieldtype": "Date"}) }}</span>م</td>
+			<td style="text-align:left; width:50%;"><div style="height:40px;"></div><div style="border-top:1px solid #999; display:inline-block; min-width:200px; text-align:center; padding-top:4px;">{{ company.company_name }}</div></td>
+		</tr>
+	</table>
+</div>

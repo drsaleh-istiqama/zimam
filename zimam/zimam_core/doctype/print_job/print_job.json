@@ -37,6 +37,7 @@
   "cb4",
   "delivered_on",
   "section_5",
+  "estimate",
   "quotation",
   "sales_order",
   "cb5",
@@ -226,6 +227,14 @@
    "fieldname": "section_5",
    "fieldtype": "Section Break",
    "label": "مستندات البيع"
+  },
+  {
+   "fieldname": "estimate",
+   "fieldtype": "Link",
+   "label": "التقدير المصدر",
+   "options": "Print Estimate",
+   "read_only": 1,
+   "no_copy": 1
   },
   {
    "fieldname": "quotation",

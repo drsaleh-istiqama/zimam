@@ -1,0 +1,276 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "machine_name",
+  "machine_type",
+  "is_active",
+  "cb1",
+  "max_sheet_width_mm",
+  "max_sheet_height_mm",
+  "gripper_margin_mm",
+  "duplex",
+  "sb_digital",
+  "click_cost_color",
+  "click_cost_mono",
+  "cb2",
+  "waste_sheets",
+  "sb_offset",
+  "plate_cost",
+  "makeready_cost",
+  "cb3",
+  "run_cost_per_1000",
+  "sb_wide",
+  "cost_per_sqm",
+  "cb4",
+  "min_charge",
+  "section_1",
+  "setup_cost",
+  "cb5",
+  "speed_per_hour",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "machine_name",
+   "fieldtype": "Data",
+   "label": "اسم الآلة",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "machine_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "رقمية (لكل نقرة)\nأوفست\nواسعة التنسيق (لكل م²)",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "نشطة",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "max_sheet_width_mm",
+   "fieldtype": "Float",
+   "label": "أقصى عرض فرخ (مم)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "max_sheet_height_mm",
+   "fieldtype": "Float",
+   "label": "أقصى طول فرخ (مم)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "gripper_margin_mm",
+   "fieldtype": "Float",
+   "label": "حافة الماسك غير المطبوعة (مم)",
+   "default": 8
+  },
+  {
+   "fieldname": "duplex",
+   "fieldtype": "Check",
+   "label": "تطبع الوجهين آليًا",
+   "default": 1
+  },
+  {
+   "fieldname": "sb_digital",
+   "fieldtype": "Section Break",
+   "label": "التكلفة — رقمية (لكل نقرة)",
+   "depends_on": "eval:doc.machine_type=='رقمية (لكل نقرة)'"
+  },
+  {
+   "fieldname": "click_cost_color",
+   "fieldtype": "Currency",
+   "label": "تكلفة النقرة الملونة (لكل وجه فرخ)"
+  },
+  {
+   "fieldname": "click_cost_mono",
+   "fieldtype": "Currency",
+   "label": "تكلفة النقرة الأحادية (لكل وجه فرخ)"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "waste_sheets",
+   "fieldtype": "Int",
+   "label": "أفرخ الضبط الثابتة لكل عمل",
+   "default": 5
+  },
+  {
+   "fieldname": "sb_offset",
+   "fieldtype": "Section Break",
+   "label": "التكلفة — أوفست",
+   "depends_on": "eval:doc.machine_type=='أوفست'"
+  },
+  {
+   "fieldname": "plate_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الزنك (لكل لون)"
+  },
+  {
+   "fieldname": "makeready_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة التجهيز (لكل لون)"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "run_cost_per_1000",
+   "fieldtype": "Currency",
+   "label": "تكلفة التشغيل لكل 1000 مرور"
+  },
+  {
+   "fieldname": "sb_wide",
+   "fieldtype": "Section Break",
+   "label": "التكلفة — واسعة التنسيق",
+   "depends_on": "eval:doc.machine_type=='واسعة التنسيق (لكل م²)'"
+  },
+  {
+   "fieldname": "cost_per_sqm",
+   "fieldtype": "Currency",
+   "label": "تكلفة المتر المربع (حبر وتشغيل)"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "min_charge",
+   "fieldtype": "Currency",
+   "label": "الحد الأدنى للعمل"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "عام"
+  },
+  {
+   "fieldname": "setup_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة تجهيز ثابتة لكل عمل"
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "speed_per_hour",
+   "fieldtype": "Int",
+   "label": "السرعة (مرور/ساعة أو م²/ساعة)",
+   "description": "لتقدير ساعات الإنتاج ومدة التسليم"
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Machine",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:machine_name",
+ "naming_rule": "By fieldname"
+}

@@ -1,0 +1,204 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_1",
+  "default_margin_percent",
+  "default_tax_rate",
+  "default_validity_days",
+  "default_advance_percent",
+  "default_rush_percent",
+  "cb_p1",
+  "default_design_rate",
+  "default_round_to",
+  "min_job_price",
+  "default_tiers",
+  "section_2",
+  "default_waste_percent",
+  "cb_p2",
+  "default_bleed_mm",
+  "section_3",
+  "taxes_template",
+  "payment_terms",
+  "cb_p3",
+  "terms",
+  "design_service_item"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "التسعير الافتراضي"
+  },
+  {
+   "fieldname": "default_margin_percent",
+   "fieldtype": "Percent",
+   "label": "هامش الربح الافتراضي (%)",
+   "default": 35
+  },
+  {
+   "fieldname": "default_tax_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة الافتراضية (%)",
+   "default": 5
+  },
+  {
+   "fieldname": "default_validity_days",
+   "fieldtype": "Int",
+   "label": "صلاحية عرض السعر (أيام)",
+   "default": 15
+  },
+  {
+   "fieldname": "default_advance_percent",
+   "fieldtype": "Percent",
+   "label": "الدفعة المقدمة الافتراضية (%)",
+   "default": 50
+  },
+  {
+   "fieldname": "default_rush_percent",
+   "fieldtype": "Percent",
+   "label": "نسبة الاستعجال الافتراضية (%)",
+   "default": 25
+  },
+  {
+   "fieldname": "cb_p1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "default_design_rate",
+   "fieldtype": "Currency",
+   "label": "أجر ساعة التصميم",
+   "default": 8
+  },
+  {
+   "fieldname": "default_round_to",
+   "fieldtype": "Select",
+   "label": "تقريب السعر إلى",
+   "options": "بلا\n0.100\n0.500\n1.000",
+   "default": "0.100"
+  },
+  {
+   "fieldname": "min_job_price",
+   "fieldtype": "Currency",
+   "label": "الحد الأدنى لسعر العمل",
+   "default": 2
+  },
+  {
+   "fieldname": "default_tiers",
+   "fieldtype": "Data",
+   "label": "شرائح الكمية الافتراضية",
+   "default": "100, 250, 500, 1000",
+   "description": "كميات مفصولة بفواصل تُعرض للعميل في عرض السعر"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الإنتاج"
+  },
+  {
+   "fieldname": "default_waste_percent",
+   "fieldtype": "Percent",
+   "label": "هدر التشغيل الافتراضي (%)",
+   "default": 5
+  },
+  {
+   "fieldname": "cb_p2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "default_bleed_mm",
+   "fieldtype": "Float",
+   "label": "هامش القصّ الافتراضي (مم)",
+   "default": 3
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "قوالب البيع"
+  },
+  {
+   "fieldname": "taxes_template",
+   "fieldtype": "Link",
+   "label": "قالب ضرائب عروض الطباعة",
+   "options": "Sales Taxes and Charges Template"
+  },
+  {
+   "fieldname": "payment_terms",
+   "fieldtype": "Link",
+   "label": "قالب شروط الدفع",
+   "options": "Payment Terms Template"
+  },
+  {
+   "fieldname": "cb_p3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Link",
+   "label": "الشروط والأحكام",
+   "options": "Terms and Conditions"
+  },
+  {
+   "fieldname": "design_service_item",
+   "fieldtype": "Link",
+   "label": "صنف خدمة التصميم",
+   "options": "Item"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Press Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "issingle": 1
+}

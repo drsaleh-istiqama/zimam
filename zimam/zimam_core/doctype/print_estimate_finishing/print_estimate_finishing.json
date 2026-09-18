@@ -1,0 +1,109 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "finishing_service",
+  "applies_to",
+  "basis",
+  "auto_qty",
+  "qty_per_copy",
+  "qty",
+  "rate",
+  "setup_cost",
+  "amount"
+ ],
+ "fields": [
+  {
+   "fieldname": "finishing_service",
+   "fieldtype": "Link",
+   "label": "خدمة التشطيب",
+   "options": "Finishing Service",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "applies_to",
+   "fieldtype": "Select",
+   "label": "ينطبق على",
+   "options": "الكل\nالغلاف\nالداخلي",
+   "default": "الكل",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "basis",
+   "fieldtype": "Select",
+   "label": "الأساس",
+   "options": "لكل نسخة\nلكل فرخ\nلكل عمل\nلكل متر مربع\nلكل ساعة\nلكل 1000",
+   "fetch_from": "finishing_service.basis",
+   "fetch_if_empty": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "auto_qty",
+   "fieldtype": "Check",
+   "label": "كمية آلية",
+   "default": 1,
+   "description": "تُحسب الكمية من الأساس (نسخ/أفرخ/م²)؛ ألغِه لإدخالها يدويًا (وللأساس «لكل ساعة» أدخل الساعات)"
+  },
+  {
+   "fieldname": "qty_per_copy",
+   "fieldtype": "Float",
+   "label": "الكمية لكل نسخة",
+   "default": 1
+  },
+  {
+   "fieldname": "qty",
+   "fieldtype": "Float",
+   "label": "الكمية",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "السعر",
+   "fetch_from": "finishing_service.rate",
+   "fetch_if_empty": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "setup_cost",
+   "fieldtype": "Currency",
+   "label": "تجهيز",
+   "fetch_from": "finishing_service.setup_cost",
+   "fetch_if_empty": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Estimate Finishing",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

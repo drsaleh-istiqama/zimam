@@ -1,0 +1,679 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "template",
+  "product_type",
+  "title",
+  "cb1",
+  "customer",
+  "customer_name",
+  "prospect_name",
+  "contact_phone",
+  "status",
+  "section_1",
+  "quantity",
+  "size_preset",
+  "finished_width_mm",
+  "finished_height_mm",
+  "bleed_mm",
+  "waste_percent",
+  "cb2",
+  "structure",
+  "pages",
+  "binding",
+  "spine_mm",
+  "rush",
+  "rush_percent",
+  "section_2",
+  "components",
+  "section_3",
+  "finishing",
+  "section_4",
+  "extras",
+  "design_hours",
+  "cb3",
+  "design_rate",
+  "section_5",
+  "paper_cost",
+  "print_cost",
+  "finishing_cost",
+  "cb4",
+  "extras_cost",
+  "total_cost",
+  "unit_cost",
+  "section_6",
+  "margin_percent",
+  "discount_percent",
+  "round_to",
+  "rush_amount",
+  "discount_amount",
+  "cb5",
+  "net_total",
+  "unit_price",
+  "tax_rate",
+  "tax_amount",
+  "grand_total",
+  "section_7",
+  "tiers",
+  "section_8",
+  "total_sheets",
+  "total_impressions",
+  "cb6",
+  "production_hours",
+  "estimated_days",
+  "delivery_date",
+  "section_9",
+  "estimate_date",
+  "date_hijri",
+  "validity_days",
+  "valid_until",
+  "cb7",
+  "advance_percent",
+  "artwork",
+  "description",
+  "section_10",
+  "quotation",
+  "print_job",
+  "cb8",
+  "sales_order",
+  "section_11",
+  "terms",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "template",
+   "fieldtype": "Link",
+   "label": "قالب المنتج",
+   "options": "Print Product Template",
+   "in_standard_filter": 1,
+   "description": "اختر قالبًا ثم «تطبيق القالب» لتعبئة المواصفات والمكوّنات والتشطيب"
+  },
+  {
+   "fieldname": "product_type",
+   "fieldtype": "Select",
+   "label": "نوع المنتج",
+   "options": "كتاب\nكتيب\nمجلة\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "عنوان العمل",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "العميل",
+   "options": "Customer",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "label": "اسم العميل",
+   "fetch_from": "customer.customer_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "prospect_name",
+   "fieldtype": "Data",
+   "label": "اسم طالب العرض (إن لم يكن عميلًا مسجلًا)",
+   "depends_on": "eval:!doc.customer"
+  },
+  {
+   "fieldname": "contact_phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مسودة\nمُرسل\nمقبول\nمرفوض\nمنتهي الصلاحية\nملغى",
+   "default": "مسودة",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المواصفات"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Int",
+   "label": "الكمية",
+   "reqd": 1,
+   "default": 100,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "size_preset",
+   "fieldtype": "Select",
+   "label": "المقاس",
+   "options": "A6\nA5\nA4\nA3\nB5\nبطاقة أعمال 90×55\nDL 99×210\n20×20\nمخصص",
+   "default": "A4"
+  },
+  {
+   "fieldname": "finished_width_mm",
+   "fieldtype": "Float",
+   "label": "العرض النهائي (مم)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "finished_height_mm",
+   "fieldtype": "Float",
+   "label": "الطول النهائي (مم)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "bleed_mm",
+   "fieldtype": "Float",
+   "label": "هامش القصّ (مم)",
+   "default": 3
+  },
+  {
+   "fieldname": "waste_percent",
+   "fieldtype": "Percent",
+   "label": "هدر التشغيل (%)",
+   "default": 5
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "structure",
+   "fieldtype": "Select",
+   "label": "البنية",
+   "options": "قطعة واحدة\nغلاف + داخلي",
+   "default": "قطعة واحدة",
+   "reqd": 1
+  },
+  {
+   "fieldname": "pages",
+   "fieldtype": "Int",
+   "label": "عدد الصفحات الداخلية",
+   "depends_on": "eval:doc.structure=='غلاف + داخلي'",
+   "mandatory_depends_on": "eval:doc.structure=='غلاف + داخلي'"
+  },
+  {
+   "fieldname": "binding",
+   "fieldtype": "Select",
+   "label": "التجليد",
+   "options": "بلا\nتدبيس سلك\nغراء (تجليد حراري)\nخياطة وغراء\nسلك حلزوني\nغلاف صلب",
+   "default": "بلا"
+  },
+  {
+   "fieldname": "spine_mm",
+   "fieldtype": "Float",
+   "label": "سماكة الكعب (مم)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rush",
+   "fieldtype": "Check",
+   "label": "عمل مستعجل"
+  },
+  {
+   "fieldname": "rush_percent",
+   "fieldtype": "Percent",
+   "label": "نسبة الاستعجال (%)",
+   "depends_on": "rush"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المكوّنات — الورق والطباعة"
+  },
+  {
+   "fieldname": "components",
+   "fieldtype": "Table",
+   "label": "المكوّنات",
+   "options": "Print Estimate Component",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التشطيب"
+  },
+  {
+   "fieldname": "finishing",
+   "fieldtype": "Table",
+   "label": "التشطيب",
+   "options": "Print Estimate Finishing"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "بنود إضافية وتصميم"
+  },
+  {
+   "fieldname": "extras",
+   "fieldtype": "Table",
+   "label": "بنود إضافية (تغليف، توصيل، مواد خاصة…)",
+   "options": "Print Cost Item"
+  },
+  {
+   "fieldname": "design_hours",
+   "fieldtype": "Float",
+   "label": "ساعات التصميم"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "design_rate",
+   "fieldtype": "Currency",
+   "label": "أجر ساعة التصميم"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "التكلفة"
+  },
+  {
+   "fieldname": "paper_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الورق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "print_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الطباعة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "finishing_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة التشطيب",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "extras_cost",
+   "fieldtype": "Currency",
+   "label": "بنود إضافية وتصميم",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_cost",
+   "fieldtype": "Currency",
+   "label": "إجمالي التكلفة",
+   "read_only": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "unit_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الوحدة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_6",
+   "fieldtype": "Section Break",
+   "label": "التسعير"
+  },
+  {
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "هامش الربح (%)"
+  },
+  {
+   "fieldname": "discount_percent",
+   "fieldtype": "Percent",
+   "label": "خصم (%)"
+  },
+  {
+   "fieldname": "round_to",
+   "fieldtype": "Select",
+   "label": "تقريب السعر إلى",
+   "options": "بلا\n0.100\n0.500\n1.000"
+  },
+  {
+   "fieldname": "rush_amount",
+   "fieldtype": "Currency",
+   "label": "مبلغ الاستعجال",
+   "read_only": 1,
+   "depends_on": "rush"
+  },
+  {
+   "fieldname": "discount_amount",
+   "fieldtype": "Currency",
+   "label": "مبلغ الخصم",
+   "read_only": 1,
+   "depends_on": "discount_percent"
+  },
+  {
+   "fieldname": "cb5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "net_total",
+   "fieldtype": "Currency",
+   "label": "السعر قبل الضريبة",
+   "read_only": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "unit_price",
+   "fieldtype": "Currency",
+   "label": "سعر الوحدة",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "tax_rate",
+   "fieldtype": "Percent",
+   "label": "نسبة الضريبة (%)"
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "الضريبة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "grand_total",
+   "fieldtype": "Currency",
+   "label": "الإجمالي شامل الضريبة",
+   "read_only": 1,
+   "bold": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_7",
+   "fieldtype": "Section Break",
+   "label": "التسعير المتدرج (يُعرض للعميل)"
+  },
+  {
+   "fieldname": "tiers",
+   "fieldtype": "Table",
+   "label": "شرائح الكمية",
+   "options": "Print Estimate Tier"
+  },
+  {
+   "fieldname": "section_8",
+   "fieldtype": "Section Break",
+   "label": "الإنتاج (تقديري)"
+  },
+  {
+   "fieldname": "total_sheets",
+   "fieldtype": "Int",
+   "label": "إجمالي الأفرخ",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_impressions",
+   "fieldtype": "Int",
+   "label": "إجمالي المرورات/النقرات",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb6",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "production_hours",
+   "fieldtype": "Float",
+   "label": "ساعات الإنتاج",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_days",
+   "fieldtype": "Int",
+   "label": "أيام التنفيذ المتوقعة"
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "موعد التسليم المطلوب"
+  },
+  {
+   "fieldname": "section_9",
+   "fieldtype": "Section Break",
+   "label": "التواريخ والشروط"
+  },
+  {
+   "fieldname": "estimate_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التقدير",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_hijri",
+   "fieldtype": "Data",
+   "label": "التاريخ الهجري",
+   "description": "يُحسب تلقائيًا ويمكن تصحيحه"
+  },
+  {
+   "fieldname": "validity_days",
+   "fieldtype": "Int",
+   "label": "صلاحية العرض (أيام)"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "صالح حتى",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb7",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "advance_percent",
+   "fieldtype": "Percent",
+   "label": "الدفعة المقدمة (%)"
+  },
+  {
+   "fieldname": "artwork",
+   "fieldtype": "Attach",
+   "label": "ملف التصميم"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "وصف المنتج في عرض السعر"
+  },
+  {
+   "fieldname": "section_10",
+   "fieldtype": "Section Break",
+   "label": "المستندات المرتبطة"
+  },
+  {
+   "fieldname": "quotation",
+   "fieldtype": "Link",
+   "label": "عرض السعر",
+   "options": "Quotation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "print_job",
+   "fieldtype": "Link",
+   "label": "أمر الطباعة",
+   "options": "Print Job",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb8",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "sales_order",
+   "fieldtype": "Link",
+   "label": "أمر البيع",
+   "options": "Sales Order",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_11",
+   "fieldtype": "Section Break",
+   "label": "الشروط والملاحظات"
+  },
+  {
+   "fieldname": "terms",
+   "fieldtype": "Text",
+   "label": "الشروط"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات داخلية"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Print Estimate",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Print Job",
+   "link_fieldname": "estimate"
+  }
+ ],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Estimate",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:PE-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "title",
+ "show_title_field_in_link": 1,
+ "search_fields": "title,customer_name,prospect_name"
+}

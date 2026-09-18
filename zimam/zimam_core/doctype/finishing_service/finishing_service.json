@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "service_name",
+  "category",
+  "is_active",
+  "cb1",
+  "basis",
+  "rate",
+  "setup_cost",
+  "min_charge",
+  "section_1",
+  "item",
+  "cb2",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "service_name",
+   "fieldtype": "Data",
+   "label": "اسم الخدمة",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Select",
+   "label": "الفئة",
+   "options": "تجليد\nتغليف (لامينيشن)\nقص\nطي\nثقب/تخريم\nطلاء/ورنيش\nختم/بصمة\nتجميع\nتغليف وتعبئة\nتوصيل\nتصميم\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "نشطة",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "basis",
+   "fieldtype": "Select",
+   "label": "أساس التسعير",
+   "options": "لكل نسخة\nلكل فرخ\nلكل عمل\nلكل متر مربع\nلكل ساعة\nلكل 1000",
+   "reqd": 1,
+   "in_list_view": 1,
+   "default": "لكل نسخة"
+  },
+  {
+   "fieldname": "rate",
+   "fieldtype": "Currency",
+   "label": "التكلفة (حسب الأساس)",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "setup_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة تجهيز ثابتة"
+  },
+  {
+   "fieldname": "min_charge",
+   "fieldtype": "Currency",
+   "label": "الحد الأدنى"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الربط"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "الصنف (اختياري)",
+   "options": "Item"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Finishing Service",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:service_name",
+ "naming_rule": "By fieldname"
+}

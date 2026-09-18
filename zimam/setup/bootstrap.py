@@ -252,6 +252,63 @@ def ensure_restoration_catalog(company, h):
 	return out
 
 
+def ensure_press_catalog(company, press):
+	"""كتالوج المطبعة لمحرّك تقدير التسعير: خامات الورق، آلات الطباعة، خدمات التشطيب، قوالب المنتجات،
+	وإعدادات المطبعة (الافتراضيات + قالب ضريبة + شروط دفع + شروط وأحكام + صنف التصميم). آمن للتكرار: لا يُعدَّل موجود."""
+	if not press:
+		return
+	n = {"paper": 0, "machine": 0, "finishing": 0, "template": 0}
+	for p in press.get("papers", []):
+		if not frappe.db.exists("Paper Stock", p["name"]):
+			frappe.get_doc({"doctype": "Paper Stock", "stock_name": p["name"], "category": p.get("category", "أخرى"), "gsm": p.get("gsm"),
+				"finish": p.get("finish", "غير مصقول"), "sheet_width_mm": p["w"], "sheet_height_mm": p["h"], "caliper_mm": p.get("caliper"),
+				"pricing_basis": p.get("basis", "لكل فرخ"), "cost": p["cost"], "is_active": 1}).insert(ignore_permissions=True)
+			n["paper"] += 1
+	for m in press.get("machines", []):
+		if not frappe.db.exists("Print Machine", m["name"]):
+			frappe.get_doc({"doctype": "Print Machine", "machine_name": m["name"], "machine_type": m["type"], "is_active": 1,
+				"max_sheet_width_mm": m["max_w"], "max_sheet_height_mm": m["max_h"], "gripper_margin_mm": m.get("gripper", 0), "duplex": m.get("duplex", 1),
+				"click_cost_color": m.get("click_color"), "click_cost_mono": m.get("click_mono"), "waste_sheets": m.get("waste_sheets", 0),
+				"plate_cost": m.get("plate"), "makeready_cost": m.get("makeready"), "run_cost_per_1000": m.get("run_per_1000"),
+				"cost_per_sqm": m.get("cost_per_sqm"), "min_charge": m.get("min"), "setup_cost": m.get("setup"), "speed_per_hour": m.get("speed")}).insert(ignore_permissions=True)
+			n["machine"] += 1
+	for f in press.get("finishing", []):
+		if not frappe.db.exists("Finishing Service", f["name"]):
+			frappe.get_doc({"doctype": "Finishing Service", "service_name": f["name"], "category": f.get("category", "أخرى"), "is_active": 1,
+				"basis": f["basis"], "rate": f["rate"], "setup_cost": f.get("setup", 0), "min_charge": f.get("min", 0)}).insert(ignore_permissions=True)
+			n["finishing"] += 1
+	for t in press.get("templates", []):
+		if frappe.db.exists("Print Product Template", t["name"]):
+			continue
+		cover, inner = t.get("cover", {}), t.get("inner", {})
+		doc = frappe.get_doc({"doctype": "Print Product Template", "template_name": t["name"], "product_type": t["product_type"], "is_active": 1,
+			"structure": t.get("structure", "قطعة واحدة"), "size_preset": t.get("size", "مخصص"), "finished_width_mm": t.get("w"), "finished_height_mm": t.get("h"),
+			"bleed_mm": t.get("bleed", 3), "binding": t.get("binding", "بلا"), "default_pages": t.get("pages"),
+			"cover_paper": cover.get("paper"), "cover_machine": cover.get("machine"), "cover_color": cover.get("color", "ملون"), "cover_sides": cover.get("sides", "وجهان"),
+			"inner_paper": inner.get("paper"), "inner_machine": inner.get("machine"), "inner_color": inner.get("color", "أحادي"), "inner_sides": inner.get("sides", "وجهان"),
+			"margin_percent": t.get("margin"), "design_hours": t.get("design_hours"), "tiers": t.get("tiers"), "description": t.get("description")})
+		for fin in t.get("finishing", []):
+			doc.append("finishing", {"finishing_service": fin[0], "applies_to": fin[1] if len(fin) > 1 else "الكل", "qty_per_copy": fin[2] if len(fin) > 2 else 1})
+		doc.insert(ignore_permissions=True)
+		n["template"] += 1
+	log(f"كتالوج المطبعة: {n['paper']} خامة، {n['machine']} آلة، {n['finishing']} خدمة تشطيب، {n['template']} قالب منتج (جديد)")
+
+	s = press.get("settings", {})
+	ps = frappe.get_single("Press Settings")
+	values = {k: s[k] for k in ("default_margin_percent", "default_tax_rate", "default_validity_days", "default_advance_percent", "default_rush_percent",
+		"default_design_rate", "default_round_to", "min_job_price", "default_tiers", "default_waste_percent", "default_bleed_mm") if k in s}
+	values["design_service_item"] = ensure_item("SRV-DESIGN", "خدمة تصميم")
+	if s.get("default_tax_rate"):
+		values["taxes_template"] = ensure_sales_tax_template(company, s.get("tax_account") or "ضريبة القيمة المضافة", s["default_tax_rate"])
+	if s.get("default_advance_percent"):
+		values["payment_terms"] = ensure_payment_terms(s["default_advance_percent"])
+	if s.get("terms"):
+		values["terms"] = ensure_terms(s.get("terms_title") or "شروط خدمات الطباعة", s["terms"])
+	ps.update(values)
+	ps.save(ignore_permissions=True)
+	log("إعدادات المطبعة جاهزة")
+
+
 def root_company(company):
 	"""ERPNext يشترط إنشاء الحسابات في الشركة الجذر (الأم) لتُنسخ تلقائيًا إلى الشركات التابعة."""
 	seen = set()
@@ -371,6 +428,9 @@ def run(profile="template", with_optional_arms=False):
 		"certificate_title": cert.get("title") or settings.certificate_title, "certificate_footer": cert.get("footer") or settings.certificate_footer,
 	})
 	settings.save(ignore_permissions=True)
+
+	if p.get("press"):
+		ensure_press_catalog(by_role.get("press", parent), p["press"])
 
 	if "Heritage" in p.get("domains", []):
 		h = p.get("heritage", {})

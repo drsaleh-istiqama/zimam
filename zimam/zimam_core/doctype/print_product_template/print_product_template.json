@@ -1,0 +1,310 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "template_name",
+  "product_type",
+  "is_active",
+  "cb1",
+  "structure",
+  "size_preset",
+  "finished_width_mm",
+  "finished_height_mm",
+  "bleed_mm",
+  "section_1",
+  "cover_paper",
+  "cover_machine",
+  "cb2",
+  "cover_color",
+  "cover_sides",
+  "sb_inner",
+  "inner_paper",
+  "inner_machine",
+  "default_pages",
+  "cb3",
+  "inner_color",
+  "inner_sides",
+  "binding",
+  "section_2",
+  "finishing",
+  "section_3",
+  "margin_percent",
+  "design_hours",
+  "cb4",
+  "tiers",
+  "description"
+ ],
+ "fields": [
+  {
+   "fieldname": "template_name",
+   "fieldtype": "Data",
+   "label": "اسم القالب",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "product_type",
+   "fieldtype": "Select",
+   "label": "نوع المنتج",
+   "options": "كتاب\nكتيب\nمجلة\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "نشط",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "structure",
+   "fieldtype": "Select",
+   "label": "البنية",
+   "options": "قطعة واحدة\nغلاف + داخلي",
+   "default": "قطعة واحدة",
+   "reqd": 1
+  },
+  {
+   "fieldname": "size_preset",
+   "fieldtype": "Select",
+   "label": "المقاس",
+   "options": "A6\nA5\nA4\nA3\nB5\nبطاقة أعمال 90×55\nDL 99×210\n20×20\nمخصص",
+   "default": "A4"
+  },
+  {
+   "fieldname": "finished_width_mm",
+   "fieldtype": "Float",
+   "label": "العرض النهائي (مم)"
+  },
+  {
+   "fieldname": "finished_height_mm",
+   "fieldtype": "Float",
+   "label": "الطول النهائي (مم)"
+  },
+  {
+   "fieldname": "bleed_mm",
+   "fieldtype": "Float",
+   "label": "هامش القصّ (مم)",
+   "default": 3
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الغلاف / القطعة"
+  },
+  {
+   "fieldname": "cover_paper",
+   "fieldtype": "Link",
+   "label": "الورق",
+   "options": "Paper Stock"
+  },
+  {
+   "fieldname": "cover_machine",
+   "fieldtype": "Link",
+   "label": "الآلة",
+   "options": "Print Machine"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cover_color",
+   "fieldtype": "Select",
+   "label": "الألوان",
+   "options": "ملون\nأحادي",
+   "default": "ملون"
+  },
+  {
+   "fieldname": "cover_sides",
+   "fieldtype": "Select",
+   "label": "الأوجه",
+   "options": "وجه\nوجهان",
+   "default": "وجهان"
+  },
+  {
+   "fieldname": "sb_inner",
+   "fieldtype": "Section Break",
+   "label": "الداخلي",
+   "depends_on": "eval:doc.structure=='غلاف + داخلي'"
+  },
+  {
+   "fieldname": "inner_paper",
+   "fieldtype": "Link",
+   "label": "ورق الداخلي",
+   "options": "Paper Stock"
+  },
+  {
+   "fieldname": "inner_machine",
+   "fieldtype": "Link",
+   "label": "آلة الداخلي",
+   "options": "Print Machine"
+  },
+  {
+   "fieldname": "default_pages",
+   "fieldtype": "Int",
+   "label": "عدد الصفحات الافتراضي"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "inner_color",
+   "fieldtype": "Select",
+   "label": "ألوان الداخلي",
+   "options": "ملون\nأحادي",
+   "default": "أحادي"
+  },
+  {
+   "fieldname": "inner_sides",
+   "fieldtype": "Select",
+   "label": "أوجه الداخلي",
+   "options": "وجه\nوجهان",
+   "default": "وجهان"
+  },
+  {
+   "fieldname": "binding",
+   "fieldtype": "Select",
+   "label": "التجليد",
+   "options": "بلا\nتدبيس سلك\nغراء (تجليد حراري)\nخياطة وغراء\nسلك حلزوني\nغلاف صلب",
+   "default": "بلا"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "التشطيب الافتراضي"
+  },
+  {
+   "fieldname": "finishing",
+   "fieldtype": "Table",
+   "label": "التشطيب",
+   "options": "Print Template Finishing"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التسعير"
+  },
+  {
+   "fieldname": "margin_percent",
+   "fieldtype": "Percent",
+   "label": "هامش الربح (%)",
+   "description": "إن تُرك فارغًا يُؤخذ من إعدادات المطبعة"
+  },
+  {
+   "fieldname": "design_hours",
+   "fieldtype": "Float",
+   "label": "ساعات التصميم الافتراضية"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "tiers",
+   "fieldtype": "Data",
+   "label": "شرائح الكمية",
+   "description": "كميات مفصولة بفواصل، مثل: 100, 250, 500"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "وصف يظهر في عرض السعر"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Product Template",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مخرج فني ومصمم",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:template_name",
+ "naming_rule": "By fieldname",
+ "search_fields": "product_type"
+}

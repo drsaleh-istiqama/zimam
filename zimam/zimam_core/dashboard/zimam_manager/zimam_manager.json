@@ -40,6 +40,12 @@
    "card": "Print Revenue This Month"
   },
   {
+   "card": "Print Estimates This Month"
+  },
+  {
+   "card": "Print Estimates Accepted This Month"
+  },
+  {
    "card": "Legal Matters Expiring Soon"
   }
  ],
@@ -54,6 +60,10 @@
   },
   {
    "chart": "Print Jobs by Status",
+   "width": "Half"
+  },
+  {
+   "chart": "Print Estimates by Status",
    "width": "Half"
   }
  ]

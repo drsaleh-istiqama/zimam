@@ -1,0 +1,188 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-16 22:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "component",
+  "paper",
+  "machine",
+  "color",
+  "sides",
+  "pages",
+  "auto_size",
+  "piece_width_mm",
+  "piece_height_mm",
+  "sb_result",
+  "ups",
+  "run_w",
+  "run_h",
+  "sheets",
+  "impressions",
+  "paper_cost",
+  "print_cost",
+  "amount",
+  "hours",
+  "warning"
+ ],
+ "fields": [
+  {
+   "fieldname": "component",
+   "fieldtype": "Select",
+   "label": "المكوّن",
+   "options": "قطعة واحدة\nغلاف\nداخلي\nإدراج/ملحق",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "paper",
+   "fieldtype": "Link",
+   "label": "الورق",
+   "options": "Paper Stock",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "machine",
+   "fieldtype": "Link",
+   "label": "الآلة",
+   "options": "Print Machine",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "color",
+   "fieldtype": "Select",
+   "label": "الألوان",
+   "options": "ملون\nأحادي",
+   "default": "ملون",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "sides",
+   "fieldtype": "Select",
+   "label": "الأوجه",
+   "options": "وجه\nوجهان",
+   "default": "وجهان",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "pages",
+   "fieldtype": "Int",
+   "label": "الصفحات",
+   "in_list_view": 1,
+   "columns": 1,
+   "description": "للداخلي: عدد الصفحات؛ للغلاف والقطعة يُشتق من الأوجه"
+  },
+  {
+   "fieldname": "auto_size",
+   "fieldtype": "Check",
+   "label": "مقاس آلي",
+   "default": 1,
+   "description": "يُحسب مقاس القطعة من المقاس النهائي (والكعب للغلاف)؛ ألغِه لإدخال مقاس القطعة يدويًا"
+  },
+  {
+   "fieldname": "piece_width_mm",
+   "fieldtype": "Float",
+   "label": "عرض القطعة (مم)"
+  },
+  {
+   "fieldname": "piece_height_mm",
+   "fieldtype": "Float",
+   "label": "طول القطعة (مم)"
+  },
+  {
+   "fieldname": "sb_result",
+   "fieldtype": "Section Break",
+   "label": "النتيجة"
+  },
+  {
+   "fieldname": "ups",
+   "fieldtype": "Int",
+   "label": "قطع على الفرخ",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "run_w",
+   "fieldtype": "Float",
+   "label": "فرخ التشغيل — عرض",
+   "read_only": 1
+  },
+  {
+   "fieldname": "run_h",
+   "fieldtype": "Float",
+   "label": "فرخ التشغيل — طول",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sheets",
+   "fieldtype": "Int",
+   "label": "الأفرخ",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "impressions",
+   "fieldtype": "Int",
+   "label": "المرورات/النقرات",
+   "read_only": 1
+  },
+  {
+   "fieldname": "paper_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الورق",
+   "read_only": 1
+  },
+  {
+   "fieldname": "print_cost",
+   "fieldtype": "Currency",
+   "label": "تكلفة الطباعة",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "الإجمالي",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "hours",
+   "fieldtype": "Float",
+   "label": "ساعات",
+   "read_only": 1
+  },
+  {
+   "fieldname": "warning",
+   "fieldtype": "Data",
+   "label": "تنبيه",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-16 22:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Print Estimate Component",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1
+}

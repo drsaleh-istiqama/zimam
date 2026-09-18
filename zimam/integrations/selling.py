@@ -43,15 +43,20 @@ def quotation_on_cancel(doc, method=None):
 	_assessment_sync(doc, "مسودة", clear=True)
 
 
+STATUS_SYNC_DOCTYPES = ("Restoration Assessment", "Print Estimate")
+
+
 def _assessment_sync(doc, status, clear=False):
-	if doc.get("zimam_ref_doctype") != "Restoration Assessment" or not doc.get("zimam_ref_name"):
+	"""يزامن حالة المستند المصدر (تقييم ترميم / تقدير طباعة) مع عرض السعر: مُرسل/مقبول/مرفوض/منتهي، ويفكّ الربط عند الإلغاء."""
+	ref_dt, ref_dn = doc.get("zimam_ref_doctype"), doc.get("zimam_ref_name")
+	if ref_dt not in STATUS_SYNC_DOCTYPES or not ref_dn:
 		return
-	if not frappe.db.exists("Restoration Assessment", doc.zimam_ref_name):
+	if not frappe.db.exists(ref_dt, ref_dn):
 		return
 	values = {"status": status}
 	if clear:
 		values["quotation"] = None
-	frappe.db.set_value("Restoration Assessment", doc.zimam_ref_name, values, update_modified=False)
+	frappe.db.set_value(ref_dt, ref_dn, values, update_modified=False)
 
 
 def sales_order_on_submit(doc, method=None):
