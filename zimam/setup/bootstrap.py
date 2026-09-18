@@ -252,15 +252,31 @@ def ensure_restoration_catalog(company, h):
 	return out
 
 
+def root_company(company):
+	"""ERPNext يشترط إنشاء الحسابات في الشركة الجذر (الأم) لتُنسخ تلقائيًا إلى الشركات التابعة."""
+	seen = set()
+	while company and company not in seen:
+		seen.add(company)
+		parent = frappe.db.get_value("Company", company, "parent_company")
+		if not parent:
+			return company
+		company = parent
+	return company
+
+
 def ensure_tax_account(company, name):
 	existing = frappe.db.get_value("Account", {"account_name": name, "company": company}, "name")
 	if existing:
 		return existing
-	parent = frappe.db.get_value("Account", {"company": company, "account_name": "Duties and Taxes", "is_group": 1}, "name") \
-		or frappe.db.get_value("Account", {"company": company, "root_type": "Liability", "is_group": 1}, "name")
-	doc = frappe.get_doc({"doctype": "Account", "account_name": name, "parent_account": parent, "company": company, "is_group": 0, "account_type": "Tax"}).insert(ignore_permissions=True)
-	log(f"حساب ضريبة: {doc.name}")
-	return doc.name
+	root = root_company(company)
+	if not frappe.db.get_value("Account", {"account_name": name, "company": root}, "name"):
+		parent = frappe.db.get_value("Account", {"company": root, "account_name": "Duties and Taxes", "is_group": 1}, "name") \
+			or frappe.db.get_value("Account", {"company": root, "root_type": "Liability", "is_group": 1}, "name")
+		doc = frappe.get_doc({"doctype": "Account", "account_name": name, "parent_account": parent, "company": root, "is_group": 0, "account_type": "Tax"}).insert(ignore_permissions=True)
+		log(f"حساب ضريبة في الشركة الجذر: {doc.name}")
+	# النسخة في الشركة التابعة تُنشأ تلقائيًا؛ وإلا نستخدم حساب الجذر
+	return frappe.db.get_value("Account", {"account_name": name, "company": company}, "name") \
+		or frappe.db.get_value("Account", {"account_name": name, "company": root}, "name")
 
 
 def ensure_sales_tax_template(company, account_name, rate):
