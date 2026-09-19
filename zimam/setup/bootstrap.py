@@ -465,8 +465,88 @@ def run(profile="template", with_optional_arms=False):
 		log("إعدادات الحزمة التراثية جاهزة")
 
 	setup_website(parent)
+	setup_login_policy(p.get("login_policy"))
+	ensure_users(p.get("users"))
 	frappe.db.commit()
-	log(f"اكتملت تهيئة «{parent}» من ملف التعريف {profile_name}. راجع إعدادات زِمام ثم أنشئ المستخدمين وأدوارهم.")
+	log(f"اكتملت تهيئة «{parent}» من ملف التعريف {profile_name}. راجع إعدادات زِمام وأدوار المستخدمين.")
+
+
+# ---------------------------------------------------------------------------
+# الدخول وكلمات المرور — سياسة موحّدة لكل مؤسسة على زِمام (0.7.1)
+# ---------------------------------------------------------------------------
+# افتراضيات Frappe صارمة على غير التقنيين: رابط إعادة التعيين يبطل بعد 20 دقيقة، و3 طلبات في الساعة فقط،
+# ورابط الدخول بالبريد 10 دقائق. هنا: ساعتان للتعيين، 5 طلبات، رابط دخول 30 دقيقة، والدخول باسم المستخدم أيضًا.
+DEFAULT_LOGIN_POLICY = {
+	"login_with_email_link": 1,               # دخول برابط يُرسل إلى البريد بلا كلمة مرور
+	"login_with_email_link_expiry": 30,       # دقائق
+	"rate_limit_email_link_login": 5,         # طلبات في الساعة
+	"reset_password_link_expiry_duration": 7200,  # ثانية = ساعتان
+	"password_reset_limit": 5,                # طلبات إعادة تعيين في الساعة
+	"allow_login_using_user_name": 1,
+	"logout_on_password_reset": 1,
+}
+
+
+def setup_login_policy(policy=None):
+	"""تطبيق سياسة الدخول على System Settings — تُكتب القيم المختلفة فقط (آمنة للتكرار)."""
+	wanted = dict(DEFAULT_LOGIN_POLICY)
+	wanted.update({k: v for k, v in (policy or {}).items() if not k.startswith("_")})
+	ss = frappe.get_single("System Settings")
+	changed = [k for k, v in wanted.items() if ss.meta.has_field(k) and (ss.get(k) or 0) != v]
+	if not changed:
+		return
+	for k in changed:
+		ss.set(k, wanted[k])
+	ss.flags.ignore_mandatory = True
+	ss.save(ignore_permissions=True)
+	log("سياسة الدخول: " + "، ".join(f"{k}={wanted[k]}" for k in changed))
+
+
+def ensure_users(rows):
+	"""حسابات الدخول من ملف التعريف.
+
+	- حساب جديد: يُنشأ «مستخدم نظام» بأدواره، ويُرسل له Frappe رسالة ترحيب تحمل رابط تعيين كلمة المرور
+	  (صلاحيته حسب سياسة الدخول أعلاه) — لا تُكتب كلمة مرور في أي ملف.
+	- حساب قائم: يُفعَّل إن كان معطَّلًا وتُستكمل أدواره الناقصة فقط؛ لا يُمسّ شيء آخر.
+	- حساب Administrator لا يُرسل له Frappe بريد إعادة تعيين إطلاقًا؛ لذلك يجب أن يكون لكل مدير حسابه ببريده.
+	"""
+	for u in rows or []:
+		email = (u.get("email") or "").strip().lower()
+		if not email or "@" not in email:
+			continue
+		roles = [r for r in u.get("roles", []) if frappe.db.exists("Role", r)]
+		for r in set(u.get("roles", [])) - set(roles):
+			log(f"المستخدم {email}: الدور «{r}» غير موجود على هذا الموقع — تُخطّي")
+		if frappe.db.exists("User", email):
+			doc = frappe.get_doc("User", email)
+			existing = {r.role for r in doc.roles}
+			added = [r for r in roles if r not in existing]
+			if not added and doc.enabled:
+				log(f"المستخدم {email}: موجود بأدواره — لا تغيير")
+				continue
+			doc.enabled = 1
+			for r in added:
+				doc.append("roles", {"role": r})
+			doc.save(ignore_permissions=True)
+			log(f"المستخدم {email}: موجود — أُضيفت الأدوار {added}" if added else f"المستخدم {email}: أُعيد تفعيله")
+			continue
+		welcome = u.get("welcome_email", True)
+		doc = frappe.get_doc({
+			"doctype": "User",
+			"email": email,
+			"first_name": u.get("first_name") or email.split("@")[0],
+			"last_name": u.get("last_name"),
+			"language": u.get("language") or "ar",
+			"user_type": "System User",
+			"enabled": 1,
+			"send_welcome_email": 1 if welcome else 0,
+			"roles": [{"role": r} for r in roles],
+		})
+		if u.get("time_zone"):
+			doc.time_zone = u["time_zone"]
+		doc.flags.no_welcome_mail = not welcome
+		doc.insert(ignore_permissions=True)
+		log(f"المستخدم {email}: أُنشئ" + (" وأُرسلت رسالة تعيين كلمة المرور إلى بريده" if welcome else " بلا رسالة ترحيب"))
 
 
 def setup_website(institution):

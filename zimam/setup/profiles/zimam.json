@@ -7,6 +7,25 @@
   "country": "Oman",
   "currency": "OMR"
  },
+ "users": [
+  {
+   "email": "zuhimi@gmail.com",
+   "first_name": "صالح",
+   "last_name": "الزهيمي",
+   "language": "ar",
+   "roles": [
+    "System Manager",
+    "مدير المؤسسة",
+    "Accounts Manager",
+    "HR Manager",
+    "Sales Manager",
+    "Purchase Manager",
+    "Stock Manager",
+    "Item Manager",
+    "Projects Manager"
+   ]
+  }
+ ],
  "arms": [],
  "optional_arms": [
   {

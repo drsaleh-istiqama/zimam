@@ -7,6 +7,9 @@
   "country": "Oman",
   "currency": "OMR"
  },
+ "_users_comment": "users: حسابات الدخول التي تُنشئها التهيئة (مستخدم نظام لكل بريد؛ تصل كل واحد رسالة ترحيب برابط تعيين كلمة المرور — لا تُكتب كلمة مرور هنا أبدًا). login_policy: قيم System Settings التي تُغيّر افتراضيات زِمام (login_with_email_link, login_with_email_link_expiry, reset_password_link_expiry_duration, password_reset_limit, allow_login_using_user_name). مثال مستخدم: {\"email\": \"admin@example.om\", \"first_name\": \"الاسم\", \"last_name\": \"اللقب\", \"language\": \"ar\", \"roles\": [\"System Manager\", \"مدير المؤسسة\", \"Accounts Manager\", \"HR Manager\"]}",
+ "users": [],
+ "login_policy": {},
  "arms": [],
  "optional_arms": [],
  "domains": [],
