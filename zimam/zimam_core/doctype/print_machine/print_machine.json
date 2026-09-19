@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-16 22:30:00.000000",
+ "creation": "2026-09-17 06:31:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -198,7 +198,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-16 22:30:00.000000",
+ "modified": "2026-09-17 06:31:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Print Machine",
