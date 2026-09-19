@@ -18,20 +18,20 @@
  "for_user": "",
  "sequence_id": 98.0,
  "restrict_to_domain": "",
- "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — إدارة المؤسسة</b></span>\", \"col\": 12}}, {\"id\": \"sc_service_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب خدمة\", \"col\": 4}}, {\"id\": \"sc_waqf_contribution\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مساهمة وقفية\", \"col\": 4}}, {\"id\": \"sc_print_estimate\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تقدير سعر طباعة\", \"col\": 4}}, {\"id\": \"sc_print_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر طباعة\", \"col\": 4}}, {\"id\": \"sc_institution_event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فعالية\", \"col\": 4}}, {\"id\": \"sc_legal_matter\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"شأن قانوني\", \"col\": 4}}, {\"id\": \"sc_zimam_manager\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة مدير المؤسسة\", \"col\": 4}}, {\"id\": \"nc_service_requests_receive\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Received This Month\", \"col\": 4}}, {\"id\": \"nc_service_requests_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Completed This Month\", \"col\": 4}}, {\"id\": \"nc_media_activities_this_mo\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Media Activities This Month\", \"col\": 4}}, {\"id\": \"nc_events_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Events This Month\", \"col\": 4}}, {\"id\": \"nc_waqf_income_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Waqf Income This Month\", \"col\": 4}}, {\"id\": \"nc_sales_invoices_this_mont\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Sales Invoices This Month\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_4517896\", \"type\": \"card\", \"data\": {\"card_name\": \"الخدمات\", \"col\": 4}}, {\"id\": \"card_45927406\", \"type\": \"card\", \"data\": {\"card_name\": \"المطبعة — التسعير والإنتاج\", \"col\": 4}}, {\"id\": \"card_96618525\", \"type\": \"card\", \"data\": {\"card_name\": \"المطبعة — الكتالوج\", \"col\": 4}}, {\"id\": \"card_28930501\", \"type\": \"card\", \"data\": {\"card_name\": \"العطاء الوقفي\", \"col\": 4}}, {\"id\": \"card_19186750\", \"type\": \"card\", \"data\": {\"card_name\": \"الفعاليات والإعلام\", \"col\": 4}}, {\"id\": \"card_81598541\", \"type\": \"card\", \"data\": {\"card_name\": \"الشؤون القانونية\", \"col\": 4}}, {\"id\": \"card_49405095\", \"type\": \"card\", \"data\": {\"card_name\": \"الإعدادات\", \"col\": 4}}]",
+ "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — إدارة المؤسسة</b></span>\", \"col\": 12}}, {\"id\": \"sc_service_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب خدمة\", \"col\": 4}}, {\"id\": \"sc_waqf_contribution\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مساهمة وقفية\", \"col\": 4}}, {\"id\": \"sc_print_estimate\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تقدير سعر طباعة\", \"col\": 4}}, {\"id\": \"sc_print_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر طباعة\", \"col\": 4}}, {\"id\": \"sc_institution_event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فعالية\", \"col\": 4}}, {\"id\": \"sc_legal_matter\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"شأن قانوني\", \"col\": 4}}, {\"id\": \"sc_zimam_manager\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة مدير المؤسسة\", \"col\": 4}}, {\"id\": \"nc_service_requests_receive\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Received This Month\", \"col\": 4}}, {\"id\": \"nc_service_requests_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Completed This Month\", \"col\": 4}}, {\"id\": \"nc_media_activities_this_mo\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Media Activities This Month\", \"col\": 4}}, {\"id\": \"nc_events_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Events This Month\", \"col\": 4}}, {\"id\": \"nc_waqf_income_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Waqf Income This Month\", \"col\": 4}}, {\"id\": \"nc_sales_invoices_this_mont\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Sales Invoices This Month\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_49043409\", \"type\": \"card\", \"data\": {\"card_name\": \"٤ · الدراسات والأبحاث\", \"col\": 4}}, {\"id\": \"card_53211317\", \"type\": \"card\", \"data\": {\"card_name\": \"٥ · الطباعة والنشر\", \"col\": 4}}, {\"id\": \"card_42651815\", \"type\": \"card\", \"data\": {\"card_name\": \"٦ · الاتصال المؤسسي والتواصل العلمي\", \"col\": 4}}, {\"id\": \"card_9696352\", \"type\": \"card\", \"data\": {\"card_name\": \"٧ · التميز المؤسسي\", \"col\": 4}}, {\"id\": \"card_71550374\", \"type\": \"card\", \"data\": {\"card_name\": \"٨ · التسويق والإنتاج الفني\", \"col\": 4}}, {\"id\": \"card_5283474\", \"type\": \"card\", \"data\": {\"card_name\": \"٩ · المطبعة الرقمية\", \"col\": 4}}, {\"id\": \"card_29331501\", \"type\": \"card\", \"data\": {\"card_name\": \"١٠ · خدمات الباحثين والمستفيدين\", \"col\": 4}}, {\"id\": \"card_99560078\", \"type\": \"card\", \"data\": {\"card_name\": \"١١ · الشؤون المالية\", \"col\": 4}}, {\"id\": \"card_49589257\", \"type\": \"card\", \"data\": {\"card_name\": \"١٢ · الموارد البشرية والإدارية\", \"col\": 4}}, {\"id\": \"card_92467834\", \"type\": \"card\", \"data\": {\"card_name\": \"١٣ · الشؤون القانونية\", \"col\": 4}}, {\"id\": \"card_57141235\", \"type\": \"card\", \"data\": {\"card_name\": \"١٤ · التحول الرقمي وإدارة النظام\", \"col\": 4}}, {\"id\": \"card_31795541\", \"type\": \"card\", \"data\": {\"card_name\": \"١٥ · الاستثمار الوقفي والاستدامة\", \"col\": 4}}, {\"id\": \"card_26151575\", \"type\": \"card\", \"data\": {\"card_name\": \"١٦ · المتجر الرقمي\", \"col\": 4}}]",
  "links": [
   {
    "type": "Card Break",
-   "label": "الخدمات",
-   "link_count": 2,
+   "label": "٤ · الدراسات والأبحاث",
+   "link_count": 3,
    "hidden": 0,
    "onboard": 0
   },
   {
    "type": "Link",
-   "label": "طلب خدمة",
+   "label": "مشروع",
    "link_type": "DocType",
-   "link_to": "Service Request",
+   "link_to": "Project",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -39,9 +39,19 @@
   },
   {
    "type": "Link",
-   "label": "نوع خدمة",
+   "label": "مهمة",
    "link_type": "DocType",
-   "link_to": "Service Type",
+   "link_to": "Task",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "سجل ساعات العمل",
+   "link_type": "DocType",
+   "link_to": "Timesheet",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -49,8 +59,196 @@
   },
   {
    "type": "Card Break",
-   "label": "المطبعة — التسعير والإنتاج",
-   "link_count": 6,
+   "label": "٥ · الطباعة والنشر",
+   "link_count": 4,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر طباعة",
+   "link_type": "DocType",
+   "link_to": "Print Job",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "قالب منتج طباعي",
+   "link_type": "DocType",
+   "link_to": "Print Product Template",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الترويسات",
+   "link_type": "DocType",
+   "link_to": "Letter Head",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نماذج الطباعة",
+   "link_type": "DocType",
+   "link_to": "Print Format",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "٦ · الاتصال المؤسسي والتواصل العلمي",
+   "link_count": 5,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "فعالية",
+   "link_type": "DocType",
+   "link_to": "Institution Event",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "تسجيل في فعالية",
+   "link_type": "DocType",
+   "link_to": "Event Registration",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نشاط إعلامي",
+   "link_type": "DocType",
+   "link_to": "Media Activity",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نشرة / تعميم",
+   "link_type": "DocType",
+   "link_to": "Newsletter",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "جهات الاتصال",
+   "link_type": "DocType",
+   "link_to": "Contact",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "٧ · التميز المؤسسي",
+   "link_count": 4,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "إجراء جودة",
+   "link_type": "DocType",
+   "link_to": "Quality Procedure",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "هدف جودة",
+   "link_type": "DocType",
+   "link_to": "Quality Goal",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مراجعة جودة",
+   "link_type": "DocType",
+   "link_to": "Quality Review",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "حالة عدم مطابقة",
+   "link_type": "DocType",
+   "link_to": "Non Conformance",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "٨ · التسويق والإنتاج الفني",
+   "link_count": 3,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "حملة تواصل/تسويق",
+   "link_type": "DocType",
+   "link_to": "Campaign",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "تقدير وعرض سعر طباعة",
+   "link_type": "DocType",
+   "link_to": "Print Estimate",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الأصناف والمنتجات",
+   "link_type": "DocType",
+   "link_to": "Item",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "٩ · المطبعة الرقمية",
+   "link_count": 9,
    "hidden": 0,
    "onboard": 0
   },
@@ -69,16 +267,6 @@
    "label": "أمر طباعة",
    "link_type": "DocType",
    "link_to": "Print Job",
-   "onboard": 0,
-   "dependencies": "",
-   "is_query_report": 0,
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "قالب منتج طباعي",
-   "link_type": "DocType",
-   "link_to": "Print Product Template",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -113,13 +301,6 @@
    "dependencies": "",
    "is_query_report": 0,
    "hidden": 0
-  },
-  {
-   "type": "Card Break",
-   "label": "المطبعة — الكتالوج",
-   "link_count": 4,
-   "hidden": 0,
-   "onboard": 0
   },
   {
    "type": "Link",
@@ -163,16 +344,16 @@
   },
   {
    "type": "Card Break",
-   "label": "العطاء الوقفي",
+   "label": "١٠ · خدمات الباحثين والمستفيدين",
    "link_count": 4,
    "hidden": 0,
    "onboard": 0
   },
   {
    "type": "Link",
-   "label": "حملة وقفية",
+   "label": "طلب خدمة",
    "link_type": "DocType",
-   "link_to": "Waqf Campaign",
+   "link_to": "Service Request",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -180,9 +361,9 @@
   },
   {
    "type": "Link",
-   "label": "نوع سهم وقفي",
+   "label": "نوع خدمة",
    "link_type": "DocType",
-   "link_to": "Waqf Share Type",
+   "link_to": "Service Type",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -190,9 +371,9 @@
   },
   {
    "type": "Link",
-   "label": "مساهمة وقفية",
+   "label": "موعد",
    "link_type": "DocType",
-   "link_to": "Waqf Contribution",
+   "link_to": "Appointment",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -200,9 +381,9 @@
   },
   {
    "type": "Link",
-   "label": "عقار وقفي استثماري",
+   "label": "العملاء والمستفيدون",
    "link_type": "DocType",
-   "link_to": "Waqf Property",
+   "link_to": "Customer",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -210,16 +391,16 @@
   },
   {
    "type": "Card Break",
-   "label": "الفعاليات والإعلام",
-   "link_count": 2,
+   "label": "١١ · الشؤون المالية",
+   "link_count": 8,
    "hidden": 0,
    "onboard": 0
   },
   {
    "type": "Link",
-   "label": "فعالية",
+   "label": "شجرة الحسابات",
    "link_type": "DocType",
-   "link_to": "Institution Event",
+   "link_to": "Account",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -227,9 +408,69 @@
   },
   {
    "type": "Link",
-   "label": "نشاط إعلامي",
+   "label": "قيد يومية",
    "link_type": "DocType",
-   "link_to": "Media Activity",
+   "link_to": "Journal Entry",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "قيد دفع",
+   "link_type": "DocType",
+   "link_to": "Payment Entry",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "فاتورة مبيعات",
+   "link_type": "DocType",
+   "link_to": "Sales Invoice",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "فاتورة شراء",
+   "link_type": "DocType",
+   "link_to": "Purchase Invoice",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مطالبة مصروفات",
+   "link_type": "DocType",
+   "link_to": "Expense Claim",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الموازنة",
+   "link_type": "DocType",
+   "link_to": "Budget",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الحركات البنكية",
+   "link_type": "DocType",
+   "link_to": "Bank Transaction",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
@@ -237,8 +478,85 @@
   },
   {
    "type": "Card Break",
-   "label": "الشؤون القانونية",
-   "link_count": 2,
+   "label": "١٢ · الموارد البشرية والإدارية",
+   "link_count": 7,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "الموظفون",
+   "link_type": "DocType",
+   "link_to": "Employee",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب إجازة",
+   "link_type": "DocType",
+   "link_to": "Leave Application",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الحضور",
+   "link_type": "DocType",
+   "link_to": "Attendance",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "وظيفة شاغرة",
+   "link_type": "DocType",
+   "link_to": "Job Opening",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "تقييم أداء",
+   "link_type": "DocType",
+   "link_to": "Appraisal",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "قيد الرواتب",
+   "link_type": "DocType",
+   "link_to": "Payroll Entry",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "قسيمة راتب",
+   "link_type": "DocType",
+   "link_to": "Salary Slip",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "١٣ · الشؤون القانونية",
+   "link_count": 3,
    "hidden": 0,
    "onboard": 0
   },
@@ -263,11 +581,41 @@
    "hidden": 0
   },
   {
+   "type": "Link",
+   "label": "قالب عقد",
+   "link_type": "DocType",
+   "link_to": "Contract Template",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
    "type": "Card Break",
-   "label": "الإعدادات",
-   "link_count": 6,
+   "label": "١٤ · التحول الرقمي وإدارة النظام",
+   "link_count": 10,
    "hidden": 0,
    "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "المستخدمون",
+   "link_type": "DocType",
+   "link_to": "User",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الأدوار",
+   "link_type": "DocType",
+   "link_to": "Role",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
   },
   {
    "type": "Link",
@@ -324,6 +672,130 @@
    "label": "الحزم المفعّلة (النطاقات)",
    "link_type": "DocType",
    "link_to": "Domain Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "حساب البريد",
+   "link_type": "DocType",
+   "link_to": "Email Account",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "إعدادات النظام",
+   "link_type": "DocType",
+   "link_to": "System Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "١٥ · الاستثمار الوقفي والاستدامة",
+   "link_count": 5,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "حملة وقفية",
+   "link_type": "DocType",
+   "link_to": "Waqf Campaign",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نوع سهم وقفي",
+   "link_type": "DocType",
+   "link_to": "Waqf Share Type",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مساهمة وقفية",
+   "link_type": "DocType",
+   "link_to": "Waqf Contribution",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "عقار وقفي استثماري",
+   "link_type": "DocType",
+   "link_to": "Waqf Property",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "عقد إيجار",
+   "link_type": "DocType",
+   "link_to": "Property Lease",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "١٦ · المتجر الرقمي",
+   "link_count": 4,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "الأصناف والمنتجات",
+   "link_type": "DocType",
+   "link_to": "Item",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "أمر بيع",
+   "link_type": "DocType",
+   "link_to": "Sales Order",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب دفع إلكتروني",
+   "link_type": "DocType",
+   "link_to": "Payment Request",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "العملاء والمستفيدون",
+   "link_type": "DocType",
+   "link_to": "Customer",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,

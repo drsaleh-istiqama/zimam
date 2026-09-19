@@ -131,6 +131,42 @@ def ensure_website_defaults():
 	if changed:
 		ws.save(ignore_permissions=True)
 
+
+def prune_sidebars_for_domains():
+	"""الشريط الجانبي الموحد يضم أنواع الحزم القطاعية؛ نحذف بعد كل ترحيل بنود الأنواع المقيدة بنطاق غير مفعَّل
+	(والمجموعات التي تفرغ) فيصلح الشريط للمؤسسات التي لا تشغّل الحزمة التراثية. تُعاد المزامنة من JSON في الترحيل التالي ثم يُعاد الحذف."""
+	if not frappe.db.exists("DocType", "Workspace Sidebar"):
+		return
+	active = {d.domain for d in frappe.get_single("Domain Settings").active_domains}
+	for name in frappe.get_all("Workspace Sidebar", filters={"app": "zimam", "standard": 1}, pluck="name"):
+		try:
+			doc = frappe.get_doc("Workspace Sidebar", name)
+		except Exception:
+			continue
+		keep, changed = [], False
+		for row in doc.items:
+			if row.type == "Link" and row.link_type == "DocType":
+				domain = frappe.db.get_value("DocType", row.link_to, "restrict_to_domain") if frappe.db.exists("DocType", row.link_to) else None
+				if domain and domain not in active:
+					changed = True
+					continue
+			keep.append(row)
+		# مجموعات بلا أبناء
+		pruned = []
+		for i, row in enumerate(keep):
+			if row.type == "Section Break" and row.indent:
+				has_child = i + 1 < len(keep) and keep[i + 1].type == "Link" and keep[i + 1].child
+				if not has_child:
+					changed = True
+					continue
+			pruned.append(row)
+		if changed:
+			doc.items = []
+			for row in pruned:
+				doc.append("items", {k: row.get(k) for k in ("label", "link_type", "link_to", "icon", "type", "child", "indent", "collapsible", "keep_closed", "show_arrow", "url", "navigate_to_tab", "filters", "route_options")})
+			doc.flags.ignore_permissions = True
+			doc.save()
+
 def after_install():
 	create_roles()
 	create_domains()
@@ -138,6 +174,7 @@ def after_install():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
+	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()
 	frappe.msgprint("تم تثبيت زِمام. الخطوة التالية: bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{\"profile\": \"<profile>\"}'")
@@ -150,5 +187,6 @@ def after_migrate():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
+	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()
