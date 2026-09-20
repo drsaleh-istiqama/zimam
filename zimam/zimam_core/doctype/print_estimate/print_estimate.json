@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 08:30:00.000000",
+ "creation": "2026-09-17 09:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -17,6 +17,8 @@
   "prospect_name",
   "contact_phone",
   "status",
+  "alternative_of",
+  "option_label",
   "section_1",
   "quantity",
   "size_preset",
@@ -49,7 +51,10 @@
   "total_cost",
   "unit_cost",
   "section_6",
+  "pricing_mode",
   "margin_percent",
+  "margin_tiers",
+  "margin_applied",
   "discount_percent",
   "round_to",
   "rush_amount",
@@ -67,6 +72,7 @@
   "total_impressions",
   "cb6",
   "production_hours",
+  "lead_days",
   "estimated_days",
   "delivery_date",
   "section_9",
@@ -78,6 +84,13 @@
   "advance_percent",
   "artwork",
   "description",
+  "customer_notes",
+  "sb_followup",
+  "sent_via",
+  "sent_on",
+  "cb_fu",
+  "follow_up_date",
+  "rejection_reason",
   "section_10",
   "quotation",
   "print_job",
@@ -108,7 +121,7 @@
    "fieldname": "product_type",
    "fieldtype": "Select",
    "label": "نوع المنتج",
-   "options": "كتاب\nكتيب\nمجلة\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
+   "options": "كتاب\nكتيب\nمجلة\nكتالوج/تقرير\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nبطاقة تعريف (باج)\nشهادة\nدفتر/نوتة\nتقويم\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
    "reqd": 1,
    "in_standard_filter": 1
   },
@@ -162,6 +175,22 @@
    "allow_on_submit": 1
   },
   {
+   "fieldname": "alternative_of",
+   "fieldtype": "Link",
+   "label": "خيار بديل للتقدير",
+   "options": "Print Estimate",
+   "no_copy": 1,
+   "in_standard_filter": 1,
+   "description": "إن كان هذا التقدير خيارًا بديلًا (ورق آخر، تشطيب آخر…) لتقدير أصلي، يظهر في عرض أسعار الأصل ضمن جدول «خيارات بديلة»"
+  },
+  {
+   "fieldname": "option_label",
+   "fieldtype": "Data",
+   "label": "اسم الخيار",
+   "depends_on": "alternative_of",
+   "description": "مثل: الخيار ب — بتغليف لامع"
+  },
+  {
    "fieldname": "section_1",
    "fieldtype": "Section Break",
    "label": "المواصفات"
@@ -179,7 +208,7 @@
    "fieldname": "size_preset",
    "fieldtype": "Select",
    "label": "المقاس",
-   "options": "A6\nA5\nA4\nA3\nB5\nبطاقة أعمال 90×55\nDL 99×210\n20×20\nمخصص",
+   "options": "A7\nA6\nA5\nA4\nA3\nB5\nB4\nLetter 216×279\nبطاقة أعمال 90×55\nبطاقة تعريف (باج) 90×130\nDL 99×210\nظرف DL 110×220\nظرف C5 162×229\nظرف C4 229×324\n10×15\n13×18\n15×15\n20×20\n21×21\nبوستر 50×70\nبوستر 60×90\n70×100\nرول أب 85×200\nبانر 100×200\nبانر 200×100\nبانر 300×100\nمخصص",
    "default": "A4"
   },
   {
@@ -352,9 +381,29 @@
    "label": "التسعير"
   },
   {
+   "fieldname": "pricing_mode",
+   "fieldtype": "Select",
+   "label": "طريقة التسعير",
+   "options": "هامش ثابت\nهامش بحسب الكمية"
+  },
+  {
    "fieldname": "margin_percent",
    "fieldtype": "Percent",
-   "label": "هامش الربح (%)"
+   "label": "هامش الربح (%)",
+   "depends_on": "eval:doc.pricing_mode!='هامش بحسب الكمية'"
+  },
+  {
+   "fieldname": "margin_tiers",
+   "fieldtype": "Data",
+   "label": "شرائح الهامش (من الكمية : الهامش %)",
+   "depends_on": "eval:doc.pricing_mode=='هامش بحسب الكمية'",
+   "description": "إن تُرك فارغًا تُؤخذ شرائح إعدادات المطبعة"
+  },
+  {
+   "fieldname": "margin_applied",
+   "fieldtype": "Percent",
+   "label": "الهامش المطبَّق (%)",
+   "read_only": 1
   },
   {
    "fieldname": "discount_percent",
@@ -459,6 +508,12 @@
    "read_only": 1
   },
   {
+   "fieldname": "lead_days",
+   "fieldtype": "Int",
+   "label": "مهلة الخدمات الخارجية (أيام)",
+   "read_only": 1
+  },
+  {
    "fieldname": "estimated_days",
    "fieldtype": "Int",
    "label": "أيام التنفيذ المتوقعة"
@@ -516,6 +571,48 @@
    "fieldname": "description",
    "fieldtype": "Small Text",
    "label": "وصف المنتج في عرض السعر"
+  },
+  {
+   "fieldname": "customer_notes",
+   "fieldtype": "Small Text",
+   "label": "طلبات العميل الخاصة"
+  },
+  {
+   "fieldname": "sb_followup",
+   "fieldtype": "Section Break",
+   "label": "الإرسال والمتابعة"
+  },
+  {
+   "fieldname": "sent_via",
+   "fieldtype": "Select",
+   "label": "أُرسل عبر",
+   "options": "\nواتساب\nبريد إلكتروني\nطباعة\nيدويًا",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Datetime",
+   "label": "وقت الإرسال",
+   "allow_on_submit": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb_fu",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "follow_up_date",
+   "fieldtype": "Date",
+   "label": "تاريخ المتابعة",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض / الملاحظة",
+   "allow_on_submit": 1,
+   "depends_on": "eval:['مرفوض','منتهي الصلاحية'].includes(doc.status)"
   },
   {
    "fieldname": "section_10",
@@ -581,9 +678,14 @@
   {
    "link_doctype": "Print Job",
    "link_fieldname": "estimate"
+  },
+  {
+   "link_doctype": "Print Estimate",
+   "link_fieldname": "alternative_of",
+   "group": "خيارات بديلة"
   }
  ],
- "modified": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Print Estimate",

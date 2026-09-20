@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 08:30:00.000000",
+ "creation": "2026-09-17 09:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -15,6 +15,12 @@
   "rate",
   "setup_cost",
   "min_charge",
+  "sb_outsource",
+  "is_outsourced",
+  "supplier",
+  "cb_o1",
+  "outsource_markup_percent",
+  "lead_days",
   "section_1",
   "item",
   "cb2",
@@ -76,6 +82,42 @@
    "label": "الحد الأدنى"
   },
   {
+   "fieldname": "sb_outsource",
+   "fieldtype": "Section Break",
+   "label": "الإسناد لجهة خارجية"
+  },
+  {
+   "fieldname": "is_outsourced",
+   "fieldtype": "Check",
+   "label": "تُنفَّذ لدى جهة خارجية",
+   "description": "السعر أعلاه = سعر المورد؛ يُضاف عليه هامش الإسناد وتُضاف المهلة إلى أيام التنفيذ"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "المورد",
+   "options": "Supplier",
+   "depends_on": "is_outsourced"
+  },
+  {
+   "fieldname": "cb_o1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "outsource_markup_percent",
+   "fieldtype": "Percent",
+   "label": "هامش الإسناد (%)",
+   "depends_on": "is_outsourced",
+   "default": 15
+  },
+  {
+   "fieldname": "lead_days",
+   "fieldtype": "Int",
+   "label": "المهلة (أيام)",
+   "description": "تُضاف إلى مدة التنفيذ المتوقعة"
+  },
+  {
    "fieldname": "section_1",
    "fieldtype": "Section Break",
    "label": "الربط"
@@ -100,7 +142,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Finishing Service",

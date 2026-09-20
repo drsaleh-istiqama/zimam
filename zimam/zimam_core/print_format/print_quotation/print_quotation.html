@@ -26,7 +26,7 @@
 
 	<div>الأفاضل / <b>{{ addressee }}</b> المحترمون{% if doc.contact_phone %} — <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.contact_phone }}</span>{% endif %}</div>
 	<div>السلام عليكم ورحمة الله وبركاته، وبعد:</div>
-	<div style="margin:8px 0;"><b>الموضوع:</b> <u>عرض أسعار طباعة — {{ doc.title }}</u></div>
+	<div style="margin:8px 0;"><b>الموضوع:</b> <u>عرض أسعار طباعة — {{ doc.title }}{% if doc.option_label %} ({{ doc.option_label }}){% endif %}</u></div>
 	<div>يسرّ {{ company.company_name }} أن تقدّم لكم عرض الأسعار الآتي بناءً على طلبكم، وفق المواصفات المبينة أدناه:</div>
 
 	<table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:12pt;">
@@ -43,6 +43,7 @@
 			{% if doc.extras %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">بنود إضافية</td><td {{ td }}>{% for e in doc.extras %}{{ e.description or e.component }}{% if not loop.last %}، {% endif %}{% endfor %}</td></tr>{% endif %}
 			{% if doc.design_hours %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">التصميم</td><td {{ td }}>{{ num(doc.design_hours) }} ساعة عمل</td></tr>{% endif %}
 			{% if doc.estimated_days %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">مدة التنفيذ</td><td {{ td }}>{{ num(doc.estimated_days) }} يوم عمل من اعتماد التصميم{% if doc.rush %} (مستعجل){% endif %}</td></tr>{% endif %}
+			{% if doc.customer_notes %}<tr><td {{ td }} style="border:1px solid #999; padding:4px 6px; background:#f6f1f4; font-weight:bold;">طلبات خاصة</td><td {{ td }}>{{ doc.customer_notes }}</td></tr>{% endif %}
 		</tbody>
 	</table>
 
@@ -69,6 +70,20 @@
 		<tbody>
 			{% for t in tiers %}
 			<tr{% if t.qty == doc.quantity %} style="background:#fafaf6; font-weight:bold;"{% endif %}><td {{ td }}>{{ num(t.qty) }}</td><td {{ td }}>{{ money(t.unit_price) }}</td><td {{ td }}>{{ money(t.price) }}</td><td {{ td }}>{{ money(t.grand_total) }}</td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	{% endif %}
+
+	{% set alts = frappe.get_all("Print Estimate", filters={"alternative_of": doc.name, "docstatus": 1}, fields=["name", "option_label", "title", "description", "quantity", "unit_price", "net_total", "grand_total"], order_by="creation") %}
+	{% if alts %}
+	<div style="font-weight:bold; color:#7B3F61; margin-top:6px;">خيارات بديلة يمكنكم اختيار أحدها:</div>
+	<table style="width:100%; border-collapse:collapse; margin:6px 0 12px; font-size:12pt;">
+		<thead><tr style="background:#f6f1f4;"><th {{ td }}>الخيار</th><th {{ td }}>المواصفات</th><th {{ td }}>الكمية</th><th {{ td }}>سعر الوحدة</th><th {{ td }}>الإجمالي شامل الضريبة</th></tr></thead>
+		<tbody>
+			<tr style="background:#fafaf6;"><td {{ td }}>الخيار الأساسي{% if doc.option_label %} — {{ doc.option_label }}{% endif %}</td><td {{ td }}>{{ doc.description or "" }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:center;">{{ num(doc.quantity) }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.unit_price) }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(doc.grand_total) }}</td></tr>
+			{% for a in alts %}
+			<tr><td {{ td }}>{{ a.option_label or a.title }}</td><td {{ td }}>{{ a.description or "" }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:center;">{{ num(a.quantity) }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(a.unit_price) }}</td><td {{ td }} style="border:1px solid #999; padding:4px 6px; text-align:left;">{{ money(a.grand_total) }}</td></tr>
 			{% endfor %}
 		</tbody>
 	</table>

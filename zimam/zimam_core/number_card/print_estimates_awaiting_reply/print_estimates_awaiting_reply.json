@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "Print Estimates Awaiting Reply",
+ "creation": "2026-09-17 09:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Core",
+ "label": "عروض طباعة بانتظار رد العميل",
+ "type": "Document Type",
+ "document_type": "Print Estimate",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Weekly",
+ "color": "#7B3F61",
+ "filters_json": "[[\"Print Estimate\", \"docstatus\", \"=\", 1, false], [\"Print Estimate\", \"status\", \"=\", \"مُرسل\", false]]",
+ "dynamic_filters_json": "[]"
+}

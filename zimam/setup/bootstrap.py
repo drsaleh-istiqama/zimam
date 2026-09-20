@@ -262,7 +262,7 @@ def ensure_press_catalog(company, press):
 		if not frappe.db.exists("Paper Stock", p["name"]):
 			frappe.get_doc({"doctype": "Paper Stock", "stock_name": p["name"], "category": p.get("category", "أخرى"), "gsm": p.get("gsm"),
 				"finish": p.get("finish", "غير مصقول"), "sheet_width_mm": p["w"], "sheet_height_mm": p["h"], "caliper_mm": p.get("caliper"),
-				"pricing_basis": p.get("basis", "لكل فرخ"), "cost": p["cost"], "is_active": 1}).insert(ignore_permissions=True)
+				"is_precut": p.get("precut", 0), "pricing_basis": p.get("basis", "لكل فرخ"), "cost": p["cost"], "is_active": 1}).insert(ignore_permissions=True)
 			n["paper"] += 1
 	for m in press.get("machines", []):
 		if not frappe.db.exists("Print Machine", m["name"]):
@@ -275,7 +275,9 @@ def ensure_press_catalog(company, press):
 	for f in press.get("finishing", []):
 		if not frappe.db.exists("Finishing Service", f["name"]):
 			frappe.get_doc({"doctype": "Finishing Service", "service_name": f["name"], "category": f.get("category", "أخرى"), "is_active": 1,
-				"basis": f["basis"], "rate": f["rate"], "setup_cost": f.get("setup", 0), "min_charge": f.get("min", 0)}).insert(ignore_permissions=True)
+				"basis": f["basis"], "rate": f["rate"], "setup_cost": f.get("setup", 0), "min_charge": f.get("min", 0),
+				"is_outsourced": f.get("outsourced", 0), "outsource_markup_percent": f.get("markup", 15 if f.get("outsourced") else 0),
+				"lead_days": f.get("lead_days", 0)}).insert(ignore_permissions=True)
 			n["finishing"] += 1
 	for t in press.get("templates", []):
 		if frappe.db.exists("Print Product Template", t["name"]):
@@ -296,7 +298,8 @@ def ensure_press_catalog(company, press):
 	s = press.get("settings", {})
 	ps = frappe.get_single("Press Settings")
 	values = {k: s[k] for k in ("default_margin_percent", "default_tax_rate", "default_validity_days", "default_advance_percent", "default_rush_percent",
-		"default_design_rate", "default_round_to", "min_job_price", "default_tiers", "default_waste_percent", "default_bleed_mm") if k in s}
+		"default_design_rate", "default_round_to", "min_job_price", "default_tiers", "default_waste_percent", "default_bleed_mm",
+		"default_pricing_mode", "margin_tiers", "follow_up_days", "whatsapp_template") if k in s}
 	values["design_service_item"] = ensure_item("SRV-DESIGN", "خدمة تصميم")
 	if s.get("default_tax_rate"):
 		values["taxes_template"] = ensure_sales_tax_template(company, s.get("tax_account") or "ضريبة القيمة المضافة", s["default_tax_rate"])

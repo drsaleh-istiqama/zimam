@@ -3,14 +3,14 @@
 # For license information, please see license.txt
 """محرّك تقدير تكلفة الطباعة — Print Estimating Engine.
 
-وحدة خالصة (بلا Frappe) حتى تُختبر محليًا وتُنقل حرفيًا إلى JavaScript في الحاسبة المستقلة.
+وحدة خالصة (بلا Frappe) حتى تُختبر محليًا وتُنقل حرفيًا إلى JavaScript في الحاسبة المستقلة وصفحة «التسعير السريع».
 المدخلات قواميس عادية (dict) والمخرجات قواميس؛ الربط بأنواع المستندات في `doctype/print_estimate/print_estimate.py`.
 
 المنهج (كما في أنظمة Print MIS التجارية: Printlogic، Tharstern، Printsmith):
     مقاس نهائي + هوامش قصّ ⟵ التلقيم على فرخ التشغيل (ups) ⟵ الأفرخ الصافية والهدر ⟵ تكلفة الورق
     ⟵ المرورات/النقرات بحسب نوع الآلة (رقمية لكل نقرة · أوفست زنكات وتجهيز وتشغيل · واسعة التنسيق لكل م²)
-    ⟵ التشطيب بأساسه (نسخة/فرخ/عمل/م²/ساعة/ألف) ⟵ بنود إضافية وتصميم ⟵ التكلفة
-    ⟵ هامش + استعجال − خصم ⟵ تقريب وحدّ أدنى ⟵ ضريبة ⟵ الإجمالي، ثم يُعاد الحساب لكل شريحة كمية.
+    ⟵ التشطيب بأساسه (نسخة/فرخ/عمل/م²/ساعة/ألف؛ الخدمات المسنَدة لجهة خارجية بهامشها ومهلتها) ⟵ بنود إضافية وتصميم ⟵ التكلفة
+    ⟵ هامش (ثابت أو بحسب الكمية) + استعجال − خصم ⟵ تقريب وحدّ أدنى ⟵ ضريبة ⟵ الإجمالي، ثم يُعاد الحساب لكل شريحة كمية.
 """
 from __future__ import annotations
 
@@ -38,11 +38,20 @@ PAPER_PER_SHEET = "لكل فرخ"
 PAPER_PER_SQM = "لكل متر مربع"
 PAPER_PER_LM = "لكل متر طولي"
 
+PRICING_FIXED = "هامش ثابت"
+PRICING_BY_QTY = "هامش بحسب الكمية"
+
 BINDING_SPINE = {"غراء (تجليد حراري)", "خياطة وغراء", "غلاف صلب"}
 
+# المقاسات الجاهزة (عرض، طول) بالمليمتر — الاتجاه لا يهم لأن التلقيم يجرّب الاتجاهين
 SIZE_PRESETS = {
-	"A6": (105, 148), "A5": (148, 210), "A4": (210, 297), "A3": (297, 420), "B5": (176, 250),
-	"بطاقة أعمال 90×55": (90, 55), "DL 99×210": (99, 210), "20×20": (200, 200),
+	"A7": (74, 105), "A6": (105, 148), "A5": (148, 210), "A4": (210, 297), "A3": (297, 420),
+	"B5": (176, 250), "B4": (250, 353), "Letter 216×279": (216, 279),
+	"بطاقة أعمال 90×55": (90, 55), "بطاقة تعريف (باج) 90×130": (90, 130), "DL 99×210": (99, 210),
+	"ظرف DL 110×220": (110, 220), "ظرف C5 162×229": (162, 229), "ظرف C4 229×324": (229, 324),
+	"10×15": (100, 150), "13×18": (130, 180), "15×15": (150, 150), "20×20": (200, 200), "21×21": (210, 210),
+	"بوستر 50×70": (500, 700), "بوستر 60×90": (600, 900), "70×100": (700, 1000),
+	"رول أب 85×200": (850, 2000), "بانر 100×200": (1000, 2000), "بانر 200×100": (2000, 1000), "بانر 300×100": (3000, 1000),
 }
 
 
@@ -174,8 +183,13 @@ def component_cost(comp, qty, paper, machine, waste_percent=5.0, bleed=3.0):
 			paper_cost=r3(paper_cost), print_cost=r3(print_cost), amount=r3(paper_cost + print_cost), hours=round(hours + 0.25, 2))
 		return out
 
-	rw, rh, pieces_per_parent = run_sheet(paper, machine)
-	ups, orientation = imposition(pw, ph, rw, rh, bleed=bleed, gripper=flt(machine.get("gripper_margin_mm")))
+	if cint(paper.get("is_precut")):
+		# قطعة جاهزة (ظرف، بطاقة مقصوصة…): تُطبع كما هي — قطعة واحدة على «الفرخ» بلا هوامش ولا تلقيم
+		rw, rh, pieces_per_parent = flt(paper.get("sheet_width_mm")) or pw, flt(paper.get("sheet_height_mm")) or ph, 1
+		ups, orientation = 1, "portrait"
+	else:
+		rw, rh, pieces_per_parent = run_sheet(paper, machine)
+		ups, orientation = imposition(pw, ph, rw, rh, bleed=bleed, gripper=flt(machine.get("gripper_margin_mm")))
 	if ups == 0:
 		out["warning"] = "القطعة أكبر من فرخ التشغيل"
 		return out
@@ -234,10 +248,40 @@ def finishing_qty(row, service, qty, comps_out, comps_in, piece_area_sqm):
 
 
 def finishing_amount(row, service, q):
+	"""الكمية × السعر + التجهيز، بحد أدنى؛ والخدمة المسنَدة لجهة خارجية (is_outsourced) تُحمَّل هامش الإسناد فوق سعر المورد."""
 	rate = flt(row.get("rate")) if row.get("rate") not in (None, "") else flt(service.get("rate"))
 	setup = flt(row.get("setup_cost")) if row.get("setup_cost") not in (None, "") else flt(service.get("setup_cost"))
-	amount = q * rate + setup
-	return r3(max(amount, flt(service.get("min_charge"))))
+	amount = max(q * rate + setup, flt(service.get("min_charge")))
+	if cint(service.get("is_outsourced")):
+		amount *= 1 + flt(service.get("outsource_markup_percent")) / 100.0
+	return r3(amount)
+
+
+# ---------------------------------------------------------------------------
+# الهامش بحسب الكمية
+# ---------------------------------------------------------------------------
+def parse_margin_tiers(text):
+	"""«1:45, 100:40, 500:35, 1000:30» ⟵ [(1, 45.0), (100, 40.0), (500, 35.0), (1000, 30.0)] مرتبة بالكمية.
+
+	كل زوج «من الكمية : الهامش %» — الهامش المطبَّق هو هامش أكبر حدّ لا يتجاوز الكمية."""
+	out = []
+	for part in str(text or "").replace("،", ",").replace("؛", ",").split(","):
+		if ":" not in part:
+			continue
+		q, m = part.split(":", 1)
+		q, m = cint(q.strip()), flt(m.strip(), None)
+		if q > 0 and m is not None and not any(x[0] == q for x in out):
+			out.append((q, m))
+	out.sort()
+	return out
+
+
+def margin_for_qty(text, qty, default):
+	margin = flt(default)
+	for q, m in parse_margin_tiers(text):
+		if cint(qty) >= q:
+			margin = m
+	return margin
 
 
 # ---------------------------------------------------------------------------
@@ -250,9 +294,14 @@ def round_to(value, step):
 	return r3(math.ceil(flt(value) / step - 1e-9) * step)
 
 
-def price_from_cost(total_cost, settings, doc):
-	"""من التكلفة إلى السعر: هامش ⟵ استعجال ⟵ خصم ⟵ تقريب ⟵ حد أدنى."""
+def price_from_cost(total_cost, settings, doc, qty=None):
+	"""من التكلفة إلى السعر: هامش (ثابت أو بحسب الكمية) ⟵ استعجال ⟵ خصم ⟵ تقريب ⟵ حد أدنى.
+
+	يُرجع (السعر، مبلغ الاستعجال، مبلغ الخصم، الهامش المطبَّق %)."""
 	margin = flt(doc.get("margin_percent"), flt(settings.get("default_margin_percent")))
+	mode = doc.get("pricing_mode") or settings.get("default_pricing_mode") or PRICING_FIXED
+	if mode == PRICING_BY_QTY and cint(qty) > 0:
+		margin = margin_for_qty(doc.get("margin_tiers") or settings.get("margin_tiers"), qty, margin)
 	price = flt(total_cost) * (1 + margin / 100.0)
 	rush_amount = 0.0
 	if cint(doc.get("rush")):
@@ -264,7 +313,7 @@ def price_from_cost(total_cost, settings, doc):
 	min_price = flt(settings.get("min_job_price"))
 	if min_price and price < min_price:
 		price = min_price
-	return r3(price), r3(rush_amount), r3(discount)
+	return r3(price), r3(rush_amount), r3(discount), r3(margin)
 
 
 def compute(doc, masters, settings=None):
@@ -300,12 +349,12 @@ def compute(doc, masters, settings=None):
 		if q <= 0:
 			return {"components": [dict(ups=0, sheets=0, impressions=0, paper_cost=0.0, print_cost=0.0, amount=0.0, hours=0.0, run_w=0, run_h=0,
 				area_sqm=0.0, orientation="portrait", warning="الكمية صفر", piece_width_mm=fw, piece_height_mm=fh, pages=cint(c.get("pages")) or 1) for c in comps],
-				"finishing": [dict(basis=r.get("basis") or BASIS_PER_COPY, qty=0.0, rate=0.0, setup_cost=0.0, amount=0.0) for r in doc.get("finishing") or []],
+				"finishing": [dict(basis=r.get("basis") or BASIS_PER_COPY, qty=0.0, rate=0.0, setup_cost=0.0, amount=0.0, outsourced=0) for r in doc.get("finishing") or []],
 				"extras": [dict(amount=0.0) for _ in doc.get("extras") or []],
 				"paper_cost": 0.0, "print_cost": 0.0, "finishing_cost": 0.0, "extras_cost": 0.0, "design_cost": 0.0, "total_cost": 0.0,
-				"rush_amount": 0.0, "discount_amount": 0.0, "net_total": 0.0, "unit_price": 0.0, "unit_cost": 0.0,
+				"rush_amount": 0.0, "discount_amount": 0.0, "net_total": 0.0, "unit_price": 0.0, "unit_cost": 0.0, "margin_applied": 0.0,
 				"tax_rate": flt(doc.get("tax_rate"), flt(settings.get("default_tax_rate"))), "tax_amount": 0.0, "grand_total": 0.0,
-				"total_sheets": 0, "total_impressions": 0, "production_hours": 0.0}
+				"total_sheets": 0, "total_impressions": 0, "production_hours": 0.0, "lead_days": 0}
 		for c in comps:
 			paper = masters.get("paper", {}).get(c.get("paper")) or {}
 			machine = masters.get("machine", {}).get(c.get("machine")) or {}
@@ -333,7 +382,7 @@ def compute(doc, masters, settings=None):
 			impressions += o["impressions"]
 			hours += o["hours"]
 
-		fin_out, fin_cost = [], 0.0
+		fin_out, fin_cost, lead_days = [], 0.0, 0
 		piece_area = fw * fh / 1e6
 		for r in doc.get("finishing") or []:
 			svc = masters.get("finishing", {}).get(r.get("finishing_service")) or {}
@@ -343,8 +392,10 @@ def compute(doc, masters, settings=None):
 			amt = finishing_amount(rr, svc, flt(fq))
 			rate = flt(r.get("rate")) if r.get("rate") not in (None, "") else flt(svc.get("rate"))
 			setup = flt(r.get("setup_cost")) if r.get("setup_cost") not in (None, "") else flt(svc.get("setup_cost"))
-			fin_out.append({"basis": rr["basis"], "qty": r3(fq), "rate": r3(rate), "setup_cost": r3(setup), "amount": amt})
+			fin_out.append({"basis": rr["basis"], "qty": r3(fq), "rate": r3(rate), "setup_cost": r3(setup), "amount": amt,
+				"outsourced": 1 if cint(svc.get("is_outsourced")) else 0})
 			fin_cost += amt
+			lead_days = max(lead_days, cint(svc.get("lead_days")))
 
 		extras_cost = 0.0
 		extras_out = []
@@ -356,7 +407,7 @@ def compute(doc, masters, settings=None):
 		extras_cost += design_cost
 
 		total_cost = r3(paper_cost + print_cost + fin_cost + extras_cost)
-		net_total, rush_amount, discount_amount = price_from_cost(total_cost, settings, doc)
+		net_total, rush_amount, discount_amount, margin_applied = price_from_cost(total_cost, settings, doc, q)
 		tax_rate = flt(doc.get("tax_rate"), flt(settings.get("default_tax_rate")))
 		tax_amount = r3(net_total * tax_rate / 100.0)
 		grand_total = r3(net_total + tax_amount)
@@ -364,10 +415,10 @@ def compute(doc, masters, settings=None):
 			"components": comp_out, "finishing": fin_out, "extras": extras_out,
 			"paper_cost": r3(paper_cost), "print_cost": r3(print_cost), "finishing_cost": r3(fin_cost),
 			"extras_cost": r3(extras_cost), "design_cost": design_cost, "total_cost": total_cost,
-			"rush_amount": rush_amount, "discount_amount": discount_amount, "net_total": net_total,
+			"rush_amount": rush_amount, "discount_amount": discount_amount, "net_total": net_total, "margin_applied": margin_applied,
 			"unit_price": r3(net_total / q) if q else 0.0, "unit_cost": r3(total_cost / q) if q else 0.0,
 			"tax_rate": tax_rate, "tax_amount": tax_amount, "grand_total": grand_total,
-			"total_sheets": sheets, "total_impressions": impressions, "production_hours": round(hours, 2),
+			"total_sheets": sheets, "total_impressions": impressions, "production_hours": round(hours, 2), "lead_days": lead_days,
 		}
 
 	result = run(qty)
@@ -376,12 +427,14 @@ def compute(doc, masters, settings=None):
 	for t in doc.get("tiers") or []:
 		tq = cint(t.get("qty"))
 		if tq <= 0:
-			tiers.append({"qty": tq, "total_cost": 0, "price": 0, "unit_price": 0, "grand_total": 0})
+			tiers.append({"qty": tq, "total_cost": 0, "price": 0, "unit_price": 0, "grand_total": 0, "margin_applied": 0})
 			continue
 		r = run(tq)
-		tiers.append({"qty": tq, "total_cost": r["total_cost"], "price": r["net_total"], "unit_price": r["unit_price"], "grand_total": r["grand_total"]})
+		tiers.append({"qty": tq, "total_cost": r["total_cost"], "price": r["net_total"], "unit_price": r["unit_price"],
+			"grand_total": r["grand_total"], "margin_applied": r["margin_applied"]})
 	result["tiers"] = tiers
-	result["estimated_days"] = max(1, math.ceil(result["production_hours"] / 8.0)) + (0 if cint(doc.get("rush")) else 1)
+	# أيام التنفيذ: ساعات الإنتاج على 8 ساعات/يوم + يوم للتجهيز (إلا المستعجل) + مهلة الخدمات المسنَدة لجهة خارجية
+	result["estimated_days"] = max(1, math.ceil(result["production_hours"] / 8.0)) + (0 if cint(doc.get("rush")) else 1) + cint(result.get("lead_days"))
 	return result
 
 
@@ -393,3 +446,54 @@ def parse_tiers(text):
 		if q > 0 and q not in out:
 			out.append(q)
 	return out
+
+
+def summary_text(doc, result, settings=None, company=""):
+	"""ملخص عرض السعر نصًّا عاديًا (لواتساب/البريد/النسخ): المواصفات ثم السعر ثم أسعار الكميات ثم الشروط."""
+	settings = settings or {}
+
+	def money(v):
+		return f"{flt(v):,.3f}"
+
+	def g(v):
+		return ("%g" % flt(v)) if v not in (None, "") else ""
+
+	lines = [f"عرض سعر طباعة — {doc.get('title') or ''}".rstrip(" —")]
+	if company:
+		lines[0] += f" ({company})"
+	spec = [f"الكمية: {cint(doc.get('quantity'))}", f"المقاس: {g(result.get('finished_width_mm'))}×{g(result.get('finished_height_mm'))} مم"]
+	if (doc.get("structure") or SINGLE) != SINGLE:
+		spec.append(f"{cint(doc.get('pages'))} صفحة داخلية")
+		if doc.get("binding") and doc.get("binding") != "بلا":
+			spec.append(f"التجليد: {doc.get('binding')}")
+	lines.append(" · ".join(spec))
+	for c in doc.get("components") or []:
+		label = "الورق" if c.get("component") == SINGLE else c.get("component")
+		lines.append(f"{label}: {c.get('paper')} — {c.get('color') or 'ملون'}، {c.get('sides') or 'وجهان'}")
+	fins = [f"{f.get('finishing_service')}" + (f" ({f.get('applies_to')})" if f.get("applies_to") and f.get("applies_to") != "الكل" else "") for f in doc.get("finishing") or []]
+	if fins:
+		lines.append("التشطيب: " + "، ".join(fins))
+	lines.append("")
+	lines.append(f"السعر قبل الضريبة: {money(result.get('net_total'))} ر.ع (سعر الوحدة {money(result.get('unit_price'))})")
+	if flt(result.get("tax_amount")):
+		lines.append(f"الضريبة {g(result.get('tax_rate'))}%: {money(result.get('tax_amount'))}")
+	lines.append(f"الإجمالي شامل الضريبة: {money(result.get('grand_total'))} ر.ع")
+	tiers = [t for t in result.get("tiers") or [] if cint(t.get("qty")) > 0]
+	if len(tiers) > 1:
+		lines.append("")
+		lines.append("أسعار الكميات الأخرى:")
+		for t in tiers:
+			lines.append(f"{t['qty']} نسخة: {money(t['unit_price'])} للوحدة — {money(t['grand_total'])} شامل الضريبة")
+	tail = []
+	if result.get("estimated_days"):
+		tail.append(f"مدة التنفيذ المتوقعة: {result['estimated_days']} يوم عمل")
+	validity = doc.get("validity_days") or settings.get("default_validity_days")
+	if validity:
+		tail.append(f"صلاحية العرض {cint(validity)} يومًا")
+	advance = doc.get("advance_percent") or settings.get("default_advance_percent")
+	if flt(advance):
+		tail.append(f"دفعة مقدمة {g(advance)}%")
+	if tail:
+		lines.append("")
+		lines.append(" · ".join(tail))
+	return "\n".join(lines)

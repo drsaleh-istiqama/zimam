@@ -54,6 +54,8 @@ scheduler_events = {
 		"zimam.zimam_heritage.doctype.cabinet_intake.cabinet_intake.send_return_due_reminders",
 		# الحزمة الخيرية: استحقاقات الكفالات تُقيَّد يوم حلولها لا قبله (أو قبلها بأيام محددة في الإعدادات)
 		"zimam.zimam_charity.doctype.sponsorship.sponsorship.generate_dues",
+		# المطبعة: عروض الأسعار المُرسلة التي تجاوزت «صالح حتى» تصير منتهية الصلاحية
+		"zimam.zimam_core.doctype.print_estimate.print_estimate.expire_estimates",
 	],
 }
 

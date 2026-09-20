@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 08:30:00.000000",
+ "creation": "2026-09-17 09:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -18,6 +18,14 @@
   "default_round_to",
   "min_job_price",
   "default_tiers",
+  "sb_margin_tiers",
+  "default_pricing_mode",
+  "cb_p1b",
+  "margin_tiers",
+  "sb_followup",
+  "follow_up_days",
+  "cb_p1c",
+  "whatsapp_template",
   "section_2",
   "default_waste_percent",
   "cb_p2",
@@ -97,6 +105,55 @@
    "description": "كميات مفصولة بفواصل تُعرض للعميل في عرض السعر"
   },
   {
+   "fieldname": "sb_margin_tiers",
+   "fieldtype": "Section Break",
+   "label": "الهامش بحسب الكمية"
+  },
+  {
+   "fieldname": "default_pricing_mode",
+   "fieldtype": "Select",
+   "label": "طريقة التسعير الافتراضية",
+   "options": "هامش ثابت\nهامش بحسب الكمية",
+   "default": "هامش ثابت",
+   "description": "«هامش بحسب الكمية»: الكميات الصغيرة بهامش أعلى والكبيرة بهامش أقل وفق الشرائح؛ يُطبَّق على كل شريحة كمية في عرض السعر"
+  },
+  {
+   "fieldname": "cb_p1b",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "margin_tiers",
+   "fieldtype": "Data",
+   "label": "شرائح الهامش (من الكمية : الهامش %)",
+   "default": "1:45, 100:40, 500:35, 1000:30",
+   "description": "أزواج «من الكمية : الهامش %» مفصولة بفواصل — الهامش المطبَّق هو هامش أكبر حدّ لا يتجاوز الكمية"
+  },
+  {
+   "fieldname": "sb_followup",
+   "fieldtype": "Section Break",
+   "label": "المتابعة والمراسلة"
+  },
+  {
+   "fieldname": "follow_up_days",
+   "fieldtype": "Int",
+   "label": "أيام المتابعة بعد الإرسال",
+   "default": 3,
+   "description": "يُقترح تاريخ متابعة بعد إرسال العرض بهذه الأيام"
+  },
+  {
+   "fieldname": "cb_p1c",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "whatsapp_template",
+   "fieldtype": "Small Text",
+   "label": "نص رسالة واتساب",
+   "default": "السلام عليكم {customer}،\nيسرّ {company} أن ترسل لكم عرض السعر الآتي:\n\n{summary}\n\nللاستفسار أو الاعتماد يرجى الرد على هذه الرسالة.",
+   "description": "تُستبدل {customer} و{company} و{summary} و{title} و{grand_total} و{name} تلقائيًا"
+  },
+  {
    "fieldname": "section_2",
    "fieldtype": "Section Break",
    "label": "الإنتاج"
@@ -156,7 +213,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Press Settings",

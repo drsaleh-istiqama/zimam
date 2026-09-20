@@ -1,6 +1,7 @@
 // Copyright (c) 2026, جدوى للدراسات والتطوير — منتج زِمام
 // For license information, please see license.txt
 // تقدير وعرض سعر طباعة: حساب فوري على الخادم (محرّك واحد) عند كل تغيير، بلا حفظ.
+// منذ 0.11: هامش بحسب الكمية، خيار بديل، إرسال عبر واتساب/البريد مع ختم الإرسال، نسخ الملخص، سبب الرفض.
 
 const PE = "zimam.zimam_core.doctype.print_estimate.print_estimate";
 let pe_timer = null;
@@ -25,9 +26,62 @@ function pe_show_summary(frm) {
 	const cur = (v) => format_currency(v, frappe.get_doc("Company", d.company)?.default_currency || frappe.boot.sysdefaults.currency);
 	const warnings = (d.components || []).filter((c) => c.warning).map((c) => `⚠ ${c.component}: ${c.warning}`);
 	let html = `<b>${__("التكلفة")}</b> ${cur(d.total_cost)} · <b>${__("السعر قبل الضريبة")}</b> ${cur(d.net_total)} · <b>${__("للوحدة")}</b> ${cur(d.unit_price)} · <b>${__("شامل الضريبة")}</b> ${cur(d.grand_total)}`;
+	if (d.margin_applied) html += ` · ${__("الهامش")}: ${d.margin_applied}%`;
 	if (d.total_sheets) html += ` · ${__("الأفرخ")}: ${d.total_sheets} · ${__("الساعات")}: ${d.production_hours}`;
+	if (d.lead_days) html += ` · ${__("مهلة خارجية")}: ${d.lead_days} ${__("يوم")}`;
+	if (d.alternative_of) html += `<br><span class="text-muted">${__("خيار بديل للتقدير")} <a href="/app/print-estimate/${encodeURIComponent(d.alternative_of)}">${d.alternative_of}</a>${d.option_label ? " — " + frappe.utils.escape_html(d.option_label) : ""}</span>`;
 	if (warnings.length) html += `<br><span class="text-danger">${warnings.join(" · ")}</span>`;
 	frm.dashboard.set_headline(html);
+}
+
+function pe_after_send(frm, via) {
+	frappe.call({ method: PE + ".mark_sent", args: { name: frm.doc.name, via } }).then(() => {
+		frm.reload_doc();
+		frappe.show_alert({ message: __("سُجّل الإرسال عبر {0}", [via]), indicator: "green" });
+	});
+}
+
+function pe_whatsapp(frm) {
+	frappe.call({ method: PE + ".whatsapp_link", args: { name: frm.doc.name }, freeze: true }).then((r) => {
+		const m = r.message || {};
+		if (!m.phone) {
+			frappe.msgprint(__("لا رقم هاتف للعميل — سيُفتح واتساب لاختيار جهة الاتصال يدويًا"));
+		}
+		window.open(m.url, "_blank");
+		if (frm.doc.docstatus === 1) {
+			frappe.confirm(__("هل أُرسل العرض عبر واتساب؟ سيُسجَّل وقت الإرسال وتاريخ المتابعة."), () => pe_after_send(frm, "واتساب"));
+		}
+	});
+}
+
+function pe_copy_summary(frm) {
+	frappe.call({ method: PE + ".whatsapp_link", args: { name: frm.doc.name } }).then((r) => {
+		const text = (r.message || {}).summary || "";
+		const done = () => frappe.show_alert({ message: __("نُسخ ملخص عرض السعر"), indicator: "green" });
+		if (navigator.clipboard) navigator.clipboard.writeText(text).then(done).catch(() => frappe.msgprint({ title: __("انسخ النص"), message: `<pre style="white-space:pre-wrap;direction:rtl">${frappe.utils.escape_html(text)}</pre>` }));
+		else frappe.msgprint({ title: __("انسخ النص"), message: `<pre style="white-space:pre-wrap;direction:rtl">${frappe.utils.escape_html(text)}</pre>` });
+	});
+}
+
+function pe_email(frm) {
+	frappe.call({ method: PE + ".whatsapp_link", args: { name: frm.doc.name } }).then((r) => {
+		const text = ((r.message || {}).text || "").replace(/\n/g, "<br>");
+		new frappe.views.CommunicationComposer({
+			doc: frm.doc, frm, subject: __("عرض أسعار طباعة — {0}", [frm.doc.title]), message: text,
+			recipients: frm.doc.customer ? undefined : "", attach_document_print: true, print_format: "Print Quotation",
+		});
+		if (frm.doc.docstatus === 1) {
+			frappe.confirm(__("بعد إرسال البريد: هل أسجّل الإرسال عبر البريد الإلكتروني؟"), () => pe_after_send(frm, "بريد إلكتروني"));
+		}
+	});
+}
+
+function pe_make_alternative(frm) {
+	frappe.prompt([{ fieldname: "option_label", fieldtype: "Data", label: __("اسم الخيار"), reqd: 1, default: __("خيار بديل — ") }], (v) => {
+		frappe.call({ method: PE + ".make_alternative", args: { name: frm.doc.name, option_label: v.option_label }, freeze: true }).then((r) => {
+			if (r.message) frappe.set_route("Form", "Print Estimate", r.message);
+		});
+	}, __("خيار بديل من هذا التقدير"), __("إنشاء"));
 }
 
 frappe.ui.form.on("Print Estimate", {
@@ -36,12 +90,13 @@ frappe.ui.form.on("Print Estimate", {
 		frm.set_query("machine", "components", () => ({ filters: { is_active: 1 } }));
 		frm.set_query("finishing_service", "finishing", () => ({ filters: { is_active: 1 } }));
 		frm.set_query("template", () => ({ filters: { is_active: 1 } }));
+		frm.set_query("alternative_of", () => ({ filters: { name: ["!=", frm.doc.name || ""], docstatus: ["<", 2] } }));
 	},
 	onload(frm) {
 		if (frm.is_new()) {
 			frappe.call({ method: PE + ".get_defaults" }).then((r) => {
 				const d = r.message || {};
-				["margin_percent", "tax_rate", "validity_days", "advance_percent", "rush_percent", "design_rate", "round_to", "waste_percent", "bleed_mm"].forEach((f) => {
+				["margin_percent", "tax_rate", "validity_days", "advance_percent", "rush_percent", "design_rate", "round_to", "waste_percent", "bleed_mm", "pricing_mode"].forEach((f) => {
 					if (!frm.doc[f] && d[f] !== undefined && d[f] !== null) frm.set_value(f, d[f]);
 				});
 				if (!(frm.doc.tiers || []).length && d.tiers) {
@@ -64,6 +119,12 @@ frappe.ui.form.on("Print Estimate", {
 			});
 			frm.add_custom_button(__("احسب الآن"), () => pe_recalc(frm, true));
 		}
+		if (!frm.is_new()) {
+			frm.add_custom_button(__("واتساب"), () => pe_whatsapp(frm), __("إرسال"));
+			frm.add_custom_button(__("بريد إلكتروني"), () => pe_email(frm), __("إرسال"));
+			frm.add_custom_button(__("نسخ الملخص"), () => pe_copy_summary(frm), __("إرسال"));
+			frm.add_custom_button(__("خيار بديل"), () => pe_make_alternative(frm), __("إنشاء"));
+		}
 		if (frm.doc.docstatus === 1) {
 			if (!frm.doc.quotation) {
 				frm.add_custom_button(__("عرض سعر"), () => {
@@ -79,13 +140,35 @@ frappe.ui.form.on("Print Estimate", {
 					} });
 				}, __("إنشاء"));
 			}
-			frm.add_custom_button(__("طباعة عرض الأسعار"), () => frappe.set_route("print", frm.doc.doctype, frm.doc.name));
+			frm.add_custom_button(__("طباعة عرض الأسعار"), () => {
+				frappe.set_route("print", frm.doc.doctype, frm.doc.name);
+				if (!frm.doc.sent_via) frappe.db.set_value("Print Estimate", frm.doc.name, { sent_via: "طباعة", sent_on: frappe.datetime.now_datetime() });
+			});
+			if (["مُرسل", "مسودة"].includes(frm.doc.status)) {
+				frm.add_custom_button(__("قبِله العميل"), () => {
+					frm.set_value("status", "مقبول");
+					frm.save("Update").then(() => frappe.show_alert({ message: __("العرض مقبول — أنشئ أمر الطباعة"), indicator: "green" }));
+				}, __("الحالة"));
+				frm.add_custom_button(__("رفضه العميل"), () => {
+					frappe.prompt([{ fieldname: "reason", fieldtype: "Small Text", label: __("سبب الرفض"), reqd: 1 }], (v) => {
+						frm.set_value("rejection_reason", v.reason);
+						frm.set_value("status", "مرفوض");
+						frm.save("Update");
+					}, __("سبب الرفض"), __("تسجيل"));
+				}, __("الحالة"));
+			}
+			if (frm.doc.follow_up_date && frappe.datetime.get_diff(frm.doc.follow_up_date, frappe.datetime.get_today()) <= 0 && frm.doc.status === "مُرسل") {
+				frm.dashboard.add_indicator(__("موعد المتابعة حان: {0}", [frappe.datetime.str_to_user(frm.doc.follow_up_date)]), "orange");
+			}
 		}
 		if (frm.doc.quotation) {
 			frm.add_custom_button(__("عرض السعر {0}", [frm.doc.quotation]), () => frappe.set_route("Form", "Quotation", frm.doc.quotation), __("عرض"));
 		}
 		if (frm.doc.print_job) {
 			frm.add_custom_button(__("أمر الطباعة {0}", [frm.doc.print_job]), () => frappe.set_route("Form", "Print Job", frm.doc.print_job), __("عرض"));
+		}
+		if (frm.doc.alternative_of) {
+			frm.add_custom_button(__("التقدير الأصلي {0}", [frm.doc.alternative_of]), () => frappe.set_route("Form", "Print Estimate", frm.doc.alternative_of), __("عرض"));
 		}
 	},
 	template(frm) {
@@ -119,6 +202,11 @@ frappe.ui.form.on("Print Estimate", {
 		}
 		pe_recalc(frm);
 	},
+	status(frm) {
+		if (frm.doc.docstatus === 1 && frm.doc.status === "مرفوض" && !frm.doc.rejection_reason) {
+			frappe.prompt([{ fieldname: "reason", fieldtype: "Small Text", label: __("سبب الرفض"), reqd: 1 }], (v) => frm.set_value("rejection_reason", v.reason), __("سبب الرفض"), __("تسجيل"));
+		}
+	},
 	finished_width_mm(frm) { pe_recalc(frm); },
 	finished_height_mm(frm) { pe_recalc(frm); },
 	bleed_mm(frm) { pe_recalc(frm); },
@@ -131,6 +219,8 @@ frappe.ui.form.on("Print Estimate", {
 	binding(frm) { pe_recalc(frm); },
 	rush(frm) { pe_recalc(frm); },
 	rush_percent(frm) { pe_recalc(frm); },
+	pricing_mode(frm) { pe_recalc(frm); },
+	margin_tiers(frm) { pe_recalc(frm); },
 	margin_percent(frm) { pe_recalc(frm); },
 	discount_percent(frm) { pe_recalc(frm); },
 	round_to(frm) { pe_recalc(frm); },

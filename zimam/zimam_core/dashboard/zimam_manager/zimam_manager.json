@@ -1,8 +1,8 @@
 {
  "doctype": "Dashboard",
  "name": "Zimam Manager",
- "creation": "2026-09-17 08:30:00.000000",
- "modified": "2026-09-17 08:30:00.000000",
+ "creation": "2026-09-17 09:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
  "owner": "Administrator",
  "modified_by": "Administrator",
  "docstatus": 0,
@@ -46,6 +46,9 @@
    "card": "Print Estimates Accepted This Month"
   },
   {
+   "card": "Print Estimates Awaiting Reply"
+  },
+  {
    "card": "Legal Matters Expiring Soon"
   },
   {
@@ -76,6 +79,10 @@
   },
   {
    "chart": "Print Estimates by Status",
+   "width": "Half"
+  },
+  {
+   "chart": "Print Estimates by Product Type",
    "width": "Half"
   },
   {

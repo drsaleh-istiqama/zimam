@@ -1124,3 +1124,9 @@ Reject,رفض
 Workflow Action,إجراء سير العمل
 Self approval is not allowed,لا يجوز اعتماد الشخص لما سجّله بنفسه (فصل المهام)
 Not a valid Workflow Action,إجراء غير صالح في هذه المرحلة
+Print Estimates Register,سجل تقديرات الطباعة
+Print Quotes Conversion,تحويل عروض الطباعة
+Print Estimates Awaiting Reply,عروض طباعة بانتظار رد العميل
+Print Estimates by Product Type,تقديرات الطباعة بحسب نوع المنتج
+Quick Quote,التسعير السريع
+press-quick-quote,التسعير السريع للطباعة

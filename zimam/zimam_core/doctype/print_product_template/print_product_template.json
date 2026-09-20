@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 08:30:00.000000",
+ "creation": "2026-09-17 09:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -51,7 +51,7 @@
    "fieldname": "product_type",
    "fieldtype": "Select",
    "label": "نوع المنتج",
-   "options": "كتاب\nكتيب\nمجلة\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
+   "options": "كتاب\nكتيب\nمجلة\nكتالوج/تقرير\nبروشور/مطوية\nفلاير/منشور\nبطاقة\nبطاقة تعريف (باج)\nشهادة\nدفتر/نوتة\nتقويم\nملصق/بوستر\nبانر/لافتة\nرول أب\nورق رسمي\nمغلف\nفولدر\nدعوة\nملصق لاصق\nلوحة\nصورة مخطوطة\nهدية\nأخرى",
    "reqd": 1,
    "in_list_view": 1,
    "in_standard_filter": 1
@@ -80,7 +80,7 @@
    "fieldname": "size_preset",
    "fieldtype": "Select",
    "label": "المقاس",
-   "options": "A6\nA5\nA4\nA3\nB5\nبطاقة أعمال 90×55\nDL 99×210\n20×20\nمخصص",
+   "options": "A7\nA6\nA5\nA4\nA3\nB5\nB4\nLetter 216×279\nبطاقة أعمال 90×55\nبطاقة تعريف (باج) 90×130\nDL 99×210\nظرف DL 110×220\nظرف C5 162×229\nظرف C4 229×324\n10×15\n13×18\n15×15\n20×20\n21×21\nبوستر 50×70\nبوستر 60×90\n70×100\nرول أب 85×200\nبانر 100×200\nبانر 200×100\nبانر 300×100\nمخصص",
    "default": "A4"
   },
   {
@@ -231,7 +231,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 09:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Print Product Template",
