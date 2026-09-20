@@ -553,16 +553,16 @@ def setup_website(institution):
 	"""الصفحة الرسمية: صفحة هبوط زِمام صفحةً رئيسية، واسم المؤسسة وشعار زِمام في إعدادات الموقع وشاشة الدخول."""
 	ws = frappe.get_single("Website Settings")
 	changed = False
-	if ws.home_page != "zimam-home":
-		ws.home_page, changed = "zimam-home", True
+	if ws.home_page != "login":
+		ws.home_page, changed = "login", True
 	if not ws.app_name or ws.app_name in ("Frappe", "ERPNext"):
 		ws.app_name, changed = institution, True
 	if not ws.app_logo:
-		ws.app_logo, changed = "/assets/zimam/images/zimam-logo.svg", True
+		ws.app_logo, changed = "/assets/zimam/images/zimam-mark.png", True
 	if not ws.splash_image:
-		ws.splash_image, changed = "/assets/zimam/images/zimam-logo.svg", True
+		ws.splash_image, changed = "/assets/zimam/images/zimam-logo.png", True
 	if not ws.footer_powered:
 		ws.footer_powered, changed = "يعمل هذا الموقع من خلال منصة زِمام", True
 	if changed:
 		ws.save(ignore_permissions=True)
-		log("إعدادات الموقع: صفحة الهبوط zimam-home، الاسم، الشعار، صورة الدخول")
+		log("إعدادات الموقع: شاشة الدخول صفحةً رئيسية، الاسم، الشعار الرسمي")

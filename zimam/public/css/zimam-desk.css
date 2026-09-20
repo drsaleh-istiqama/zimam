@@ -1,12 +1,12 @@
-/* زِمام — سمة سطح المكتب (الهوية 0.6): قانٍ ونحاس وورق، خطا Tajawal وAmiri؛ تعديلات خفيفة لا تكسر واجهة Frappe */
+/* زِمام — سمة سطح المكتب (الهوية 0.9 من الشعار الرسمي): قانٍ داكن #5A1A30 · وردي قانٍ #983050 · نحاسي #C89060 · ورق؛ خطا Tajawal وAmiri */
 @import url("https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap");
 
 :root {
-	--zimam-brand: #6E2231;
-	--zimam-brand-deep: #4B1520;
-	--zimam-brass: #A9822F;
-	--zimam-slate: #34506A;
-	--zimam-paper: #F5F1EA;
+	--zimam-brand: #5A1A30;
+	--zimam-brand-deep: #983050;
+	--zimam-brass: #C89060;
+	--zimam-slate: #983050;
+	--zimam-paper: #F8F4EF;
 }
 
 html[lang="ar"] body,
@@ -53,7 +53,7 @@ a:not(.btn) {
 .form-control:focus,
 .frappe-control input:focus {
 	border-color: var(--zimam-brass) !important;
-	box-shadow: 0 0 0 2px rgba(169, 130, 47, 0.18) !important;
+	box-shadow: 0 0 0 2px rgba(200, 144, 96, 0.28) !important;
 }
 
 /* بطاقات المؤشرات ولوحات القيادة: حواف هادئة وخط نحاسي علوي */
@@ -78,5 +78,5 @@ a:not(.btn) {
 	letter-spacing: 0.01em;
 	color: var(--zimam-brand-deep);
 	background: var(--zimam-paper);
-	border-top: 1px solid #E4DCCF;
+	border-top: 1px solid #E9DDD2;
 }

@@ -10,12 +10,12 @@ app_license = "MIT"
 required_apps = ["frappe/erpnext"]
 
 # الظهور في شاشة التطبيقات وسطح المكتب (v15/v16)
-app_logo_url = "/assets/zimam/images/zimam-logo.svg"
+app_logo_url = "/assets/zimam/images/zimam-mark.png"
 app_home = "/app/zimam"
 add_to_apps_screen = [
 	{
 		"name": "zimam",
-		"logo": "/assets/zimam/images/zimam-logo.svg",
+		"logo": "/assets/zimam/images/zimam-mark.png",
 		"title": "زِمام",
 		"route": "/app/zimam",
 	}
@@ -63,9 +63,9 @@ app_include_css = ["/assets/zimam/css/zimam-desk.css"]
 web_include_css = ["/assets/zimam/css/zimam-web.css"]
 
 # الصفحة الرسمية (صفحة الهبوط) وشاشة الدخول
-home_page = "zimam-home"
+home_page = "login"  # الواجهة الرسمية = شاشة الدخول فقط (بقرار د. صالح 2026-09-20)؛ صفحة التعريف تبقى على /zimam-home
 boot_session = "zimam.setup.boot.boot_session"
-website_context = {"footer_powered": "يعمل هذا الموقع من خلال منصة زِمام", "splash_image": "/assets/zimam/images/zimam-logo.svg"}
+website_context = {"footer_powered": "يعمل هذا الموقع من خلال منصة زِمام", "splash_image": "/assets/zimam/images/zimam-logo.png"}
 update_website_context = ["zimam.setup.boot.website_context"]
 
 # لا نعدّل نواة ERPNext إطلاقًا؛ الحقول الإضافية Custom Field في setup/install.py

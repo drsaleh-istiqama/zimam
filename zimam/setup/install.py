@@ -110,7 +110,8 @@ def sync_desktop_icons():
 
 
 def ensure_website_defaults():
-	"""الواجهة الرسمية: تُملأ إعدادات الموقع الفارغة/الافتراضية فقط (لا تُستبدل تخصيصات المؤسسة)."""
+	"""الواجهة الرسمية: شاشة الدخول صفحةً رئيسية، شعار زِمام الرسمي (PNG) في الدخول وسطح المكتب. تُستبدل قيم زِمام
+	القديمة (svg / zimam-home) بالجديدة، ولا تُمسّ قيم خصّصتها المؤسسة بنفسها."""
 	ws = frappe.get_single("Website Settings")
 	institution = None
 	if frappe.db.exists("DocType", "Zimam Settings"):
@@ -118,19 +119,19 @@ def ensure_website_defaults():
 		if company:
 			institution = frappe.db.get_value("Company", company, "company_name")
 	changed = False
-	if not ws.home_page:
-		ws.home_page, changed = "zimam-home", True
+	if (ws.home_page or "") in ("", "zimam-home"):
+		if ws.home_page != "login":
+			ws.home_page, changed = "login", True
 	if institution and (not ws.app_name or ws.app_name in ("Frappe", "ERPNext")):
 		ws.app_name, changed = institution, True
-	if not ws.app_logo:
-		ws.app_logo, changed = "/assets/zimam/images/zimam-logo.svg", True
-	if not ws.splash_image:
-		ws.splash_image, changed = "/assets/zimam/images/zimam-logo.svg", True
+	if (ws.app_logo or "") in ("", "/assets/zimam/images/zimam-logo.svg"):
+		ws.app_logo, changed = "/assets/zimam/images/zimam-mark.png", True
+	if (ws.splash_image or "") in ("", "/assets/zimam/images/zimam-logo.svg"):
+		ws.splash_image, changed = "/assets/zimam/images/zimam-logo.png", True
 	if not ws.footer_powered:
 		ws.footer_powered, changed = "يعمل هذا الموقع من خلال منصة زِمام", True
 	if changed:
 		ws.save(ignore_permissions=True)
-
 
 def prune_sidebars_for_domains():
 	"""الشريط الجانبي الموحد يضم أنواع الحزم القطاعية؛ نحذف بعد كل ترحيل بنود الأنواع المقيدة بنطاق غير مفعَّل
