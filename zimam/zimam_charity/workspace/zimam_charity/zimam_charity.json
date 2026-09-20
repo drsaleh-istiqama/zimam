@@ -1,0 +1,450 @@
+{
+ "doctype": "Workspace",
+ "name": "Zimam Charity",
+ "creation": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 08:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Charity",
+ "title": "Zimam Charity",
+ "label": "Zimam Charity",
+ "public": 1,
+ "is_hidden": 0,
+ "icon": "book",
+ "indicator_color": "green",
+ "parent_page": "",
+ "for_user": "",
+ "sequence_id": 99.5,
+ "restrict_to_domain": "Charity",
+ "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — الحزمة الخيرية: الإيرادات والصرف</b></span>\", \"col\": 12}}, {\"id\": \"sc_donation\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تسجيل إيصال تبرع\", \"col\": 4}}, {\"id\": \"sc_payment_voucher\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"سند صرف جديد\", \"col\": 4}}, {\"id\": \"sc_disbursement_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب صرف\", \"col\": 4}}, {\"id\": \"sc_donor\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"متبرع\", \"col\": 4}}, {\"id\": \"sc_sponsorship\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"كفالة\", \"col\": 4}}, {\"id\": \"sc_membership_application\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب انضمام\", \"col\": 4}}, {\"id\": \"sc_zimam_charity\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة المالية الخيرية\", \"col\": 4}}, {\"id\": \"nc_donations_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Donations This Month\", \"col\": 4}}, {\"id\": \"nc_net_donations_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Net Donations This Month\", \"col\": 4}}, {\"id\": \"nc_admin_fees_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Admin Fees This Month\", \"col\": 4}}, {\"id\": \"nc_vouchers_paid_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Vouchers Paid This Month\", \"col\": 4}}, {\"id\": \"nc_vouchers_awaiting_approv\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Vouchers Awaiting Approval\", \"col\": 4}}, {\"id\": \"nc_vouchers_ready_to_pay\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Vouchers Ready To Pay\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_35801007\", \"type\": \"card\", \"data\": {\"card_name\": \"الإيرادات والتبرعات\", \"col\": 4}}, {\"id\": \"card_40538556\", \"type\": \"card\", \"data\": {\"card_name\": \"الصرف والاعتماد\", \"col\": 4}}, {\"id\": \"card_74746948\", \"type\": \"card\", \"data\": {\"card_name\": \"الرصيد والقيود\", \"col\": 4}}, {\"id\": \"card_41028912\", \"type\": \"card\", \"data\": {\"card_name\": \"الأعضاء والكفالات\", \"col\": 4}}, {\"id\": \"card_87944582\", \"type\": \"card\", \"data\": {\"card_name\": \"المشاريع الخيرية\", \"col\": 4}}, {\"id\": \"card_65136577\", \"type\": \"card\", \"data\": {\"card_name\": \"الإعدادات والموقع\", \"col\": 4}}]",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "الإيرادات والتبرعات",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "إيصال تبرع",
+   "link_type": "DocType",
+   "link_to": "Donation",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "متبرع",
+   "link_type": "DocType",
+   "link_to": "Donor",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "فئة تبرع",
+   "link_type": "DocType",
+   "link_to": "Donation Category",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "صندوق / حساب صرف",
+   "link_type": "DocType",
+   "link_to": "Charity Fund",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "سجل الإيرادات",
+   "link_type": "Report",
+   "link_to": "Donations Register",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 1,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الإيرادات بحسب الفئة",
+   "link_type": "Report",
+   "link_to": "Donations by Category",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 1,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الصرف والاعتماد",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "سند صرف",
+   "link_type": "DocType",
+   "link_to": "Payment Voucher",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب صرف",
+   "link_type": "DocType",
+   "link_to": "Disbursement Request",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "تصنيف مصروف",
+   "link_type": "DocType",
+   "link_to": "Expense Classification",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الفروع / الدول",
+   "link_type": "DocType",
+   "link_to": "Branch",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الأقسام",
+   "link_type": "DocType",
+   "link_to": "Department",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "سجل سندات الصرف",
+   "link_type": "Report",
+   "link_to": "Payment Vouchers Register",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 1,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الرصيد والقيود",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "صندوق / حساب صرف",
+   "link_type": "DocType",
+   "link_to": "Charity Fund",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "أرصدة الصناديق",
+   "link_type": "Report",
+   "link_to": "Fund Balances",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 1,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "قيد يومية",
+   "link_type": "DocType",
+   "link_to": "Journal Entry",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الحركات البنكية",
+   "link_type": "DocType",
+   "link_to": "Bank Transaction",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مطابقة كشف البنك",
+   "link_type": "DocType",
+   "link_to": "Bank Reconciliation Tool",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "شجرة الحسابات",
+   "link_type": "DocType",
+   "link_to": "Account",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الأعضاء والكفالات",
+   "link_count": 5,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "عضو الجمعية",
+   "link_type": "DocType",
+   "link_to": "Member",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طلب انضمام",
+   "link_type": "DocType",
+   "link_to": "Membership Application",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "كفالة",
+   "link_type": "DocType",
+   "link_to": "Sponsorship",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "استحقاق كفالة",
+   "link_type": "DocType",
+   "link_to": "Sponsorship Due",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "استحقاقات الكفالات",
+   "link_type": "Report",
+   "link_to": "Sponsorship Dues",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 1,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "المشاريع الخيرية",
+   "link_count": 2,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "المشاريع الخيرية",
+   "link_type": "DocType",
+   "link_to": "Project",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "مهمة",
+   "link_type": "DocType",
+   "link_to": "Task",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Card Break",
+   "label": "الإعدادات والموقع",
+   "link_count": 6,
+   "hidden": 0,
+   "onboard": 0
+  },
+  {
+   "type": "Link",
+   "label": "إعدادات الحزمة الخيرية",
+   "link_type": "DocType",
+   "link_to": "Charity Settings",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "سير اعتماد سند الصرف",
+   "link_type": "DocType",
+   "link_to": "Workflow",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "نماذج الموقع (تبرع / انضمام)",
+   "link_type": "DocType",
+   "link_to": "Web Form",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "استيراد من ملف (CSV/Excel)",
+   "link_type": "DocType",
+   "link_to": "Data Import",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "طرق الدفع",
+   "link_type": "DocType",
+   "link_to": "Mode of Payment",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  },
+  {
+   "type": "Link",
+   "label": "الحسابات البنكية",
+   "link_type": "DocType",
+   "link_to": "Bank Account",
+   "onboard": 0,
+   "dependencies": "",
+   "is_query_report": 0,
+   "hidden": 0
+  }
+ ],
+ "shortcuts": [
+  {
+   "type": "DocType",
+   "label": "تسجيل إيصال تبرع",
+   "link_to": "Donation",
+   "color": "Green"
+  },
+  {
+   "type": "DocType",
+   "label": "سند صرف جديد",
+   "link_to": "Payment Voucher",
+   "color": "Red"
+  },
+  {
+   "type": "DocType",
+   "label": "طلب صرف",
+   "link_to": "Disbursement Request",
+   "color": "Orange"
+  },
+  {
+   "type": "DocType",
+   "label": "متبرع",
+   "link_to": "Donor",
+   "color": "Cyan"
+  },
+  {
+   "type": "DocType",
+   "label": "كفالة",
+   "link_to": "Sponsorship",
+   "color": "Blue"
+  },
+  {
+   "type": "DocType",
+   "label": "طلب انضمام",
+   "link_to": "Membership Application",
+   "color": "Cyan"
+  },
+  {
+   "type": "Dashboard",
+   "label": "لوحة المالية الخيرية",
+   "link_to": "Zimam Charity",
+   "color": "Grey"
+  }
+ ],
+ "number_cards": [
+  {
+   "label": "إيرادات التبرعات هذا الشهر",
+   "number_card_name": "Donations This Month"
+  },
+  {
+   "label": "صافي التبرعات بعد الرسوم هذا الشهر",
+   "number_card_name": "Net Donations This Month"
+  },
+  {
+   "label": "الرسوم الإدارية هذا الشهر",
+   "number_card_name": "Admin Fees This Month"
+  },
+  {
+   "label": "مصروفات مدفوعة هذا الشهر",
+   "number_card_name": "Vouchers Paid This Month"
+  },
+  {
+   "label": "سندات بانتظار الاعتماد",
+   "number_card_name": "Vouchers Awaiting Approval"
+  },
+  {
+   "label": "سندات جاهزة للدفع",
+   "number_card_name": "Vouchers Ready To Pay"
+  }
+ ],
+ "charts": [],
+ "quick_lists": [],
+ "custom_blocks": [],
+ "roles": []
+}

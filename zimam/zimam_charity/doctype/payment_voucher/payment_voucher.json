@@ -1,0 +1,485 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "voucher_date",
+  "date_hijri",
+  "due_date",
+  "cb1",
+  "beneficiary_type",
+  "beneficiary_name",
+  "supplier",
+  "employee",
+  "beneficiary_bank_details",
+  "section_1",
+  "amount",
+  "expense_classification",
+  "classification_name",
+  "expense_account",
+  "cb2",
+  "project",
+  "branch",
+  "cost_center",
+  "disbursement_request",
+  "section_2",
+  "payment_method",
+  "fund",
+  "mode_of_payment",
+  "cb3",
+  "cheque_no",
+  "cheque_date",
+  "paid_on",
+  "payment_reference",
+  "section_3",
+  "description",
+  "supporting_document",
+  "section_4",
+  "allocations",
+  "section_5",
+  "workflow_state",
+  "requires_ceo_approval",
+  "rejection_reason",
+  "cb4",
+  "finance_reviewed_by",
+  "finance_reviewed_on",
+  "approved_by",
+  "approved_on",
+  "paid_by",
+  "section_6",
+  "journal_entry",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "voucher_date",
+   "fieldtype": "Date",
+   "label": "تاريخ السند",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "date_hijri",
+   "fieldtype": "Data",
+   "label": "التاريخ الهجري"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الاستحقاق"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "beneficiary_type",
+   "fieldtype": "Select",
+   "label": "نوع المستفيد",
+   "options": "مورد\nموظف\nمستفيد\nجهة/مؤسسة\nأخرى",
+   "default": "مستفيد",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "beneficiary_name",
+   "fieldtype": "Data",
+   "label": "المستفيد",
+   "reqd": 1,
+   "in_list_view": 1,
+   "fetch_from": "supplier.supplier_name",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "المورد",
+   "options": "Supplier",
+   "depends_on": "eval:doc.beneficiary_type=='مورد'"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "الموظف",
+   "options": "Employee",
+   "depends_on": "eval:doc.beneficiary_type=='موظف'"
+  },
+  {
+   "fieldname": "beneficiary_bank_details",
+   "fieldtype": "Small Text",
+   "label": "بيانات حساب المستفيد (للتحويل)"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المبلغ والتصنيف"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ",
+   "reqd": 1,
+   "bold": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "expense_classification",
+   "fieldtype": "Link",
+   "label": "تصنيف المصروف",
+   "options": "Expense Classification",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "classification_name",
+   "fieldtype": "Data",
+   "label": "اسم التصنيف",
+   "fetch_from": "expense_classification.classification_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expense_account",
+   "fieldtype": "Link",
+   "label": "حساب المصروف",
+   "options": "Account",
+   "fetch_from": "expense_classification.expense_account",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع",
+   "options": "Project",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "branch",
+   "fieldtype": "Link",
+   "label": "الموقع / الفرع (الدولة)",
+   "options": "Branch",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center",
+   "fetch_from": "expense_classification.cost_center",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "disbursement_request",
+   "fieldtype": "Link",
+   "label": "طلب الصرف المصدر",
+   "options": "Disbursement Request",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الدفع"
+  },
+  {
+   "fieldname": "payment_method",
+   "fieldtype": "Select",
+   "label": "طريقة الدفع",
+   "options": "نقد\nتحويل بنكي\nشيك\nبطاقة\nبوابة إلكترونية",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "fund",
+   "fieldtype": "Link",
+   "label": "حساب الصرف / الصندوق",
+   "options": "Charity Fund",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "طريقة الدفع في النظام (اختياري)",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cheque_no",
+   "fieldtype": "Data",
+   "label": "رقم الشيك / التحويل",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "cheque_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الشيك / التحويل",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "paid_on",
+   "fieldtype": "Date",
+   "label": "تاريخ الدفع الفعلي",
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "payment_reference",
+   "fieldtype": "Data",
+   "label": "مرجع الدفع",
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "البيان"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "البيان / الملاحظة",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "supporting_document",
+   "fieldtype": "Attach",
+   "label": "المستند المؤيد (فاتورة / طلب / عقد)"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "الأوعية المموِّلة (اختياري — للأموال المقيدة)"
+  },
+  {
+   "fieldname": "allocations",
+   "fieldtype": "Table",
+   "label": "التخصيصات",
+   "options": "Voucher Allocation"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "سير الاعتماد"
+  },
+  {
+   "fieldname": "workflow_state",
+   "fieldtype": "Link",
+   "label": "المرحلة",
+   "options": "Workflow State",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "no_copy": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "requires_ceo_approval",
+   "fieldtype": "Check",
+   "label": "يتطلب اعتماد الرئيس التنفيذي",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "سبب الرفض / ملاحظة الإعادة",
+   "allow_on_submit": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "finance_reviewed_by",
+   "fieldtype": "Link",
+   "label": "راجعه مدير المالية",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "finance_reviewed_on",
+   "fieldtype": "Datetime",
+   "label": "تاريخ مراجعة المالية",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "اعتمده",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "تاريخ الاعتماد",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "paid_by",
+   "fieldtype": "Link",
+   "label": "سجّل الدفع",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "section_6",
+   "fieldtype": "Section Break",
+   "label": "القيد"
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "قيد اليومية",
+   "options": "Journal Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Payment Voucher",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Payment Voucher",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "create": 1,
+   "write": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "role": "معتمد الصرف",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "submit": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "Employee",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "if_owner": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:PV-{YYYY}-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "beneficiary_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "beneficiary_name,description,payment_reference",
+ "restrict_to_domain": "Charity",
+ "track_seen": 1
+}

@@ -1,0 +1,182 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "sponsorship",
+  "sponsor",
+  "sponsor_name",
+  "beneficiary_name",
+  "cb1",
+  "due_date",
+  "amount",
+  "status",
+  "donation",
+  "paid_on"
+ ],
+ "fields": [
+  {
+   "fieldname": "sponsorship",
+   "fieldtype": "Link",
+   "label": "الكفالة",
+   "options": "Sponsorship",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sponsor",
+   "fieldtype": "Link",
+   "label": "الكافل",
+   "options": "Donor",
+   "fetch_from": "sponsorship.sponsor",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sponsor_name",
+   "fieldtype": "Data",
+   "label": "اسم الكافل",
+   "fetch_from": "sponsorship.sponsor_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "beneficiary_name",
+   "fieldtype": "Data",
+   "label": "المكفول",
+   "fetch_from": "sponsorship.beneficiary_name",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الاستحقاق",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مستحق\nمدفوع\nمعفى",
+   "default": "مستحق",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "donation",
+   "fieldtype": "Link",
+   "label": "إيصال السداد",
+   "options": "Donation",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "paid_on",
+   "fieldtype": "Date",
+   "label": "تاريخ السداد",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Sponsorship Due",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:SPD-{YYYY}-{######}",
+ "naming_rule": "Expression",
+ "title_field": "beneficiary_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "beneficiary_name,sponsor_name",
+ "restrict_to_domain": "Charity"
+}

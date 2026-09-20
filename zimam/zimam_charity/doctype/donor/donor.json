@@ -1,0 +1,270 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "donor_name",
+  "donor_type",
+  "phone",
+  "email",
+  "cb1",
+  "country",
+  "city",
+  "member",
+  "customer",
+  "section_1",
+  "preferred_channel",
+  "receive_reports",
+  "cb2",
+  "national_id",
+  "address",
+  "section_2",
+  "total_donated",
+  "donations_count",
+  "cb3",
+  "first_donation_date",
+  "last_donation_date",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "label": "اسم المتبرع",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donor_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "فرد\nمؤسسة\nشركة\nجهة مانحة",
+   "default": "فرد",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "options": "Email"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "country",
+   "fieldtype": "Link",
+   "label": "الدولة",
+   "options": "Country"
+  },
+  {
+   "fieldname": "city",
+   "fieldtype": "Data",
+   "label": "المدينة/الولاية"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "عضو في الجمعية",
+   "options": "Member"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "عميل مرتبط (اختياري)",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "التواصل"
+  },
+  {
+   "fieldname": "preferred_channel",
+   "fieldtype": "Select",
+   "label": "قناة التواصل المفضلة",
+   "options": "واتساب\nبريد\nهاتف\nلا تواصل",
+   "default": "واتساب"
+  },
+  {
+   "fieldname": "receive_reports",
+   "fieldtype": "Check",
+   "label": "يستلم تقارير الأثر والإيصالات",
+   "default": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "national_id",
+   "fieldtype": "Data",
+   "label": "رقم الهوية/السجل"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "العنوان"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الإحصاء (يُحدَّث تلقائيًا)"
+  },
+  {
+   "fieldname": "total_donated",
+   "fieldtype": "Currency",
+   "label": "إجمالي التبرعات",
+   "read_only": 1,
+   "no_copy": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donations_count",
+   "fieldtype": "Int",
+   "label": "عدد الإيصالات",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "first_donation_date",
+   "fieldtype": "Date",
+   "label": "أول تبرع",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "last_donation_date",
+   "fieldtype": "Date",
+   "label": "آخر تبرع",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Donation",
+   "link_fieldname": "donor"
+  },
+  {
+   "link_doctype": "Sponsorship",
+   "link_fieldname": "sponsor"
+  }
+ ],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Donor",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:DNR-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "donor_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "donor_name,phone,email",
+ "restrict_to_domain": "Charity"
+}

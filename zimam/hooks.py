@@ -2,7 +2,7 @@
 app_name = "zimam"
 app_title = "زِمام"
 app_publisher = "جدوى للدراسات والتطوير"
-app_description = "زِمام — نظام إدارة المؤسسات المالي والإداري فوق ERPNext: الأذرع الاستثمارية، العطاء الوقفي، الخدمات، الفعاليات، الشؤون القانونية، والحزم القطاعية (التراثية أولًا)"
+app_description = "زِمام — نظام إدارة المؤسسات المالي والإداري فوق ERPNext: الأذرع الاستثمارية، العطاء الوقفي، الخدمات، الفعاليات، الشؤون القانونية، والحزم القطاعية (التراثية والخيرية)"
 app_email = "info@jadwa.om"
 app_license = "MIT"
 
@@ -52,6 +52,8 @@ scheduler_events = {
 	"daily": [
 		"zimam.zimam_core.doctype.legal_matter.legal_matter.send_expiry_reminders",
 		"zimam.zimam_heritage.doctype.cabinet_intake.cabinet_intake.send_return_due_reminders",
+		# الحزمة الخيرية: استحقاقات الكفالات تُقيَّد يوم حلولها لا قبله (أو قبلها بأيام محددة في الإعدادات)
+		"zimam.zimam_charity.doctype.sponsorship.sponsorship.generate_dues",
 	],
 }
 

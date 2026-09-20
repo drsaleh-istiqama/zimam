@@ -1,0 +1,74 @@
+{
+ "doctype": "Dashboard",
+ "name": "Zimam Charity",
+ "creation": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 08:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Charity",
+ "dashboard_name": "Zimam Charity",
+ "is_standard": 1,
+ "is_default": 0,
+ "cards": [
+  {
+   "card": "Donations This Month"
+  },
+  {
+   "card": "Net Donations This Month"
+  },
+  {
+   "card": "Admin Fees This Month"
+  },
+  {
+   "card": "Vouchers Paid This Month"
+  },
+  {
+   "card": "Vouchers Awaiting Approval"
+  },
+  {
+   "card": "Vouchers Ready To Pay"
+  },
+  {
+   "card": "Disbursement Requests For Review"
+  },
+  {
+   "card": "Active Sponsorships"
+  },
+  {
+   "card": "Sponsorship Dues Unpaid"
+  },
+  {
+   "card": "New Donors This Month"
+  },
+  {
+   "card": "Membership Applications Pending"
+  },
+  {
+   "card": "Active Members"
+  }
+ ],
+ "charts": [
+  {
+   "chart": "Donations by Month",
+   "width": "Half"
+  },
+  {
+   "chart": "Donations by Category",
+   "width": "Half"
+  },
+  {
+   "chart": "Donations by Channel",
+   "width": "Half"
+  },
+  {
+   "chart": "Vouchers by Stage",
+   "width": "Half"
+  },
+  {
+   "chart": "Vouchers Paid by Month",
+   "width": "Half"
+  }
+ ]
+}

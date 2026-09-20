@@ -1,0 +1,38 @@
+{
+ "doctype": "Report",
+ "name": "Fund Balances",
+ "creation": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 08:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Charity",
+ "report_name": "Fund Balances",
+ "ref_doctype": "Charity Fund",
+ "report_type": "Script Report",
+ "is_standard": "Yes",
+ "disabled": 0,
+ "add_total_row": 0,
+ "prepared_report": 0,
+ "roles": [
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "محاسب مالي"
+  },
+  {
+   "role": "مدير مالي"
+  },
+  {
+   "role": "معتمد الصرف"
+  },
+  {
+   "role": "أمين صندوق"
+  },
+  {
+   "role": "مدير المؤسسة"
+  }
+ ]
+}

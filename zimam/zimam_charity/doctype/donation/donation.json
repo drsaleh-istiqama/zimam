@@ -1,0 +1,380 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "donor",
+  "donor_name",
+  "is_anonymous",
+  "member",
+  "cb1",
+  "donation_date",
+  "date_hijri",
+  "company",
+  "source",
+  "section_1",
+  "channel",
+  "fund",
+  "mode_of_payment",
+  "cb2",
+  "reference_no",
+  "reference_date",
+  "receipt_file",
+  "section_2",
+  "amount",
+  "donation_category",
+  "project",
+  "sponsorship",
+  "cb3",
+  "purpose",
+  "admin_fee_amount",
+  "net_amount",
+  "section_3",
+  "allocations",
+  "section_4",
+  "status",
+  "journal_entry",
+  "cb4",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "donor",
+   "fieldtype": "Link",
+   "label": "المتبرع",
+   "options": "Donor",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "label": "اسم المتبرع (كما يُطبع)",
+   "fetch_from": "donor.donor_name",
+   "fetch_if_empty": 1,
+   "in_list_view": 1,
+   "description": "يُملأ من بطاقة المتبرع، أو يُكتب مباشرة لمتبرع غير مسجل"
+  },
+  {
+   "fieldname": "is_anonymous",
+   "fieldtype": "Check",
+   "label": "متبرع مجهول / لا يُذكر اسمه"
+  },
+  {
+   "fieldname": "member",
+   "fieldtype": "Link",
+   "label": "العضو",
+   "options": "Member",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "donation_date",
+   "fieldtype": "Date",
+   "label": "تاريخ التبرع",
+   "reqd": 1,
+   "default": "Today",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "date_hijri",
+   "fieldtype": "Data",
+   "label": "التاريخ الهجري",
+   "description": "يُحسب تلقائيًا ويمكن تصحيحه"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "مُسجَّل عبر",
+   "options": "إدخال يدوي\nالموقع الإلكتروني\nاستيراد من ملف\nبوابة دفع",
+   "default": "إدخال يدوي",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "القناة والحساب"
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "label": "القناة",
+   "options": "بنك\nنقد\nشيك\nبطاقة\nثواني\nOMPay\nواتساب\nالموقع الإلكتروني\nأخرى",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "fund",
+   "fieldtype": "Link",
+   "label": "الصندوق / الحساب المستلِم",
+   "options": "Charity Fund",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "mode_of_payment",
+   "fieldtype": "Link",
+   "label": "طريقة الدفع (اختياري)",
+   "options": "Mode of Payment"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "مرجع التحويل / رقم العملية"
+  },
+  {
+   "fieldname": "reference_date",
+   "fieldtype": "Date",
+   "label": "تاريخ المرجع"
+  },
+  {
+   "fieldname": "receipt_file",
+   "fieldtype": "Attach",
+   "label": "المستند المؤيد (إشعار تحويل / إيصال)",
+   "description": "الإيصالات وإشعارات التحويل البنكي وأي مستند يوثّق هذا القيد؛ حذف أي ملف يُسجَّل في سجل التغييرات"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المبلغ والتخصيص"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ الإجمالي",
+   "reqd": 1,
+   "bold": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "donation_category",
+   "fieldtype": "Link",
+   "label": "الفئة",
+   "options": "Donation Category",
+   "in_standard_filter": 1,
+   "description": "إن تُرك جدول التخصيصات فارغًا يُنشأ منها سطر واحد بكامل المبلغ"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع",
+   "options": "Project",
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "sponsorship",
+   "fieldtype": "Link",
+   "label": "كفالة (إن كان سدادًا لقسط)",
+   "options": "Sponsorship"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Small Text",
+   "label": "وذلك عن"
+  },
+  {
+   "fieldname": "admin_fee_amount",
+   "fieldtype": "Currency",
+   "label": "الرسوم الإدارية",
+   "read_only": 1
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "الصافي",
+   "read_only": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "التخصيصات"
+  },
+  {
+   "fieldname": "allocations",
+   "fieldtype": "Table",
+   "label": "التخصيصات",
+   "options": "Donation Allocation"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "القيد والحالة"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مسودة\nمُرحَّل\nملغى",
+   "default": "مسودة",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "journal_entry",
+   "fieldtype": "Link",
+   "label": "قيد اليومية",
+   "options": "Journal Entry",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات داخلية"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "معدَّل من",
+   "options": "Donation",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Sponsorship Due",
+   "link_fieldname": "donation"
+  }
+ ],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Donation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "معتمد الصرف",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "is_submittable": 1,
+ "autoname": "format:DON-{YYYY}-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "donor_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "donor_name,reference_no,purpose",
+ "restrict_to_domain": "Charity"
+}

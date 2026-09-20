@@ -1,0 +1,264 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_1",
+  "company",
+  "admin_fee_income_account",
+  "default_donation_income_account",
+  "cb_c1",
+  "default_admin_fee_percent",
+  "default_cost_center",
+  "default_fund",
+  "section_2",
+  "ceo_approval_threshold",
+  "allow_self_approval",
+  "cb_c2",
+  "notify_on_stage_change",
+  "voucher_note",
+  "section_3",
+  "receipt_signatory",
+  "receipt_title",
+  "show_admin_fee_on_receipt",
+  "cb_c3",
+  "receipt_footer",
+  "receipt_note",
+  "section_4",
+  "website_donation_category",
+  "cb_c4",
+  "website_fund",
+  "section_5",
+  "sponsorship_category",
+  "cb_c5",
+  "dues_generation_days_ahead"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الشركة والحسابات"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الجمعية/المؤسسة (الشركة)",
+   "options": "Company"
+  },
+  {
+   "fieldname": "admin_fee_income_account",
+   "fieldtype": "Link",
+   "label": "حساب إيرادات الرسوم الإدارية",
+   "options": "Account",
+   "description": "تُقيَّد فيه نسبة الرسوم الإدارية المقتطعة من التبرعات (Cr) عند ترحيل الإيصال"
+  },
+  {
+   "fieldname": "default_donation_income_account",
+   "fieldtype": "Link",
+   "label": "حساب إيرادات التبرعات الافتراضي",
+   "options": "Account",
+   "description": "يُستعمل حين لا تحدد الفئة حسابًا خاصًا"
+  },
+  {
+   "fieldname": "cb_c1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "default_admin_fee_percent",
+   "fieldtype": "Percent",
+   "label": "نسبة الرسوم الإدارية الافتراضية (%)",
+   "description": "تُطبَّق على الفئات التي تسمح بالرسوم ولم تحدد نسبة خاصة؛ الزكاة والأموال المقيدة عادة 0"
+  },
+  {
+   "fieldname": "default_cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة الافتراضي",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "default_fund",
+   "fieldtype": "Link",
+   "label": "الصندوق الافتراضي للإيصالات",
+   "options": "Charity Fund"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "سلسلة اعتماد الصرف"
+  },
+  {
+   "fieldname": "ceo_approval_threshold",
+   "fieldtype": "Currency",
+   "label": "حد اعتماد الرئيس التنفيذي",
+   "description": "السندات التي تساوي هذا المبلغ أو تزيد تمر بالرئيس التنفيذي بعد مدير المالية؛ 0 = كل السندات تمر به (كما في وقاف)"
+  },
+  {
+   "fieldname": "allow_self_approval",
+   "fieldtype": "Check",
+   "label": "السماح باعتماد الشخص لسندٍ سجّله بنفسه",
+   "description": "افتراضيًا ممنوع (فصل المهام: من يسجّل لا يعتمد). فعّله في بيئات العرض ذات المستخدم الواحد فقط"
+  },
+  {
+   "fieldname": "cb_c2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "notify_on_stage_change",
+   "fieldtype": "Check",
+   "label": "إشعار أصحاب المرحلة التالية عند كل انتقال",
+   "default": 1
+  },
+  {
+   "fieldname": "voucher_note",
+   "fieldtype": "Small Text",
+   "label": "عبارة ثابتة تُطبع في ذيل سند الصرف"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "إيصال التبرع"
+  },
+  {
+   "fieldname": "receipt_signatory",
+   "fieldtype": "Data",
+   "label": "اسم موقّع الإيصال"
+  },
+  {
+   "fieldname": "receipt_title",
+   "fieldtype": "Data",
+   "label": "صفة الموقّع",
+   "default": "المدير المالي"
+  },
+  {
+   "fieldname": "show_admin_fee_on_receipt",
+   "fieldtype": "Check",
+   "label": "إظهار الرسوم الإدارية والصافي في إيصال المتبرع",
+   "default": 1
+  },
+  {
+   "fieldname": "cb_c3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "receipt_footer",
+   "fieldtype": "Small Text",
+   "label": "عبارة ذيل الإيصال",
+   "default": "تقبّل الله منكم — يُتحقق من الإيصال بمراجعة الجمعية برقمه"
+  },
+  {
+   "fieldname": "receipt_note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة تظهر تحت المبلغ"
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "الموقع الإلكتروني (نموذج التبرع العام)"
+  },
+  {
+   "fieldname": "website_donation_category",
+   "fieldtype": "Link",
+   "label": "الفئة الافتراضية لتبرعات الموقع",
+   "options": "Donation Category"
+  },
+  {
+   "fieldname": "cb_c4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "website_fund",
+   "fieldtype": "Link",
+   "label": "صندوق تبرعات الموقع",
+   "options": "Charity Fund"
+  },
+  {
+   "fieldname": "section_5",
+   "fieldtype": "Section Break",
+   "label": "الكفالات"
+  },
+  {
+   "fieldname": "sponsorship_category",
+   "fieldtype": "Link",
+   "label": "فئة الكفالات",
+   "options": "Donation Category",
+   "description": "تُسند إليها إيصالات سداد الكفالات تلقائيًا"
+  },
+  {
+   "fieldname": "cb_c5",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "dues_generation_days_ahead",
+   "fieldtype": "Int",
+   "label": "توليد الاستحقاق قبل موعده بـ (أيام)",
+   "default": 0,
+   "description": "0 = يُقيَّد الاستحقاق يوم حلوله لا قبله"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Charity Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "issingle": 1,
+ "restrict_to_domain": "Charity"
+}

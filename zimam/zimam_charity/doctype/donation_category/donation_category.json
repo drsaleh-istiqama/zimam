@@ -1,0 +1,250 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "category_name",
+  "category_code",
+  "is_group",
+  "parent_donation_category",
+  "cb1",
+  "apply_admin_fee",
+  "admin_fee_percent",
+  "is_restricted",
+  "restriction_type",
+  "section_1",
+  "income_account",
+  "cost_center",
+  "cb2",
+  "is_active",
+  "publish_on_website",
+  "description",
+  "lft",
+  "rgt",
+  "old_parent"
+ ],
+ "fields": [
+  {
+   "fieldname": "category_name",
+   "fieldtype": "Data",
+   "label": "اسم الفئة",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "category_code",
+   "fieldtype": "Data",
+   "label": "الرمز",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "مثل 06 للفئة و06.09 للفئة الفرعية"
+  },
+  {
+   "fieldname": "is_group",
+   "fieldtype": "Check",
+   "label": "فئة رئيسية (تضم فئات فرعية)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "parent_donation_category",
+   "fieldtype": "Link",
+   "label": "الفئة الأم",
+   "options": "Donation Category",
+   "ignore_user_permissions": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "apply_admin_fee",
+   "fieldtype": "Check",
+   "label": "تُقتطع منها رسوم إدارية",
+   "default": 1
+  },
+  {
+   "fieldname": "admin_fee_percent",
+   "fieldtype": "Percent",
+   "label": "نسبة الرسوم الإدارية (%)",
+   "depends_on": "apply_admin_fee",
+   "description": "إن تُركت فارغة تُؤخذ النسبة الافتراضية من إعدادات الحزمة الخيرية"
+  },
+  {
+   "fieldname": "is_restricted",
+   "fieldtype": "Check",
+   "label": "أموال مقيدة الغرض",
+   "description": "زكاة/وقف/صدقة مقيدة — لا تُصرف إلا في بابها (ملاحظة المدقق الخارجي 2026)"
+  },
+  {
+   "fieldname": "restriction_type",
+   "fieldtype": "Select",
+   "label": "نوع القيد",
+   "options": "\nزكاة\nوقف\nصدقة مقيدة\nكفارة\nأخرى",
+   "depends_on": "is_restricted"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المحاسبة"
+  },
+  {
+   "fieldname": "income_account",
+   "fieldtype": "Link",
+   "label": "حساب الإيراد",
+   "options": "Account",
+   "description": "لكل فئة حساب إيراد مستقل يُقيَّد فيه صافي التبرع"
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "نشطة",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "publish_on_website",
+   "fieldtype": "Check",
+   "label": "تظهر في نموذج التبرع على الموقع"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "الوصف"
+  },
+  {
+   "fieldname": "lft",
+   "fieldtype": "Int",
+   "label": "lft",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "rgt",
+   "fieldtype": "Int",
+   "label": "rgt",
+   "hidden": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "old_parent",
+   "fieldtype": "Link",
+   "label": "old_parent",
+   "options": "Donation Category",
+   "hidden": 1,
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Donation",
+   "link_fieldname": "donation_category"
+  }
+ ],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Donation Category",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "معتمد الصرف",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:category_name",
+ "naming_rule": "By fieldname",
+ "title_field": "category_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "category_code",
+ "restrict_to_domain": "Charity",
+ "is_tree": 1,
+ "nsm_parent_field": "parent_donation_category"
+}

@@ -464,11 +464,135 @@ def run(profile="template", with_optional_arms=False):
 		hs.save(ignore_permissions=True)
 		log("إعدادات الحزمة التراثية جاهزة")
 
+	if "Charity" in p.get("domains", []):
+		ensure_charity(parent, p.get("charity") or {})
+
 	setup_website(parent)
 	setup_login_policy(p.get("login_policy"))
 	ensure_users(p.get("users"))
 	frappe.db.commit()
 	log(f"اكتملت تهيئة «{parent}» من ملف التعريف {profile_name}. راجع إعدادات زِمام وأدوار المستخدمين.")
+
+
+# ---------------------------------------------------------------------------
+# الحزمة الخيرية (0.10.0) — فئات التبرع شجرةً بحساب إيراد لكل فئة، الصناديق بحساب أستاذ لكل صندوق، تصنيفات المصروف
+# بحساب مصروف لكل تصنيف، الفروع والأقسام والمشاريع الخيرية، إعدادات الحزمة، وسير اعتماد سند الصرف. آمنة للتكرار.
+# ---------------------------------------------------------------------------
+def _account_group(company, candidates, root_type):
+	for c in candidates:
+		acc = frappe.db.get_value("Account", {"company": company, "account_name": c, "is_group": 1}, "name")
+		if acc:
+			return acc
+	return frappe.db.get_value("Account", {"company": company, "root_type": root_type, "is_group": 1}, "name")
+
+
+def ensure_account(company, name, parent, account_type=None, is_group=0):
+	existing = frappe.db.get_value("Account", {"account_name": name, "company": company}, "name")
+	if existing:
+		return existing
+	root = root_company(company)
+	target = company if root == company else root
+	if not frappe.db.get_value("Account", {"account_name": name, "company": target}, "name"):
+		parent_acc = parent if frappe.db.get_value("Account", parent, "company") == target else frappe.db.get_value("Account", {"account_name": frappe.db.get_value("Account", parent, "account_name"), "company": target}, "name")
+		doc = frappe.get_doc({"doctype": "Account", "account_name": name, "parent_account": parent_acc, "company": target, "is_group": is_group, "account_type": account_type}).insert(ignore_permissions=True)
+		log(f"حساب: {doc.name}")
+	return frappe.db.get_value("Account", {"account_name": name, "company": company}, "name") or frappe.db.get_value("Account", {"account_name": name, "company": target}, "name")
+
+
+def ensure_charity(company, ch):
+	income_parent_acc = income_parent(company)
+	donations_group = ensure_account(company, "إيرادات التبرعات بحسب الفئة", income_parent_acc, is_group=1)
+	default_cc = frappe.db.get_value("Cost Center", {"cost_center_name": ch.get("default_cost_center"), "company": company}, "name") if ch.get("default_cost_center") else None
+
+	# الفئات شجرةً
+	n_cat = 0
+	for g in ch.get("categories", []):
+		if not frappe.db.exists("Donation Category", g["name"]):
+			frappe.get_doc({"doctype": "Donation Category", "category_name": g["name"], "category_code": g.get("code"), "is_group": 1,
+				"apply_admin_fee": 0 if g.get("fee") == 0 else 1, "admin_fee_percent": g.get("fee") if g.get("fee") else None,
+				"is_restricted": 1 if g.get("restricted") else 0, "restriction_type": g.get("restricted") or "", "is_active": 1}).insert(ignore_permissions=True)
+			n_cat += 1
+		for c in g.get("children", []):
+			if frappe.db.exists("Donation Category", c["name"]):
+				continue
+			fee = c.get("fee", g.get("fee"))
+			restricted = c.get("restricted") or g.get("restricted")
+			acc = ensure_account(company, c["name"], donations_group, account_type="Income Account")
+			frappe.get_doc({"doctype": "Donation Category", "category_name": c["name"], "category_code": c.get("code"), "is_group": 0,
+				"parent_donation_category": g["name"], "apply_admin_fee": 0 if fee == 0 else 1, "admin_fee_percent": fee if fee else None,
+				"is_restricted": 1 if restricted else 0, "restriction_type": restricted or "", "income_account": acc, "cost_center": default_cc,
+				"is_active": 1, "publish_on_website": 1 if c.get("website") else 0}).insert(ignore_permissions=True)
+			n_cat += 1
+	log(f"فئات التبرع: {n_cat} فئة جديدة")
+
+	# تصنيفات المصروف بحساب لكل تصنيف
+	exp_parent = _account_group(company, ["Indirect Expenses", "Expenses"], "Expense")
+	n_cl = 0
+	for c in ch.get("expense_classifications", []):
+		if frappe.db.exists("Expense Classification", c["code"]):
+			continue
+		acc = ensure_account(company, f"{c['code']} {c['name']}", exp_parent, account_type="Expense Account")
+		frappe.get_doc({"doctype": "Expense Classification", "classification_code": c["code"], "classification_name": c["name"],
+			"expense_account": acc, "cost_center": default_cc, "is_active": 1, "description": c.get("description")}).insert(ignore_permissions=True)
+		n_cl += 1
+	log(f"تصنيفات المصروف: {n_cl} جديد")
+
+	# الصناديق بحساب أستاذ لكل صندوق (بنك/نقد)
+	bank_parent = _account_group(company, ["Bank Accounts"], "Asset")
+	cash_parent = _account_group(company, ["Cash In Hand"], "Asset")
+	n_f = 0
+	for f in ch.get("funds", []):
+		if frappe.db.exists("Charity Fund", f["code"]):
+			continue
+		is_cash = f.get("type") == "صندوق نقدي"
+		acc = ensure_account(company, f["name"], cash_parent if is_cash else bank_parent, account_type="Cash" if is_cash else "Bank")
+		frappe.get_doc({"doctype": "Charity Fund", "fund_code": f["code"], "fund_name": f["name"], "fund_type": f.get("type", "حساب بنكي"), "company": company,
+			"account": acc, "purpose": f.get("purpose"), "donation_category": f.get("category"), "is_active": 1}).insert(ignore_permissions=True)
+		n_f += 1
+	log(f"الصناديق: {n_f} جديد")
+
+	# الفروع والأقسام
+	for b in ch.get("branches", []):
+		if not frappe.db.exists("Branch", b):
+			frappe.get_doc({"doctype": "Branch", "branch": b}).insert(ignore_permissions=True)
+	for dname in ch.get("departments", []):
+		if not frappe.db.exists("Department", {"department_name": dname, "company": company}):
+			frappe.get_doc({"doctype": "Department", "department_name": dname, "company": company}).insert(ignore_permissions=True)
+
+	# المشاريع الخيرية (Project القياسي بحقول زِمام)
+	n_p = 0
+	for pr in ch.get("projects", []):
+		if frappe.db.exists("Project", {"project_name": pr["name"]}):
+			continue
+		doc = frappe.get_doc({"doctype": "Project", "project_name": pr["name"], "company": company, "status": "Open",
+			"zimam_country": pr.get("country"), "zimam_donation_category": pr.get("category"), "zimam_target_amount": pr.get("target"),
+			"zimam_publish_on_website": 1 if pr.get("website", True) else 0})
+		doc.insert(ignore_permissions=True)
+		n_p += 1
+	log(f"المشاريع الخيرية: {n_p} جديد")
+
+	# الإعدادات
+	cs = frappe.get_single("Charity Settings")
+	values = {"company": company, "default_admin_fee_percent": ch.get("default_admin_fee_percent", cs.default_admin_fee_percent),
+		"ceo_approval_threshold": ch.get("ceo_approval_threshold", 0), "allow_self_approval": 1 if ch.get("allow_self_approval") else 0,
+		"notify_on_stage_change": 1, "default_cost_center": default_cc, "default_fund": ch.get("default_fund") if frappe.db.exists("Charity Fund", ch.get("default_fund") or "") else None,
+		"sponsorship_category": ch.get("sponsorship_category") if frappe.db.exists("Donation Category", ch.get("sponsorship_category") or "") else None,
+		"website_donation_category": ch.get("website_donation_category") if frappe.db.exists("Donation Category", ch.get("website_donation_category") or "") else None,
+		"website_fund": ch.get("default_fund") if frappe.db.exists("Charity Fund", ch.get("default_fund") or "") else None}
+	if ch.get("admin_fee_income_account"):
+		values["admin_fee_income_account"] = ensure_income_account(ch["admin_fee_income_account"], company)
+	if ch.get("default_donation_income_account"):
+		values["default_donation_income_account"] = ensure_income_account(ch["default_donation_income_account"], company)
+	for k in ("receipt_signatory", "receipt_title", "receipt_footer", "receipt_note", "voucher_note"):
+		if ch.get(k):
+			values[k] = ch[k]
+	cs.update(values)
+	cs.save(ignore_permissions=True)
+	log("إعدادات الحزمة الخيرية جاهزة")
+
+	from zimam.zimam_charity.workflow import ensure_payment_voucher_workflow
+	ensure_payment_voucher_workflow()
+	log("سير اعتماد سند الصرف جاهز (محاسب ← مدير مالي ← معتمد الصرف ← أمين صندوق)")
 
 
 # ---------------------------------------------------------------------------

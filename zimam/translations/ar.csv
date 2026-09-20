@@ -1068,3 +1068,59 @@ Print Quotation,عرض أسعار طباعة
 Print Estimates This Month,تقديرات طباعة هذا الشهر
 Print Estimates Accepted This Month,تقديرات طباعة مقبولة هذا الشهر
 Print Estimates by Status,تقديرات الطباعة بحسب الحالة
+Zimam Charity,زِمام — الحزمة الخيرية
+Charity Settings,إعدادات الحزمة الخيرية
+Donation Category,فئة تبرع
+Expense Classification,تصنيف مصروف
+Charity Fund,صندوق / حساب صرف
+Donor,متبرع
+Member,عضو الجمعية
+Membership Application,طلب انضمام
+Donation Allocation,تخصيص تبرع
+Donation,إيصال تبرع
+Voucher Allocation,تخصيص سند صرف
+Payment Voucher,سند صرف
+Disbursement Request,طلب صرف
+Sponsorship,كفالة
+Sponsorship Due,استحقاق كفالة
+Donation Receipt,إيصال تبرع
+Payment Voucher Form,سند صرف
+Donations Register,سجل الإيرادات
+Donations by Category,الإيرادات بحسب الفئة
+Payment Vouchers Register,سجل سندات الصرف
+Fund Balances,أرصدة الصناديق
+Sponsorship Dues,استحقاقات الكفالات
+Donations This Month,إيرادات التبرعات هذا الشهر
+Net Donations This Month,صافي التبرعات بعد الرسوم هذا الشهر
+Admin Fees This Month,الرسوم الإدارية هذا الشهر
+Vouchers Paid This Month,مصروفات مدفوعة هذا الشهر
+Vouchers Awaiting Approval,سندات بانتظار الاعتماد
+Vouchers Ready To Pay,سندات جاهزة للدفع
+Disbursement Requests For Review,طلبات صرف للمراجعة
+Active Sponsorships,كفالات نشطة
+Sponsorship Dues Unpaid,استحقاقات كفالة غير مسدَّدة
+New Donors This Month,متبرعون جدد هذا الشهر
+Membership Applications Pending,طلبات انضمام بانتظار البت
+Active Members,أعضاء نشطون
+Donations by Month,إيرادات التبرعات شهريًا
+Donations by Channel,التبرعات بحسب القناة
+Vouchers by Stage,سندات الصرف بحسب المرحلة
+Vouchers Paid by Month,المصروفات المدفوعة شهريًا
+Workflow State,المرحلة
+Workflow,سير العمل
+Web Form,نموذج موقع
+Data Import,استيراد من ملف
+Branch,الفرع
+Department,القسم
+Bank Account,حساب بنكي
+Bank Reconciliation Tool,مطابقة كشف البنك
+مدير مالي,مدير مالي
+معتمد الصرف,معتمد الصرف
+أمين صندوق,أمين صندوق
+Actions,الإجراءات
+Apply,تطبيق
+Approve,اعتماد
+Reject,رفض
+Workflow Action,إجراء سير العمل
+Self approval is not allowed,لا يجوز اعتماد الشخص لما سجّله بنفسه (فصل المهام)
+Not a valid Workflow Action,إجراء غير صالح في هذه المرحلة

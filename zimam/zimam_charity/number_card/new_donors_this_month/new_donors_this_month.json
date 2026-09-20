@@ -1,0 +1,22 @@
+{
+ "doctype": "Number Card",
+ "name": "New Donors This Month",
+ "creation": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 08:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Charity",
+ "label": "متبرعون جدد هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Donor",
+ "function": "Count",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#00838F",
+ "filters_json": "[[\"Donor\", \"creation\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]"
+}

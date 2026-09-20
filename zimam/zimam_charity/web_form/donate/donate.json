@@ -1,0 +1,113 @@
+{
+ "doctype": "Web Form",
+ "name": "donate",
+ "creation": "2026-09-17 08:30:00.000000",
+ "modified": "2026-09-17 08:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Charity",
+ "title": "تبرع الآن",
+ "route": "donate",
+ "doc_type": "Donation",
+ "is_standard": 1,
+ "published": 1,
+ "login_required": 0,
+ "anonymous": 1,
+ "allow_edit": 0,
+ "allow_multiple": 1,
+ "allow_incomplete": 0,
+ "show_list": 0,
+ "allow_delete": 0,
+ "allow_print": 0,
+ "apply_document_permissions": 0,
+ "button_label": "إرسال التبرع",
+ "success_message": "وصلنا طلب تبرعكم وسيُصدر الإيصال بعد ورود المبلغ. تقبّل الله منكم.",
+ "introduction_text": "اختر باب التبرع والمبلغ، وحوّل المبلغ إلى حساب الجمعية ثم أدخل مرجع التحويل — يراجع المحاسب الطلب ويصدر الإيصال.",
+ "web_form_fields": [
+  {
+   "fieldname": "donor_name",
+   "fieldtype": "Data",
+   "label": "الاسم",
+   "reqd": 1,
+   "options": "",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Small Text",
+   "label": "وذلك عن / رسالة (اختياري)",
+   "reqd": 0,
+   "options": "",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "donation_category",
+   "fieldtype": "Link",
+   "label": "باب التبرع",
+   "reqd": 1,
+   "options": "Donation Category",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع (اختياري)",
+   "reqd": 0,
+   "options": "Project",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "المبلغ",
+   "reqd": 1,
+   "options": "",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "reference_no",
+   "fieldtype": "Data",
+   "label": "مرجع التحويل / رقم العملية",
+   "reqd": 0,
+   "options": "",
+   "read_only": 0,
+   "hidden": 0
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Select",
+   "label": "القناة",
+   "reqd": 1,
+   "options": "بنك\nثواني\nOMPay\nبطاقة\nالموقع الإلكتروني",
+   "read_only": 0,
+   "hidden": 0,
+   "default": "الموقع الإلكتروني"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "المصدر",
+   "reqd": 0,
+   "options": "الموقع الإلكتروني",
+   "read_only": 0,
+   "hidden": 1,
+   "default": "الموقع الإلكتروني"
+  },
+  {
+   "fieldname": "is_anonymous",
+   "fieldtype": "Check",
+   "label": "لا أرغب في ذكر اسمي",
+   "reqd": 0,
+   "options": "",
+   "read_only": 0,
+   "hidden": 0
+  }
+ ]
+}

@@ -24,9 +24,30 @@ ROLES = [
 	("مدير المؤسسة", 1),
 ]
 
+# أدوار الحزم القطاعية (تُنشأ دائمًا؛ لا تضر المؤسسات التي لا تشغّل الحزمة)
+PACKAGE_ROLES = [
+	# الحزمة الخيرية — سلسلة اعتماد الصرف: المحاسب المالي (تسجيل) ← مدير مالي ← معتمد الصرف (الرئيس التنفيذي) ← أمين صندوق
+	("مدير مالي", 1),
+	("معتمد الصرف", 1),
+	("أمين صندوق", 1),
+]
+
 DOMAINS = ["Heritage", "Education", "Training", "Charity"]
+# الوحدات المقيدة بنطاق: تُخفى وحدة الحزمة (Module Def) حين لا يكون نطاقها مفعَّلًا
+MODULE_DOMAINS = {"Zimam Heritage": "Heritage", "Zimam Charity": "Charity"}
 
 CUSTOM_FIELDS = {
+	"Project": [
+		dict(fieldname="zimam_charity_section", label="المشروع الخيري (زِمام)", fieldtype="Section Break", insert_after="notes", collapsible=1),
+		dict(fieldname="zimam_country", label="الدولة / الموقع", fieldtype="Data", insert_after="zimam_charity_section", in_standard_filter=1),
+		dict(fieldname="zimam_donation_category", label="فئة التبرع", fieldtype="Link", options="Donation Category", insert_after="zimam_country"),
+		dict(fieldname="zimam_target_amount", label="المبلغ المستهدف", fieldtype="Currency", insert_after="zimam_donation_category"),
+		dict(fieldname="zimam_beneficiaries", label="عدد المستفيدين المتوقع", fieldtype="Int", insert_after="zimam_target_amount"),
+		dict(fieldname="zimam_charity_cb", fieldtype="Column Break", insert_after="zimam_beneficiaries"),
+		dict(fieldname="zimam_collected", label="المحصَّل من التبرعات", fieldtype="Currency", insert_after="zimam_charity_cb", read_only=1, no_copy=1),
+		dict(fieldname="zimam_spent", label="المصروف بسندات الصرف", fieldtype="Currency", insert_after="zimam_collected", read_only=1, no_copy=1),
+		dict(fieldname="zimam_publish_on_website", label="يظهر في نموذج التبرع على الموقع", fieldtype="Check", insert_after="zimam_spent"),
+	],
 	"Company": [
 		dict(fieldname="zimam_arm_type", label="الصفة في منظومة زِمام", fieldtype="Select",
 			options="\nالمؤسسة (الشركة الأم)\nذراع استثماري تابع", insert_after="parent_company"),
@@ -68,7 +89,7 @@ CUSTOM_FIELDS = {
 
 
 def create_roles():
-	for role_name, desk in ROLES:
+	for role_name, desk in ROLES + PACKAGE_ROLES:
 		if not frappe.db.exists("Role", role_name):
 			frappe.get_doc({"doctype": "Role", "role_name": role_name, "desk_access": desk, "is_custom": 1}).insert(ignore_permissions=True)
 
@@ -77,6 +98,28 @@ def create_domains():
 	for domain in DOMAINS:
 		if not frappe.db.exists("Domain", domain):
 			frappe.get_doc({"doctype": "Domain", "domain": domain}).insert(ignore_permissions=True)
+	# وحدة الحزمة تُقيَّد بنطاقها فتختفي من سطح المكتب والبحث حين لا يكون مفعَّلًا
+	for module, domain in MODULE_DOMAINS.items():
+		if frappe.db.exists("Module Def", module) and frappe.db.get_value("Module Def", module, "restrict_to_domain") != domain:
+			frappe.db.set_value("Module Def", module, "restrict_to_domain", domain, update_modified=False)
+
+
+def active_domains():
+	try:
+		return {d.domain for d in frappe.get_single("Domain Settings").active_domains}
+	except Exception:
+		return set()
+
+
+def sync_charity_workflow():
+	"""سير اعتماد سند الصرف (الحزمة الخيرية) — يُنشأ/يُحدَّث عند الترحيل إن كان نطاق Charity مفعَّلًا."""
+	if "Charity" not in active_domains():
+		return
+	try:
+		from zimam.zimam_charity.workflow import ensure_payment_voucher_workflow
+		ensure_payment_voucher_workflow()
+	except Exception:
+		frappe.log_error(title="zimam: charity workflow sync failed")
 
 
 def create_fields():
@@ -146,11 +189,18 @@ def prune_sidebars_for_domains():
 			continue
 		keep, changed = [], False
 		for row in doc.items:
+			domain = None
 			if row.type == "Link" and row.link_type == "DocType":
 				domain = frappe.db.get_value("DocType", row.link_to, "restrict_to_domain") if frappe.db.exists("DocType", row.link_to) else None
-				if domain and domain not in active:
-					changed = True
-					continue
+			elif row.type == "Link" and row.link_type == "Report":
+				ref = frappe.db.get_value("Report", row.link_to, "ref_doctype") if frappe.db.exists("Report", row.link_to) else None
+				domain = frappe.db.get_value("DocType", ref, "restrict_to_domain") if ref else None
+			elif row.type == "Link" and row.link_type == "Dashboard":
+				module = frappe.db.get_value("Dashboard", row.link_to, "module") if frappe.db.exists("Dashboard", row.link_to) else None
+				domain = MODULE_DOMAINS.get(module)
+			if domain and domain not in active:
+				changed = True
+				continue
 			keep.append(row)
 		# مجموعات بلا أبناء
 		pruned = []
@@ -175,6 +225,7 @@ def after_install():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
+	sync_charity_workflow()
 	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()
@@ -188,6 +239,7 @@ def after_migrate():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
+	sync_charity_workflow()
 	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()

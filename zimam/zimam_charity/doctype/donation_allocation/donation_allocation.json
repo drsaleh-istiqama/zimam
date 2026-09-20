@@ -1,0 +1,117 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "donation_category",
+  "category_code",
+  "project",
+  "amount",
+  "admin_fee_percent",
+  "admin_fee_amount",
+  "net_amount",
+  "income_account",
+  "cost_center",
+  "note"
+ ],
+ "fields": [
+  {
+   "fieldname": "donation_category",
+   "fieldtype": "Link",
+   "label": "الفئة",
+   "options": "Donation Category",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "category_code",
+   "fieldtype": "Data",
+   "label": "الرمز",
+   "fetch_from": "donation_category.category_code",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "المشروع",
+   "options": "Project",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "الإجمالي",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "admin_fee_percent",
+   "fieldtype": "Percent",
+   "label": "الرسوم %",
+   "in_list_view": 1,
+   "columns": 1,
+   "description": "تُملأ من الفئة/الإعدادات إن تُركت فارغة"
+  },
+  {
+   "fieldname": "admin_fee_amount",
+   "fieldtype": "Currency",
+   "label": "الرسوم",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "net_amount",
+   "fieldtype": "Currency",
+   "label": "الصافي",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "income_account",
+   "fieldtype": "Link",
+   "label": "حساب الإيراد",
+   "options": "Account",
+   "fetch_from": "donation_category.income_account",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة",
+   "options": "Cost Center",
+   "fetch_from": "donation_category.cost_center",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Data",
+   "label": "ملاحظة"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Donation Allocation",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "istable": 1,
+ "restrict_to_domain": "Charity"
+}

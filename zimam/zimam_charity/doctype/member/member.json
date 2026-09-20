@@ -1,0 +1,216 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "member_name",
+  "membership_type",
+  "status",
+  "membership_number",
+  "cb1",
+  "phone",
+  "email",
+  "national_id",
+  "join_date",
+  "section_1",
+  "annual_fee",
+  "fee_paid_until",
+  "donor",
+  "cb2",
+  "user",
+  "address",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "member_name",
+   "fieldtype": "Data",
+   "label": "اسم العضو",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "membership_type",
+   "fieldtype": "Select",
+   "label": "نوع العضوية",
+   "options": "عامل\nمنتسب\nشرفي\nمؤسس",
+   "default": "عامل",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "نشط\nمتوقف\nمنتهٍ\nمستقيل",
+   "default": "نشط",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "membership_number",
+   "fieldtype": "Data",
+   "label": "رقم العضوية",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Data",
+   "label": "الهاتف",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد",
+   "options": "Email"
+  },
+  {
+   "fieldname": "national_id",
+   "fieldtype": "Data",
+   "label": "رقم الهوية"
+  },
+  {
+   "fieldname": "join_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الانضمام",
+   "default": "Today"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الاشتراك"
+  },
+  {
+   "fieldname": "annual_fee",
+   "fieldtype": "Currency",
+   "label": "الاشتراك السنوي"
+  },
+  {
+   "fieldname": "fee_paid_until",
+   "fieldtype": "Date",
+   "label": "الاشتراك مسدَّد حتى",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "donor",
+   "fieldtype": "Link",
+   "label": "بطاقة المتبرع المرتبطة",
+   "options": "Donor",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "مستخدم النظام (اختياري)",
+   "options": "User"
+  },
+  {
+   "fieldname": "address",
+   "fieldtype": "Small Text",
+   "label": "العنوان"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Donation",
+   "link_fieldname": "member"
+  }
+ ],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Charity",
+ "name": "Member",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:MBR-{#####}",
+ "naming_rule": "Expression",
+ "title_field": "member_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "member_name,phone,membership_number",
+ "restrict_to_domain": "Charity"
+}
