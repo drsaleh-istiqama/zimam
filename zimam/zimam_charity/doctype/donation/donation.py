@@ -10,8 +10,9 @@ from frappe.model.document import Document
 from frappe.utils import flt, getdate, nowdate
 
 from zimam.utils import cancel_linked, hijri_str
-from zimam.zimam_charity.utils import (category_income_account, charity_company, fee_percent_for, fund_account,
-	get_charity_settings, make_journal_entry, update_donor_stats, update_project_totals)
+from zimam.zimam_core.finance import fund_account, make_journal_entry
+from zimam.zimam_charity.utils import (category_income_account, charity_company, fee_percent_for, get_charity_settings,
+	update_donor_stats, update_project_totals)
 
 
 class Donation(Document):
@@ -21,7 +22,7 @@ class Donation(Document):
 		if not self.company:
 			self.company = charity_company()
 		if not self.fund:
-			self.fund = get_charity_settings().default_fund
+			self.fund = get_charity_settings().default_fund or frappe.db.get_single_value("Zimam Settings", "default_fund")
 		if not self.donor_name and self.donor:
 			self.donor_name = frappe.db.get_value("Donor", self.donor, "donor_name")
 		if self.is_anonymous and not self.donor_name:

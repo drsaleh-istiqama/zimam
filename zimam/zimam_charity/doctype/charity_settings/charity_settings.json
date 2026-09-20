@@ -16,23 +16,17 @@
   "default_cost_center",
   "default_fund",
   "section_2",
-  "ceo_approval_threshold",
-  "allow_self_approval",
-  "cb_c2",
-  "notify_on_stage_change",
-  "voucher_note",
-  "section_3",
   "receipt_signatory",
   "receipt_title",
   "show_admin_fee_on_receipt",
   "cb_c3",
   "receipt_footer",
   "receipt_note",
-  "section_4",
+  "section_3",
   "website_donation_category",
   "cb_c4",
   "website_fund",
-  "section_5",
+  "section_4",
   "sponsorship_category",
   "cb_c5",
   "dues_generation_days_ahead"
@@ -84,43 +78,11 @@
    "fieldname": "default_fund",
    "fieldtype": "Link",
    "label": "الصندوق الافتراضي للإيصالات",
-   "options": "Charity Fund"
+   "options": "Treasury Fund",
+   "description": "سلسلة اعتماد الصرف والصناديق في إعدادات زِمام (النواة)"
   },
   {
    "fieldname": "section_2",
-   "fieldtype": "Section Break",
-   "label": "سلسلة اعتماد الصرف"
-  },
-  {
-   "fieldname": "ceo_approval_threshold",
-   "fieldtype": "Currency",
-   "label": "حد اعتماد الرئيس التنفيذي",
-   "description": "السندات التي تساوي هذا المبلغ أو تزيد تمر بالرئيس التنفيذي بعد مدير المالية؛ 0 = كل السندات تمر به (كما في وقاف)"
-  },
-  {
-   "fieldname": "allow_self_approval",
-   "fieldtype": "Check",
-   "label": "السماح باعتماد الشخص لسندٍ سجّله بنفسه",
-   "description": "افتراضيًا ممنوع (فصل المهام: من يسجّل لا يعتمد). فعّله في بيئات العرض ذات المستخدم الواحد فقط"
-  },
-  {
-   "fieldname": "cb_c2",
-   "fieldtype": "Column Break",
-   "label": ""
-  },
-  {
-   "fieldname": "notify_on_stage_change",
-   "fieldtype": "Check",
-   "label": "إشعار أصحاب المرحلة التالية عند كل انتقال",
-   "default": 1
-  },
-  {
-   "fieldname": "voucher_note",
-   "fieldtype": "Small Text",
-   "label": "عبارة ثابتة تُطبع في ذيل سند الصرف"
-  },
-  {
-   "fieldname": "section_3",
    "fieldtype": "Section Break",
    "label": "إيصال التبرع"
   },
@@ -158,7 +120,7 @@
    "label": "ملاحظة تظهر تحت المبلغ"
   },
   {
-   "fieldname": "section_4",
+   "fieldname": "section_3",
    "fieldtype": "Section Break",
    "label": "الموقع الإلكتروني (نموذج التبرع العام)"
   },
@@ -177,10 +139,10 @@
    "fieldname": "website_fund",
    "fieldtype": "Link",
    "label": "صندوق تبرعات الموقع",
-   "options": "Charity Fund"
+   "options": "Treasury Fund"
   },
   {
-   "fieldname": "section_5",
+   "fieldname": "section_4",
    "fieldtype": "Section Break",
    "label": "الكفالات"
   },

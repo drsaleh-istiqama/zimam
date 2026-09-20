@@ -31,7 +31,7 @@ def execute(filters=None):
 		{"label": _("المتبرع"), "fieldname": "donor_name", "fieldtype": "Data", "width": 160},
 		{"label": _("العضو"), "fieldname": "member", "fieldtype": "Link", "options": "Member", "width": 100},
 		{"label": _("القناة"), "fieldname": "channel", "fieldtype": "Data", "width": 90},
-		{"label": _("الصندوق"), "fieldname": "fund", "fieldtype": "Link", "options": "Charity Fund", "width": 120},
+		{"label": _("الصندوق"), "fieldname": "fund", "fieldtype": "Link", "options": "Treasury Fund", "width": 120},
 		{"label": _("المبلغ"), "fieldname": "amount", "fieldtype": "Currency", "width": 110},
 		{"label": _("الرسوم"), "fieldname": "admin_fee_amount", "fieldtype": "Currency", "width": 100},
 		{"label": _("الصافي"), "fieldname": "net_amount", "fieldtype": "Currency", "width": 110},

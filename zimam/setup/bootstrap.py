@@ -464,6 +464,7 @@ def run(profile="template", with_optional_arms=False):
 		hs.save(ignore_permissions=True)
 		log("إعدادات الحزمة التراثية جاهزة")
 
+	ensure_finance(parent, p.get("finance") or {})
 	if "Charity" in p.get("domains", []):
 		ensure_charity(parent, p.get("charity") or {})
 
@@ -475,8 +476,8 @@ def run(profile="template", with_optional_arms=False):
 
 
 # ---------------------------------------------------------------------------
-# الحزمة الخيرية (0.10.0) — فئات التبرع شجرةً بحساب إيراد لكل فئة، الصناديق بحساب أستاذ لكل صندوق، تصنيفات المصروف
-# بحساب مصروف لكل تصنيف، الفروع والأقسام والمشاريع الخيرية، إعدادات الحزمة، وسير اعتماد سند الصرف. آمنة للتكرار.
+# الصرف والاعتماد (النواة، 0.10.0 — لكل مؤسسة): الصناديق بحساب أستاذ لكل صندوق (بنك/نقد)، تصنيفات المصروف بحساب
+# مصروف لكل تصنيف، الفروع والأقسام، إعدادات سلسلة الاعتماد في إعدادات زِمام، وسير اعتماد سند الصرف. آمنة للتكرار.
 # ---------------------------------------------------------------------------
 def _account_group(company, candidates, root_type):
 	for c in candidates:
@@ -499,6 +500,63 @@ def ensure_account(company, name, parent, account_type=None, is_group=0):
 	return frappe.db.get_value("Account", {"account_name": name, "company": company}, "name") or frappe.db.get_value("Account", {"account_name": name, "company": target}, "name")
 
 
+def ensure_finance(company, fin):
+	default_cc = frappe.db.get_value("Cost Center", {"cost_center_name": fin.get("default_cost_center"), "company": company}, "name") if fin.get("default_cost_center") else None
+
+	# تصنيفات المصروف بحساب لكل تصنيف
+	exp_parent = _account_group(company, ["Indirect Expenses", "Expenses"], "Expense")
+	n_cl = 0
+	for c in fin.get("expense_classifications", []):
+		if frappe.db.exists("Expense Classification", c["code"]):
+			continue
+		acc = ensure_account(company, f"{c['code']} {c['name']}", exp_parent, account_type="Expense Account")
+		frappe.get_doc({"doctype": "Expense Classification", "classification_code": c["code"], "classification_name": c["name"],
+			"expense_account": acc, "cost_center": default_cc, "is_active": 1, "description": c.get("description")}).insert(ignore_permissions=True)
+		n_cl += 1
+	log(f"تصنيفات المصروف: {n_cl} جديد")
+
+	# الصناديق بحساب أستاذ لكل صندوق (بنك/نقد)
+	bank_parent = _account_group(company, ["Bank Accounts"], "Asset")
+	cash_parent = _account_group(company, ["Cash In Hand"], "Asset")
+	n_f = 0
+	for f in fin.get("funds", []):
+		if frappe.db.exists("Treasury Fund", f["code"]):
+			continue
+		is_cash = f.get("type") == "صندوق نقدي"
+		acc = ensure_account(company, f["name"], cash_parent if is_cash else bank_parent, account_type="Cash" if is_cash else "Bank")
+		cc = frappe.db.get_value("Cost Center", {"cost_center_name": f.get("cost_center"), "company": company}, "name") if f.get("cost_center") else None
+		frappe.get_doc({"doctype": "Treasury Fund", "fund_code": f["code"], "fund_name": f["name"], "fund_type": f.get("type", "حساب بنكي"), "company": company,
+			"account": acc, "purpose": f.get("purpose"), "cost_center": cc, "is_restricted": 1 if f.get("restricted") else 0, "is_active": 1}).insert(ignore_permissions=True)
+		n_f += 1
+	log(f"الصناديق: {n_f} جديد")
+
+	# الفروع والأقسام
+	for b in fin.get("branches", []):
+		if not frappe.db.exists("Branch", b):
+			frappe.get_doc({"doctype": "Branch", "branch": b}).insert(ignore_permissions=True)
+	for dname in fin.get("departments", []):
+		if not frappe.db.exists("Department", {"department_name": dname, "company": company}):
+			frappe.get_doc({"doctype": "Department", "department_name": dname, "company": company}).insert(ignore_permissions=True)
+
+	# إعدادات سلسلة الاعتماد في إعدادات زِمام
+	zs = frappe.get_single("Zimam Settings")
+	values = {"ceo_approval_threshold": fin.get("ceo_approval_threshold", zs.ceo_approval_threshold or 0),
+		"allow_self_approval": 1 if fin.get("allow_self_approval") else 0, "notify_on_stage_change": 1,
+		"default_expense_cost_center": default_cc or zs.default_expense_cost_center,
+		"default_fund": fin.get("default_fund") if frappe.db.exists("Treasury Fund", fin.get("default_fund") or "") else zs.default_fund}
+	if fin.get("voucher_note"):
+		values["voucher_note"] = fin["voucher_note"]
+	zs.update(values)
+	zs.save(ignore_permissions=True)
+
+	from zimam.zimam_core.workflow import ensure_payment_voucher_workflow
+	ensure_payment_voucher_workflow()
+	log("الصرف والاعتماد جاهزان: سير اعتماد سند الصرف (محاسب ← مدير مالي ← معتمد الصرف ← أمين صندوق)")
+
+
+# ---------------------------------------------------------------------------
+# الحزمة الخيرية (0.10.0): فئات التبرع شجرةً بحساب إيراد لكل فئة، المشاريع الخيرية، وإعدادات الحزمة. آمنة للتكرار.
+# ---------------------------------------------------------------------------
 def ensure_charity(company, ch):
 	income_parent_acc = income_parent(company)
 	donations_group = ensure_account(company, "إيرادات التبرعات بحسب الفئة", income_parent_acc, is_group=1)
@@ -525,40 +583,6 @@ def ensure_charity(company, ch):
 			n_cat += 1
 	log(f"فئات التبرع: {n_cat} فئة جديدة")
 
-	# تصنيفات المصروف بحساب لكل تصنيف
-	exp_parent = _account_group(company, ["Indirect Expenses", "Expenses"], "Expense")
-	n_cl = 0
-	for c in ch.get("expense_classifications", []):
-		if frappe.db.exists("Expense Classification", c["code"]):
-			continue
-		acc = ensure_account(company, f"{c['code']} {c['name']}", exp_parent, account_type="Expense Account")
-		frappe.get_doc({"doctype": "Expense Classification", "classification_code": c["code"], "classification_name": c["name"],
-			"expense_account": acc, "cost_center": default_cc, "is_active": 1, "description": c.get("description")}).insert(ignore_permissions=True)
-		n_cl += 1
-	log(f"تصنيفات المصروف: {n_cl} جديد")
-
-	# الصناديق بحساب أستاذ لكل صندوق (بنك/نقد)
-	bank_parent = _account_group(company, ["Bank Accounts"], "Asset")
-	cash_parent = _account_group(company, ["Cash In Hand"], "Asset")
-	n_f = 0
-	for f in ch.get("funds", []):
-		if frappe.db.exists("Charity Fund", f["code"]):
-			continue
-		is_cash = f.get("type") == "صندوق نقدي"
-		acc = ensure_account(company, f["name"], cash_parent if is_cash else bank_parent, account_type="Cash" if is_cash else "Bank")
-		frappe.get_doc({"doctype": "Charity Fund", "fund_code": f["code"], "fund_name": f["name"], "fund_type": f.get("type", "حساب بنكي"), "company": company,
-			"account": acc, "purpose": f.get("purpose"), "donation_category": f.get("category"), "is_active": 1}).insert(ignore_permissions=True)
-		n_f += 1
-	log(f"الصناديق: {n_f} جديد")
-
-	# الفروع والأقسام
-	for b in ch.get("branches", []):
-		if not frappe.db.exists("Branch", b):
-			frappe.get_doc({"doctype": "Branch", "branch": b}).insert(ignore_permissions=True)
-	for dname in ch.get("departments", []):
-		if not frappe.db.exists("Department", {"department_name": dname, "company": company}):
-			frappe.get_doc({"doctype": "Department", "department_name": dname, "company": company}).insert(ignore_permissions=True)
-
 	# المشاريع الخيرية (Project القياسي بحقول زِمام)
 	n_p = 0
 	for pr in ch.get("projects", []):
@@ -573,26 +597,21 @@ def ensure_charity(company, ch):
 
 	# الإعدادات
 	cs = frappe.get_single("Charity Settings")
+	fund = ch.get("default_fund") if frappe.db.exists("Treasury Fund", ch.get("default_fund") or "") else frappe.db.get_single_value("Zimam Settings", "default_fund")
 	values = {"company": company, "default_admin_fee_percent": ch.get("default_admin_fee_percent", cs.default_admin_fee_percent),
-		"ceo_approval_threshold": ch.get("ceo_approval_threshold", 0), "allow_self_approval": 1 if ch.get("allow_self_approval") else 0,
-		"notify_on_stage_change": 1, "default_cost_center": default_cc, "default_fund": ch.get("default_fund") if frappe.db.exists("Charity Fund", ch.get("default_fund") or "") else None,
+		"default_cost_center": default_cc, "default_fund": fund, "website_fund": fund,
 		"sponsorship_category": ch.get("sponsorship_category") if frappe.db.exists("Donation Category", ch.get("sponsorship_category") or "") else None,
-		"website_donation_category": ch.get("website_donation_category") if frappe.db.exists("Donation Category", ch.get("website_donation_category") or "") else None,
-		"website_fund": ch.get("default_fund") if frappe.db.exists("Charity Fund", ch.get("default_fund") or "") else None}
+		"website_donation_category": ch.get("website_donation_category") if frappe.db.exists("Donation Category", ch.get("website_donation_category") or "") else None}
 	if ch.get("admin_fee_income_account"):
 		values["admin_fee_income_account"] = ensure_income_account(ch["admin_fee_income_account"], company)
 	if ch.get("default_donation_income_account"):
 		values["default_donation_income_account"] = ensure_income_account(ch["default_donation_income_account"], company)
-	for k in ("receipt_signatory", "receipt_title", "receipt_footer", "receipt_note", "voucher_note"):
+	for k in ("receipt_signatory", "receipt_title", "receipt_footer", "receipt_note"):
 		if ch.get(k):
 			values[k] = ch[k]
 	cs.update(values)
 	cs.save(ignore_permissions=True)
 	log("إعدادات الحزمة الخيرية جاهزة")
-
-	from zimam.zimam_charity.workflow import ensure_payment_voucher_workflow
-	ensure_payment_voucher_workflow()
-	log("سير اعتماد سند الصرف جاهز (محاسب ← مدير مالي ← معتمد الصرف ← أمين صندوق)")
 
 
 # ---------------------------------------------------------------------------

@@ -22,7 +22,11 @@
     "Purchase Manager",
     "Stock Manager",
     "Item Manager",
-    "Projects Manager"
+    "Projects Manager",
+    "محاسب مالي",
+    "مدير مالي",
+    "معتمد الصرف",
+    "أمين صندوق"
    ]
   }
  ],
@@ -103,6 +107,73 @@
   "signatory": "",
   "title": "المدير التنفيذي",
   "footer": "وقفكم أثرٌ باقٍ"
+ },
+ "finance": {
+  "_comment": "موقع العرض: allow_self_approval=1 ليُجرَّب سير الاعتماد بحساب واحد",
+  "default_cost_center": "الإدارة العامة",
+  "ceo_approval_threshold": 500,
+  "allow_self_approval": 1,
+  "default_fund": "CASH-HQ",
+  "branches": [
+   "المقر الرئيسي"
+  ],
+  "departments": [
+   "الإدارة",
+   "المالية",
+   "الخدمات"
+  ],
+  "funds": [
+   {
+    "code": "CASH-HQ",
+    "name": "الصندوق النقدي",
+    "type": "صندوق نقدي",
+    "purpose": "المصروفات النقدية"
+   },
+   {
+    "code": "BANK-MAIN",
+    "name": "الحساب البنكي الرئيسي",
+    "type": "حساب بنكي",
+    "purpose": "الحساب الجاري"
+   }
+  ],
+  "expense_classifications": [
+   {
+    "code": "L01",
+    "name": "الرواتب والأجور"
+   },
+   {
+    "code": "L02",
+    "name": "المصروفات التشغيلية"
+   },
+   {
+    "code": "L03",
+    "name": "الإيجارات والمرافق"
+   },
+   {
+    "code": "L04",
+    "name": "المشاريع والبرامج"
+   },
+   {
+    "code": "L05",
+    "name": "السفر والمهمات"
+   },
+   {
+    "code": "L06",
+    "name": "الأصول والمعدات"
+   },
+   {
+    "code": "L07",
+    "name": "الفعاليات والإعلام"
+   },
+   {
+    "code": "L08",
+    "name": "رسوم وعمولات بنكية"
+   },
+   {
+    "code": "L09",
+    "name": "أخرى"
+   }
+  ]
  },
  "heritage": {
   "warehouses": {

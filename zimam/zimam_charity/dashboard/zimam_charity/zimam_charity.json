@@ -22,18 +22,6 @@
    "card": "Admin Fees This Month"
   },
   {
-   "card": "Vouchers Paid This Month"
-  },
-  {
-   "card": "Vouchers Awaiting Approval"
-  },
-  {
-   "card": "Vouchers Ready To Pay"
-  },
-  {
-   "card": "Disbursement Requests For Review"
-  },
-  {
    "card": "Active Sponsorships"
   },
   {
@@ -60,14 +48,6 @@
   },
   {
    "chart": "Donations by Channel",
-   "width": "Half"
-  },
-  {
-   "chart": "Vouchers by Stage",
-   "width": "Half"
-  },
-  {
-   "chart": "Vouchers Paid by Month",
    "width": "Half"
   }
  ]

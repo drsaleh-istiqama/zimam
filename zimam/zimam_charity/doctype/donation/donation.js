@@ -61,7 +61,7 @@ frappe.ui.form.on("Donation", {
 	donation_category: don_recalc,
 	donation_date(frm) {
 		if (frm.doc.donation_date) {
-			frappe.xcall("zimam.zimam_charity.utils.get_hijri", { date: frm.doc.donation_date }).then((h) => frm.set_value("date_hijri", h));
+			frappe.xcall("zimam.zimam_core.finance.get_hijri", { date: frm.doc.donation_date }).then((h) => frm.set_value("date_hijri", h));
 		}
 	},
 	donor(frm) {

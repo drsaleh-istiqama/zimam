@@ -33,6 +33,14 @@
   "cb_b1",
   "powered_by_url",
   "section_6",
+  "ceo_approval_threshold",
+  "allow_self_approval",
+  "notify_on_stage_change",
+  "cb_pv",
+  "default_fund",
+  "default_expense_cost_center",
+  "voucher_note",
+  "section_7",
   "ai_enabled",
   "ai_model",
   "cb_ai",
@@ -183,6 +191,51 @@
   },
   {
    "fieldname": "section_6",
+   "fieldtype": "Section Break",
+   "label": "الصرف والاعتماد (سندات الصرف)"
+  },
+  {
+   "fieldname": "ceo_approval_threshold",
+   "fieldtype": "Currency",
+   "label": "حد اعتماد مدير المؤسسة / الرئيس التنفيذي",
+   "description": "السندات التي تساوي هذا المبلغ أو تزيد تمر بمعتمد الصرف بعد مدير المالية؛ 0 = كل السندات تمر به"
+  },
+  {
+   "fieldname": "allow_self_approval",
+   "fieldtype": "Check",
+   "label": "السماح باعتماد الشخص لسندٍ سجّله بنفسه",
+   "description": "افتراضيًا ممنوع (فصل المهام: من يسجّل لا يعتمد). فعّله في بيئات العرض ذات المستخدم الواحد فقط"
+  },
+  {
+   "fieldname": "notify_on_stage_change",
+   "fieldtype": "Check",
+   "label": "إشعار أصحاب المرحلة التالية عند كل انتقال",
+   "default": 1
+  },
+  {
+   "fieldname": "cb_pv",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "default_fund",
+   "fieldtype": "Link",
+   "label": "الصندوق / حساب الصرف الافتراضي",
+   "options": "Treasury Fund"
+  },
+  {
+   "fieldname": "default_expense_cost_center",
+   "fieldtype": "Link",
+   "label": "مركز تكلفة المصروفات الافتراضي",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "voucher_note",
+   "fieldtype": "Small Text",
+   "label": "عبارة ثابتة تُطبع في ذيل سند الصرف"
+  },
+  {
+   "fieldname": "section_7",
    "fieldtype": "Section Break",
    "label": "الذكاء الاصطناعي"
   },

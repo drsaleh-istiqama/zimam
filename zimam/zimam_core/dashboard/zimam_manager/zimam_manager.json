@@ -47,6 +47,18 @@
   },
   {
    "card": "Legal Matters Expiring Soon"
+  },
+  {
+   "card": "Vouchers Paid This Month"
+  },
+  {
+   "card": "Vouchers Awaiting Approval"
+  },
+  {
+   "card": "Vouchers Ready To Pay"
+  },
+  {
+   "card": "Disbursement Requests For Review"
   }
  ],
  "charts": [
@@ -64,6 +76,14 @@
   },
   {
    "chart": "Print Estimates by Status",
+   "width": "Half"
+  },
+  {
+   "chart": "Vouchers by Stage",
+   "width": "Half"
+  },
+  {
+   "chart": "Vouchers Paid by Month",
    "width": "Half"
   }
  ]

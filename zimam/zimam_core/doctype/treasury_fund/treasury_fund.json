@@ -1,0 +1,295 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 08:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "fund_code",
+  "fund_name",
+  "fund_type",
+  "company",
+  "cb1",
+  "account",
+  "bank_account",
+  "is_active",
+  "section_1",
+  "purpose",
+  "cb2",
+  "cost_center",
+  "is_restricted",
+  "section_2",
+  "statement_balance",
+  "cb3",
+  "statement_date",
+  "section_3",
+  "posted_balance",
+  "committed_amount",
+  "cb4",
+  "book_balance",
+  "statement_difference",
+  "balances_as_of",
+  "sb_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "fund_code",
+   "fieldtype": "Data",
+   "label": "الرمز",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "مثل CASH-HQ أو OMR-CBO-01"
+  },
+  {
+   "fieldname": "fund_name",
+   "fieldtype": "Data",
+   "label": "اسم الصندوق",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "fund_type",
+   "fieldtype": "Select",
+   "label": "النوع",
+   "options": "حساب بنكي\nصندوق نقدي\nبوابة دفع إلكتروني",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "account",
+   "fieldtype": "Link",
+   "label": "حساب الأستاذ (بنك/نقد)",
+   "options": "Account",
+   "reqd": 1,
+   "description": "الحساب الذي يُقيَّد فيه المقبوض والمصروف"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "الحساب البنكي في النظام (اختياري)",
+   "options": "Bank Account"
+  },
+  {
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "label": "نشط",
+   "default": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "الغرض والقيد"
+  },
+  {
+   "fieldname": "purpose",
+   "fieldtype": "Small Text",
+   "label": "الغرض / ما يُقبل فيه ويُصرف منه",
+   "description": "مثل: المصروفات التشغيلية · إيرادات المطبعة · صدقات جارية"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "cost_center",
+   "fieldtype": "Link",
+   "label": "مركز التكلفة المرتبط (إن كان الصندوق مخصصًا)",
+   "options": "Cost Center"
+  },
+  {
+   "fieldname": "is_restricted",
+   "fieldtype": "Check",
+   "label": "صندوق مقيَّد الغرض",
+   "description": "لا يُصرف منه إلا في بابه (أموال مقيدة: وقف، زكاة، منحة مشروطة…)"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الرصيد الفعلي (كشف البنك)"
+  },
+  {
+   "fieldname": "statement_balance",
+   "fieldtype": "Currency",
+   "label": "الرصيد الفعلي حسب آخر كشف"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "statement_date",
+   "fieldtype": "Date",
+   "label": "تاريخ الكشف"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "الأرصدة المحسوبة (تُحدَّث عند فتح الصندوق)"
+  },
+  {
+   "fieldname": "posted_balance",
+   "fieldtype": "Currency",
+   "label": "المرحَّل (رصيد الأستاذ)",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "committed_amount",
+   "fieldtype": "Currency",
+   "label": "التزامات معتمدة غير مدفوعة",
+   "read_only": 1,
+   "no_copy": 1,
+   "description": "سندات صرف في مرحلة «جاهز للدفع» على هذا الصندوق"
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "book_balance",
+   "fieldtype": "Currency",
+   "label": "الدفتري (المرحَّل − الالتزامات)",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "statement_difference",
+   "fieldtype": "Currency",
+   "label": "فرق الكشف عن المرحَّل",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "balances_as_of",
+   "fieldtype": "Datetime",
+   "label": "الأرصدة كما في",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "sb_notes",
+   "fieldtype": "Section Break",
+   "label": "ملاحظات"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "ملاحظات"
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [
+  {
+   "link_doctype": "Payment Voucher",
+   "link_fieldname": "fund"
+  }
+ ],
+ "modified": "2026-09-17 08:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Treasury Fund",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "أمين صندوق",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "معتمد الصرف",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "field:fund_code",
+ "naming_rule": "By fieldname",
+ "title_field": "fund_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "fund_name"
+}

@@ -24,9 +24,9 @@ ROLES = [
 	("مدير المؤسسة", 1),
 ]
 
-# أدوار الحزم القطاعية (تُنشأ دائمًا؛ لا تضر المؤسسات التي لا تشغّل الحزمة)
+# أدوار المالية الإضافية (النواة — سلسلة اعتماد سند الصرف لكل مؤسسة)
 PACKAGE_ROLES = [
-	# الحزمة الخيرية — سلسلة اعتماد الصرف: المحاسب المالي (تسجيل) ← مدير مالي ← معتمد الصرف (الرئيس التنفيذي) ← أمين صندوق
+	# المحاسب المالي (تسجيل) ← مدير مالي ← معتمد الصرف (مدير المؤسسة / الرئيس التنفيذي) ← أمين صندوق
 	("مدير مالي", 1),
 	("معتمد الصرف", 1),
 	("أمين صندوق", 1),
@@ -111,15 +111,15 @@ def active_domains():
 		return set()
 
 
-def sync_charity_workflow():
-	"""سير اعتماد سند الصرف (الحزمة الخيرية) — يُنشأ/يُحدَّث عند الترحيل إن كان نطاق Charity مفعَّلًا."""
-	if "Charity" not in active_domains():
+def sync_finance_workflow():
+	"""سير اعتماد سند الصرف (النواة) — يُنشأ/يُحدَّث عند كل ترحيل بعد إكمال معالج الإعداد."""
+	if not frappe.db.get_single_value("System Settings", "setup_complete"):
 		return
 	try:
-		from zimam.zimam_charity.workflow import ensure_payment_voucher_workflow
+		from zimam.zimam_core.workflow import ensure_payment_voucher_workflow
 		ensure_payment_voucher_workflow()
 	except Exception:
-		frappe.log_error(title="zimam: charity workflow sync failed")
+		frappe.log_error(title="zimam: payment voucher workflow sync failed")
 
 
 def create_fields():
@@ -225,7 +225,7 @@ def after_install():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
-	sync_charity_workflow()
+	sync_finance_workflow()
 	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()
@@ -239,7 +239,7 @@ def after_migrate():
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
-	sync_charity_workflow()
+	sync_finance_workflow()
 	prune_sidebars_for_domains()
 	frappe.clear_cache()
 	frappe.db.commit()
