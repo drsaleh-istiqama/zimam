@@ -30,6 +30,8 @@ PACKAGE_ROLES = [
 	("مدير مالي", 1),
 	("معتمد الصرف", 1),
 	("أمين صندوق", 1),
+	# حسابات المستخدمين وتوزيع ملفات الصلاحيات (v0.12) — بلا صلاحيات مالية
+	("مسؤول الصلاحيات", 1),
 ]
 
 DOMAINS = ["Heritage", "Education", "Training", "Charity"]
@@ -92,6 +94,16 @@ def create_roles():
 	for role_name, desk in ROLES + PACKAGE_ROLES:
 		if not frappe.db.exists("Role", role_name):
 			frappe.get_doc({"doctype": "Role", "role_name": role_name, "desk_access": desk, "is_custom": 1}).insert(ignore_permissions=True)
+
+
+def sync_permissions():
+	"""ملفات الصلاحيات (Role Profile) + صلاحيات أدوار زِمام على مستندات ERPNext القياسية — من setup/permissions.py (v0.12)."""
+	try:
+		from zimam.setup.permissions import sync_role_profiles, sync_standard_permissions
+		sync_role_profiles()
+		sync_standard_permissions()
+	except Exception:
+		frappe.log_error(title="zimam: permissions sync failed")
 
 
 def create_domains():
@@ -222,6 +234,7 @@ def after_install():
 	create_roles()
 	create_domains()
 	create_fields()
+	sync_permissions()
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()
@@ -236,6 +249,7 @@ def after_migrate():
 	create_roles()
 	create_domains()
 	create_fields()
+	sync_permissions()
 	sync_dashboards()
 	sync_desktop_icons()
 	ensure_website_defaults()

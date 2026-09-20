@@ -7,7 +7,7 @@
   "country": "Oman",
   "currency": "OMR"
  },
- "_users_comment": "users: حسابات الدخول التي تُنشئها التهيئة (مستخدم نظام لكل بريد؛ تصل كل واحد رسالة ترحيب برابط تعيين كلمة المرور — لا تُكتب كلمة مرور هنا أبدًا). login_policy: قيم System Settings التي تُغيّر افتراضيات زِمام (login_with_email_link, login_with_email_link_expiry, reset_password_link_expiry_duration, password_reset_limit, allow_login_using_user_name). مثال مستخدم: {\"email\": \"admin@example.om\", \"first_name\": \"الاسم\", \"last_name\": \"اللقب\", \"language\": \"ar\", \"roles\": [\"System Manager\", \"مدير المؤسسة\", \"Accounts Manager\", \"HR Manager\"]}",
+ "_users_comment": "حسابات الدخول: لكل مستخدم email + first_name/last_name + role_profile (اسم ملف صلاحيات من setup/permissions.py، مثل «زِمام — محاسب مالي») وأدوار إضافية اختيارية roles؛ company/department اختياريان يقيّدان المستخدم بمستندات شركته/قسمه (User Permission). لا كلمات مرور — تصل رسالة ترحيب برابط التعيين. مثال: {\"email\": \"acc@example.om\", \"first_name\": \"محاسب\", \"role_profile\": \"زِمام — محاسب مالي\", \"company\": \"اسم الشركة\"}",
  "users": [],
  "login_policy": {},
  "arms": [],

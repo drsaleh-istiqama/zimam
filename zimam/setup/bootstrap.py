@@ -473,6 +473,7 @@ def run(profile="template", with_optional_arms=False):
 
 	setup_website(parent)
 	setup_login_policy(p.get("login_policy"))
+	sync_access_layer()
 	ensure_users(p.get("users"))
 	frappe.db.commit()
 	log(f"اكتملت تهيئة «{parent}» من ملف التعريف {profile_name}. راجع إعدادات زِمام وأدوار المستخدمين.")
@@ -648,8 +649,18 @@ def setup_login_policy(policy=None):
 	log("سياسة الدخول: " + "، ".join(f"{k}={wanted[k]}" for k in changed))
 
 
+def sync_access_layer():
+	"""ملفات الصلاحيات وصلاحيات المستندات القياسية (setup/permissions.py) — قبل إنشاء الحسابات كي تجدها."""
+	from zimam.setup.permissions import sync_role_profiles, sync_standard_permissions
+	profiles = sync_role_profiles()
+	perms = sync_standard_permissions()
+	log(f"الصلاحيات: ملفات صلاحيات {'أُنشئت/حُدِّثت: ' + '، '.join(profiles) if profiles else 'مطابقة'}؛ صفوف صلاحيات قياسية مُصحَّحة: {len(perms)}")
+
+
 def ensure_users(rows):
 	"""حسابات الدخول من ملف التعريف.
+
+	- `role_profile` (اختياري): اسم ملف صلاحيات من setup/permissions.py — يُربط بالمستخدم وتُضاف أدواره؛ `roles` أدوار إضافية فرادى.
 
 	- حساب جديد: يُنشأ «مستخدم نظام» بأدواره، ويُرسل له Frappe رسالة ترحيب تحمل رابط تعيين كلمة المرور
 	  (صلاحيته حسب سياسة الدخول أعلاه) — لا تُكتب كلمة مرور في أي ملف.
@@ -660,6 +671,11 @@ def ensure_users(rows):
 		email = (u.get("email") or "").strip().lower()
 		if not email or "@" not in email:
 			continue
+		from zimam.setup.permissions import apply_role_profile
+		profile = u.get("role_profile")
+		if profile and not frappe.db.exists("Role Profile", profile):
+			log(f"المستخدم {email}: ملف الصلاحيات «{profile}» غير موجود — تُخطّي")
+			profile = None
 		roles = [r for r in u.get("roles", []) if frappe.db.exists("Role", r)]
 		for r in set(u.get("roles", [])) - set(roles):
 			log(f"المستخدم {email}: الدور «{r}» غير موجود على هذا الموقع — تُخطّي")
@@ -667,12 +683,13 @@ def ensure_users(rows):
 			doc = frappe.get_doc("User", email)
 			existing = {r.role for r in doc.roles}
 			added = [r for r in roles if r not in existing]
+			for r in added:
+				doc.append("roles", {"role": r})
+			added += apply_role_profile(doc, profile)
 			if not added and doc.enabled:
 				log(f"المستخدم {email}: موجود بأدواره — لا تغيير")
 				continue
 			doc.enabled = 1
-			for r in added:
-				doc.append("roles", {"role": r})
 			doc.save(ignore_permissions=True)
 			log(f"المستخدم {email}: موجود — أُضيفت الأدوار {added}" if added else f"المستخدم {email}: أُعيد تفعيله")
 			continue
@@ -690,8 +707,13 @@ def ensure_users(rows):
 		})
 		if u.get("time_zone"):
 			doc.time_zone = u["time_zone"]
+		apply_role_profile(doc, profile)
 		doc.flags.no_welcome_mail = not welcome
 		doc.insert(ignore_permissions=True)
+		for allow, value in (("Company", u.get("company")), ("Department", u.get("department"))):
+			if value and frappe.db.exists(allow, value):
+				from zimam.setup.permissions import ensure_user_permission
+				ensure_user_permission(email, allow, value)
 		log(f"المستخدم {email}: أُنشئ" + (" وأُرسلت رسالة تعيين كلمة المرور إلى بريده" if welcome else " بلا رسالة ترحيب"))
 
 

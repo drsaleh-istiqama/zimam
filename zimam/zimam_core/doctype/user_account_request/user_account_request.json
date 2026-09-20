@@ -1,0 +1,291 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 10:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "section_1",
+  "full_name",
+  "email",
+  "mobile_no",
+  "employee",
+  "cb1",
+  "company",
+  "department",
+  "job_title",
+  "section_2",
+  "role_profile",
+  "role_profile_summary",
+  "extra_roles",
+  "cb2",
+  "restrict_to_company",
+  "restrict_to_department",
+  "justification",
+  "section_3",
+  "status",
+  "requested_by",
+  "cb3",
+  "user",
+  "processed_by",
+  "processed_on",
+  "processing_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "بيانات صاحب الحساب"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "الاسم الكامل",
+   "reqd": 1,
+   "in_list_view": 1,
+   "bold": 1
+  },
+  {
+   "fieldname": "email",
+   "fieldtype": "Data",
+   "label": "البريد الإلكتروني (اسم الدخول)",
+   "options": "Email",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "mobile_no",
+   "fieldtype": "Data",
+   "label": "الجوال",
+   "options": "Phone"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "سجل الموظف",
+   "options": "Employee",
+   "description": "اختياري — يُربط حساب الدخول بسجل الموظف فتعمل الخدمة الذاتية"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "الشركة / الذراع",
+   "options": "Company",
+   "reqd": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "القسم",
+   "options": "Department"
+  },
+  {
+   "fieldname": "job_title",
+   "fieldtype": "Data",
+   "label": "المسمى الوظيفي"
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "الصلاحية المطلوبة"
+  },
+  {
+   "fieldname": "role_profile",
+   "fieldtype": "Link",
+   "label": "ملف الصلاحيات (الصفة الوظيفية)",
+   "options": "Role Profile",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "description": "حزمة الأدوار الجاهزة للصفة الوظيفية — انظر مصفوفة الصلاحيات"
+  },
+  {
+   "fieldname": "role_profile_summary",
+   "fieldtype": "Small Text",
+   "label": "ما يمنحه هذا الملف",
+   "read_only": 1
+  },
+  {
+   "fieldname": "extra_roles",
+   "fieldtype": "Table",
+   "label": "أدوار إضافية (استثناء)",
+   "options": "User Account Request Role"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "restrict_to_company",
+   "fieldtype": "Check",
+   "label": "تقييد المستخدم بمستندات الشركة/الذراع المحددة",
+   "default": 1,
+   "description": "قيد مستخدم (User Permission) على الشركة: لا يرى مستندات الشركات الأخرى"
+  },
+  {
+   "fieldname": "restrict_to_department",
+   "fieldtype": "Check",
+   "label": "تقييد بالقسم"
+  },
+  {
+   "fieldname": "justification",
+   "fieldtype": "Small Text",
+   "label": "المبرر / ملاحظات"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "المعالجة"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "طلب جديد\nمعتمد ومنفَّذ\nمرفوض\nموقوف",
+   "default": "طلب جديد",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "label": "مقدم الطلب",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "حساب المستخدم",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "processed_by",
+   "fieldtype": "Link",
+   "label": "نفّذه",
+   "options": "User",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "processed_on",
+   "fieldtype": "Datetime",
+   "label": "تاريخ التنفيذ",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "processing_note",
+   "fieldtype": "Small Text",
+   "label": "ملاحظة المعالجة",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 10:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "User Account Request",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مسؤول الصلاحيات",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "create": 1,
+   "write": 1,
+   "if_owner": 1
+  },
+  {
+   "role": "مدير ذراع",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "create": 1,
+   "write": 1,
+   "if_owner": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "create": 1,
+   "write": 1,
+   "if_owner": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "format:UAR-{YYYY}-{####}",
+ "naming_rule": "Expression",
+ "title_field": "full_name",
+ "show_title_field_in_link": 1,
+ "search_fields": "full_name,email"
+}
