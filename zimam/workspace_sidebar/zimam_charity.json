@@ -443,18 +443,6 @@
    "icon": "",
    "indent": 0,
    "keep_closed": 0,
-   "label": "نشرة / تعميم",
-   "link_to": "Newsletter",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
-   "icon": "",
-   "indent": 0,
-   "keep_closed": 0,
    "label": "جهات الاتصال",
    "link_to": "Contact",
    "link_type": "DocType",
@@ -1945,18 +1933,6 @@
    "keep_closed": 0,
    "label": "ملفات النماذج",
    "link_to": "Letter Head",
-   "link_type": "DocType",
-   "show_arrow": 0,
-   "type": "Link"
-  },
-  {
-   "child": 1,
-   "collapsible": 1,
-   "icon": "",
-   "indent": 0,
-   "keep_closed": 0,
-   "label": "إرسال تعميم",
-   "link_to": "Newsletter",
    "link_type": "DocType",
    "show_arrow": 0,
    "type": "Link"

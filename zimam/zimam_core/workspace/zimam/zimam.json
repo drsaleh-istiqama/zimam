@@ -1,8 +1,8 @@
 {
  "doctype": "Workspace",
  "name": "Zimam",
- "creation": "2026-09-17 10:31:00.000000",
- "modified": "2026-09-17 10:31:00.000000",
+ "creation": "2026-09-17 10:32:00.000000",
+ "modified": "2026-09-17 10:32:00.000000",
  "owner": "Administrator",
  "modified_by": "Administrator",
  "docstatus": 0,
@@ -18,7 +18,7 @@
  "for_user": "",
  "sequence_id": 98.0,
  "restrict_to_domain": "",
- "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — إدارة المؤسسة</b></span>\", \"col\": 12}}, {\"id\": \"sc_service_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب خدمة\", \"col\": 4}}, {\"id\": \"sc_waqf_contribution\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مساهمة وقفية\", \"col\": 4}}, {\"id\": \"sc_payment_voucher\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"سند صرف\", \"col\": 4}}, {\"id\": \"sc_press_quick_quote\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"التسعير السريع للطباعة\", \"col\": 4}}, {\"id\": \"sc_print_estimate\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تقدير سعر طباعة\", \"col\": 4}}, {\"id\": \"sc_print_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر طباعة\", \"col\": 4}}, {\"id\": \"sc_institution_event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فعالية\", \"col\": 4}}, {\"id\": \"sc_legal_matter\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"شأن قانوني\", \"col\": 4}}, {\"id\": \"sc_zimam_manager\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة مدير المؤسسة\", \"col\": 4}}, {\"id\": \"nc_service_requests_receive\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Received This Month\", \"col\": 4}}, {\"id\": \"nc_service_requests_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Completed This Month\", \"col\": 4}}, {\"id\": \"nc_media_activities_this_mo\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Media Activities This Month\", \"col\": 4}}, {\"id\": \"nc_events_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Events This Month\", \"col\": 4}}, {\"id\": \"nc_waqf_income_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Waqf Income This Month\", \"col\": 4}}, {\"id\": \"nc_sales_invoices_this_mont\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Sales Invoices This Month\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_17811761\", \"type\": \"card\", \"data\": {\"card_name\": \"٤ · الدراسات والأبحاث\", \"col\": 4}}, {\"id\": \"card_1772046\", \"type\": \"card\", \"data\": {\"card_name\": \"٥ · الطباعة والنشر\", \"col\": 4}}, {\"id\": \"card_46199148\", \"type\": \"card\", \"data\": {\"card_name\": \"٦ · الاتصال المؤسسي والتواصل العلمي\", \"col\": 4}}, {\"id\": \"card_46128470\", \"type\": \"card\", \"data\": {\"card_name\": \"٧ · التميز المؤسسي\", \"col\": 4}}, {\"id\": \"card_28881757\", \"type\": \"card\", \"data\": {\"card_name\": \"٨ · التسويق والإنتاج الفني\", \"col\": 4}}, {\"id\": \"card_26624120\", \"type\": \"card\", \"data\": {\"card_name\": \"٩ · المطبعة الرقمية\", \"col\": 4}}, {\"id\": \"card_17696314\", \"type\": \"card\", \"data\": {\"card_name\": \"١٠ · خدمات الباحثين والمستفيدين\", \"col\": 4}}, {\"id\": \"card_85965196\", \"type\": \"card\", \"data\": {\"card_name\": \"١١ · الشؤون المالية\", \"col\": 4}}, {\"id\": \"card_141055\", \"type\": \"card\", \"data\": {\"card_name\": \"١٢ · الموارد البشرية والإدارية\", \"col\": 4}}, {\"id\": \"card_11023516\", \"type\": \"card\", \"data\": {\"card_name\": \"١٣ · الشؤون القانونية\", \"col\": 4}}, {\"id\": \"card_1796060\", \"type\": \"card\", \"data\": {\"card_name\": \"١٤ · التحول الرقمي وإدارة النظام\", \"col\": 4}}, {\"id\": \"card_2354065\", \"type\": \"card\", \"data\": {\"card_name\": \"١٥ · الاستثمار الوقفي والاستدامة\", \"col\": 4}}, {\"id\": \"card_12956097\", \"type\": \"card\", \"data\": {\"card_name\": \"١٦ · المتجر الرقمي\", \"col\": 4}}]",
+ "content": "[{\"id\": \"hdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\"><b>زِمام — إدارة المؤسسة</b></span>\", \"col\": 12}}, {\"id\": \"sc_service_request\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"طلب خدمة\", \"col\": 4}}, {\"id\": \"sc_waqf_contribution\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"مساهمة وقفية\", \"col\": 4}}, {\"id\": \"sc_payment_voucher\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"سند صرف\", \"col\": 4}}, {\"id\": \"sc_press_quick_quote\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"التسعير السريع للطباعة\", \"col\": 4}}, {\"id\": \"sc_print_estimate\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"تقدير سعر طباعة\", \"col\": 4}}, {\"id\": \"sc_print_job\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"أمر طباعة\", \"col\": 4}}, {\"id\": \"sc_institution_event\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"فعالية\", \"col\": 4}}, {\"id\": \"sc_legal_matter\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"شأن قانوني\", \"col\": 4}}, {\"id\": \"sc_zimam_manager\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"لوحة مدير المؤسسة\", \"col\": 4}}, {\"id\": \"nc_service_requests_receive\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Received This Month\", \"col\": 4}}, {\"id\": \"nc_service_requests_complet\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Service Requests Completed This Month\", \"col\": 4}}, {\"id\": \"nc_media_activities_this_mo\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Media Activities This Month\", \"col\": 4}}, {\"id\": \"nc_events_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Events This Month\", \"col\": 4}}, {\"id\": \"nc_waqf_income_this_month\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Waqf Income This Month\", \"col\": 4}}, {\"id\": \"nc_sales_invoices_this_mont\", \"type\": \"number_card\", \"data\": {\"number_card_name\": \"Sales Invoices This Month\", \"col\": 4}}, {\"id\": \"sp1\", \"type\": \"spacer\", \"data\": {\"col\": 12}}, {\"id\": \"card_90878880\", \"type\": \"card\", \"data\": {\"card_name\": \"٤ · الدراسات والأبحاث\", \"col\": 4}}, {\"id\": \"card_72554257\", \"type\": \"card\", \"data\": {\"card_name\": \"٥ · الطباعة والنشر\", \"col\": 4}}, {\"id\": \"card_75782263\", \"type\": \"card\", \"data\": {\"card_name\": \"٦ · الاتصال المؤسسي والتواصل العلمي\", \"col\": 4}}, {\"id\": \"card_38602079\", \"type\": \"card\", \"data\": {\"card_name\": \"٧ · التميز المؤسسي\", \"col\": 4}}, {\"id\": \"card_27777108\", \"type\": \"card\", \"data\": {\"card_name\": \"٨ · التسويق والإنتاج الفني\", \"col\": 4}}, {\"id\": \"card_86549458\", \"type\": \"card\", \"data\": {\"card_name\": \"٩ · المطبعة الرقمية\", \"col\": 4}}, {\"id\": \"card_47750104\", \"type\": \"card\", \"data\": {\"card_name\": \"١٠ · خدمات الباحثين والمستفيدين\", \"col\": 4}}, {\"id\": \"card_14828124\", \"type\": \"card\", \"data\": {\"card_name\": \"١١ · الشؤون المالية\", \"col\": 4}}, {\"id\": \"card_45377127\", \"type\": \"card\", \"data\": {\"card_name\": \"١٢ · الموارد البشرية والإدارية\", \"col\": 4}}, {\"id\": \"card_20854650\", \"type\": \"card\", \"data\": {\"card_name\": \"١٣ · الشؤون القانونية\", \"col\": 4}}, {\"id\": \"card_42777504\", \"type\": \"card\", \"data\": {\"card_name\": \"١٤ · التحول الرقمي وإدارة النظام\", \"col\": 4}}, {\"id\": \"card_18204400\", \"type\": \"card\", \"data\": {\"card_name\": \"١٥ · الاستثمار الوقفي والاستدامة\", \"col\": 4}}, {\"id\": \"card_83337614\", \"type\": \"card\", \"data\": {\"card_name\": \"١٦ · المتجر الرقمي\", \"col\": 4}}]",
  "links": [
   {
    "type": "Card Break",
@@ -107,7 +107,7 @@
   {
    "type": "Card Break",
    "label": "٦ · الاتصال المؤسسي والتواصل العلمي",
-   "link_count": 5,
+   "link_count": 4,
    "hidden": 0,
    "onboard": 0
   },
@@ -136,16 +136,6 @@
    "label": "نشاط إعلامي",
    "link_type": "DocType",
    "link_to": "Media Activity",
-   "onboard": 0,
-   "dependencies": "",
-   "is_query_report": 0,
-   "hidden": 0
-  },
-  {
-   "type": "Link",
-   "label": "نشرة / تعميم",
-   "link_type": "DocType",
-   "link_to": "Newsletter",
    "onboard": 0,
    "dependencies": "",
    "is_query_report": 0,
