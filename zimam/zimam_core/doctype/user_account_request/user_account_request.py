@@ -17,7 +17,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import now_datetime, validate_email_address
 
-from zimam.setup.permissions import ERP_ROLE_SCOPE, R_ACCESS, R_SYS, ROLE_DESCRIPTIONS, apply_block_modules, apply_role_profile, ensure_user_permission, profile_modules
+from zimam.setup.permissions import ERP_ROLE_SCOPE, PACK_COMPANY, R_ACCESS, R_SYS, ROLE_DESCRIPTIONS, apply_block_modules, apply_role_profile, ensure_user_permission, profile_modules
 from zimam.utils import notify_roles
 
 PRIVILEGED = {"System Manager", "Administrator"}
@@ -54,6 +54,8 @@ class UserAccountRequest(Document):
 			frappe.throw(_("لا يجوز طلب دور «System Manager» إلا لمن يحمله"))
 		if self.employee and not self.company:
 			self.company = frappe.db.get_value("Employee", self.employee, "company")
+		if not self.company:
+			self.company = pack_default_company(self.role_profile)
 		if self.status == "طلب جديد" and frappe.db.exists("User", self.email):
 			enabled = frappe.db.get_value("User", self.email, "enabled")
 			self.processing_note = _("تنبيه: يوجد حساب بهذا البريد ({0}) — عند الاعتماد يُفعَّل وتُستكمل أدواره فقط").format(
@@ -192,6 +194,45 @@ def profile_summary(role_profile):
 	desk = any(frappe.db.get_value("Role", r, "desk_access") for r in roles)
 	lines.append(_("نوع الحساب: {0}").format(_("مستخدم نظام (سطح المكتب)") if desk else _("مستخدم موقع (بوابة خارجية فقط)")))
 	return "\n".join(lines)
+
+
+def pack_default_company(role_profile):
+	"""شركة القيد الافتراضية لحزمة: المطبعة ⟵ ذراع المطبعة، الترميم ⟵ ذراع الترميم إن وُجد، وإلا الشركة الأم."""
+	zs = frappe.get_cached_doc("Zimam Settings")
+	kind = PACK_COMPANY.get(role_profile)
+	if kind == "press" and zs.get("press_company"):
+		return zs.press_company
+	if kind == "restoration":
+		arm = frappe.db.get_value("Company", {"zimam_arm_role": "ترميم"}, "name")
+		if arm:
+			return arm
+	return zs.parent_company
+
+
+@frappe.whitelist()
+def pack_defaults(role_profile):
+	"""للنموذج: الشركة الافتراضية والوحدات لحزمة/ملف صلاحيات."""
+	return {"company": pack_default_company(role_profile), "modules": [m for m in profile_modules(role_profile) if frappe.db.exists("Module Def", m)]}
+
+
+@frappe.whitelist()
+def assign_pack(user, role_profile, company=None, restrict_to_company=1, note=None):
+	"""تخصيص حزمة صلاحيات لمستخدم قائم بنقرة (زر «تخصيص حزمة زِمام» في شاشة المستخدم): يُنشأ طلب حساب موثَّق ويُنفَّذ فورًا
+	— فتبقى كل حزمة مخصَّصة أثرًا مسجَّلًا (من، لمن، متى، أي حزمة)."""
+	_require_processor()
+	if not frappe.db.exists("User", user):
+		frappe.throw(_("المستخدم {0} غير موجود").format(user))
+	if not frappe.db.exists("Role Profile", role_profile):
+		frappe.throw(_("ملف الصلاحيات {0} غير موجود").format(role_profile))
+	u = frappe.db.get_value("User", user, ["full_name", "mobile_no"], as_dict=True)
+	employee = frappe.db.get_value("Employee", {"user_id": user}, "name")
+	req = frappe.get_doc({"doctype": "User Account Request", "full_name": u.full_name or user, "email": user, "mobile_no": u.mobile_no,
+		"employee": employee, "company": company or pack_default_company(role_profile), "role_profile": role_profile,
+		"restrict_to_company": 1 if int(restrict_to_company or 0) else 0, "justification": note or _("تخصيص حزمة من شاشة المستخدم")})
+	req.flags.ignore_permissions = True
+	req.insert()
+	req.provision(note=note, send_welcome_email=0)
+	return req.name
 
 
 @frappe.whitelist()

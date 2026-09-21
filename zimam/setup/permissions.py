@@ -89,6 +89,7 @@ ERP_ROLE_SCOPE = {
 	"Expense Approver": "اعتماد مطالبات المصروفات",
 	"Employee": "الخدمة الذاتية للموظف: طلباته وإجازاته وقسائمه",
 	"Report Manager": "بناء التقارير وحفظها ومشاركتها",
+	"Quality Manager": "إجراءات الجودة وأهدافها ومراجعاتها وحالات عدم المطابقة",
 	"System Manager": "إدارة النظام كاملة",
 }
 
@@ -117,6 +118,58 @@ ROLE_PROFILES = [
 ]
 
 # ---------------------------------------------------------------------------
+# حزم الصلاحيات بحسب الوحدة التنظيمية (بقرار د. صالح 2026-09-21): حزمة واحدة تحوي كل ما تحتاجه الوحدة — أدوار زِمام
+# وأدوار ERPNext ووحداتها النمطية وشركتها الافتراضية — تُخصَّص بنقرة لمستخدم قائم (زر في شاشة المستخدم) أو جديد (طلب حساب).
+# كل حزمة ملف صلاحيات (Role Profile) باسم «زِمام — حزمة: …»؛ الملفات الوظيفية أعلاه تبقى لبناتٍ للتخصيص الدقيق.
+# ---------------------------------------------------------------------------
+PACK_PREFIX = PROFILE_PREFIX + "حزمة: "
+# (الاسم, الوصف, الأدوار, الوحدات النمطية, شركة القيد الافتراضية: press/restoration/parent/None)
+ACCESS_PACKS = [
+	(PACK_PREFIX + "المطبعة الرقمية", "كل عمل المطبعة: التسعير السريع والتقديرات وأوامر الطباعة وكتالوج الورق والآلات والتشطيب وعروض الأسعار والفواتير والمخزون — مقيَّد بشركة المطبعة",
+		[R_ARM_MGR, R_DESIGNER, "Sales User", "Purchase User", "Stock User", "Projects User", R_EMPLOYEE],
+		["Zimam Core", "Selling", "Buying", "Stock", "Projects", "Accounts"], "press"),
+	(PACK_PREFIX + "الترميم والصيانة", "ترميم المخطوطات والوثائق: التقييم وعروض تكلفة الترميم وطلبات الترميم والمواد والمخزون وصيانة المعدات — يرى الخزائن والمقتنيات",
+		[R_TECH_SUP, R_UNIT_SUP, "Stock User", R_EMPLOYEE],
+		["Zimam Core", "Zimam Heritage", "Stock", "Assets", "Projects"], None),
+	(PACK_PREFIX + "المقتنيات والخزائن والرقمنة", "استلام الخزائن وفرزها وفهرسة المقتنيات وأوامر المعالجة والرقمنة وحركة المخزون",
+		[R_TECH_SUP, R_UNIT, "Stock User", R_EMPLOYEE],
+		["Zimam Core", "Zimam Heritage", "Stock"], None),
+	(PACK_PREFIX + "المالية", "الوحدة المالية كاملة: سندات الصرف وسلسلة الاعتماد والصناديق والقيود والفواتير والوقفيات والتبرعات والتقارير المالية",
+		[R_ACCOUNTANT, R_FIN_MGR, R_CASHIER, "Accounts Manager", "Accounts User", R_EMPLOYEE],
+		["Zimam Core", "Zimam Giving", "Zimam Charity", "Accounts", "Selling", "Buying", "Assets"], "parent"),
+	(PACK_PREFIX + "الموارد البشرية", "الموظفون والإجازات والحضور والتوظيف والتقييم والرواتب واعتماد الإجازات والمطالبات",
+		["HR Manager", "HR User", "Payroll Manager", "Leave Approver", "Expense Approver", R_EMPLOYEE],
+		["Zimam Core", "HR", "Payroll"], None),
+	(PACK_PREFIX + "خدمات الباحثين والاستقبال", "طلبات الخدمة والمواعيد والمستفيدون والعملاء وفواتير الخدمات والتبرعات والعضويات",
+		[R_RECEPTION, "Sales User", R_EMPLOYEE],
+		["Zimam Core", "Zimam Charity", "Selling", "CRM", "Support"], "parent"),
+	(PACK_PREFIX + "الفعاليات والإعلام والتواصل", "الفعاليات وتسجيل المشاركين والأنشطة الإعلامية وجهات الاتصال وحملات التواصل",
+		[R_UNIT_SUP, R_UNIT, R_EMPLOYEE],
+		["Zimam Core", "CRM", "Projects"], None),
+	(PACK_PREFIX + "العطاء الوقفي والاستثمار", "الحملات والأسهم والمساهمات الوقفية وشهاداتها والعقارات الوقفية وعقود الإيجار",
+		[R_ACCOUNTANT, "Accounts User", R_EMPLOYEE],
+		["Zimam Core", "Zimam Giving", "Accounts"], "parent"),
+	(PACK_PREFIX + "الشؤون القانونية", "الشؤون القانونية والعقود وقوالبها وتنبيهات انتهاء الصلاحية",
+		[R_UNIT_SUP, R_EMPLOYEE],
+		["Zimam Core"], None),
+	(PACK_PREFIX + "الدراسات والأبحاث", "المشاريع البحثية والتحقيق والمهام وسجلات ساعات العمل والإصدارات",
+		[R_UNIT_SUP, "Projects User", R_EMPLOYEE],
+		["Zimam Core", "Projects"], None),
+	(PACK_PREFIX + "الجودة والتميز المؤسسي", "إجراءات الجودة وأهدافها ومراجعاتها وحالات عدم المطابقة ولوحة المؤشرات",
+		[R_UNIT_SUP, "Quality Manager", R_EMPLOYEE],
+		["Zimam Core", "Quality Management"], None),
+	(PACK_PREFIX + "الإدارة العليا", "الرئيس التنفيذي / مدير المؤسسة: اطلاع على كل شيء في كل الشركات ولوحات المؤشرات واعتماد الصرف فوق الحد",
+		[R_INST_MGR, R_APPROVER, R_EMPLOYEE],
+		[], None),
+	(PACK_PREFIX + "إدارة النظام والصلاحيات", "مدير النظام: كل الصلاحيات + اعتماد طلبات الحسابات وتوزيع الحزم",
+		[R_SYS, R_ACCESS, R_EMPLOYEE],
+		[], None),
+]
+PACK_COMPANY = {name: company for name, _d, _r, _m, company in ACCESS_PACKS}
+# الحزم ملفات صلاحيات أيضًا — تُنشأ وتُزامَن مع الملفات الوظيفية
+ROLE_PROFILES = ROLE_PROFILES + [(name, desc, roles) for name, desc, roles, _m, _c in ACCESS_PACKS]
+
+# ---------------------------------------------------------------------------
 # الوحدات النمطية (Module Def) المسموحة لكل ملف صلاحيات — ما عداها يُحجب (User.block_modules) فلا تظهر أيقوناته ولا مساحاته
 # ---------------------------------------------------------------------------
 # وحدات تقنية تبقى مسموحة دائمًا (حجبها يكسر النماذج والبريد والطباعة)
@@ -141,6 +194,7 @@ PROFILE_MODULES = {
 	PROFILE_PREFIX + "مستفيد خارجي": [],
 	PROFILE_PREFIX + "شريك خارجي": [],
 }
+PROFILE_MODULES.update({name: modules for name, _d, _r, modules, _c in ACCESS_PACKS})
 
 
 def profile_modules(role_profile):

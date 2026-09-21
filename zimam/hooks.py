@@ -30,6 +30,8 @@ after_migrate = "zimam.setup.install.after_migrate"
 # ---------------------------------------------------------------------------
 # أحداث مستندات ERPNext القياسية
 # ---------------------------------------------------------------------------
+doctype_js = {"User": "public/js/user_zimam.js"}  # زر «تخصيص حزمة زِمام» في شاشة المستخدم
+
 doc_events = {
 	"Sales Invoice": {
 		"on_submit": "zimam.integrations.selling.sales_invoice_on_submit",

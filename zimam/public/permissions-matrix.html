@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>مصفوفة صلاحيات زِمام</title>
-<meta name="description" content="مستوى صلاحية كل دور على كل مستند في زِمام (عرض/إضافة/تعديل/حذف)، ملفات الصلاحيات، وآلية إنشاء المستخدم — الإصدار 0.12.8">
+<meta name="description" content="مستوى صلاحية كل دور على كل مستند في زِمام (عرض/إضافة/تعديل/حذف)، ملفات الصلاحيات، وآلية إنشاء المستخدم — الإصدار 0.12.9">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@400;500;700&family=Noto+Naskh+Arabic:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf7f5;--fg:#2b1a20;--muted:#6b5a60;--line:#e6dcdf;--card:#fff;--brand:#5A1A30;--brand2:#983050;--gold:#C89060;
@@ -45,7 +45,7 @@ footer{color:var(--muted);font-size:14px;margin-top:40px;border-top:1px solid va
 </style>
 </head>
 <body>
-<header><div class="in"><h1>مصفوفة الصلاحيات في زِمام</h1><p>الإصدار 0.12.8 · مولَّدة آليًا في 2026-09-21 من تعريفات الأنواع و<code dir="ltr">setup/permissions.py</code> · أمام كل دور ومستند: <b>عرض · إضافة · تعديل · حذف</b> (+ اعتماد · إلغاء للمستندات المعتمَدة)</p></div></header>
+<header><div class="in"><h1>مصفوفة الصلاحيات في زِمام</h1><p>الإصدار 0.12.9 · مولَّدة آليًا في 2026-09-21 من تعريفات الأنواع و<code dir="ltr">setup/permissions.py</code> · أمام كل دور ومستند: <b>عرض · إضافة · تعديل · حذف</b> (+ اعتماد · إلغاء للمستندات المعتمَدة)</p></div></header>
 <main>
 <nav class="toc"><a href="#roles">١ الأدوار</a><a href="#profiles">٢ ملفات الصلاحيات</a><a href="#zimam">٣ مستندات زِمام</a><a href="#std">٤ مستندات ERPNext القياسية</a><a href="#mech">٥ آلية إنشاء المستخدم</a></nav>
 <div class="legend"><span class="ro">عرض فقط</span><span class="rw">إضافة و/أو تعديل</span><span class="full">كامل (يشمل الحذف)</span><span class="none">— لا صلاحية</span><span>«سجلاته فقط» = يرى ويعدّل ما أنشأه هو</span></div>
@@ -68,24 +68,37 @@ footer{color:var(--muted);font-size:14px;margin-top:40px;border-top:1px solid va
 <tr><th class="dt"><b>System Manager</b></th><td>مدير النظام: كل الصلاحيات — للتقني المسؤول عن الموقع فقط</td></tr>
 <tr><th class="dt"><b>Employee</b></th><td>موظف (Frappe HR): الخدمة الذاتية — إجازاته وحضوره وقسائم راتبه ومطالباته</td></tr>
 </tbody></table></div>
-<h2 id="profiles">٢. ملفات الصلاحيات — يُختار ملف واحد عند إنشاء الحساب</h2><div class="tbl roles"><table><thead><tr><th>ملف الصلاحيات</th><th>الاستعمال</th><th>الأدوار المضمومة</th></tr></thead><tbody>
-<tr><th class="dt"><b>زِمام — مدير المؤسسة</b></th><td>الرئيس التنفيذي: اطلاع على كل شيء + اعتماد الصرف</td><td>مدير المؤسسة، معتمد الصرف، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مدير ذراع</b></th><td>مدير المطبعة / بيت الترميم / الاستثمار — يُقيَّد بشركته</td><td>مدير ذراع، Sales User، Purchase User، Stock User، Projects User، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مدير مالي</b></th><td>مدير المالية: المراجعة والاعتماد وكل المحاسبة</td><td>مدير مالي، Accounts Manager، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — محاسب مالي</b></th><td>المحاسب: التسجيل والفوترة والقيود</td><td>محاسب مالي، Accounts User، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — معتمد الصرف</b></th><td>معتمد الصرف فوق الحد (حين يُفوَّض غير مدير المؤسسة)</td><td>معتمد الصرف، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — أمين صندوق</b></th><td>أمين الصندوق: تسجيل الدفع</td><td>أمين صندوق، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مشرف وحدة</b></th><td>رئيس قسم: يدير وحدته ومشاريعها</td><td>مشرف وحدة، Projects User، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — موظف وحدة</b></th><td>موظف تنفيذي في وحدة</td><td>موظف وحدة، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — موظف استقبال وخدمة</b></th><td>الاستقبال والخدمة والعملاء</td><td>موظف استقبال وخدمة، Sales User، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مشرف فني</b></th><td>المشرف الفني على المعالجة والرقمنة والمخزون</td><td>مشرف فني، Stock User، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مخرج فني ومصمم</b></th><td>التصميم والإخراج وأوامر الطباعة</td><td>مخرج فني ومصمم، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — موارد بشرية</b></th><td>مسؤول الموارد البشرية: الموظفون والإجازات والحضور</td><td>HR User، Leave Approver، Expense Approver، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مدير الموارد البشرية والرواتب</b></th><td>مدير الموارد البشرية: كل الموارد البشرية والرواتب</td><td>HR Manager، HR User، Payroll Manager، Leave Approver، Expense Approver، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مسؤول الصلاحيات</b></th><td>إنشاء الحسابات وتوزيع ملفات الصلاحيات وإيقافها</td><td>مسؤول الصلاحيات، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مدير النظام</b></th><td>التقني المسؤول عن الموقع: كل الصلاحيات</td><td>System Manager، مسؤول الصلاحيات، Employee</td></tr>
-<tr><th class="dt"><b>زِمام — مستفيد خارجي</b></th><td>بوابة الموقع: باحث أو مستفيد يرفع طلباته</td><td>مستفيد خارجي</td></tr>
-<tr><th class="dt"><b>زِمام — شريك خارجي</b></th><td>بوابة الموقع: شريك يطّلع على ما يُشارَك معه</td><td>شريك خارجي</td></tr>
+<h2 id="profiles">٢. حزم الصلاحيات وملفاتها — تُختار حزمة واحدة عند إنشاء الحساب أو تخصيصها لمستخدم قائم</h2><div class="tbl roles"><table><thead><tr><th>الحزمة / ملف الصلاحيات</th><th>الاستعمال</th><th>الأدوار المضمومة</th><th>الوحدات النمطية</th></tr></thead><tbody>
+<tr><th class="dt"><b>زِمام — مدير المؤسسة</b></th><td>الرئيس التنفيذي: اطلاع على كل شيء + اعتماد الصرف</td><td>مدير المؤسسة، معتمد الصرف، Employee</td><td>Zimam Core، Zimam Giving، Zimam Heritage، Zimam Charity، Accounts، Selling، Buying، Stock، Projects، HR، Payroll، Assets، Quality Management، CRM، Support</td></tr>
+<tr><th class="dt"><b>زِمام — مدير ذراع</b></th><td>مدير المطبعة / بيت الترميم / الاستثمار — يُقيَّد بشركته</td><td>مدير ذراع، Sales User، Purchase User، Stock User، Projects User، Employee</td><td>Zimam Core، Selling، Buying، Stock، Projects، CRM، Accounts</td></tr>
+<tr><th class="dt"><b>زِمام — مدير مالي</b></th><td>مدير المالية: المراجعة والاعتماد وكل المحاسبة</td><td>مدير مالي، Accounts Manager، Employee</td><td>Zimam Core، Zimam Giving، Zimam Charity، Accounts، Selling، Buying، Assets</td></tr>
+<tr><th class="dt"><b>زِمام — محاسب مالي</b></th><td>المحاسب: التسجيل والفوترة والقيود</td><td>محاسب مالي، Accounts User، Employee</td><td>Zimam Core، Zimam Giving، Zimam Charity، Accounts، Selling، Buying</td></tr>
+<tr><th class="dt"><b>زِمام — معتمد الصرف</b></th><td>معتمد الصرف فوق الحد (حين يُفوَّض غير مدير المؤسسة)</td><td>معتمد الصرف، Employee</td><td>Zimam Core، Accounts</td></tr>
+<tr><th class="dt"><b>زِمام — أمين صندوق</b></th><td>أمين الصندوق: تسجيل الدفع</td><td>أمين صندوق، Employee</td><td>Zimam Core، Accounts</td></tr>
+<tr><th class="dt"><b>زِمام — مشرف وحدة</b></th><td>رئيس قسم: يدير وحدته ومشاريعها</td><td>مشرف وحدة، Projects User، Employee</td><td>Zimam Core، Zimam Heritage، Projects، Quality Management، Support، CRM</td></tr>
+<tr><th class="dt"><b>زِمام — موظف وحدة</b></th><td>موظف تنفيذي في وحدة</td><td>موظف وحدة، Employee</td><td>Zimam Core، Zimam Heritage، Projects</td></tr>
+<tr><th class="dt"><b>زِمام — موظف استقبال وخدمة</b></th><td>الاستقبال والخدمة والعملاء</td><td>موظف استقبال وخدمة، Sales User، Employee</td><td>Zimam Core، Zimam Charity، Selling، CRM، Support</td></tr>
+<tr><th class="dt"><b>زِمام — مشرف فني</b></th><td>المشرف الفني على المعالجة والرقمنة والمخزون</td><td>مشرف فني، Stock User، Employee</td><td>Zimam Core، Zimam Heritage، Stock، Assets</td></tr>
+<tr><th class="dt"><b>زِمام — مخرج فني ومصمم</b></th><td>التصميم والإخراج وأوامر الطباعة</td><td>مخرج فني ومصمم، Employee</td><td>Zimam Core، Selling</td></tr>
+<tr><th class="dt"><b>زِمام — موارد بشرية</b></th><td>مسؤول الموارد البشرية: الموظفون والإجازات والحضور</td><td>HR User، Leave Approver، Expense Approver، Employee</td><td>Zimam Core، HR</td></tr>
+<tr><th class="dt"><b>زِمام — مدير الموارد البشرية والرواتب</b></th><td>مدير الموارد البشرية: كل الموارد البشرية والرواتب</td><td>HR Manager، HR User، Payroll Manager، Leave Approver، Expense Approver، Employee</td><td>Zimam Core، HR، Payroll</td></tr>
+<tr><th class="dt"><b>زِمام — مسؤول الصلاحيات</b></th><td>إنشاء الحسابات وتوزيع ملفات الصلاحيات وإيقافها</td><td>مسؤول الصلاحيات، Employee</td><td>Zimam Core</td></tr>
+<tr><th class="dt"><b>زِمام — مدير النظام</b></th><td>التقني المسؤول عن الموقع: كل الصلاحيات</td><td>System Manager، مسؤول الصلاحيات، Employee</td><td>الكل</td></tr>
+<tr><th class="dt"><b>زِمام — مستفيد خارجي</b></th><td>بوابة الموقع: باحث أو مستفيد يرفع طلباته</td><td>مستفيد خارجي</td><td>الكل</td></tr>
+<tr><th class="dt"><b>زِمام — شريك خارجي</b></th><td>بوابة الموقع: شريك يطّلع على ما يُشارَك معه</td><td>شريك خارجي</td><td>الكل</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: المطبعة الرقمية</b></th><td>كل عمل المطبعة: التسعير السريع والتقديرات وأوامر الطباعة وكتالوج الورق والآلات والتشطيب وعروض الأسعار والفواتير والمخزون — مقيَّد بشركة المطبعة</td><td>مدير ذراع، مخرج فني ومصمم، Sales User، Purchase User، Stock User، Projects User، Employee</td><td>Zimam Core، Selling، Buying، Stock، Projects، Accounts</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الترميم والصيانة</b></th><td>ترميم المخطوطات والوثائق: التقييم وعروض تكلفة الترميم وطلبات الترميم والمواد والمخزون وصيانة المعدات — يرى الخزائن والمقتنيات</td><td>مشرف فني، مشرف وحدة، Stock User، Employee</td><td>Zimam Core، Zimam Heritage، Stock، Assets، Projects</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: المقتنيات والخزائن والرقمنة</b></th><td>استلام الخزائن وفرزها وفهرسة المقتنيات وأوامر المعالجة والرقمنة وحركة المخزون</td><td>مشرف فني، موظف وحدة، Stock User، Employee</td><td>Zimam Core، Zimam Heritage، Stock</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: المالية</b></th><td>الوحدة المالية كاملة: سندات الصرف وسلسلة الاعتماد والصناديق والقيود والفواتير والوقفيات والتبرعات والتقارير المالية</td><td>محاسب مالي، مدير مالي، أمين صندوق، Accounts Manager، Accounts User، Employee</td><td>Zimam Core، Zimam Giving، Zimam Charity، Accounts، Selling، Buying، Assets</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الموارد البشرية</b></th><td>الموظفون والإجازات والحضور والتوظيف والتقييم والرواتب واعتماد الإجازات والمطالبات</td><td>HR Manager، HR User، Payroll Manager، Leave Approver، Expense Approver، Employee</td><td>Zimam Core، HR، Payroll</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: خدمات الباحثين والاستقبال</b></th><td>طلبات الخدمة والمواعيد والمستفيدون والعملاء وفواتير الخدمات والتبرعات والعضويات</td><td>موظف استقبال وخدمة، Sales User، Employee</td><td>Zimam Core، Zimam Charity، Selling، CRM، Support</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الفعاليات والإعلام والتواصل</b></th><td>الفعاليات وتسجيل المشاركين والأنشطة الإعلامية وجهات الاتصال وحملات التواصل</td><td>مشرف وحدة، موظف وحدة، Employee</td><td>Zimam Core، CRM، Projects</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: العطاء الوقفي والاستثمار</b></th><td>الحملات والأسهم والمساهمات الوقفية وشهاداتها والعقارات الوقفية وعقود الإيجار</td><td>محاسب مالي، Accounts User، Employee</td><td>Zimam Core، Zimam Giving، Accounts</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الشؤون القانونية</b></th><td>الشؤون القانونية والعقود وقوالبها وتنبيهات انتهاء الصلاحية</td><td>مشرف وحدة، Employee</td><td>Zimam Core</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الدراسات والأبحاث</b></th><td>المشاريع البحثية والتحقيق والمهام وسجلات ساعات العمل والإصدارات</td><td>مشرف وحدة، Projects User، Employee</td><td>Zimam Core، Projects</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الجودة والتميز المؤسسي</b></th><td>إجراءات الجودة وأهدافها ومراجعاتها وحالات عدم المطابقة ولوحة المؤشرات</td><td>مشرف وحدة، Quality Manager، Employee</td><td>Zimam Core، Quality Management</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: الإدارة العليا</b></th><td>الرئيس التنفيذي / مدير المؤسسة: اطلاع على كل شيء في كل الشركات ولوحات المؤشرات واعتماد الصرف فوق الحد</td><td>مدير المؤسسة، معتمد الصرف، Employee</td><td>الكل</td></tr>
+<tr><th class="dt"><b>زِمام — حزمة: إدارة النظام والصلاحيات</b></th><td>مدير النظام: كل الصلاحيات + اعتماد طلبات الحسابات وتوزيع الحزم</td><td>System Manager، مسؤول الصلاحيات، Employee</td><td>الكل</td></tr>
 </tbody></table></div>
 <h3>ما يمنحه كل دور ERPNext مضموم</h3><div class="tbl roles"><table><tbody>
 <tr><th class="dt"><b>Accounts User</b></th><td>إضافة وتعديل واعتماد قيود اليومية وقيود الدفع وفواتير البيع والشراء؛ لا حذف ولا إلغاء</td></tr>
@@ -106,6 +119,7 @@ footer{color:var(--muted);font-size:14px;margin-top:40px;border-top:1px solid va
 <tr><th class="dt"><b>Expense Approver</b></th><td>اعتماد مطالبات المصروفات</td></tr>
 <tr><th class="dt"><b>Employee</b></th><td>الخدمة الذاتية للموظف: طلباته وإجازاته وقسائمه</td></tr>
 <tr><th class="dt"><b>Report Manager</b></th><td>بناء التقارير وحفظها ومشاركتها</td></tr>
+<tr><th class="dt"><b>Quality Manager</b></th><td>إجراءات الجودة وأهدافها ومراجعاتها وحالات عدم المطابقة</td></tr>
 <tr><th class="dt"><b>System Manager</b></th><td>إدارة النظام كاملة</td></tr>
 </tbody></table></div>
 <h2 id="zimam">٣. مستندات زِمام — مستوى صلاحية كل دور</h2>

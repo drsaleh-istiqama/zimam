@@ -4,6 +4,7 @@
 frappe.ui.form.on("User Account Request", {
 	setup(frm) {
 		frm.set_query("role_profile", () => ({ filters: [["Role Profile", "name", "like", "زِمام%"]] }));
+		frm.set_intro && frm.is_new() && frm.set_intro(__("اختر «زِمام — حزمة: …» لوحدة تنظيمية كاملة (المطبعة، الترميم، المالية…) أو ملفًا وظيفيًا دقيقًا."), "blue");
 		frm.set_query("employee", () => (frm.doc.company ? { filters: { company: frm.doc.company, status: "Active" } } : {}));
 		frm.set_query("department", () => (frm.doc.company ? { filters: { company: frm.doc.company } } : {}));
 	},
@@ -70,12 +71,14 @@ frappe.ui.form.on("User Account Request", {
 			args: { role_profile: frm.doc.role_profile },
 		}).then((r) => frm.set_value("role_profile_summary", r.message || ""));
 		frappe.call({
-			method: "zimam.zimam_core.doctype.user_account_request.user_account_request.default_modules",
+			method: "zimam.zimam_core.doctype.user_account_request.user_account_request.pack_defaults",
 			args: { role_profile: frm.doc.role_profile },
 		}).then((r) => {
+			const d = r.message || {};
 			frm.clear_table("modules");
-			(r.message || []).forEach((m) => frm.add_child("modules", { module: m }));
+			(d.modules || []).forEach((m) => frm.add_child("modules", { module: m }));
 			frm.refresh_field("modules");
+			if (d.company && !frm.doc.employee) frm.set_value("company", d.company);
 		});
 	},
 	employee(frm) {
