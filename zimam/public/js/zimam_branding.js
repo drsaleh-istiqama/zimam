@@ -10,7 +10,7 @@
 		bar.id = "zimam-powered-by";
 		bar.setAttribute("dir", "rtl");
 		bar.setAttribute("lang", "ar");
-		bar.style.cssText = "position:fixed;inset-inline:0;bottom:0;z-index:1020;font-size:12px;line-height:1.6;text-align:center;padding:3px 12px;" +
+		bar.style.cssText = "position:fixed;inset-inline:0;bottom:0;z-index:5;font-size:12px;line-height:1.6;text-align:center;padding:3px 12px;pointer-events:none;" +
 			"background:var(--bg-color, #fff);color:var(--text-muted, #6c7680);border-top:1px solid var(--border-color, #e2e6e9);direction:rtl;";
 		if (url) {
 			var a = document.createElement("a");
@@ -53,4 +53,26 @@
 		jQuery(document).on("startup", function () { setTimeout(land, 0); });
 	}
 	document.addEventListener("DOMContentLoaded", function () { setTimeout(land, 800); });
+})();
+
+
+// الشريط يقتصر على منطقة المحتوى: يترك عرض الشريط الجانبي (اسم المستخدم وقائمته في أسفله) مكشوفًا — ملاحظة د. صالح 2026-09-21
+(function () {
+	function fit() {
+		var bar = document.getElementById("zimam-powered-by");
+		if (!bar) return;
+		var sb = document.querySelector(".body-sidebar, .layout-side-section.sidebar-toggled, .desk-sidebar");
+		var w = sb && sb.offsetWidth && sb.offsetHeight ? sb.getBoundingClientRect().width : 0;
+		bar.style.insetInlineStart = w ? w + "px" : "0";
+		bar.style.insetInlineEnd = "0";
+		var a = bar.querySelector("a");
+		if (a) a.style.pointerEvents = "auto";
+	}
+	window.addEventListener("resize", fit);
+	document.addEventListener("DOMContentLoaded", function () { setTimeout(fit, 1200); });
+	if (window.jQuery) {
+		jQuery(document).on("startup page-change", function () { setTimeout(fit, 400); });
+		jQuery(document).on("click", ".sidebar-toggle-btn, .body-sidebar-toggle, [data-toggle-sidebar]", function () { setTimeout(fit, 500); });
+	}
+	setInterval(fit, 3000);
 })();

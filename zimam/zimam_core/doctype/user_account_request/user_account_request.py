@@ -17,7 +17,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import now_datetime, validate_email_address
 
-from zimam.setup.permissions import ERP_ROLE_SCOPE, R_ACCESS, R_SYS, ROLE_DESCRIPTIONS, apply_role_profile, ensure_user_permission
+from zimam.setup.permissions import ERP_ROLE_SCOPE, R_ACCESS, R_SYS, ROLE_DESCRIPTIONS, apply_block_modules, apply_role_profile, ensure_user_permission, profile_modules
 from zimam.utils import notify_roles
 
 PRIVILEGED = {"System Manager", "Administrator"}
@@ -43,6 +43,11 @@ class UserAccountRequest(Document):
 			self.status = "طلب جديد"
 		if self.role_profile:
 			self.role_profile_summary = profile_summary(self.role_profile)
+			# الوحدات الافتراضية لملف الصلاحيات إن لم يحدد الطالب شيئًا
+			if not self.modules and (self.is_new() or self.has_value_changed("role_profile")):
+				for m in profile_modules(self.role_profile):
+					if frappe.db.exists("Module Def", m):
+						self.append("modules", {"module": m})
 		# لا يُمنح دور مدير النظام إلا ممن يحمله
 		asked = {r.role for r in self.extra_roles or []}
 		if asked & PRIVILEGED and "System Manager" not in frappe.get_roles():
@@ -102,6 +107,7 @@ class UserAccountRequest(Document):
 			user.default_app = "zimam"
 		if user.meta.has_field("default_workspace") and not user.get("default_workspace") and frappe.db.exists("Workspace", "Zimam"):
 			user.default_workspace = "Zimam"
+		blocked = apply_block_modules(user, [m.module for m in self.modules or []])
 		user.flags.ignore_permissions = True
 		if created:
 			user.insert()
@@ -134,6 +140,8 @@ class UserAccountRequest(Document):
 			summary += _(" · بلا سجل موظف مرتبط: دور «Employee» (الخدمة الذاتية) لا يثبت إلا بعد ربط سجل الموظف")
 		if restrictions:
 			summary += _(" · مقيَّد بـ: {0}").format("، ".join(restrictions))
+		if blocked:
+			summary += _(" · الوحدات المسموحة: {0} (حُجبت {1} وحدة أخرى)").format("، ".join(m.module for m in self.modules), len(blocked))
 		if created and int(send_welcome_email or 0):
 			summary += _(" · أُرسلت رسالة الترحيب برابط تعيين كلمة المرور")
 		if note:
@@ -184,6 +192,12 @@ def profile_summary(role_profile):
 	desk = any(frappe.db.get_value("Role", r, "desk_access") for r in roles)
 	lines.append(_("نوع الحساب: {0}").format(_("مستخدم نظام (سطح المكتب)") if desk else _("مستخدم موقع (بوابة خارجية فقط)")))
 	return "\n".join(lines)
+
+
+@frappe.whitelist()
+def default_modules(role_profile):
+	"""الوحدات النمطية الافتراضية لملف صلاحيات — للنموذج عند تغيير الملف."""
+	return [m for m in profile_modules(role_profile) if frappe.db.exists("Module Def", m)]
 
 
 @frappe.whitelist()

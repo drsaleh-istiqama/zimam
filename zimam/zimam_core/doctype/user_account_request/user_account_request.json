@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:36:00.000000",
+ "creation": "2026-09-17 10:37:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -21,6 +21,7 @@
   "role_profile_summary",
   "extra_roles",
   "cb2",
+  "modules",
   "restrict_to_company",
   "restrict_to_department",
   "justification",
@@ -125,6 +126,13 @@
    "label": ""
   },
   {
+   "fieldname": "modules",
+   "fieldtype": "Table",
+   "label": "الوحدات النمطية المسموحة",
+   "options": "User Account Request Module",
+   "description": "تُملأ تلقائيًا بحسب ملف الصلاحيات؛ احذف أو أضف ما تشاء — ما عداها يُحجب عن سطح المكتب والشريط الجانبي"
+  },
+  {
    "fieldname": "restrict_to_company",
    "fieldtype": "Check",
    "label": "تقييد المستخدم بمستندات الشركة/الذراع المحددة",
@@ -203,7 +211,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 10:36:00.000000",
+ "modified": "2026-09-17 10:37:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "User Account Request",

@@ -117,6 +117,54 @@ ROLE_PROFILES = [
 ]
 
 # ---------------------------------------------------------------------------
+# الوحدات النمطية (Module Def) المسموحة لكل ملف صلاحيات — ما عداها يُحجب (User.block_modules) فلا تظهر أيقوناته ولا مساحاته
+# ---------------------------------------------------------------------------
+# وحدات تقنية تبقى مسموحة دائمًا (حجبها يكسر النماذج والبريد والطباعة)
+MODULES_ALWAYS = ["Core", "Desk", "Custom", "Email", "Printing", "Workflow", "Contacts", "Communication", "Automation", "Geo", "Utilities", "Social"]
+Z_CORE, Z_GIVING, Z_HERITAGE, Z_CHARITY = "Zimam Core", "Zimam Giving", "Zimam Heritage", "Zimam Charity"
+PROFILE_MODULES = {
+	PROFILE_PREFIX + "مدير المؤسسة": [Z_CORE, Z_GIVING, Z_HERITAGE, Z_CHARITY, "Accounts", "Selling", "Buying", "Stock", "Projects", "HR", "Payroll", "Assets", "Quality Management", "CRM", "Support"],
+	PROFILE_PREFIX + "مدير ذراع": [Z_CORE, "Selling", "Buying", "Stock", "Projects", "CRM", "Accounts"],
+	PROFILE_PREFIX + "مدير مالي": [Z_CORE, Z_GIVING, Z_CHARITY, "Accounts", "Selling", "Buying", "Assets"],
+	PROFILE_PREFIX + "محاسب مالي": [Z_CORE, Z_GIVING, Z_CHARITY, "Accounts", "Selling", "Buying"],
+	PROFILE_PREFIX + "معتمد الصرف": [Z_CORE, "Accounts"],
+	PROFILE_PREFIX + "أمين صندوق": [Z_CORE, "Accounts"],
+	PROFILE_PREFIX + "مشرف وحدة": [Z_CORE, Z_HERITAGE, "Projects", "Quality Management", "Support", "CRM"],
+	PROFILE_PREFIX + "موظف وحدة": [Z_CORE, Z_HERITAGE, "Projects"],
+	PROFILE_PREFIX + "موظف استقبال وخدمة": [Z_CORE, Z_CHARITY, "Selling", "CRM", "Support"],
+	PROFILE_PREFIX + "مشرف فني": [Z_CORE, Z_HERITAGE, "Stock", "Assets"],
+	PROFILE_PREFIX + "مخرج فني ومصمم": [Z_CORE, "Selling"],
+	PROFILE_PREFIX + "موارد بشرية": [Z_CORE, "HR"],
+	PROFILE_PREFIX + "مدير الموارد البشرية والرواتب": [Z_CORE, "HR", "Payroll"],
+	PROFILE_PREFIX + "مسؤول الصلاحيات": [Z_CORE],
+	PROFILE_PREFIX + "مدير النظام": [],  # فارغ = بلا حجب
+	PROFILE_PREFIX + "مستفيد خارجي": [],
+	PROFILE_PREFIX + "شريك خارجي": [],
+}
+
+
+def profile_modules(role_profile):
+	"""الوحدات المسموحة افتراضيًا لملف صلاحيات (بلا Frappe)."""
+	return list(PROFILE_MODULES.get(role_profile, []))
+
+
+def apply_block_modules(user_doc, allowed):
+	"""يحجب كل وحدة نمطية ليست في المسموحة (+ التقنية الدائمة). قائمة فارغة = لا حجب (مدير النظام)."""
+	import frappe
+
+	allowed = [m for m in (allowed or []) if m]
+	if not allowed:
+		return []
+	keep = set(allowed) | set(MODULES_ALWAYS)
+	all_modules = frappe.get_all("Module Def", pluck="name")
+	blocked = sorted(m for m in all_modules if m not in keep)
+	user_doc.set("block_modules", [])
+	for m in blocked:
+		user_doc.append("block_modules", {"module": m})
+	return blocked
+
+
+# ---------------------------------------------------------------------------
 # صلاحيات مستندات ERPNext/HRMS القياسية لأدوار زِمام (Custom DocPerm — permlevel 0)
 # ---------------------------------------------------------------------------
 # مستويات الصلاحية ⟵ أنواع الصلاحية في Frappe

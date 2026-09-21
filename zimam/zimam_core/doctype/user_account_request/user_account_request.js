@@ -69,6 +69,14 @@ frappe.ui.form.on("User Account Request", {
 			method: "zimam.zimam_core.doctype.user_account_request.user_account_request.profile_summary",
 			args: { role_profile: frm.doc.role_profile },
 		}).then((r) => frm.set_value("role_profile_summary", r.message || ""));
+		frappe.call({
+			method: "zimam.zimam_core.doctype.user_account_request.user_account_request.default_modules",
+			args: { role_profile: frm.doc.role_profile },
+		}).then((r) => {
+			frm.clear_table("modules");
+			(r.message || []).forEach((m) => frm.add_child("modules", { module: m }));
+			frm.refresh_field("modules");
+		});
 	},
 	employee(frm) {
 		if (!frm.doc.employee) return;
