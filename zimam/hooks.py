@@ -62,7 +62,9 @@ scheduler_events = {
 # ---------------------------------------------------------------------------
 # العلامة: «يعمل هذا النظام من خلال منصة زِمام» — كل مؤسسة تبقي اسمها وشعارها
 # ---------------------------------------------------------------------------
-app_include_js = ["/assets/zimam/js/zimam_branding.js"]
+from zimam import __version__ as _v  # noqa: E402
+
+app_include_js = [f"/assets/zimam/js/zimam_branding.js?v={_v}"]  # رقم الإصدار يمنع المتصفح من خدمة نسخة قديمة بعد النشر
 app_include_css = ["/assets/zimam/css/zimam-desk.css"]
 web_include_css = ["/assets/zimam/css/zimam-web.css"]
 

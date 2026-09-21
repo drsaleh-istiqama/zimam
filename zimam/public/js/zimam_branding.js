@@ -35,26 +35,34 @@
 
 
 // الهبوط بعد الدخول: مساحة زِمام مباشرة لا شاشة أيقونات سطح المكتب (بقرار د. صالح 2026-09-21).
-// في v16 يعرض المسار الفارغ (/desk) صفحة «desktop» دائمًا ولا تغيّره إعدادات التطبيق الافتراضي وحدها،
-// فنُعيد التوجيه مرة واحدة عند أول تحميل للجلسة فقط؛ زر «Desktop» من قائمة الشريط الجانبي يبقى يعمل بعدها.
+// في v16 يعرض المسار الفارغ (/desk) صفحة «desktop» دائمًا ولا تغيّره إعدادات التطبيق الافتراضي وحدها.
+// لا نعتمد على أحداث التحميل (ثبت في 0.12.7 أنها لا تصل لهذا الملف)؛ نراقب جاهزية سطح المكتب ثم نوجّه مرة واحدة في الجلسة.
 (function () {
-	var done = false;
+	var tries = 0, done = false;
+	function ready() {
+		return window.frappe && frappe.boot && frappe.session && frappe.session.user && frappe.session.user !== "Guest" &&
+			frappe.router && typeof frappe.set_route === "function" && frappe.boot.home_page !== "setup-wizard";
+	}
 	function land() {
-		if (done || !window.frappe || !frappe.session || frappe.session.user === "Guest") return;
+		if (done) return true;
+		if (!ready()) return false;
 		var path = (location.pathname || "").replace(/\/+$/, "");
-		if (path !== "/desk" && path !== "/app") return;
-		if (location.hash && location.hash.length > 1) return;
+		if (path !== "/desk" && path !== "/app") { done = true; return true; }
+		if (location.hash && location.hash.length > 1) { done = true; return true; }
+		if (!document.querySelector(".icons-container, .desktop-icons, #page-desktop, .page-container")) return false;
 		done = true;
+		try { sessionStorage.setItem("zimam_landed", "1"); } catch (e) {}
 		frappe.route_flags = frappe.route_flags || {};
 		frappe.route_flags.replace_route = true;
 		frappe.set_route("zimam");
+		return true;
 	}
-	if (window.jQuery) {
-		jQuery(document).on("startup", function () { setTimeout(land, 0); });
-	}
-	document.addEventListener("DOMContentLoaded", function () { setTimeout(land, 800); });
+	try { if (sessionStorage.getItem("zimam_landed")) done = true; } catch (e) {}
+	var timer = setInterval(function () {
+		tries += 1;
+		if (land() || tries > 60) clearInterval(timer);
+	}, 250);
 })();
-
 
 // الشريط يقتصر على منطقة المحتوى: يترك عرض الشريط الجانبي (اسم المستخدم وقائمته في أسفله) مكشوفًا — ملاحظة د. صالح 2026-09-21
 (function () {
