@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:30:00.000000",
+ "creation": "2026-09-17 10:31:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -130,7 +130,7 @@
    "link_fieldname": "depositor"
   }
  ],
- "modified": "2026-09-17 10:30:00.000000",
+ "modified": "2026-09-17 10:31:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Heritage",
  "name": "Depositor",
@@ -205,8 +205,8 @@
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
- "autoname": "format:DEP-{#####}",
- "naming_rule": "Expression",
+ "autoname": "DEP-.#####",
+ "naming_rule": "Expression (Old Style)",
  "title_field": "depositor_name",
  "show_title_field_in_link": 1,
  "search_fields": "depositor_name,phone,wilayat",

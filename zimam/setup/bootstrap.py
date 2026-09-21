@@ -141,11 +141,13 @@ def ensure_income_account(name, company):
 
 
 def default_customer_group():
-	return frappe.db.get_single_value("Selling Settings", "customer_group") or frappe.db.get_value("Customer Group", {"is_group": 0}, "name") or "All Customer Groups"
+	from zimam.utils import leaf_of
+	return leaf_of("Customer Group", frappe.db.get_single_value("Selling Settings", "customer_group"), "Individual")
 
 
 def default_territory():
-	return frappe.db.get_single_value("Selling Settings", "territory") or "All Territories"
+	from zimam.utils import leaf_of
+	return leaf_of("Territory", frappe.db.get_single_value("Selling Settings", "territory"), "Oman")
 
 
 def ensure_internal_customer(represents, allowed):

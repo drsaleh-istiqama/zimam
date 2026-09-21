@@ -179,3 +179,10 @@ def role_profiles_catalog():
 		if frappe.db.exists("Role Profile", name):
 			out.append({"name": name, "description": desc, "roles": roles})
 	return out
+
+
+@frappe.whitelist()
+def effective_permissions(user):
+	"""«ماذا يستطيع هذا الحساب فعلًا؟» — انظر zimam.setup.permissions.effective_permissions."""
+	from zimam.setup.permissions import effective_permissions as _eff
+	return _eff(user)

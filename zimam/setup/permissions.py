@@ -317,3 +317,41 @@ def apply_role_profile(user_doc, profile_name):
 			user_doc.append("roles", {"role": r})
 			added.append(r)
 	return added
+
+
+def effective_permissions(user):
+	"""الصلاحيات الفعلية لحساب قائم كما يحسبها Frappe (الأدوار + ملفات الصلاحيات + قيود المستخدم) على كل مستندات زِمام
+	والمستندات القياسية المذكورة في STANDARD_PERMS — لمسؤول الصلاحيات ومدير النظام: «ماذا يستطيع هذا الحساب فعلًا؟» بلا تبديل جلسة."""
+	import frappe
+	from frappe import _
+
+	if not ({R_ACCESS, R_SYS} & set(frappe.get_roles())):
+		frappe.throw(_("عرض الصلاحيات الفعلية لمسؤول الصلاحيات أو مدير النظام فقط"), frappe.PermissionError)
+	if not frappe.db.exists("User", user):
+		frappe.throw(_("المستخدم {0} غير موجود").format(user))
+	roles = frappe.get_roles(user)
+	doctypes = frappe.get_all("DocType", filters={"module": ["in", ["Zimam Core", "Zimam Giving", "Zimam Heritage", "Zimam Charity"]], "istable": 0},
+		fields=["name", "module", "is_submittable", "issingle"], order_by="module, name")
+	std = [{"name": dt, "module": "ERPNext", "is_submittable": frappe.get_meta(dt).is_submittable, "issingle": 0}
+		for dt in STANDARD_PERMS if frappe.db.exists("DocType", dt)]
+	rows = []
+	for d in doctypes + std:
+		ptypes = ["read", "create", "write", "delete"] + (["submit", "cancel"] if d.get("is_submittable") else [])
+		flags = {}
+		for pt in ptypes:
+			try:
+				flags[pt] = bool(frappe.has_permission(d["name"], pt, user=user))
+			except Exception:
+				flags[pt] = False
+		if any(flags.values()):
+			rows.append({"doctype": d["name"], "module": d["module"], "single": bool(d.get("issingle")),
+				"level": level_of({k: int(v) for k, v in flags.items()}, bool(d.get("is_submittable"))), **flags})
+	ups = frappe.get_all("User Permission", filters={"user": user}, fields=["allow", "for_value", "apply_to_all_doctypes", "applicable_for"])
+	profiles = []
+	if frappe.get_meta("User").has_field("role_profiles"):
+		profiles = frappe.get_all("User Role Profile", filters={"parent": user, "parenttype": "User"}, pluck="role_profile")
+	elif frappe.get_meta("User").has_field("role_profile_name"):
+		profiles = [frappe.db.get_value("User", user, "role_profile_name")]
+	return {"user": user, "enabled": frappe.db.get_value("User", user, "enabled"), "user_type": frappe.db.get_value("User", user, "user_type"),
+		"roles": sorted(r for r in roles if r not in ("All", "Guest", "Desk User")), "role_profiles": [p for p in profiles if p],
+		"user_permissions": ups, "rows": rows}

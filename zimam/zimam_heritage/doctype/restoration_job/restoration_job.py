@@ -25,7 +25,7 @@ class RestorationJob(Document):
 			self.billing_type = "فوترة بينية للمؤسسة"
 		_hours, self.total_labor = compute_labor(self.treatments, flt(hs.default_labor_rate))
 		self.total_materials = compute_amounts(self.materials)
-		self.total_cost = flt(self.total_labor) + flt(self.total_materials)
+		self.total_cost = flt(flt(self.total_labor) + flt(self.total_materials), 3)
 		if self.billing_type != "بلا فوترة" and not self.price:
 			self.price = self.total_cost
 		if not self.materials_warehouse and self.materials:

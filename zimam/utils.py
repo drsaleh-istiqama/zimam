@@ -55,9 +55,9 @@ def hijri_str(date):
 def compute_amounts(rows, qty_field="qty", rate_field="rate", amount_field="amount"):
 	total = 0.0
 	for row in rows or []:
-		row.set(amount_field, flt(row.get(qty_field)) * flt(row.get(rate_field)))
+		row.set(amount_field, flt(flt(row.get(qty_field)) * flt(row.get(rate_field)), 3))
 		total += flt(row.get(amount_field))
-	return total
+	return flt(total, 3)
 
 
 def compute_labor(rows, default_rate, hours_field="hours", rate_field="rate", amount_field="amount"):
@@ -65,10 +65,10 @@ def compute_labor(rows, default_rate, hours_field="hours", rate_field="rate", am
 	for row in rows or []:
 		if not row.get(rate_field):
 			row.set(rate_field, default_rate)
-		row.set(amount_field, flt(row.get(hours_field)) * flt(row.get(rate_field)))
+		row.set(amount_field, flt(flt(row.get(hours_field)) * flt(row.get(rate_field)), 3))
 		total += flt(row.get(amount_field))
 		hours += flt(row.get(hours_field))
-	return hours, total
+	return flt(hours, 2), flt(total, 3)
 
 
 # ---------------------------------------------------------------------------
@@ -98,13 +98,35 @@ def cancel_linked(doctype, name):
 		doc.cancel()
 
 
+SERVICE_ITEMS = {"print": ("print_service_item", "SRV-PRINT", "خدمة طباعة"), "general": ("default_service_item", "SRV-GENERAL", "خدمة عامة")}
+
+
+def service_item(kind="general"):
+	"""صنف الخدمة من إعدادات زِمام؛ إن لم يُحدَّد يُنشأ الصنف الافتراضي (خدمة غير مخزنية) ويُحفظ في الإعدادات — فلا يتوقف
+	عرض السعر أو الفاتورة على إعداد نسيه أحد (وجدنا ذلك في الفحص الحي 2026-09-21)."""
+	field, code, label = SERVICE_ITEMS[kind]
+	zs = frappe.get_cached_doc("Zimam Settings")
+	item = zs.get(field)
+	if item and frappe.db.exists("Item", item):
+		return item
+	if not frappe.db.exists("Item", code):
+		group = "خدمات زِمام"
+		if not frappe.db.exists("Item Group", group):
+			frappe.get_doc({"doctype": "Item Group", "item_group_name": group, "parent_item_group": "All Item Groups", "is_group": 0}).insert(ignore_permissions=True)
+		frappe.get_doc({"doctype": "Item", "item_code": code, "item_name": label, "description": label, "item_group": group,
+			"stock_uom": "Nos", "is_stock_item": 0, "is_sales_item": 1, "is_purchase_item": 0}).insert(ignore_permissions=True)
+	frappe.db.set_single_value("Zimam Settings", field, code)
+	frappe.clear_cache(doctype="Zimam Settings")
+	return code
+
+
 def make_service_invoice(company, customer, item_code, rate, description, ref_doctype, ref_name,
 		qty=1, cost_center=None, income_account=None, submit=False):
 	"""فاتورة مبيعات (مسودة افتراضيًا) لخدمة واحدة مع مرجع إلى مستند زِمام."""
 	if not customer:
 		frappe.throw(_("حدد العميل قبل إنشاء الفاتورة"))
 	if not item_code:
-		frappe.throw(_("صنف الخدمة غير محدد في إعدادات زِمام"))
+		item_code = service_item("general")
 	si = frappe.new_doc("Sales Invoice")
 	si.company = company
 	si.customer = customer
@@ -129,10 +151,27 @@ def ensure_customer_for(name, email=None, phone=None):
 		return existing
 	doc = frappe.get_doc({
 		"doctype": "Customer", "customer_name": name, "customer_type": "Individual",
-		"customer_group": frappe.db.get_single_value("Selling Settings", "customer_group") or "All Customer Groups",
-		"territory": frappe.db.get_single_value("Selling Settings", "territory") or "All Territories",
+		"customer_group": leaf_of("Customer Group", frappe.db.get_single_value("Selling Settings", "customer_group"), "Individual"),
+		"territory": leaf_of("Territory", frappe.db.get_single_value("Selling Settings", "territory"), "Oman"),
 		"email_id": email, "mobile_no": phone,
 	}).insert(ignore_permissions=True)
+	return doc.name
+
+
+def leaf_of(doctype, preferred=None, fallback=None):
+	"""عقدة غير مجموعة من شجرة (مجموعة العملاء/الإقليم): ERPNext يرفض إسناد مجموعة (is_group) للعميل — الإعداد الافتراضي
+	«All Customer Groups»/«All Territories» مجموعتان فيفشل إنشاء العميل من طلب الخدمة. نأخذ المفضَّل إن كان ورقة، ثم البديل، ثم أول ورقة."""
+	for cand in (preferred, fallback):
+		if cand and frappe.db.exists(doctype, cand) and not frappe.db.get_value(doctype, cand, "is_group"):
+			return cand
+	leaf = frappe.db.get_value(doctype, {"is_group": 0}, "name", order_by="name")
+	if leaf:
+		return leaf
+	# لا ورقة إطلاقًا: ننشئ واحدة تحت الجذر
+	root = frappe.db.get_value(doctype, {"is_group": 1, "parent_" + doctype.lower().replace(" ", "_"): ["in", ["", None]]}, "name") or frappe.db.get_value(doctype, {"is_group": 1}, "name")
+	name_field = "customer_group_name" if doctype == "Customer Group" else "territory_name"
+	parent_field = "parent_customer_group" if doctype == "Customer Group" else "parent_territory"
+	doc = frappe.get_doc({"doctype": doctype, name_field: fallback or "عام", parent_field: root, "is_group": 0}).insert(ignore_permissions=True)
 	return doc.name
 
 

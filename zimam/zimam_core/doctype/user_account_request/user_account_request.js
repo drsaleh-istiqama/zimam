@@ -55,6 +55,7 @@ frappe.ui.form.on("User Account Request", {
 			}).addClass("btn-primary");
 		}
 		if (frm.doc.user) {
+			frm.add_custom_button(__("الصلاحيات الفعلية للحساب"), () => zimam_show_effective_permissions(frm.doc.user), __("عرض"));
 			frm.add_custom_button(__("حساب المستخدم"), () => frappe.set_route("Form", "User", frm.doc.user), __("عرض"));
 			frm.add_custom_button(__("قيود المستخدم"), () => frappe.set_route("List", "User Permission", { user: frm.doc.user }), __("عرض"));
 		}
@@ -82,3 +83,22 @@ frappe.ui.form.on("User Account Request", {
 		});
 	},
 });
+
+// «ماذا يستطيع هذا الحساب فعلًا؟» — الصلاحيات كما يحسبها Frappe بعد الأدوار وملفات الصلاحيات وقيود المستخدم
+function zimam_show_effective_permissions(user) {
+	frappe.call({ method: "zimam.zimam_core.doctype.user_account_request.user_account_request.effective_permissions", args: { user }, freeze: true }).then((r) => {
+		const m = r.message || {};
+		const esc = frappe.utils.escape_html;
+		const ups = (m.user_permissions || []).map((u) => `${esc(u.allow)}: ${esc(u.for_value)}`).join("، ") || __("لا قيود — يرى كل الشركات");
+		const rows = (m.rows || []).map((x) => {
+			const cell = (k) => (x[k] === undefined ? "" : x[k] ? "✔" : "—");
+			return `<tr><td>${esc(x.module.replace("Zimam ", ""))}</td><td><b>${esc(__(x.doctype))}</b><br><code>${esc(x.doctype)}</code></td>
+				<td>${cell("read")}</td><td>${cell("create")}</td><td>${cell("write")}</td><td>${cell("delete")}</td><td>${cell("submit")}</td><td>${esc(x.level)}</td></tr>`;
+		}).join("");
+		const html = `<p><b>${esc(m.user)}</b> · ${m.enabled ? __("مفعَّل") : __("موقوف")} · ${esc(m.user_type || "")}</p>
+			<p><b>${__("ملفات الصلاحيات")}:</b> ${esc((m.role_profiles || []).join("، ") || "—")}<br><b>${__("الأدوار")}:</b> ${esc((m.roles || []).join("، "))}<br><b>${__("القيود")}:</b> ${esc(ups)}</p>
+			<div style="max-height:60vh;overflow:auto"><table class="table table-bordered table-sm" style="font-size:12px"><thead><tr><th>${__("الوحدة")}</th><th>${__("المستند")}</th><th>${__("عرض")}</th><th>${__("إضافة")}</th><th>${__("تعديل")}</th><th>${__("حذف")}</th><th>${__("اعتماد")}</th><th>${__("المستوى")}</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+		const d = new frappe.ui.Dialog({ title: __("الصلاحيات الفعلية: {0}", [m.user]), size: "extra-large", fields: [{ fieldtype: "HTML", options: html }] });
+		d.show();
+	});
+}

@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:30:00.000000",
+ "creation": "2026-09-17 10:31:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -273,7 +273,7 @@
    "link_fieldname": "donation"
   }
  ],
- "modified": "2026-09-17 10:30:00.000000",
+ "modified": "2026-09-17 10:31:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Charity",
  "name": "Donation",
@@ -371,8 +371,8 @@
  "states": [],
  "track_changes": 1,
  "is_submittable": 1,
- "autoname": "format:DON-{YYYY}-{#####}",
- "naming_rule": "Expression",
+ "autoname": "DON-.YYYY.-.#####",
+ "naming_rule": "Expression (Old Style)",
  "title_field": "donor_name",
  "show_title_field_in_link": 1,
  "search_fields": "donor_name,reference_no,purpose",

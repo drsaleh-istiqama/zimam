@@ -103,8 +103,12 @@ class PrintEstimate(Document):
 			frappe.throw(_("حدد العميل أو اكتب اسم طالب العرض"))
 		if self.alternative_of and self.alternative_of == self.name:
 			frappe.throw(_("لا يكون التقدير خيارًا بديلًا لنفسه"))
+		# مقاسات صريحة بلا مقاس جاهز ⟵ «مخصص»؛ وإلا فالافتراضي من إعدادات المطبعة كان يطمس المقاس المُدخل في مستند جديد (فحص 2026-09-21)
+		if not self.size_preset and self.finished_width_mm and self.finished_height_mm:
+			self.size_preset = "مخصص"
 		self.apply_defaults(only_missing=True)
-		if self.size_preset in pe.SIZE_PRESETS and self.size_preset != "مخصص" and (self.has_value_changed("size_preset") or not self.finished_width_mm):
+		if self.size_preset in pe.SIZE_PRESETS and self.size_preset != "مخصص" and (
+				not self.finished_width_mm or (not self.is_new() and self.has_value_changed("size_preset"))):
 			self.finished_width_mm, self.finished_height_mm = pe.SIZE_PRESETS[self.size_preset]
 		if not self.estimate_date:
 			self.estimate_date = nowdate()
@@ -217,6 +221,14 @@ class PrintEstimate(Document):
 			parts.append(_("الدفعة المقدمة: {0}% قبل بدء العمل.").format(int(flt(self.advance_percent))))
 		parts.append(_("يبدأ التنفيذ بعد اعتماد التصميم النهائي كتابيًا."))
 		return "\n".join(parts)
+
+	def before_submit(self):
+		"""لا يُرسل تقدير بتكلفة صفر أو بمكوّن لم يُحسب (قطعة أكبر من الفرخ، خامة ناقصة…) — وجدنا في الفحص الحي تقديرًا مُرسلًا
+		بتكلفة 0 وإجمالي = الحد الأدنى فقط."""
+		bad = [c for c in (self.components or []) if (c.get("warning") or "").strip() or not flt(c.get("amount"))]
+		if bad or not flt(self.total_cost):
+			frappe.throw(_("لا يمكن إرسال التقدير: مكوّنات لم تُحسب تكلفتها — {0}").format(
+				"؛ ".join(f"{c.component}: {c.warning or _('التكلفة صفر')}" for c in bad) or _("التكلفة الإجمالية صفر")))
 
 	def on_submit(self):
 		values = {}
@@ -362,7 +374,8 @@ def mark_sent(name, via):
 
 
 def _quotation_lines(q, doc, zs, ps):
-	item = zs.print_service_item
+	from zimam.utils import service_item
+	item = service_item("print")
 	design_cost = flt(doc.design_hours) * flt(doc.design_rate)
 	price = flt(doc.net_total)
 	design_item = ps.design_service_item
@@ -400,8 +413,6 @@ def make_quotation(name=None, names=None):
 				return doc.quotation
 			frappe.throw(_("التقدير {0} له عرض سعر بالفعل: {1}").format(doc.name, doc.quotation))
 	zs, ps = get_settings(), get_press_settings()
-	if not zs.print_service_item:
-		frappe.throw(_("صنف خدمة الطباعة غير محدد في إعدادات زِمام"))
 	customer = docs[0].billing_customer()
 	for doc in docs:
 		if doc.billing_customer() != customer:

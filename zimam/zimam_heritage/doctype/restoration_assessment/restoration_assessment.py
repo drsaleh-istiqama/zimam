@@ -42,16 +42,16 @@ class RestorationAssessment(Document):
 		for row in self.items:
 			if not row.rate and row.service_item and self.price_list:
 				row.rate = get_rate(row.service_item, self.price_list)
-			row.amount = flt(row.qty) * flt(row.rate)
+			row.amount = flt(flt(row.qty) * flt(row.rate), 3)
 			net += row.amount
 			pages += int(row.pages or 0)
 			objects.add(row.object_code or row.cabinet_item or row.title)
-		self.net_total = net
+		self.net_total = flt(net, 3)
 		self.total_pages = pages
 		self.total_objects = len(objects)
 		tax = net * flt(self.tax_rate) / 100.0
 		self.tax_amount = float(round(tax)) if self.round_tax else round(tax, 3)
-		self.grand_total = flt(self.net_total) + flt(self.tax_amount)
+		self.grand_total = flt(flt(self.net_total) + flt(self.tax_amount), 3)
 
 	def default_terms(self):
 		parts = []

@@ -22,7 +22,7 @@ class ProcessingOrder(Document):
 		self.labor_hours = sum(flt(s.hours) for s in self.stages)
 		self.total_labor_cost = flt(self.labor_hours) * flt(self.labor_rate)
 		self.total_material_cost = compute_amounts(self.materials)
-		self.total_cost = flt(self.total_labor_cost) + flt(self.total_material_cost)
+		self.total_cost = flt(flt(self.total_labor_cost) + flt(self.total_material_cost), 3)
 		if not self.materials_warehouse and self.materials:
 			self.materials_warehouse = hs.restoration_materials_warehouse
 		self.sync_status()

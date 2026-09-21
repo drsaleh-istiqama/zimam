@@ -17,7 +17,7 @@ class WaqfContribution(Document):
 			self.share_amount = flt(frappe.db.get_value("Waqf Share Type", self.share_type, "amount"))
 			if not self.shares or self.shares < 1:
 				self.shares = 1
-			self.amount = flt(self.share_amount) * int(self.shares)
+			self.amount = flt(flt(self.share_amount) * int(self.shares), 3)
 		if flt(self.amount) <= 0:
 			frappe.throw(_("المبلغ يجب أن يكون أكبر من صفر"))
 		if not self.company:

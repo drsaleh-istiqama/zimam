@@ -7,7 +7,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import flt
 
-from zimam.utils import compute_amounts, get_settings, make_service_invoice
+from zimam.utils import service_item,  compute_amounts, get_settings, make_service_invoice
 
 
 class PrintJob(Document):
@@ -32,9 +32,8 @@ class PrintJob(Document):
 		self.check_permission("write")
 		if self.quotation:
 			frappe.throw(_("يوجد عرض سعر مرتبط: {0}").format(self.quotation))
-		item = get_settings().print_service_item
-		if not item:
-			frappe.throw(_("صنف خدمة الطباعة غير محدد في إعدادات زِمام"))
+		from zimam.utils import service_item
+		item = service_item("print")
 		q = frappe.new_doc("Quotation")
 		q.company = self.company
 		q.quotation_to = "Customer"
@@ -51,7 +50,7 @@ class PrintJob(Document):
 		self.check_permission("write")
 		if self.sales_invoice:
 			frappe.throw(_("توجد فاتورة مرتبطة: {0}").format(self.sales_invoice))
-		name = make_service_invoice(company=self.company, customer=self.customer, item_code=get_settings().print_service_item,
+		name = make_service_invoice(company=self.company, customer=self.customer, item_code=service_item("print"),
 			rate=flt(self.quoted_price), description=self.item_description(), ref_doctype=self.doctype, ref_name=self.name)
 		self.db_set("sales_invoice", name)
 		return name

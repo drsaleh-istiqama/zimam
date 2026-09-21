@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:30:00.000000",
+ "creation": "2026-09-17 10:31:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -174,7 +174,7 @@
    "link_fieldname": "disbursement_request"
   }
  ],
- "modified": "2026-09-17 10:30:00.000000",
+ "modified": "2026-09-17 10:31:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Disbursement Request",
@@ -273,8 +273,8 @@
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
- "autoname": "format:DR-{YYYY}-{####}",
- "naming_rule": "Expression",
+ "autoname": "DR-.YYYY.-.####",
+ "naming_rule": "Expression (Old Style)",
  "title_field": "title",
  "show_title_field_in_link": 1,
  "search_fields": "title,recipient_name"

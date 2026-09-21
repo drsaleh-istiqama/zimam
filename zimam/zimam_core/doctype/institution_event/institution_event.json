@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:30:00.000000",
+ "creation": "2026-09-17 10:31:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -182,7 +182,7 @@
    "link_fieldname": "related_event"
   }
  ],
- "modified": "2026-09-17 10:30:00.000000",
+ "modified": "2026-09-17 10:31:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Institution Event",
@@ -266,8 +266,8 @@
  "sort_order": "DESC",
  "states": [],
  "track_changes": 1,
- "autoname": "format:EV-{YYYY}-{###}",
- "naming_rule": "Expression",
+ "autoname": "EV-.YYYY.-.###",
+ "naming_rule": "Expression (Old Style)",
  "title_field": "event_title",
  "show_title_field_in_link": 1,
  "image_field": "poster"
