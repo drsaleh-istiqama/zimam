@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:34:00.000000",
+ "creation": "2026-09-17 10:35:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -130,7 +130,7 @@
    "link_fieldname": "depositor"
   }
  ],
- "modified": "2026-09-17 10:34:00.000000",
+ "modified": "2026-09-17 10:35:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Heritage",
  "name": "Depositor",

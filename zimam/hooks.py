@@ -11,13 +11,13 @@ required_apps = ["frappe/erpnext"]
 
 # الظهور في شاشة التطبيقات وسطح المكتب (v15/v16)
 app_logo_url = "/assets/zimam/images/zimam-mark.png"
-app_home = "/app/zimam"
+app_home = "/desk/zimam"  # v16: مسار سطح المكتب /desk (يُعاد توجيه /app إليه)
 add_to_apps_screen = [
 	{
 		"name": "zimam",
 		"logo": "/assets/zimam/images/zimam-mark.png",
 		"title": "زِمام",
-		"route": "/app/zimam",
+		"route": "/desk/zimam",
 	}
 ]
 

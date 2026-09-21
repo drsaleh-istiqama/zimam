@@ -654,14 +654,29 @@ def setup_login_policy(policy=None):
 
 
 def set_default_app():
-	"""التطبيق الافتراضي = زِمام (حقل default_app في إعدادات النظام، v15+) كي يفتح /app على مساحة زِمام لا على شاشة التطبيقات."""
+	"""بعد الدخول يفتح المستخدم على مساحة زِمام مباشرة (بقرار د. صالح 2026-09-21): Frappe يحدد وجهة ما بعد الدخول من «التطبيق
+	الافتراضي» (System Settings.default_app ثم User.default_app ⟵ مسار التطبيق /desk/zimam)، و«مساحة العمل الافتراضية» للمستخدم.
+	نكتب بالقيم مباشرة (db) لأن حفظ مستند الإعدادات كان يُسقط القيمة صامتًا في v16."""
 	try:
-		ss = frappe.get_single("System Settings")
-		if ss.meta.has_field("default_app") and ss.get("default_app") != "zimam":
-			ss.default_app = "zimam"
-			ss.flags.ignore_mandatory = True
-			ss.save(ignore_permissions=True)
-			log("التطبيق الافتراضي: زِمام")
+		meta_ss = frappe.get_meta("System Settings")
+		if meta_ss.has_field("default_app") and frappe.db.get_single_value("System Settings", "default_app") != "zimam":
+			frappe.db.set_single_value("System Settings", "default_app", "zimam")
+			log("التطبيق الافتراضي للنظام: زِمام")
+		meta_u = frappe.get_meta("User")
+		values = {}
+		if meta_u.has_field("default_app"):
+			values["default_app"] = "zimam"
+		if meta_u.has_field("default_workspace") and frappe.db.exists("Workspace", "Zimam"):
+			values["default_workspace"] = "Zimam"
+		n = 0
+		for u in frappe.get_all("User", filters={"user_type": "System User", "enabled": 1, "name": ["not in", ["Administrator", "Guest"]]}, fields=["name"] + list(values)):
+			todo = {k: v for k, v in values.items() if u.get(k) != v}
+			if todo:
+				frappe.db.set_value("User", u.name, todo, update_modified=False)
+				n += 1
+		if n:
+			log(f"مساحة زِمام وجهةً بعد الدخول لـ{n} مستخدمًا")
+		frappe.clear_cache()
 	except Exception:
 		frappe.log_error(title="zimam: set_default_app failed")
 

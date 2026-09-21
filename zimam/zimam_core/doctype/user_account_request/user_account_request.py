@@ -97,8 +97,11 @@ class UserAccountRequest(Document):
 			if r not in existing:
 				user.append("roles", {"role": r})
 		apply_role_profile(user, self.role_profile)
+		# يفتح على مساحة زِمام مباشرة بعد الدخول (التطبيق الافتراضي + مساحة العمل الافتراضية)
 		if user.meta.has_field("default_app") and not user.get("default_app"):
-			user.default_app = "zimam"  # يفتح على مساحة زِمام مباشرة بعد الدخول
+			user.default_app = "zimam"
+		if user.meta.has_field("default_workspace") and not user.get("default_workspace") and frappe.db.exists("Workspace", "Zimam"):
+			user.default_workspace = "Zimam"
 		user.flags.ignore_permissions = True
 		if created:
 			user.insert()
