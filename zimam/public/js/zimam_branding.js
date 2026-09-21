@@ -32,3 +32,25 @@
 		frappe.router.on("change", render);
 	}
 })();
+
+
+// الهبوط بعد الدخول: مساحة زِمام مباشرة لا شاشة أيقونات سطح المكتب (بقرار د. صالح 2026-09-21).
+// في v16 يعرض المسار الفارغ (/desk) صفحة «desktop» دائمًا ولا تغيّره إعدادات التطبيق الافتراضي وحدها،
+// فنُعيد التوجيه مرة واحدة عند أول تحميل للجلسة فقط؛ زر «Desktop» من قائمة الشريط الجانبي يبقى يعمل بعدها.
+(function () {
+	var done = false;
+	function land() {
+		if (done || !window.frappe || !frappe.session || frappe.session.user === "Guest") return;
+		var path = (location.pathname || "").replace(/\/+$/, "");
+		if (path !== "/desk" && path !== "/app") return;
+		if (location.hash && location.hash.length > 1) return;
+		done = true;
+		frappe.route_flags = frappe.route_flags || {};
+		frappe.route_flags.replace_route = true;
+		frappe.set_route("zimam");
+	}
+	if (window.jQuery) {
+		jQuery(document).on("startup", function () { setTimeout(land, 0); });
+	}
+	document.addEventListener("DOMContentLoaded", function () { setTimeout(land, 800); });
+})();
