@@ -97,8 +97,9 @@ def normalize_phone(phone, default_cc="968"):
 class PrintEstimate(Document):
 	def validate(self):
 		zs = get_settings()
-		if not self.company:
-			self.company = zs.press_company or zs.parent_company
+		if self.is_new() or not self.company:
+			from zimam.utils import zimam_company
+			self.company = zimam_company(self.company, "press")
 		if not self.customer and not self.prospect_name:
 			frappe.throw(_("حدد العميل أو اكتب اسم طالب العرض"))
 		if self.alternative_of and self.alternative_of == self.name:

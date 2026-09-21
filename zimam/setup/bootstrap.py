@@ -475,6 +475,7 @@ def run(profile="template", with_optional_arms=False):
 
 	setup_website(parent)
 	setup_login_policy(p.get("login_policy"))
+	set_default_company(parent)
 	sync_access_layer()
 	ensure_users(p.get("users"))
 	frappe.db.commit()
@@ -649,6 +650,23 @@ def setup_login_policy(policy=None):
 	ss.flags.ignore_mandatory = True
 	ss.save(ignore_permissions=True)
 	log("سياسة الدخول: " + "، ".join(f"{k}={wanted[k]}" for k in changed))
+
+
+def set_default_company(company):
+	"""الشركة الافتراضية العامة وللمستخدم الحالي = الشركة الأم؛ معالج الإعداد يترك شركة العرض افتراضيةً فتظهر في كل مستند جديد."""
+	try:
+		gd = frappe.get_single("Global Defaults")
+		if gd.default_company != company:
+			gd.default_company = company
+			gd.save(ignore_permissions=True)
+			log(f"الشركة الافتراضية العامة: {company}")
+		for user in {frappe.session.user, "Administrator"}:
+			if frappe.defaults.get_user_default("company", user) not in (None, "", company):
+				frappe.defaults.set_user_default("company", company, user)
+				log(f"الشركة الافتراضية للمستخدم {user}: {company}")
+		frappe.defaults.clear_cache()
+	except Exception:
+		frappe.log_error(title="zimam: set_default_company failed")
 
 
 def sync_access_layer():

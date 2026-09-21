@@ -42,9 +42,13 @@ class DisbursementRequest(Document):
 		if self.payment_voucher and frappe.db.exists("Payment Voucher", self.payment_voucher):
 			return self.payment_voucher
 		pv = frappe.new_doc("Payment Voucher")
+		fund = fund or frappe.db.get_single_value("Zimam Settings", "default_fund")
+		# شركة السند = شركة الصندوق (لا الشركة الافتراضية للمستخدم — كانت تعطي «zimam (Demo)» فيفشل الدفع، فحص 2026-09-21)
+		company = (frappe.db.get_value("Treasury Fund", fund, "company") if fund else None) or frappe.db.get_single_value("Zimam Settings", "parent_company")
 		pv.update({
+			"company": company,
 			"beneficiary_type": "مستفيد", "beneficiary_name": self.recipient_name, "amount": flt(self.amount),
-			"expense_classification": expense_classification, "project": self.project, "fund": fund or frappe.db.get_single_value("Zimam Settings", "default_fund"), "payment_method": payment_method,
+			"expense_classification": expense_classification, "project": self.project, "fund": fund, "payment_method": payment_method,
 			"description": _("{0} — طلب صرف {1}").format(self.title, self.name), "disbursement_request": self.name,
 			"due_date": self.needed_by, "supporting_document": self.attachment,
 		})

@@ -20,6 +20,9 @@ class PaymentVoucher(Document):
 	def validate(self):
 		if flt(self.amount) <= 0:
 			frappe.throw(_("المبلغ يجب أن يكون أكبر من صفر"))
+		if self.fund and self.is_new():
+			# سند جديد: شركته شركة صندوقه دائمًا (الشركة الافتراضية للمستخدم قد تكون شركة عرض أو ذراعًا آخر)
+			self.company = frappe.db.get_value("Treasury Fund", self.fund, "company") or self.company
 		if not self.company:
 			self.company = parent_company()
 		if self.voucher_date and not self.date_hijri:
@@ -62,6 +65,9 @@ class PaymentVoucher(Document):
 
 	def on_update_after_submit(self):
 		if self.workflow_state == "مدفوع" and not self.journal_entry:
+			if not self.paid_on:
+				# validate لا يكتب في مستند معتمَد؛ تاريخ الدفع يُختم هنا (بطاقة «سندات مدفوعة هذا الشهر» تعتمد عليه — فحص 2026-09-21)
+				self.db_set("paid_on", nowdate())
 			self.db_set("journal_entry", self.make_journal_entry())
 			update_project_spent(self.project)
 

@@ -110,12 +110,23 @@ class UserAccountRequest(Document):
 		if self.restrict_to_department and self.department:
 			ensure_user_permission(user.name, "Department", self.department)
 			restrictions.append(_("القسم {0}").format(self.department))
-		# ربط سجل الموظف بحساب الدخول (الخدمة الذاتية)
-		if self.employee and frappe.db.exists("Employee", self.employee) and not frappe.db.get_value("Employee", self.employee, "user_id"):
-			frappe.db.set_value("Employee", self.employee, "user_id", user.name)
+		# ربط سجل الموظف بحساب الدخول (الخدمة الذاتية). ERPNext يحذف دور «Employee» من أي مستخدم بلا سجل موظف مرتبط
+		# (validate_employee_role) — لذلك يُربط السجل أولًا ثم يُعاد الدور (وجدناه في الفحص الحي 2026-09-21).
+		employee_linked = False
+		if self.employee and frappe.db.exists("Employee", self.employee):
+			if not frappe.db.get_value("Employee", self.employee, "user_id"):
+				frappe.db.set_value("Employee", self.employee, "user_id", user.name)
+			employee_linked = frappe.db.get_value("Employee", self.employee, "user_id") == user.name
+		if employee_linked and frappe.db.exists("Role", "Employee") and "Employee" not in {r.role for r in user.get("roles") or []}:
+			user.reload()
+			user.append("roles", {"role": "Employee"})
+			user.flags.ignore_permissions = True
+			user.save()
 		summary = _("{0} الحساب {1} بملف الصلاحيات «{2}»").format(_("أُنشئ") if created else _("فُعِّل وحُدِّث"), user.name, self.role_profile)
 		if extra:
 			summary += _(" + أدوار إضافية: {0}").format("، ".join(extra))
+		if not employee_linked:
+			summary += _(" · بلا سجل موظف مرتبط: دور «Employee» (الخدمة الذاتية) لا يثبت إلا بعد ربط سجل الموظف")
 		if restrictions:
 			summary += _(" · مقيَّد بـ: {0}").format("، ".join(restrictions))
 		if created and int(send_welcome_email or 0):

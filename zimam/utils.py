@@ -16,6 +16,18 @@ def get_heritage_settings():
 	return frappe.get_cached_doc("Heritage Settings")
 
 
+def zimam_company(company, kind="parent"):
+	"""تُعيد شركة صالحة من منظومة زِمام: إن كانت الشركة المُمرَّرة (غالبًا الافتراضية للمستخدم من معالج الإعداد، مثل «zimam (Demo)»)
+	ليست الشركة الأم ولا ذراعًا مسجَّلًا، تُستبدل بشركة النوع المطلوب (press ⟵ المطبعة، وإلا الأم). وجدنا في الفحص الحي 2026-09-21
+	تقديرات وسندات تحمل شركة العرض فتفشل الضرائب والصناديق."""
+	zs = get_settings()
+	if company and frappe.db.exists("Company", company) and frappe.db.get_value("Company", company, "zimam_arm_type"):
+		return company
+	if kind == "press" and zs.press_company:
+		return zs.press_company
+	return zs.parent_company or company
+
+
 def parent_company():
 	company = get_settings().parent_company
 	if not company:
