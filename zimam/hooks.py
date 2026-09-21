@@ -69,6 +69,8 @@ web_include_css = ["/assets/zimam/css/zimam-web.css"]
 # الصفحة الرسمية (صفحة الهبوط) وشاشة الدخول
 home_page = "login"  # الواجهة الرسمية = شاشة الدخول فقط (بقرار د. صالح 2026-09-20)؛ صفحة التعريف تبقى على /zimam-home
 boot_session = "zimam.setup.boot.boot_session"
+# بعد الدخول: مساحة زِمام مباشرة (لا شاشة أيقونات سطح المكتب) — بقرار د. صالح 2026-09-21
+on_session_creation = "zimam.setup.boot.on_session_creation"
 website_context = {"footer_powered": "يعمل هذا الموقع من خلال منصة زِمام", "splash_image": "/assets/zimam/images/zimam-logo.png"}
 update_website_context = ["zimam.setup.boot.website_context"]
 

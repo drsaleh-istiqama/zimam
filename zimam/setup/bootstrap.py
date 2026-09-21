@@ -476,6 +476,7 @@ def run(profile="template", with_optional_arms=False):
 	setup_website(parent)
 	setup_login_policy(p.get("login_policy"))
 	set_default_company(parent)
+	set_default_app()
 	sync_access_layer()
 	ensure_users(p.get("users"))
 	frappe.db.commit()
@@ -650,6 +651,19 @@ def setup_login_policy(policy=None):
 	ss.flags.ignore_mandatory = True
 	ss.save(ignore_permissions=True)
 	log("سياسة الدخول: " + "، ".join(f"{k}={wanted[k]}" for k in changed))
+
+
+def set_default_app():
+	"""التطبيق الافتراضي = زِمام (حقل default_app في إعدادات النظام، v15+) كي يفتح /app على مساحة زِمام لا على شاشة التطبيقات."""
+	try:
+		ss = frappe.get_single("System Settings")
+		if ss.meta.has_field("default_app") and ss.get("default_app") != "zimam":
+			ss.default_app = "zimam"
+			ss.flags.ignore_mandatory = True
+			ss.save(ignore_permissions=True)
+			log("التطبيق الافتراضي: زِمام")
+	except Exception:
+		frappe.log_error(title="zimam: set_default_app failed")
 
 
 def set_default_company(company):
