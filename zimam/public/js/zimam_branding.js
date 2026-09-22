@@ -47,9 +47,14 @@
 		if (done) return true;
 		if (!ready()) return false;
 		var path = (location.pathname || "").replace(/\/+$/, "");
-		if (path !== "/desk" && path !== "/app") { done = true; return true; }
-		if (location.hash && location.hash.length > 1) { done = true; return true; }
-		if (!document.querySelector(".icons-container, .desktop-icons, #page-desktop, .page-container")) return false;
+		// الصفحات التي يهبط عليها Frappe افتراضيًا ويجب تحويلها: سطح المكتب، أو صفحة حساب المستخدم نفسه
+		// (بعد تعيين كلمة المرور من رسالة الترحيب يفتح Frappe للمستخدم الجديد صفحة حسابه — ملاحظة د. صالح 2026-09-22)
+		var me = encodeURIComponent(frappe.session.user).toLowerCase();
+		var self_page = ("/desk/user/" + me === path.toLowerCase() || "/app/user/" + me === path.toLowerCase() ||
+			path.toLowerCase() === "/desk/user/" + frappe.session.user.toLowerCase() || path.toLowerCase() === "/app/user/" + frappe.session.user.toLowerCase());
+		if (path !== "/desk" && path !== "/app" && !self_page) { done = true; return true; }
+		if (!self_page && location.hash && location.hash.length > 1) { done = true; return true; }
+		if (!document.querySelector(".icons-container, .desktop-icons, #page-desktop, .page-container, .form-page, .layout-main-section")) return false;
 		done = true;
 		try { sessionStorage.setItem("zimam_landed", "1"); } catch (e) {}
 		frappe.route_flags = frappe.route_flags || {};
