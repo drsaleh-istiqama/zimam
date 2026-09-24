@@ -475,6 +475,7 @@ def run(profile="template", with_optional_arms=False):
 
 	setup_website(parent)
 	setup_login_policy(p.get("login_policy"))
+	setup_social_login_prompt()
 	set_default_company(parent)
 	set_default_app()
 	sync_access_layer()
@@ -653,6 +654,36 @@ def setup_login_policy(policy=None):
 	log("سياسة الدخول: " + "، ".join(f"{k}={wanted[k]}" for k in changed))
 
 
+def setup_social_login_prompt():
+	"""قائمة اختيار حساب Google في كل دخول (بطلب د. صالح 2026-09-23).
+
+	المشكلة: من دخل بزر Google بحساب بريده غير مسجَّل مستخدمًا في الموقع يرى صفحة «Signup is Disabled» (403)،
+	وأكثر ما يقع حين يحمل الجهاز أكثر من حساب Google فيختار المتصفح آخر حساب استُعمل بلا سؤال.
+	الحل: `prompt=select_account` في «بيانات عنوان المصادقة» فيعرض Google قائمة الحسابات في كل مرة.
+
+	يُكتب من الخادم مباشرة لأن حقول المزوّد المعروف للقراءة فقط في النموذج، و«موفر تسجيل الدخول الاجتماعي»
+	يُضبط مرة واحدة عند الإنشاء ولا يُغيَّر بعدها. آمنة للتكرار: لا تُكتب إلا إن نقص المفتاح.
+	"""
+	try:
+		for name in frappe.get_all("Social Login Key", filters={"enable_social_login": 1}, pluck="name"):
+			if "google" not in (name or "").lower():
+				continue
+			raw = frappe.db.get_value("Social Login Key", name, "auth_url_data") or "{}"
+			try:
+				data = json.loads(raw)
+			except ValueError:
+				data = {}
+			if not isinstance(data, dict) or data.get("prompt"):
+				continue
+			data.setdefault("scope", "profile email")
+			data.setdefault("response_type", "code")
+			data["prompt"] = "select_account"
+			frappe.db.set_value("Social Login Key", name, "auth_url_data", json.dumps(data), update_modified=False)
+			log(f"دخول Google ({name}): تفعيل قائمة اختيار الحساب في كل مرة (prompt=select_account)")
+	except Exception:
+		frappe.log_error(title="zimam: setup_social_login_prompt failed")
+
+
 def set_default_app():
 	"""بعد الدخول يفتح المستخدم على مساحة زِمام مباشرة (بقرار د. صالح 2026-09-21): Frappe يحدد وجهة ما بعد الدخول من «التطبيق
 	الافتراضي» (System Settings.default_app ثم User.default_app ⟵ مسار التطبيق /desk/zimam)، و«مساحة العمل الافتراضية» للمستخدم.
@@ -706,6 +737,17 @@ def sync_access_layer():
 	log(f"الصلاحيات: ملفات صلاحيات {'أُنشئت/حُدِّثت: ' + '، '.join(profiles) if profiles else 'مطابقة'}؛ صفوف صلاحيات قياسية مُصحَّحة: {len(perms)}")
 
 
+def _profile_roles_only(doc, profile):
+	"""أدوار ملف الصلاحيات تُضاف إلى المستخدم فرادى بلا ربط الملف به — فلا يحكم الملف أدواره كلها (انظر ensure_users)."""
+	added = []
+	existing = {r.role for r in doc.get("roles") or []}
+	for r in frappe.get_all("Has Role", filters={"parent": profile, "parenttype": "Role Profile"}, pluck="role"):
+		if r not in existing and frappe.db.exists("Role", r):
+			doc.append("roles", {"role": r})
+			added.append(r)
+	return added
+
+
 def ensure_users(rows):
 	"""حسابات الدخول من ملف التعريف.
 
@@ -734,7 +776,16 @@ def ensure_users(rows):
 			added = [r for r in roles if r not in existing]
 			for r in added:
 				doc.append("roles", {"role": r})
-			added += apply_role_profile(doc, profile)
+			# Frappe v16: ربط المستخدم بملف صلاحيات يجعل الملف يحكم أدواره كلها — عند الحفظ تُمسح أدوار المستخدم
+			# وتُعاد من الملف وحده. لحساب قائم له أدوار أوسع من الملف (حساب المدير مثلًا) يعني هذا إسقاط أدواره؛
+			# وقع فعلًا على موقع ذاكرة عُمان في 2026-09-22 فضاعت أدوار المحاسبة والموارد البشرية والمشاريع.
+			# لذلك: لا يُربط ملف صلاحيات بحساب قائم له أدوار ولم يُربط بملف من قبل — تُضاف أدوار الملف فرادى.
+			linked = bool(doc.get("role_profiles") or doc.get("role_profile_name"))
+			if profile and existing and not linked:
+				added += _profile_roles_only(doc, profile)
+				log(f"المستخدم {email}: حساب قائم بأدواره — أُضيفت أدوار «{profile}» فرادى بلا ربط الملف (حفاظًا على أدواره)")
+			else:
+				added += apply_role_profile(doc, profile)
 			if not added and doc.enabled:
 				log(f"المستخدم {email}: موجود بأدواره — لا تغيير")
 				continue
