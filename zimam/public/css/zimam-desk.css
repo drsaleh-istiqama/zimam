@@ -80,3 +80,12 @@ a:not(.btn) {
 	background: var(--zimam-paper);
 	border-top: 1px solid #E9DDD2;
 }
+
+/* المسح الذكي: الحقول المعبَّأة آليًا تُلوَّن حتى يراجعها المستخدم */
+.frappe-control.zimam-scanned .control-input,
+.frappe-control.zimam-scanned .control-value {
+	background: #FFF6DC !important;
+	box-shadow: inset 0 0 0 1px #E6C766;
+	border-radius: var(--border-radius, 6px);
+}
+.btn-primary-light { font-weight: 600; }

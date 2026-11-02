@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 10:40:00.000000",
+ "creation": "2026-09-17 11:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -43,8 +43,11 @@
   "section_7",
   "ai_enabled",
   "ai_model",
+  "ai_scan_daily_limit",
   "cb_ai",
-  "anthropic_api_key"
+  "anthropic_api_key",
+  "section_8",
+  "show_other_systems"
  ],
  "fields": [
   {
@@ -248,8 +251,16 @@
    "fieldname": "ai_model",
    "fieldtype": "Data",
    "label": "نموذج Claude",
-   "default": "claude-sonnet-5",
+   "default": "claude-sonnet-5-5",
    "depends_on": "ai_enabled"
+  },
+  {
+   "fieldname": "ai_scan_daily_limit",
+   "fieldtype": "Int",
+   "label": "الحد اليومي للمسح الذكي لكل مستخدم",
+   "default": 100,
+   "depends_on": "ai_enabled",
+   "description": "يحمي من الاستهلاك غير المقصود؛ كل مسح يرسل المستند إلى خدمة Claude للتعرّف على محتواه"
   },
   {
    "fieldname": "cb_ai",
@@ -260,13 +271,25 @@
    "fieldname": "anthropic_api_key",
    "fieldtype": "Password",
    "label": "مفتاح Anthropic API",
-   "depends_on": "ai_enabled"
+   "depends_on": "ai_enabled",
+   "description": "يُحفظ مشفّرًا. التفعيل = موافقة المؤسسة على إرسال المستندات الممسوحة (فواتير، إيصالات، مراسلات) إلى خدمة Claude"
+  },
+  {
+   "fieldname": "section_8",
+   "fieldtype": "Section Break",
+   "label": "الواجهة"
+  },
+  {
+   "fieldname": "show_other_systems",
+   "fieldtype": "Check",
+   "label": "إظهار أنظمة ERPNext الأخرى في شاشة التطبيقات",
+   "description": "افتراضيًا تظهر زِمام وحدها (المحاسبة والموارد البشرية وغيرهما تبقى داخل زِمام حسب الصلاحيات). فعّله لإظهار بقية التطبيقات"
   }
  ],
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 10:40:00.000000",
+ "modified": "2026-09-17 11:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Zimam Settings",

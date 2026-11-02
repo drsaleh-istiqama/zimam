@@ -1,0 +1,342 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-09-17 11:30:00.000000",
+ "doctype": "DocType",
+ "docstatus": 0,
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "scan_file",
+  "doc_kind",
+  "status",
+  "confidence",
+  "cb1",
+  "counterparty",
+  "document_number",
+  "document_date",
+  "document_date_hijri",
+  "section_1",
+  "currency",
+  "subtotal",
+  "cb2",
+  "tax_amount",
+  "total_amount",
+  "section_2",
+  "description",
+  "subject",
+  "summary",
+  "cb3",
+  "sender",
+  "recipient",
+  "action_required",
+  "action_due_date",
+  "section_3",
+  "warnings",
+  "target_doctype",
+  "model",
+  "cb4",
+  "applied_doctype",
+  "applied_name",
+  "section_4",
+  "extracted_json"
+ ],
+ "fields": [
+  {
+   "fieldname": "scan_file",
+   "fieldtype": "Attach",
+   "label": "الملف الممسوح",
+   "reqd": 1
+  },
+  {
+   "fieldname": "doc_kind",
+   "fieldtype": "Select",
+   "label": "نوع المستند",
+   "options": "فاتورة\nإيصال\nمراسلة\nعقد\nأخرى",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "الحالة",
+   "options": "مستخرج\nبحاجة مراجعة\nمُطبَّق\nملغى",
+   "default": "مستخرج",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "confidence",
+   "fieldtype": "Percent",
+   "label": "ثقة التعرّف",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "counterparty",
+   "fieldtype": "Data",
+   "label": "الطرف الآخر (المورد / المرسِل)",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "document_number",
+   "fieldtype": "Data",
+   "label": "رقم المستند",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "document_date",
+   "fieldtype": "Date",
+   "label": "تاريخ المستند",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "document_date_hijri",
+   "fieldtype": "Data",
+   "label": "التاريخ الهجري كما ورد"
+  },
+  {
+   "fieldname": "section_1",
+   "fieldtype": "Section Break",
+   "label": "المبالغ"
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Data",
+   "label": "العملة"
+  },
+  {
+   "fieldname": "subtotal",
+   "fieldtype": "Currency",
+   "label": "المجموع قبل الضريبة"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "tax_amount",
+   "fieldtype": "Currency",
+   "label": "الضريبة"
+  },
+  {
+   "fieldname": "total_amount",
+   "fieldtype": "Currency",
+   "label": "الإجمالي",
+   "bold": 1
+  },
+  {
+   "fieldname": "section_2",
+   "fieldtype": "Section Break",
+   "label": "المحتوى"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "البيان"
+  },
+  {
+   "fieldname": "subject",
+   "fieldtype": "Data",
+   "label": "الموضوع (للمراسلة)"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Text",
+   "label": "الملخص"
+  },
+  {
+   "fieldname": "cb3",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "sender",
+   "fieldtype": "Data",
+   "label": "المرسِل"
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Data",
+   "label": "المرسَل إليه"
+  },
+  {
+   "fieldname": "action_required",
+   "fieldtype": "Small Text",
+   "label": "الإجراء المطلوب"
+  },
+  {
+   "fieldname": "action_due_date",
+   "fieldtype": "Date",
+   "label": "موعد الإجراء"
+  },
+  {
+   "fieldname": "section_3",
+   "fieldtype": "Section Break",
+   "label": "المراجعة والتدقيق"
+  },
+  {
+   "fieldname": "warnings",
+   "fieldtype": "Small Text",
+   "label": "تنبيهات التعرّف",
+   "read_only": 1
+  },
+  {
+   "fieldname": "target_doctype",
+   "fieldtype": "Data",
+   "label": "النموذج المستهدف عند المسح",
+   "read_only": 1
+  },
+  {
+   "fieldname": "model",
+   "fieldtype": "Data",
+   "label": "النموذج المستخدم",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cb4",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "applied_doctype",
+   "fieldtype": "Link",
+   "label": "نوع المستند المُنشأ",
+   "options": "DocType",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "applied_name",
+   "fieldtype": "Dynamic Link",
+   "label": "المستند المُنشأ",
+   "options": "applied_doctype",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_4",
+   "fieldtype": "Section Break",
+   "label": "البيانات الخام (للتدقيق)"
+  },
+  {
+   "fieldname": "extracted_json",
+   "fieldtype": "Code",
+   "label": "ما استخرجه النموذج",
+   "options": "JSON",
+   "read_only": 1
+  }
+ ],
+ "idx": 0,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-09-17 11:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "Zimam Core",
+ "name": "Scanned Document",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "محاسب مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1
+  },
+  {
+   "role": "مدير مالي",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مشرف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف وحدة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "موظف استقبال وخدمة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "مدير المؤسسة",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  },
+  {
+   "role": "معتمد الصرف",
+   "read": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "report": 1,
+   "share": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1,
+ "autoname": "SCN-.YYYY.-.#####",
+ "naming_rule": "Expression (Old Style)",
+ "title_field": "counterparty",
+ "show_title_field_in_link": 1,
+ "search_fields": "counterparty,document_number,subject",
+ "track_seen": 1
+}
