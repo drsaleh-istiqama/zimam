@@ -64,6 +64,14 @@ CUSTOM_FIELDS = {
 		dict(fieldname="zimam_ref_name", label="المستند المصدر", fieldtype="Dynamic Link", options="zimam_ref_doctype",
 			insert_after="zimam_ref_doctype", read_only=1, no_copy=1),
 	],
+	"Payment Entry": [
+		dict(fieldname="zimam_receipt_section", label="سند القبض (زِمام)", fieldtype="Section Break", insert_after="mode_of_payment", collapsible=0,
+			depends_on="eval:doc.payment_type=='Receive'"),
+		dict(fieldname="zimam_fund", label="الصندوق (يملأ حساب الاستلام ويظهر في أرصدة الصناديق)", fieldtype="Link", options="Treasury Fund",
+			insert_after="zimam_receipt_section", in_standard_filter=1, no_copy=1),
+		dict(fieldname="zimam_receipt_cb", fieldtype="Column Break", insert_after="zimam_fund"),
+		dict(fieldname="zimam_date_hijri", label="التاريخ الهجري", fieldtype="Data", insert_after="zimam_receipt_cb", read_only=1, no_copy=1),
+	],
 	"Quotation": [
 		dict(fieldname="zimam_print_job", label="أمر الطباعة", fieldtype="Link", options="Print Job",
 			insert_after="order_type", read_only=1, no_copy=1),

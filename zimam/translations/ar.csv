@@ -1089,6 +1089,11 @@ Donations Register,سجل الإيرادات
 Donations by Category,الإيرادات بحسب الفئة
 Payment Vouchers Register,سجل سندات الصرف
 Fund Balances,أرصدة الصناديق
+Receipts Register,سجل سندات القبض
+Former Employees Archive,أرشيف الموظفين السابقين
+Former Employees,موظفون سابقون (محفوظة سجلاتهم)
+Receipts This Month,مقبوضات هذا الشهر
+Receipts Awaiting Approval,سندات قبض بانتظار الاعتماد
 Sponsorship Dues,استحقاقات الكفالات
 Donations This Month,إيرادات التبرعات هذا الشهر
 Net Donations This Month,صافي التبرعات بعد الرسوم هذا الشهر
@@ -1138,4 +1143,9 @@ User Permission,قيد مستخدم
 User Account Request Module,وحدة نمطية مسموحة في طلب حساب
 Module Def,وحدة نمطية
 Scanned Document,مستند ممسوح
+Collection Followup,متابعة تحصيل
+Collection Followups,متابعات التحصيل
+Receivables Aging,أعمار الديون
+Unpaid Receivables,ذمم مدينة غير محصَّلة
+Collection Followups This Month,متابعات تحصيل هذا الشهر
 Scanned Documents,مستندات ممسوحة

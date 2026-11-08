@@ -30,11 +30,24 @@ after_migrate = "zimam.setup.install.after_migrate"
 # ---------------------------------------------------------------------------
 # أحداث مستندات ERPNext القياسية
 # ---------------------------------------------------------------------------
-doctype_js = {"User": "public/js/user_zimam.js"}  # زر «تخصيص حزمة زِمام» في شاشة المستخدم
+doctype_js = {
+	"User": "public/js/user_zimam.js",  # زر «تخصيص حزمة زِمام» في شاشة المستخدم
+	"Payment Entry": "public/js/payment_entry_zimam.js",  # سند القبض: الصندوق وزر الطباعة (0.14.0)
+	"Sales Invoice": "public/js/sales_invoice_zimam.js",  # زر طباعة الفاتورة بالنموذج العربي (0.14.0)
+}
 
 doc_events = {
+	"Employee": {
+		"on_update": "zimam.integrations.hr_archive.employee_on_update",
+		"on_trash": "zimam.integrations.hr_archive.employee_on_trash",
+	},
+	"Payment Entry": {
+		"before_validate": "zimam.integrations.receipts.payment_entry_before_validate",
+		"after_insert": "zimam.integrations.finance_notices.payment_entry_after_insert",
+		"on_submit": "zimam.integrations.finance_notices.payment_entry_on_submit",
+	},
 	"Sales Invoice": {
-		"on_submit": "zimam.integrations.selling.sales_invoice_on_submit",
+		"on_submit": ["zimam.integrations.selling.sales_invoice_on_submit", "zimam.integrations.finance_notices.sales_invoice_on_submit"],
 		"on_cancel": "zimam.integrations.selling.sales_invoice_on_cancel",
 	},
 	"Quotation": {
@@ -58,6 +71,10 @@ scheduler_events = {
 		"zimam.zimam_charity.doctype.sponsorship.sponsorship.generate_dues",
 		# المطبعة: عروض الأسعار المُرسلة التي تجاوزت «صالح حتى» تصير منتهية الصلاحية
 		"zimam.zimam_core.doctype.print_estimate.print_estimate.expire_estimates",
+		# التحصيل: ملخص يومي واحد بالفواتير المتأخرة ووعود السداد الحالّة (يُعطَّل من إعدادات زِمام)
+		"zimam.zimam_core.doctype.collection_followup.collection_followup.send_overdue_reminders",
+		# الإشعارات المالية: استحقاق قريب + صناديق نزل رصيدها عن حدّها (ملخص واحد لكل نوع)
+		"zimam.integrations.finance_notices.send_finance_alerts",
 	],
 }
 

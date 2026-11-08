@@ -187,12 +187,14 @@ def leaf_of(doctype, preferred=None, fallback=None):
 	return doc.name
 
 
-def notify_roles(roles, subject, message, reference_doctype=None, reference_name=None):
-	"""إشعار داخلي + بريد لكل مستخدم يحمل أحد الأدوار. يُرجع قائمة المستلمين."""
+def notify_roles(roles, subject, message, reference_doctype=None, reference_name=None, exclude=None):
+	"""إشعار داخلي + بريد لكل مستخدم يحمل أحد الأدوار (عدا exclude: المنفِّذ عادةً). يُرجع قائمة المستلمين."""
 	users = set()
 	for role in roles:
 		users.update(frappe.get_all("Has Role", filters={"role": role, "parenttype": "User"}, pluck="parent"))
 	users -= {"Administrator", "Guest"}
+	if exclude:
+		users.discard(exclude)
 	enabled = set(frappe.get_all("User", filters={"enabled": 1, "name": ["in", list(users)]}, pluck="name")) if users else set()
 	for user in enabled:
 		frappe.get_doc({

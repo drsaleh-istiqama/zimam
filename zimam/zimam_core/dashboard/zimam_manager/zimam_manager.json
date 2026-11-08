@@ -1,8 +1,8 @@
 {
  "doctype": "Dashboard",
  "name": "Zimam Manager",
- "creation": "2026-09-17 10:40:00.000000",
- "modified": "2026-09-17 10:40:00.000000",
+ "creation": "2026-09-17 15:30:00.000000",
+ "modified": "2026-09-17 15:30:00.000000",
  "owner": "Administrator",
  "modified_by": "Administrator",
  "docstatus": 0,
@@ -59,6 +59,21 @@
   },
   {
    "card": "Vouchers Ready To Pay"
+  },
+  {
+   "card": "Receipts This Month"
+  },
+  {
+   "card": "Receipts Awaiting Approval"
+  },
+  {
+   "card": "Former Employees"
+  },
+  {
+   "card": "Unpaid Receivables"
+  },
+  {
+   "card": "Collection Followups This Month"
   },
   {
    "card": "Disbursement Requests For Review"

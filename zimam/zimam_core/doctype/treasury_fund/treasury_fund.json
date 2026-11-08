@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 11:30:00.000000",
+ "creation": "2026-09-17 15:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -21,6 +21,8 @@
   "cost_center",
   "is_restricted",
   "section_2",
+  "low_balance_alert",
+  "cb_lb",
   "statement_balance",
   "cb3",
   "statement_date",
@@ -126,6 +128,17 @@
    "label": "الرصيد الفعلي (كشف البنك)"
   },
   {
+   "fieldname": "low_balance_alert",
+   "fieldtype": "Currency",
+   "label": "حد التنبيه عند انخفاض الرصيد الدفتري",
+   "description": "إن نزل الرصيد الدفتري عن هذا المبلغ وصل مدير المالية تنبيه يومي؛ 0 = بلا تنبيه"
+  },
+  {
+   "fieldname": "cb_lb",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
    "fieldname": "statement_balance",
    "fieldtype": "Currency",
    "label": "الرصيد الفعلي حسب آخر كشف"
@@ -205,7 +218,7 @@
    "link_fieldname": "fund"
   }
  ],
- "modified": "2026-09-17 11:30:00.000000",
+ "modified": "2026-09-17 15:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Treasury Fund",

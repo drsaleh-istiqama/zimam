@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-09-17 11:30:00.000000",
+ "creation": "2026-09-17 15:30:00.000000",
  "doctype": "DocType",
  "docstatus": 0,
  "editable_grid": 1,
@@ -47,6 +47,13 @@
   "cb_ai",
   "anthropic_api_key",
   "section_8",
+  "notify_overdue_receivables",
+  "cb_col",
+  "overdue_grace_days",
+  "notify_finance_events",
+  "cb_col2",
+  "due_soon_days",
+  "section_9",
   "show_other_systems"
  ],
  "fields": [
@@ -277,6 +284,48 @@
   {
    "fieldname": "section_8",
    "fieldtype": "Section Break",
+   "label": "التحصيل والإشعارات المالية"
+  },
+  {
+   "fieldname": "notify_overdue_receivables",
+   "fieldtype": "Check",
+   "label": "تنبيه يومي بالفواتير المتأخرة ووعود السداد التي حلّ موعدها",
+   "default": 1,
+   "description": "ملخص واحد في اليوم للمحاسب ومدير المالية (لا رسالة لكل فاتورة)"
+  },
+  {
+   "fieldname": "cb_col",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "overdue_grace_days",
+   "fieldtype": "Int",
+   "label": "مهلة بعد الاستحقاق قبل عدّ الفاتورة متأخرة (أيام)",
+   "default": 0
+  },
+  {
+   "fieldname": "notify_finance_events",
+   "fieldtype": "Check",
+   "label": "إشعار المحاسب ومدير المالية بصدور الفواتير واستلام المبالغ",
+   "default": 1,
+   "description": "فاتورة معتمدة ← المحاسب · سند قبض بانتظار الاعتماد ← المحاسب · قبض معتمد ← مدير المالية (لا يُشعَر المنفِّذ نفسه)"
+  },
+  {
+   "fieldname": "cb_col2",
+   "fieldtype": "Column Break",
+   "label": ""
+  },
+  {
+   "fieldname": "due_soon_days",
+   "fieldtype": "Int",
+   "label": "التنبيه بالفواتير التي يحلّ استحقاقها خلال (أيام)",
+   "default": 3,
+   "description": "0 = بلا تنبيه استحقاق قريب"
+  },
+  {
+   "fieldname": "section_9",
+   "fieldtype": "Section Break",
    "label": "الواجهة"
   },
   {
@@ -289,7 +338,7 @@
  "idx": 0,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-09-17 11:30:00.000000",
+ "modified": "2026-09-17 15:30:00.000000",
  "modified_by": "Administrator",
  "module": "Zimam Core",
  "name": "Zimam Settings",

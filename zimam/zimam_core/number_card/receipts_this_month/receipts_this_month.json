@@ -1,0 +1,23 @@
+{
+ "doctype": "Number Card",
+ "name": "Receipts This Month",
+ "creation": "2026-09-17 15:30:00.000000",
+ "modified": "2026-09-17 15:30:00.000000",
+ "owner": "Administrator",
+ "modified_by": "Administrator",
+ "docstatus": 0,
+ "idx": 0,
+ "module": "Zimam Core",
+ "label": "مقبوضات هذا الشهر",
+ "type": "Document Type",
+ "document_type": "Payment Entry",
+ "function": "Sum",
+ "is_public": 1,
+ "is_standard": 1,
+ "show_percentage_stats": 1,
+ "stats_time_interval": "Monthly",
+ "color": "#1B5E20",
+ "filters_json": "[[\"Payment Entry\", \"docstatus\", \"=\", 1, false], [\"Payment Entry\", \"payment_type\", \"=\", \"Receive\", false], [\"Payment Entry\", \"posting_date\", \"Timespan\", \"this month\", false]]",
+ "dynamic_filters_json": "[]",
+ "aggregate_function_based_on": "base_received_amount"
+}

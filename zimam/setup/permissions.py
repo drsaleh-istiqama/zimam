@@ -56,7 +56,7 @@ ROLE_DESCRIPTIONS = {
 	R_FIN_MGR: "مدير المالية: مراجعة سندات الصرف واعتمادها، الصناديق وتصنيفات المصروف، وكل أعمال المحاسبة (Accounts Manager)",
 	R_ACCOUNTANT: "المحاسب: تسجيل سندات الصرف وطلبات الصرف، الفوترة والقيود (Accounts User)، الوقفيات والعقارات الوقفية",
 	R_APPROVER: "معتمد الصرف (مدير المؤسسة / الرئيس التنفيذي): اعتماد سندات الصرف فوق حد الاعتماد أو رفضها — اطلاع على المالية",
-	R_CASHIER: "أمين الصندوق: تسجيل دفع السندات الجاهزة وإلغاؤها؛ اطلاع على القيود وحركات البنك",
+	R_CASHIER: "أمين الصندوق: تسجيل دفع السندات الجاهزة وإلغاؤها، وحفظ سندات القبض (الاعتماد للمحاسب)؛ اطلاع على القيود وحركات البنك",
 	R_UNIT_SUP: "مشرف وحدة (رئيس قسم): يدير أعمال وحدته — الخدمات والفعاليات والإعلام والقانونية والمشاريع — ويعتمد ما يرفعه موظفوه",
 	R_UNIT: "موظف وحدة: ينفّذ أعمال وحدته (إدخال وتعديل) ويرفع طلبات الصرف؛ لا يحذف",
 	R_RECEPTION: "موظف الاستقبال والخدمة: طلبات الخدمة والمواعيد والمستفيدون والعملاء والتبرعات والعضويات؛ اطلاع على الكتالوجات",
@@ -237,7 +237,7 @@ RO, RW, FULL = "عرض", "إضافة وتعديل", "كامل"
 STANDARD_PERMS = {
 	# المالية
 	"Journal Entry": {R_INST_MGR: RO, R_APPROVER: RO, R_CASHIER: RO, R_ARM_MGR: RO},
-	"Payment Entry": {R_INST_MGR: RO, R_APPROVER: RO, R_CASHIER: RO, R_ARM_MGR: RO},
+	"Payment Entry": {R_INST_MGR: RO, R_APPROVER: RO, R_CASHIER: RW, R_ARM_MGR: RO},  # أمين الصندوق: يحفظ سندات القبض فقط (يمنع غيرها integrations/receipts.py)؛ الاعتماد للمحاسب
 	"Sales Invoice": {R_INST_MGR: RO, R_FIN_MGR: RO, R_APPROVER: RO, R_ARM_MGR: RO, R_DESIGNER: RO, R_RECEPTION: RO, R_UNIT_SUP: RO},
 	"Purchase Invoice": {R_INST_MGR: RO, R_FIN_MGR: RO, R_APPROVER: RO, R_ARM_MGR: RO},
 	"Expense Claim": {R_INST_MGR: RO, R_FIN_MGR: RO, R_APPROVER: RO, R_ACCOUNTANT: RO},
@@ -250,7 +250,7 @@ STANDARD_PERMS = {
 	"Quotation": {R_INST_MGR: RO, R_FIN_MGR: RO, R_DESIGNER: RO, R_ACCOUNTANT: RO},
 	"Sales Order": {R_INST_MGR: RO, R_FIN_MGR: RO, R_DESIGNER: RO, R_ACCOUNTANT: RO, R_TECH_SUP: RO},
 	"Purchase Order": {R_INST_MGR: RO, R_FIN_MGR: RO, R_ACCOUNTANT: RO},
-	"Customer": {R_INST_MGR: RO, R_FIN_MGR: RO, R_ACCOUNTANT: RO, R_DESIGNER: RO, R_UNIT: RO, R_UNIT_SUP: RO},
+	"Customer": {R_INST_MGR: RO, R_FIN_MGR: RO, R_ACCOUNTANT: RO, R_CASHIER: RO, R_DESIGNER: RO, R_UNIT: RO, R_UNIT_SUP: RO},
 	"Supplier": {R_INST_MGR: RO, R_FIN_MGR: RO, R_ACCOUNTANT: RO, R_CASHIER: RO},
 	"Item": {R_INST_MGR: RO, R_ACCOUNTANT: RO, R_DESIGNER: RO, R_RECEPTION: RO, R_UNIT: RO, R_UNIT_SUP: RO},
 	"Stock Entry": {R_INST_MGR: RO, R_ACCOUNTANT: RO, R_UNIT_SUP: RO},

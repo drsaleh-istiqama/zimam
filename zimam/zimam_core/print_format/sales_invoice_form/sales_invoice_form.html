@@ -1,0 +1,75 @@
+{%- set company = frappe.get_doc("Company", doc.company) -%}
+{%- set currency = doc.currency or company.default_currency -%}
+{%- set s = frappe.get_doc("Zimam Settings") -%}
+{%- set total = doc.rounded_total or doc.grand_total -%}
+{%- set cur_words = {"OMR": ("ريال عماني", "بيسة"), "SAR": ("ريال سعودي", "هللة"), "AED": ("درهم إماراتي", "فلس"), "KWD": ("دينار كويتي", "فلس"), "QAR": ("ريال قطري", "درهم"), "BHD": ("دينار بحريني", "فلس"), "USD": ("دولار أمريكي", "سنت")} -%}
+{%- macro words(amount) -%}
+{%- set w = frappe.utils.money_in_words(amount, currency) -%}
+{%- if currency in cur_words -%}{{ w.replace(currency, cur_words[currency][0]).replace("Baisa", cur_words[currency][1]).replace("Halala", cur_words[currency][1]).replace("Fils", cur_words[currency][1]).replace("Dirham", cur_words[currency][1]).replace("Cent", cur_words[currency][1]).replace("فقط.", "فقط") }}{%- else -%}{{ w }}{%- endif -%}
+{%- endmacro -%}
+{%- macro money(v) -%}<span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.utils.fmt_money(v, currency=currency) }}</span>{%- endmacro -%}
+{%- macro num(v) -%}<span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.utils.flt(v) }}</span>{%- endmacro -%}
+{%- macro user(u) -%}{{ frappe.db.get_value("User", u, "full_name") if u else "" }}{%- endmacro -%}
+{%- set td = 'style="border:1px solid #bbb; padding:4px 8px;"' -%}
+{%- set lbl = 'style="border:1px solid #bbb; padding:4px 8px; width:22%; background:#faf7f2;"' -%}
+{%- set state = "مسودة — غير معتمدة" if doc.docstatus == 0 else ("ملغاة" if doc.docstatus == 2 else ("إشعار دائن (مرتجع)" if doc.is_return else "معتمدة")) -%}
+<div dir="rtl" lang="ar" style="direction:rtl; text-align:right; font-family:'Sakkal Majalla','Noto Naskh Arabic','Amiri',serif; font-size:13.5pt; line-height:1.8; padding:10px 18px;">
+	<table style="width:100%; border-bottom:2px solid #1565C0; margin-bottom:12px;">
+		<tr>
+			<td style="text-align:right; vertical-align:bottom; width:60%;">
+				<div style="font-size:18pt; font-weight:bold; color:#1565C0;">{{ company.company_name }}</div>
+				<div style="font-size:15pt; margin-top:4px;">{% if doc.is_return %}إشعار دائن{% else %}فاتورة مبيعات{% endif %}</div>
+				{% if company.tax_id %}<div style="font-size:10.5pt; color:#555;">الرقم الضريبي: <span dir="ltr" style="unicode-bidi:isolate;">{{ company.tax_id }}</span></div>{% endif %}
+			</td>
+			<td style="text-align:left; vertical-align:bottom; font-size:11pt; color:#444;">
+				<div>رقم الفاتورة: <b><span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span></b></div>
+				<div>التاريخ: <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.posting_date, {"fieldtype": "Date"}) }}</span>م</div>
+				{% if doc.due_date %}<div>الاستحقاق: <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.due_date, {"fieldtype": "Date"}) }}</span>م</div>{% endif %}
+				<div>الحالة: <b{% if doc.docstatus != 1 %} style="color:#C62828;"{% endif %}>{{ state }}</b></div>
+			</td>
+		</tr>
+	</table>
+
+	<table style="width:100%; border-collapse:collapse; font-size:12pt; margin:8px 0;">
+		<tr><td {{ lbl }}>العميل</td><td {{ td }}><b>{{ doc.customer_name or doc.customer }}</b></td>
+			<td {{ lbl }}>الرقم الضريبي للعميل</td><td {{ td }}>{% if doc.tax_id %}<span dir="ltr" style="unicode-bidi:isolate;">{{ doc.tax_id }}</span>{% else %}—{% endif %}</td></tr>
+		{% if doc.address_display or doc.project or doc.po_no %}
+		<tr><td {{ lbl }}>العنوان</td><td {{ td }}>{{ doc.address_display or "—" }}</td>
+			<td {{ lbl }}>{% if doc.po_no %}أمر الشراء{% else %}المشروع{% endif %}</td><td {{ td }}>{% if doc.po_no %}<span dir="ltr" style="unicode-bidi:isolate;">{{ doc.po_no }}</span>{% elif doc.project %}{{ frappe.db.get_value("Project", doc.project, "project_name") or doc.project }}{% else %}—{% endif %}</td></tr>
+		{% endif %}
+	</table>
+
+	<table style="width:100%; border-collapse:collapse; font-size:12pt; margin-top:6px;">
+		<thead><tr style="background:#1565C0; color:#fff;">
+			<th {{ td }} width="6%">م</th><th {{ td }}>البند</th>
+			<th {{ td }} width="10%">الكمية</th><th {{ td }} width="16%">السعر</th><th {{ td }} width="16%">الإجمالي</th>
+		</tr></thead>
+		<tbody>
+		{% for r in doc.items %}
+			<tr><td {{ td }}>{{ loop.index }}</td>
+				<td {{ td }}><b>{{ r.item_name or r.item_code }}</b>{% if r.description and r.description != r.item_name %}<div style="font-size:10.5pt; color:#555;">{{ r.description | striptags }}</div>{% endif %}</td>
+				<td {{ td }}>{{ num(r.qty) }}{% if r.uom %} {{ r.uom }}{% endif %}</td><td {{ td }}>{{ money(r.rate) }}</td><td {{ td }}>{{ money(r.amount) }}</td></tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+	<table style="width:55%; float:left; border-collapse:collapse; font-size:12pt; margin-top:8px;">
+		<tr><td {{ lbl }}>الإجمالي قبل الضريبة</td><td {{ td }}>{{ money(doc.net_total) }}</td></tr>
+		{% for t in doc.taxes %}<tr><td {{ lbl }}>{{ t.description }}</td><td {{ td }}>{{ money(t.tax_amount) }}</td></tr>{% endfor %}
+		{% if doc.discount_amount %}<tr><td {{ lbl }}>الخصم</td><td {{ td }}>{{ money(doc.discount_amount) }}</td></tr>{% endif %}
+		<tr><td {{ lbl }}><b>الإجمالي المستحق</b></td><td {{ td }}><b>{{ money(total) }}</b></td></tr>
+		{% if doc.docstatus == 1 and doc.outstanding_amount is not none and doc.outstanding_amount != total %}<tr><td {{ lbl }}>المتبقي بعد التحصيل</td><td {{ td }}>{{ money(doc.outstanding_amount) }}</td></tr>{% endif %}
+	</table>
+	<div style="clear:both;"></div>
+	<p style="margin-top:8px;">المبلغ كتابةً: <b>{{ words(total) }}</b></p>
+	{% if doc.remarks and doc.remarks != "No Remarks" %}<p style="font-size:11.5pt; color:#444;">ملاحظات: {{ doc.remarks }}</p>{% endif %}
+	{% if doc.terms %}<div style="font-size:10.5pt; color:#555; margin-top:6px;">{{ doc.terms }}</div>{% endif %}
+
+	<table style="width:100%; margin-top:28px; font-size:11.5pt; text-align:center;">
+		<tr>
+			<td style="width:50%; vertical-align:top;"><div style="height:36px;"></div><div style="border-top:1px solid #999; padding-top:4px;">أصدرها<br><span style="color:#555; font-size:10pt;">{{ user(doc.owner) }}</span></div></td>
+			<td style="width:50%; vertical-align:top;"><div style="height:36px;"></div><div style="border-top:1px solid #999; padding-top:4px;">استلام العميل<br><span style="color:#555; font-size:10pt;">الاسم والتوقيع</span></div></td>
+		</tr>
+	</table>
+	{% if s.voucher_note %}<div style="margin-top:14px; font-size:10pt; color:#777; text-align:center; border-top:1px dashed #ccc; padding-top:6px;">{{ s.voucher_note }}</div>{% endif %}
+</div>
