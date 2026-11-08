@@ -1,6 +1,5 @@
 {%- set company = frappe.get_doc("Company", doc.company) -%}
 {%- set currency = doc.paid_to_account_currency or company.default_currency -%}
-{%- set s = frappe.get_doc("Zimam Settings") -%}
 {%- set cur_words = {"OMR": ("ريال عماني", "بيسة"), "SAR": ("ريال سعودي", "هللة"), "AED": ("درهم إماراتي", "فلس"), "KWD": ("دينار كويتي", "فلس"), "QAR": ("ريال قطري", "درهم"), "BHD": ("دينار بحريني", "فلس"), "USD": ("دولار أمريكي", "سنت")} -%}
 {%- macro words(amount) -%}
 {%- set w = frappe.utils.money_in_words(amount, currency) -%}
@@ -56,5 +55,4 @@
 			<td style="width:33%; vertical-align:top;"><div style="height:36px;"></div><div style="border-top:1px solid #999; padding-top:4px;">الدافع / المودِع<br><span style="color:#555; font-size:10pt;">الاسم والتوقيع</span></div></td>
 		</tr>
 	</table>
-	{% if s.voucher_note %}<div style="margin-top:14px; font-size:10pt; color:#777; text-align:center; border-top:1px dashed #ccc; padding-top:6px;">{{ s.voucher_note }}</div>{% endif %}
 </div>
