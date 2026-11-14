@@ -399,6 +399,8 @@ def run(profile="template", with_optional_arms=False):
 	ensure_cost_centers(parent, p.get("cost_centers", []))
 	activate_domains(p.get("domains", []))
 	ensure_item_group()
+	from zimam.setup import print_layer
+	print_layer.sync(p.get("print"))
 	service_item = ensure_item("SRV-GENERAL", "خدمة مؤسسية")
 	print_item = ensure_item("SRV-PRINT", "خدمة طباعة") if "press" in by_role else None
 

@@ -248,6 +248,8 @@ def after_install():
 	ensure_website_defaults()
 	sync_finance_workflow()
 	prune_sidebars_for_domains()
+	from zimam.setup import print_layer
+	print_layer.sync()
 	frappe.clear_cache()
 	frappe.db.commit()
 	frappe.msgprint("تم تثبيت زِمام. الخطوة التالية: bench --site <site> execute zimam.setup.bootstrap.run --kwargs '{\"profile\": \"<profile>\"}'")
@@ -263,5 +265,7 @@ def after_migrate():
 	ensure_website_defaults()
 	sync_finance_workflow()
 	prune_sidebars_for_domains()
+	from zimam.setup import print_layer
+	print_layer.sync()
 	frappe.clear_cache()
 	frappe.db.commit()

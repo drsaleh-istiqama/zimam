@@ -44,10 +44,10 @@ doc_events = {
 	"Payment Entry": {
 		"before_validate": "zimam.integrations.receipts.payment_entry_before_validate",
 		"after_insert": "zimam.integrations.finance_notices.payment_entry_after_insert",
-		"on_submit": "zimam.integrations.finance_notices.payment_entry_on_submit",
+		"on_submit": ["zimam.integrations.finance_notices.payment_entry_on_submit", "zimam.setup.print_layer.attach_pdf"],
 	},
 	"Sales Invoice": {
-		"on_submit": ["zimam.integrations.selling.sales_invoice_on_submit", "zimam.integrations.finance_notices.sales_invoice_on_submit"],
+		"on_submit": ["zimam.integrations.selling.sales_invoice_on_submit", "zimam.integrations.finance_notices.sales_invoice_on_submit", "zimam.setup.print_layer.attach_pdf"],
 		"on_cancel": "zimam.integrations.selling.sales_invoice_on_cancel",
 	},
 	"Quotation": {
