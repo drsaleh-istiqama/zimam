@@ -18,7 +18,7 @@ def _parent_company_name():
 	return frappe.db.get_value("Company", company, "company_name") if company else None
 
 
-def ensure_letterhead(title=None, image=None):
+def ensure_letterhead(title=None, image=None, footer_image=None):
 	"""يُنشئ ترويسة المؤسسة ويجعلها الافتراضية؛ لا يمسّ ترويسة أنشأها المستخدم بنفسه (يُحدَّث ما أنشأناه فقط)."""
 	title = title or _parent_company_name()
 	if not title:
@@ -26,13 +26,18 @@ def ensure_letterhead(title=None, image=None):
 	name = title
 	if frappe.db.exists("Letter Head", name):
 		doc = frappe.get_doc("Letter Head", name)
-		if not (doc.get("content") or "").startswith("<!--zimam-->") and doc.source != "Image":
+		if not (doc.get("content") or "").startswith("<!--zimam-->"):
 			return name  # أنشأها المستخدم يدويًا
 	else:
 		doc = frappe.new_doc("Letter Head")
 		doc.letter_head_name = name
+	base = "/assets/zimam/images/letterheads/"
 	if image:
-		doc.source, doc.image = "Image", "/assets/zimam/images/letterheads/" + image
+		doc.source = "HTML"
+		doc.content = '<!--zimam--><img src="' + base + image + '" style="width:100%; display:block;">'
+		if footer_image:
+			doc.footer_source = "HTML"
+			doc.footer = '<img src="' + base + footer_image + '" style="width:100%; display:block;">'
 	else:
 		doc.source = "HTML"
 		doc.content = (
@@ -59,7 +64,9 @@ def ensure_default_formats():
 
 def sync(profile_print=None):
 	profile_print = profile_print or {}
-	ensure_letterhead(profile_print.get("letterhead_title"), profile_print.get("letterhead_image"))
+	ensure_letterhead(
+		profile_print.get("letterhead_title"), profile_print.get("letterhead_image"), profile_print.get("letterhead_footer_image")
+	)
 	ensure_default_formats()
 
 
