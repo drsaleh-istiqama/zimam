@@ -1,5 +1,6 @@
 {%- set s = frappe.get_doc("Zimam Settings") -%}
 {%- set institution = frappe.db.get_value("Company", doc.company, "company_name") -%}
+{%- if institution|lower == "zimam" -%}{%- set institution = s.parent_company and frappe.db.get_value("Company", s.parent_company, "company_name") or institution -%}{%- endif -%}
 {%- set campaign_name = frappe.db.get_value("Waqf Campaign", doc.campaign, "campaign_name") -%}
 <div dir="rtl" lang="ar" style="direction:rtl; text-align:center; font-family:'Sakkal Majalla','Noto Naskh Arabic','Amiri',serif; padding:28px 36px; border:6px double #C89060; margin:6px;">
 	<div style="font-size:15pt; color:#8A5E35; letter-spacing:1px;">{{ institution }}</div>

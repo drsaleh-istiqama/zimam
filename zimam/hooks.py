@@ -36,6 +36,8 @@ doctype_js = {
 	"Sales Invoice": "public/js/sales_invoice_zimam.js",  # زر طباعة الفاتورة بالنموذج العربي (0.14.0)
 }
 
+jinja = {"methods": ["zimam.utils.hijri_str"]}
+
 doc_events = {
 	"Employee": {
 		"on_update": "zimam.integrations.hr_archive.employee_on_update",
