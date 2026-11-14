@@ -1,6 +1,6 @@
 {%- set _lh = frappe.db.get_value("Letter Head", {"is_default": 1, "disabled": 0}, ["content", "footer"], as_dict=True) -%}{#zimam-lh#}
 {%- if _lh and _lh.content and "<!--zimam-->" in _lh.content -%}<div class="zimam-lh-head">{{ _lh.content }}</div>{%- endif -%}
-<div class="zimam-page" style="position:relative; min-height:262mm;">
+<div class="zimam-page" style="position:relative; min-height:212mm;">
 {%- set company = frappe.get_doc("Company", doc.company) -%}
 {%- set currency = company.default_currency -%}
 {%- set s = frappe.get_doc("Charity Settings") -%}
