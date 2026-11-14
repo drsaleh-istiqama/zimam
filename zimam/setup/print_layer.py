@@ -20,9 +20,13 @@ def _parent_company_name():
 
 def ensure_letterhead(title=None, image=None, footer_image=None):
 	"""يُنشئ ترويسة المؤسسة ويجعلها الافتراضية؛ لا يمسّ ترويسة أنشأها المستخدم بنفسه (يُحدَّث ما أنشأناه فقط)."""
-	title = title or _parent_company_name()
 	if not title:
-		return None
+		# بلا ملف تعريف (after_migrate): لا نستبدل ترويسة زِمام القائمة، ولا ننشئ ترويسة بنص اسم شركة مؤقتة
+		if frappe.db.exists("Letter Head", {"content": ["like", "<!--zimam-->%"], "disabled": 0}):
+			return None
+		title = _parent_company_name()
+		if not title:
+			return None
 	name = title
 	if frappe.db.exists("Letter Head", name):
 		doc = frappe.get_doc("Letter Head", name)
