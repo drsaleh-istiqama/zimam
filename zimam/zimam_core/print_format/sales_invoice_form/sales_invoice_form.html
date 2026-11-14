@@ -24,7 +24,7 @@
 			<td style="width:36%; text-align:right; vertical-align:bottom; font-size:11pt; color:#444;">
 				{% if company.tax_id %}<div style="font-size:10.5pt; color:#555;">الرقم الضريبي: <span dir="ltr" style="unicode-bidi:isolate;">{{ company.tax_id }}</span></div>{% endif %}
 				<div>رقم الفاتورة: <b><span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span></b></div>
-				<div>التاريخ: <b>{{ hijri_str(doc.posting_date) }}</b> الموافق <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.posting_date, {"fieldtype": "Date"}) }}</span>م</div>
+				<div>التاريخ: <b>{{ hijri_str(doc.posting_date) }}</b><br>الموافق: <span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap;">{{ frappe.format(doc.posting_date, {"fieldtype": "Date"}) }}</span>م</div>
 				{% if doc.due_date %}<div>الاستحقاق: <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.due_date, {"fieldtype": "Date"}) }}</span>م</div>{% endif %}
 				<div>الحالة: <b{% if doc.docstatus != 1 %} style="color:#C62828;"{% endif %}>{{ state }}</b></div>
 			</td>

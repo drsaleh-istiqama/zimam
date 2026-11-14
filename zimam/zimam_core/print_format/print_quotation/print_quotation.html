@@ -21,7 +21,7 @@
 		<tr>
 			<td style="width:36%; text-align:right; vertical-align:bottom; font-size:11pt; color:#444;">
 				<div>عرض أسعار رقم: <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span></div>
-				<div>التاريخ: <b>{{ doc.date_hijri or hijri_str(doc.estimate_date) }}</b> الموافق <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.estimate_date, {"fieldtype": "Date"}) }}</span>م</div>
+				<div>التاريخ: <b>{{ doc.date_hijri or hijri_str(doc.estimate_date) }}</b><br>الموافق: <span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap;">{{ frappe.format(doc.estimate_date, {"fieldtype": "Date"}) }}</span>م</div>
 			</td>
 			<td style="width:30%; text-align:center; vertical-align:bottom; font-size:20pt; font-weight:bold; color:#7B3F61;">عرض سعر</td>
 			<td style="width:34%;"></td>

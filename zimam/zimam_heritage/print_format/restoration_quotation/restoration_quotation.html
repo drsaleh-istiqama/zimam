@@ -18,7 +18,7 @@
 		<tr>
 			<td style="width:36%; text-align:right; vertical-align:bottom; font-size:11pt; color:#444;">
 				<div>الرقم: <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.name }}</span>{% if doc.reference_no %} · المرجع: <span dir="ltr" style="unicode-bidi:isolate;">{{ doc.reference_no }}</span>{% endif %}</div>
-				<div>التاريخ: <b>{{ doc.date_hijri or hijri_str(doc.assessment_date) }}</b> الموافق <span dir="ltr" style="unicode-bidi:isolate;">{{ frappe.format(doc.assessment_date, {"fieldtype": "Date"}) }}</span>م</div>
+				<div>التاريخ: <b>{{ doc.date_hijri or hijri_str(doc.assessment_date) }}</b><br>الموافق: <span dir="ltr" style="unicode-bidi:isolate; white-space:nowrap;">{{ frappe.format(doc.assessment_date, {"fieldtype": "Date"}) }}</span>م</div>
 			</td>
 			<td style="width:30%; text-align:center; vertical-align:bottom; font-size:20pt; font-weight:bold; color:#5A1A30;">عرض سعر ترميم</td>
 			<td style="width:34%;"></td>
