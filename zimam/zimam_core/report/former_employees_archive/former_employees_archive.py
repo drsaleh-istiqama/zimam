@@ -40,7 +40,7 @@ def execute(filters=None):
 		f.append(["Employee", "reason_for_leaving", "like", f"%{filters.reason}%"])
 
 	rows = frappe.get_list("Employee", filters=f, limit_page_length=0, order_by="relieving_date desc, name desc",
-		fields=["name", "employee_name", "company", "department", "designation", "branch", "date_of_joining", "relieving_date",
+		fields=["name", "employee_name", "zimam_civil_id", "company", "department", "designation", "branch", "date_of_joining", "relieving_date",
 			"resignation_letter_date", "reason_for_leaving", "user_id"])
 
 	# إنهاء الخدمة المرتبط (إن كان HRMS مثبتًا) وحالة حساب المستخدم
@@ -61,6 +61,7 @@ def execute(filters=None):
 	columns = [
 		{"label": _("الموظف"), "fieldname": "name", "fieldtype": "Link", "options": "Employee", "width": 110},
 		{"label": _("الاسم"), "fieldname": "employee_name", "fieldtype": "Data", "width": 190},
+		{"label": _("الرقم المدني"), "fieldname": "zimam_civil_id", "fieldtype": "Data", "width": 110},
 		{"label": _("الشركة"), "fieldname": "company", "fieldtype": "Link", "options": "Company", "width": 150},
 		{"label": _("القسم"), "fieldname": "department", "fieldtype": "Link", "options": "Department", "width": 140},
 		{"label": _("المسمى الوظيفي"), "fieldname": "designation", "fieldtype": "Link", "options": "Designation", "width": 140},

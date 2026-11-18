@@ -40,6 +40,7 @@ jinja = {"methods": ["zimam.utils.hijri_str"]}
 
 doc_events = {
 	"Employee": {
+		"validate": "zimam.integrations.hr_identity.employee_validate",
 		"on_update": "zimam.integrations.hr_archive.employee_on_update",
 		"on_trash": "zimam.integrations.hr_archive.employee_on_trash",
 	},
