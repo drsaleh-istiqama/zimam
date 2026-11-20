@@ -273,6 +273,15 @@ STANDARD_PERMS = {
 	"File": {R_UNIT: RW, R_UNIT_SUP: RW, R_RECEPTION: RW, R_DESIGNER: RW, R_TECH_SUP: RW, R_ACCOUNTANT: RW, R_ARM_MGR: RW, R_INST_MGR: RO},
 }
 
+# صلاحيات الحقول الحساسة (permlevel > 0) — 0.18.1
+# الرقم المدني للموظف على المستوى 7: لا يراه ولا يعدّله إلا هذه الأدوار (بقرار د. صالح 2026-11-20).
+# ملاحظة: يلزم الدور أيضًا صلاحية قراءة Employee على المستوى 0 ليفتح السجل أصلًا.
+CIVIL_ID_PERMLEVEL = 7
+CIVIL_ID_ROLES = ("HR Manager", "HR User", R_SYS)
+FIELD_PERMS = {
+	"Employee": {CIVIL_ID_PERMLEVEL: {role: ("read", "write") for role in CIVIL_ID_ROLES}},
+}
+
 # ---------------------------------------------------------------------------
 # دوال مساعدة ساكنة (بلا Frappe)
 # ---------------------------------------------------------------------------
@@ -378,6 +387,35 @@ def sync_standard_permissions():
 						changed.append(f"{doctype}/{role}/{ptype}={want}")
 			except Exception:
 				frappe.log_error(title=f"zimam: standard permission sync failed — {doctype}/{role}")
+	if changed:
+		frappe.clear_cache()
+	return changed
+
+
+def sync_field_permissions():
+	"""يطبّق FIELD_PERMS (صلاحيات المستويات الأعلى من 0) عبر Custom DocPerm. آمن للتكرار؛ لا يمسّ صفوف المستوى 0."""
+	import frappe
+	from frappe.permissions import add_permission, update_permission_property
+
+	changed = []
+	for doctype, levels in FIELD_PERMS.items():
+		if not frappe.db.exists("DocType", doctype):
+			continue
+		for permlevel, grants in levels.items():
+			for role, ptypes in grants.items():
+				if not frappe.db.exists("Role", role):
+					continue
+				try:
+					add_permission(doctype, role, permlevel)
+					filters = {"parent": doctype, "role": role, "permlevel": permlevel, "if_owner": 0}
+					current = frappe.db.get_value("Custom DocPerm", filters, ["read", "write"], as_dict=True) or {}
+					for ptype in ("read", "write"):
+						want = 1 if ptype in ptypes else 0
+						if int(current.get(ptype) or 0) != want:
+							update_permission_property(doctype, role, permlevel, ptype, want, validate=False)
+							changed.append(f"{doctype}/{role}/L{permlevel}/{ptype}={want}")
+				except Exception:
+					frappe.log_error(title=f"zimam: field permission sync failed — {doctype}/{role}/L{permlevel}")
 	if changed:
 		frappe.clear_cache()
 	return changed

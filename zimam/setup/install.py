@@ -74,7 +74,7 @@ CUSTOM_FIELDS = {
 	],
 	"Employee": [
 		dict(fieldname="zimam_civil_id", label="الرقم المدني", fieldtype="Data", insert_after="date_of_birth",
-			in_standard_filter=1, search_index=1, no_copy=1, length=20,
+			in_standard_filter=1, search_index=1, no_copy=1, length=20, permlevel=7,  # 0.18.1: يراه ويعدّله HR وSystem Manager فقط (setup/permissions.py FIELD_PERMS)
 			description="أرقام فقط — يُحفظ بصيغة لاتينية موحَّدة ولا يتكرر بين موظفين على رأس العمل"),
 	],
 	"Quotation": [
@@ -112,9 +112,10 @@ def create_roles():
 def sync_permissions():
 	"""ملفات الصلاحيات (Role Profile) + صلاحيات أدوار زِمام على مستندات ERPNext القياسية — من setup/permissions.py (v0.12)."""
 	try:
-		from zimam.setup.permissions import sync_role_profiles, sync_standard_permissions
+		from zimam.setup.permissions import sync_field_permissions, sync_role_profiles, sync_standard_permissions
 		sync_role_profiles()
 		sync_standard_permissions()
+		sync_field_permissions()
 	except Exception:
 		frappe.log_error(title="zimam: permissions sync failed")
 

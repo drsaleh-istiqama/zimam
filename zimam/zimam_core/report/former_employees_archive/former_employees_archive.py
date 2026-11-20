@@ -39,9 +39,12 @@ def execute(filters=None):
 	if filters.get("reason"):
 		f.append(["Employee", "reason_for_leaving", "like", f"%{filters.reason}%"])
 
+	# الرقم المدني حقل محصور بالموارد البشرية وSystem Manager (0.18.1): لا نطلبه ولا نعرض عموده لغيرهم
+	from zimam.setup.permissions import CIVIL_ID_ROLES  # داخل الدالة: يبقى استيراد الوحدة خفيفًا (اختبار service_text بلا حزمة)
+	show_civil = frappe.session.user == "Administrator" or bool(set(frappe.get_roles()) & set(CIVIL_ID_ROLES))
 	rows = frappe.get_list("Employee", filters=f, limit_page_length=0, order_by="relieving_date desc, name desc",
-		fields=["name", "employee_name", "zimam_civil_id", "company", "department", "designation", "branch", "date_of_joining", "relieving_date",
-			"resignation_letter_date", "reason_for_leaving", "user_id"])
+		fields=["name", "employee_name", "company", "department", "designation", "branch", "date_of_joining", "relieving_date",
+			"resignation_letter_date", "reason_for_leaving", "user_id"] + (["zimam_civil_id"] if show_civil else []))
 
 	# إنهاء الخدمة المرتبط (إن كان HRMS مثبتًا) وحالة حساب المستخدم
 	separation = {}
@@ -61,7 +64,7 @@ def execute(filters=None):
 	columns = [
 		{"label": _("الموظف"), "fieldname": "name", "fieldtype": "Link", "options": "Employee", "width": 110},
 		{"label": _("الاسم"), "fieldname": "employee_name", "fieldtype": "Data", "width": 190},
-		{"label": _("الرقم المدني"), "fieldname": "zimam_civil_id", "fieldtype": "Data", "width": 110},
+		*([{"label": _("الرقم المدني"), "fieldname": "zimam_civil_id", "fieldtype": "Data", "width": 110}] if show_civil else []),
 		{"label": _("الشركة"), "fieldname": "company", "fieldtype": "Link", "options": "Company", "width": 150},
 		{"label": _("القسم"), "fieldname": "department", "fieldtype": "Link", "options": "Department", "width": 140},
 		{"label": _("المسمى الوظيفي"), "fieldname": "designation", "fieldtype": "Link", "options": "Designation", "width": 140},
